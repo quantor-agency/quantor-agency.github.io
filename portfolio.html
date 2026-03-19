@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — QUANTOR</title>
+  <meta name="description" content="Live demo pages built by Quantor across 6 industries. Real estate, coaching, finance, healthcare, events and interior design.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-deep: #080d19;
+      --accent: #3b82f6;
+      --cyan: #06b6d4;
+      --blue: #1e40af;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(59, 130, 246, 0.14);
+      --card-bg: rgba(15, 23, 42, 0.7);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .bg-pattern {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; opacity: 0.5; }
+    .orb-1 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(59,130,246,0.35) 0%, transparent 70%); top: -150px; right: -100px; animation: float1 22s ease-in-out infinite; }
+    .orb-2 { width: 350px; height: 350px; background: radial-gradient(circle, rgba(6,182,212,0.3) 0%, transparent 70%); bottom: 15%; left: -80px; animation: float2 28s ease-in-out infinite; }
+    .orb-3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(30,64,175,0.35) 0%, transparent 70%); top: 40%; right: 5%; animation: float3 24s ease-in-out infinite; }
+
+    @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-40px,50px) scale(1.08);} 66%{transform:translate(30px,-30px) scale(0.95);} }
+    @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(50px,-40px) scale(1.12);} 66%{transform:translate(-30px,30px) scale(0.88);} }
+    @keyframes float3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-40px,40px) scale(1.1);} }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb { animation: none; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* Nav */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; transition: all 0.3s ease; }
+    nav.scrolled { background: rgba(8,13,25,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+
+    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+
+    .logo {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: 0.05em; text-decoration: none;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.2s ease; }
+    .nav-links a:hover { color: var(--text); }
+
+    .btn-nav {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--blue) 100%);
+      color: var(--text); padding: 0.65rem 1.5rem; border-radius: 8px;
+      text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease;
+    }
+    .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,0.3); }
+
+    .mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+    .mobile-toggle span { width: 24px; height: 2px; background: var(--text); transition: all 0.3s ease; }
+
+    main { position: relative; z-index: 1; }
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    /* Page Hero */
+    .page-hero { min-height: 55vh; display: flex; align-items: center; padding-top: 8rem; text-align: center; }
+    .page-hero-content { max-width: 750px; margin: 0 auto; }
+
+    .page-tag {
+      font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--cyan);
+      text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem;
+      display: inline-block; background: rgba(6,182,212,0.1); padding: 0.4rem 1rem;
+      border-radius: 4px; border: 1px solid rgba(6,182,212,0.2);
+    }
+
+    .page-hero h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.15; margin-bottom: 1.5rem; }
+    .page-hero-body { font-size: 1.15rem; color: var(--muted); line-height: 1.8; }
+
+    /* Portfolio */
+    .portfolio-section { background: var(--bg-deep); padding-top: 2rem; }
+
+    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+    .portfolio-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.75rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 280px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .portfolio-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--cyan));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .portfolio-card:hover { transform: translateY(-10px); border-color: rgba(59,130,246,0.25); box-shadow: 0 25px 60px rgba(0,0,0,0.35), 0 0 40px rgba(59,130,246,0.1); }
+    .portfolio-card:hover::after { opacity: 1; }
+
+    .card-header { margin-bottom: 1rem; }
+
+    .industry-tag {
+      font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--cyan);
+      text-transform: uppercase; letter-spacing: 0.12em;
+      background: rgba(6,182,212,0.1); padding: 0.35rem 0.75rem;
+      border-radius: 4px; display: inline-block; margin-bottom: 1rem;
+    }
+
+    .business-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.35rem; margin-bottom: 0.5rem; color: var(--text); }
+    .business-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.65; flex-grow: 1; }
+
+    .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+
+    .city-badge {
+      font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted);
+      background: rgba(148,163,184,0.1); padding: 0.3rem 0.65rem; border-radius: 4px;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+
+    .city-badge svg { width: 12px; height: 12px; stroke: var(--muted); }
+
+    .view-demo {
+      color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.85rem;
+      display: inline-flex; align-items: center; gap: 0.4rem; transition: all 0.3s ease;
+    }
+
+    .view-demo:hover { color: var(--cyan); gap: 0.6rem; }
+    .view-demo svg { width: 14px; height: 14px; stroke: currentColor; transition: transform 0.3s ease; }
+    .portfolio-card:hover .view-demo svg { transform: translateX(3px); }
+
+    /* CTA Strip */
+    .cta-strip { background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 100%); text-align: center; padding: 5rem 2rem; }
+
+    .cta-content {
+      background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(6,182,212,0.05) 100%);
+      border: 1px solid var(--border); border-radius: 20px; padding: 3rem 2rem;
+      max-width: 700px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center; gap: 1.75rem;
+    }
+
+    .cta-text { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.5rem, 3.5vw, 2rem); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--blue) 100%);
+      color: var(--text); padding: 1rem 2.5rem; border-radius: 10px;
+      text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s ease;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(59,130,246,0.35); }
+
+    /* Footer */
+    footer { background: var(--bg-deep); border-top: 1px solid var(--border); padding: 3rem 2rem; }
+    .footer-container { max-width: 1200px; margin: 0 auto; }
+
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem; }
+    .footer-brand .logo { margin-bottom: 0.5rem; display: inline-block; }
+    .footer-tagline { color: var(--muted); font-size: 0.9rem; }
+
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-copyright { color: var(--muted); font-size: 0.85rem; }
+    .footer-built { color: var(--muted); font-size: 0.85rem; font-family: 'DM Mono', monospace; }
+
+    /* Mobile */
+    @media (max-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    @media (max-width: 968px) {
+      .nav-links { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-deep); flex-direction: column; justify-content: center; gap: 2rem; transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav-links.active { transform: translateX(0); }
+      .nav-links a { font-size: 1.2rem; }
+      .mobile-toggle { display: flex; z-index: 1001; }
+      .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+      .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 4rem 1.5rem; }
+      .page-hero { padding-top: 6rem; min-height: 45vh; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .portfolio-card { min-height: 260px; }
+      .cta-content { padding: 2.5rem 1.5rem; }
+      .footer-top { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">QUANTOR</a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn-nav">Get Started</a>
+      </div>
+      <div class="mobile-toggle" id="mobileToggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero-content">
+          <span class="page-tag reveal">Our Work</span>
+          <h1 class="reveal reveal-delay-1">Live Demo Pages Across 6 Industries</h1>
+          <p class="page-hero-body reveal reveal-delay-2">Every demo below is a fully functional page with an AI chatbot. Click any card to see it live.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section class="portfolio-section">
+      <div class="container">
+        <div class="portfolio-grid">
+
+          <a href="https://quantor-agency.github.io/sharma-properties" target="_blank" rel="noopener noreferrer" class="portfolio-card reveal reveal-delay-1">
+            <div class="card-header">
+              <span class="industry-tag">Real Estate</span>
+              <h3 class="business-name">Sharma Properties</h3>
+            </div>
+            <p class="business-desc">Premium 2BHK/3BHK flats with verified listings and site visit booking.</p>
+            <div class="card-footer">
+              <span class="city-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Mumbai
+              </span>
+              <span class="view-demo">View Live Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
+
+          <a href="https://quantor-agency.github.io/demo-apex-coaching" target="_blank" rel="noopener noreferrer" class="portfolio-card reveal reveal-delay-2">
+            <div class="card-header">
+              <span class="industry-tag">Education</span>
+              <h3 class="business-name">Apex Coaching Institute</h3>
+            </div>
+            <p class="business-desc">JEE/NEET coaching centre with demo class booking and student enquiry chatbot.</p>
+            <div class="card-footer">
+              <span class="city-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Delhi
+              </span>
+              <span class="view-demo">View Live Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
+
+          <a href="https://quantor-agency.github.io/demo-ca-firm" target="_blank" rel="noopener noreferrer" class="portfolio-card reveal reveal-delay-3">
+            <div class="card-header">
+              <span class="industry-tag">Finance</span>
+              <h3 class="business-name">Verma & Associates</h3>
+            </div>
+            <p class="business-desc">CA firm for GST filing, ITR and tax planning with free consultation booking.</p>
+            <div class="card-footer">
+              <span class="city-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Bangalore
+              </span>
+              <span class="view-demo">View Live Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
+
+          <a href="https://quantor-agency.github.io/demo-dental-clinic" target="_blank" rel="noopener noreferrer" class="portfolio-card reveal reveal-delay-4">
+            <div class="card-header">
+              <span class="industry-tag">Healthcare</span>
+              <h3 class="business-name">SmileCare Dental</h3>
+            </div>
+            <p class="business-desc">Dental clinic with treatment info, appointment booking and patient chatbot.</p>
+            <div class="card-footer">
+              <span class="city-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Pune
+              </span>
+              <span class="view-demo">View Live Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
+
+          <a href="https://quantor-agency.github.io/demo-wedding-planner" target="_blank" rel="noopener noreferrer" class="portfolio-card reveal reveal-delay-5">
+            <div class="card-header">
+              <span class="industry-tag">Events</span>
+              <h3 class="business-name">Royal Shaadi Planners</h3>
+            </div>
+            <p class="business-desc">Destination wedding planning with venue booking, decoration and photography services.</p>
+            <div class="card-footer">
+              <span class="city-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Jaipur
+              </span>
+              <span class="view-demo">View Live Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
+
+          <a href="https://quantor-agency.github.io/demo-interior-designer" target="_blank" rel="noopener noreferrer" class="portfolio-card reveal reveal-delay-6">
+            <div class="card-header">
+              <span class="industry-tag">Design</span>
+              <h3 class="business-name">Spaces by Riya</h3>
+            </div>
+            <p class="business-desc">Interior design studio with 3D visualization, modular kitchens and office spaces.</p>
+            <div class="card-footer">
+              <span class="city-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Mumbai
+              </span>
+              <span class="view-demo">View Live Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Strip -->
+    <section class="cta-strip">
+      <div class="container">
+        <div class="cta-content reveal">
+          <h2 class="cta-text">Want a page like this for your business?</h2>
+          <a href="contact.html" class="btn-primary">
+            Get Started
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">QUANTOR</a>
+          <p class="footer-tagline">AI-Powered Landing Pages & Chatbots. Live in 7 Days.</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 Quantor. All rights reserved.</p>
+        <p class="footer-built">Built with AI &nbsp;·&nbsp; Delivered fast &nbsp;·&nbsp; Owned by you</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+    mobileToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    if (!prefersReducedMotion) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  </script>
+</body>
+</html>
