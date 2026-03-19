@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — QUANTOR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-deep: #080d19;
+      --accent: #3b82f6;
+      --cyan: #06b6d4;
+      --blue: #1e40af;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(59, 130, 246, 0.14);
+      --card-bg: rgba(15, 23, 42, 0.7);
+      --whatsapp: #25D366;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .bg-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      animation: float1 20s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, transparent 70%);
+      bottom: 20%;
+      left: -50px;
+      animation: float2 25s ease-in-out infinite;
+    }
+
+    .orb-3 {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(30, 64, 175, 0.3) 0%, transparent 70%);
+      top: 50%;
+      right: 10%;
+      animation: float3 22s ease-in-out infinite;
+    }
+
+    @keyframes float1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(-30px, 40px) scale(1.05); }
+      66% { transform: translate(20px, -20px) scale(0.95); }
+    }
+
+    @keyframes float2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(40px, -30px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+    }
+
+    @keyframes float3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-30px, 30px) scale(1.08); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb { animation: none; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(8, 13, 25, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .btn-nav {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--blue) 100%);
+      color: var(--text);
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+    }
+
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .mobile-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    .page-hero {
+      min-height: 55vh;
+      display: flex;
+      align-items: center;
+      padding-top: 8rem;
+      text-align: center;
+    }
+
+    .page-hero-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .page-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+      display: inline-block;
+      background: rgba(6, 182, 212, 0.1);
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      border: 1px solid rgba(6, 182, 212, 0.2);
+    }
+
+    .page-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-hero-body {
+      font-size: 1.15rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 1rem;
+    }
+
+    .contact-section {
+      background: var(--bg-deep);
+      padding-top: 3rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .contact-card:hover::before {
+      opacity: 1;
+    }
+
+    .contact-card.whatsapp-card::before {
+      background: linear-gradient(90deg, transparent, var(--whatsapp), transparent);
+    }
+
+    .contact-card.whatsapp-card:hover {
+      border-color: rgba(37, 211, 102, 0.3);
+    }
+
+    .contact-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 1.5rem;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    .contact-card:hover .contact-icon {
+      transform: scale(1.08);
+    }
+
+    .contact-icon.whatsapp {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.2) 0%, rgba(37, 211, 102, 0.1) 100%);
+    }
+
+    .contact-icon.whatsapp svg {
+      width: 36px;
+      height: 36px;
+      fill: var(--whatsapp);
+    }
+
+    .contact-icon.email {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%);
+    }
+
+    .contact-icon.email svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--accent);
+    }
+
+    .contact-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-card.whatsapp-card .contact-label {
+      color: var(--whatsapp);
+    }
+
+    .contact-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-desc {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .btn-whatsapp-large {
+      background: var(--whatsapp);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-whatsapp-large:hover {
+      background: #20bd5a;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(37, 211, 102, 0.35);
+    }
+
+    .btn-whatsapp-large svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .email-display {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.1rem;
+      color: var(--text);
+      background: rgba(59, 130, 246, 0.1);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: inline-block;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .email-display:hover {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: var(--accent);
+    }
+
+    .response-time {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .response-time svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--cyan);
+    }
+
+    .contact-card.whatsapp-card .response-time svg {
+      stroke: var(--whatsapp);
+    }
+
+    .steps-section {
+      background: var(--bg);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .step-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(59, 130, 246, 0.25);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    }
+
+    .step-number {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--blue) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--text);
+      transition: transform 0.3s ease;
+    }
+
+    .step-card:hover .step-number {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+    }
+
+    .step-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .faq-strip {
+      background: var(--bg-deep);
+      padding-top: 4rem;
+      padding-bottom: 5rem;
+    }
+
+    .faq-quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .faq-quick-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .faq-quick-item:hover {
+      border-color: rgba(59, 130, 246, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .faq-quick-q {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .faq-quick-q svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--cyan);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .faq-quick-a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      padding-left: 1.5rem;
+    }
+
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand .logo {
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .footer-tagline {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copyright {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-built {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-family: 'DM Mono', monospace;
+    }
+
+    @media (max-width: 968px) {
+      .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg-deep);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .nav-links.active {
+        transform: translateX(0);
+      }
+
+      .nav-links a {
+        font-size: 1.2rem;
+      }
+
+      .mobile-toggle {
+        display: flex;
+        z-index: 1001;
+      }
+
+      .mobile-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .mobile-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .faq-quick-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 4rem 1.5rem;
+      }
+
+      .page-hero {
+        padding-top: 6rem;
+        min-height: 45vh;
+      }
+
+      .contact-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .step-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .faq-quick-item {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .footer-top {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        justify-content: center;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">QUANTOR</a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn-nav">Get Started</a>
+      </div>
+      <div class="mobile-toggle" id="mobileToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero-content">
+          <span class="page-tag reveal">Get In Touch</span>
+          <h1 class="reveal reveal-delay-1">Tell Us About Your Business</h1>
+          <p class="page-hero-body reveal reveal-delay-2">We'll get back within 24 hours with a plan, timeline and price. No commitment needed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-card whatsapp-card reveal reveal-delay-1">
+            <div class="contact-icon whatsapp">
+              <svg viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </div>
+            <span class="contact-label">Preferred</span>
+            <h3 class="contact-title">WhatsApp</h3>
+            <p class="contact-desc">Message us directly and we'll respond as soon as possible.</p>
+            <a href="https://wa.me/919359163507?text=Hi%20Quantor%2C%20I%20want%20a%20landing%20page%20for%20my%20business" target="_blank" rel="noopener" class="btn-whatsapp-large">
+              <svg viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Message on WhatsApp
+            </a>
+            <div class="response-time">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Fastest response — usually within 2 hours
+            </div>
+          </div>
+
+          <div class="contact-card reveal reveal-delay-2">
+            <div class="contact-icon email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <span class="contact-label">Alternative</span>
+            <h3 class="contact-title">Email</h3>
+            <p class="contact-desc">Send us an email with your requirements and we'll get back to you.</p>
+            <a href="mailto:quantorleads@gmail.com" class="email-display">quantorleads@gmail.com</a>
+            <div class="response-time">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Response within 24 hours
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">The Process</span>
+          <h2 class="section-title reveal reveal-delay-1">What Happens Next</h2>
+        </div>
+        <div class="steps-grid">
+          <div class="step-card reveal reveal-delay-1">
+            <div class="step-number">1</div>
+            <h3 class="step-title">You Contact Us</h3>
+            <p class="step-desc">Reach out via WhatsApp or email with your business details.</p>
+          </div>
+          <div class="step-card reveal reveal-delay-2">
+            <div class="step-number">2</div>
+            <h3 class="step-title">We Send a Free Proposal</h3>
+            <p class="step-desc">Within 24 hours, you get a clear plan, timeline and price.</p>
+          </div>
+          <div class="step-card reveal reveal-delay-3">
+            <div class="step-number">3</div>
+            <h3 class="step-title">We Start Building</h3>
+            <p class="step-desc">You approve, pay, and we begin. Live in 7 days.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-strip">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">Quick Answers</span>
+          <h2 class="section-title reveal reveal-delay-1">Common Questions</h2>
+        </div>
+        <div class="faq-quick-grid">
+          <div class="faq-quick-item reveal reveal-delay-1">
+            <h4 class="faq-quick-q">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              How fast can you start?
+            </h4>
+            <p class="faq-quick-a">Within 24 hours of payment confirmation, we begin your project.</p>
+          </div>
+          <div class="faq-quick-item reveal reveal-delay-2">
+            <h4 class="faq-quick-q">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Do I need to prepare anything?
+            </h4>
+            <p class="faq-quick-a">Just 5 minutes to fill a simple form about your business. We handle the rest.</p>
+          </div>
+          <div class="faq-quick-item reveal reveal-delay-3">
+            <h4 class="faq-quick-q">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Is there a contract?
+            </h4>
+            <p class="faq-quick-a">No lock-in contracts. One-time payment, you own everything.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">QUANTOR</a>
+          <p class="footer-tagline">AI-Powered Landing Pages and Chatbots. Live in 7 Days.</p>
+        </div>
+        <div class="footer-links">
+          <a href="portfolio.html">Portfolio</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">2025 Quantor. All rights reserved.</p>
+        <p class="footer-built">Built with AI . Delivered fast . Owned by you</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function handleScroll() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    mobileToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    navLinks.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    if (!prefersReducedMotion) {
+      const revealElements = document.querySelectorAll('.reveal');
+      
+      const revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      revealElements.forEach(function(el) {
+        revealObserver.observe(el);
+      });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(el) {
+        el.classList.add('visible');
+      });
+    }
+
+    handleScroll();
+  </script>
+</body>
+</html>
