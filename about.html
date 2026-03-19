@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — QUANTOR</title>
+  <meta name="description" content="Learn how Quantor helps Indian businesses get online and get leads with AI-powered landing pages and chatbots. Live in 7 days, done for you.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-deep: #080d19;
+      --accent: #3b82f6;
+      --cyan: #06b6d4;
+      --blue: #1e40af;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(59, 130, 246, 0.14);
+      --card-bg: rgba(15, 23, 42, 0.7);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .bg-pattern {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; opacity: 0.5; }
+    .orb-1 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%); top: -100px; right: -100px; animation: float1 20s ease-in-out infinite; }
+    .orb-2 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(6,182,212,0.25) 0%, transparent 70%); bottom: 20%; left: -50px; animation: float2 25s ease-in-out infinite; }
+    .orb-3 { width: 250px; height: 250px; background: radial-gradient(circle, rgba(30,64,175,0.3) 0%, transparent 70%); top: 50%; right: 10%; animation: float3 22s ease-in-out infinite; }
+
+    @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-30px,40px) scale(1.05);} 66%{transform:translate(20px,-20px) scale(0.95);} }
+    @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(40px,-30px) scale(1.1);} 66%{transform:translate(-20px,20px) scale(0.9);} }
+    @keyframes float3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-30px,30px) scale(1.08);} }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb { animation: none; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1rem 2rem;
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(8,13,25,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .btn-nav {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--blue) 100%);
+      color: var(--text);
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,0.3); }
+
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .mobile-toggle span {
+      width: 24px; height: 2px;
+      background: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    main { position: relative; z-index: 1; }
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* Page Hero */
+    .page-hero { min-height: 70vh; display: flex; align-items: center; padding-top: 8rem; }
+    .page-hero-content { max-width: 800px; }
+
+    .page-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+      display: inline-block;
+      background: rgba(6,182,212,0.1);
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      border: 1px solid rgba(6,182,212,0.2);
+    }
+
+    .page-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-hero-body { font-size: 1.15rem; color: var(--muted); max-width: 650px; line-height: 1.8; }
+
+    /* Section Headers */
+    .section-header { text-align: center; margin-bottom: 4rem; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .section-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+    .section-desc { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Problems */
+    .problems { background: var(--bg-deep); }
+
+    .problems-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+    .problem-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .problem-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(239,68,68,0.5), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .problem-card:hover { transform: translateY(-8px); border-color: rgba(239,68,68,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+    .problem-card:hover::before { opacity: 1; }
+
+    .problem-icon {
+      width: 64px; height: 64px;
+      background: rgba(239,68,68,0.1);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .problem-icon svg { width: 32px; height: 32px; stroke: #ef4444; }
+    .problem-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; margin-bottom: 0.75rem; }
+    .problem-desc { color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+
+    /* Comparison */
+    .comparison { background: var(--bg); }
+    .comparison-wrapper { overflow-x: auto; }
+
+    .comparison-table {
+      width: 100%;
+      min-width: 600px;
+      border-collapse: collapse;
+      background: var(--card-bg);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .comparison-table th,
+    .comparison-table td { padding: 1.25rem 1.5rem; text-align: left; border-bottom: 1px solid var(--border); }
+
+    .comparison-table tr:last-child td { border-bottom: none; }
+
+    .comparison-table thead th {
+      background: rgba(59,130,246,0.08);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .comparison-table thead th:first-child { color: var(--muted); font-weight: 600; }
+    .comparison-table thead th:last-child { background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(6,182,212,0.1) 100%); color: var(--cyan); }
+    .comparison-table td:first-child { color: var(--text); font-weight: 500; }
+    .comparison-table td:nth-child(2) { color: var(--muted); }
+    .comparison-table td:last-child { color: var(--text); font-weight: 500; }
+
+    .check-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px;
+      background: rgba(6,182,212,0.15);
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    .check-icon svg { width: 14px; height: 14px; stroke: var(--cyan); }
+
+    .cross-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px;
+      background: rgba(239,68,68,0.1);
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    .cross-icon svg { width: 14px; height: 14px; stroke: #ef4444; }
+
+    /* Included */
+    .included { background: var(--bg-deep); }
+
+    .included-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+    .included-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .included-item:hover { transform: translateY(-5px); border-color: rgba(59,130,246,0.25); box-shadow: 0 12px 35px rgba(0,0,0,0.2); }
+
+    .included-icon {
+      width: 48px; height: 48px;
+      margin: 0 auto 1rem;
+      background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(6,182,212,0.1) 100%);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .included-icon svg { width: 24px; height: 24px; stroke: var(--accent); }
+    .included-text { font-weight: 500; font-size: 0.9rem; color: var(--text); }
+
+    /* Industries */
+    .industries { background: var(--bg); }
+
+    .industries-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .industry-chip {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 1rem 2rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text);
+      transition: all 0.3s ease;
+      cursor: default;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .industry-chip:hover { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); transform: scale(1.05); }
+    .industry-chip svg { width: 20px; height: 20px; stroke: var(--cyan); }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 100%); text-align: center; }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(6,182,212,0.05) 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 4rem 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 2rem; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--blue) 100%);
+      color: var(--text);
+      padding: 1rem 2.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(59,130,246,0.35); }
+
+    /* Footer */
+    footer { background: var(--bg-deep); border-top: 1px solid var(--border); padding: 3rem 2rem; }
+
+    .footer-container { max-width: 1200px; margin: 0 auto; }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand .logo { margin-bottom: 0.5rem; display: inline-block; }
+    .footer-tagline { color: var(--muted); font-size: 0.9rem; }
+
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copyright { color: var(--muted); font-size: 0.85rem; }
+    .footer-built { color: var(--muted); font-size: 0.85rem; font-family: 'DM Mono', monospace; }
+
+    /* Mobile */
+    @media (max-width: 968px) {
+      .nav-links {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--bg-deep);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .nav-links.active { transform: translateX(0); }
+      .nav-links a { font-size: 1.2rem; }
+      .mobile-toggle { display: flex; z-index: 1001; }
+
+      .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+      .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+      .problems-grid { grid-template-columns: 1fr; }
+      .included-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 4rem 1.5rem; }
+      .page-hero { padding-top: 6rem; min-height: 60vh; }
+      .included-grid { grid-template-columns: 1fr; }
+      .industry-chip { padding: 0.875rem 1.5rem; font-size: 0.9rem; }
+      .cta-box { padding: 2.5rem 1.5rem; }
+      .footer-top { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">QUANTOR</a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn-nav">Get Started</a>
+      </div>
+      <div class="mobile-toggle" id="mobileToggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero-content">
+          <span class="page-tag reveal">About Quantor</span>
+          <h1 class="reveal reveal-delay-1">We Help Indian Businesses Get Online and Get Leads</h1>
+          <p class="page-hero-body reveal reveal-delay-2">
+            We believe every business deserves a powerful online presence, regardless of technical expertise. Our mission is simple: build high-converting landing pages and AI chatbots that capture leads 24/7, delivered in just 7 days. No complexity, no excuses, just results.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problems -->
+    <section class="problems">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">The Problem We Solve</span>
+          <h2 class="section-title reveal reveal-delay-1">Sound Familiar?</h2>
+          <p class="section-desc reveal reveal-delay-2">These challenges hold back thousands of Indian businesses every day.</p>
+        </div>
+        <div class="problems-grid">
+          <div class="problem-card reveal reveal-delay-1">
+            <div class="problem-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <line x1="9" y1="9" x2="15" y2="15"/>
+                <line x1="15" y1="9" x2="9" y2="15"/>
+              </svg>
+            </div>
+            <h3 class="problem-title">No Website</h3>
+            <p class="problem-desc">Your business is invisible online. Customers search Google and find your competitors instead of you. Every day without a web presence costs you money.</p>
+          </div>
+          <div class="problem-card reveal reveal-delay-2">
+            <div class="problem-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="8.5" cy="7" r="4"/>
+                <line x1="18" y1="8" x2="23" y2="13"/>
+                <line x1="23" y1="8" x2="18" y2="13"/>
+              </svg>
+            </div>
+            <h3 class="problem-title">Losing Leads to Competitors</h3>
+            <p class="problem-desc">Your competitors have websites that capture leads 24/7. They respond instantly while you're still checking WhatsApp. By then, the customer has already moved on.</p>
+          </div>
+          <div class="problem-card reveal reveal-delay-3">
+            <div class="problem-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                <line x1="12" y1="6" x2="12" y2="12"/>
+                <line x1="9" y1="9" x2="15" y2="9"/>
+              </svg>
+            </div>
+            <h3 class="problem-title">Tech Feels Overwhelming</h3>
+            <p class="problem-desc">You don't understand domains, hosting, or coding. Agencies quote thousands and take months. You just want a website that works without becoming a tech expert.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="comparison">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">How We're Different</span>
+          <h2 class="section-title reveal reveal-delay-1">Traditional Agency vs Quantor</h2>
+          <p class="section-desc reveal reveal-delay-2">See why smart businesses choose the faster, smarter path.</p>
+        </div>
+        <div class="comparison-wrapper reveal reveal-delay-3">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th>Traditional Agency</th>
+                <th>Quantor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Timeline</td>
+                <td><span class="cross-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>4–12 weeks</td>
+                <td><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>7 Days</td>
+              </tr>
+              <tr>
+                <td>Price</td>
+                <td><span class="cross-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>$500 – $5,000+</td>
+                <td><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Starting $399</td>
+              </tr>
+              <tr>
+                <td>Tech Required</td>
+                <td><span class="cross-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>You manage hosting, domains</td>
+                <td><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Zero tech knowledge needed</td>
+              </tr>
+              <tr>
+                <td>Ownership</td>
+                <td><span class="cross-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>They often keep the files</td>
+                <td><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>You own everything</td>
+              </tr>
+              <tr>
+                <td>Chatbot Included</td>
+                <td><span class="cross-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>Extra $200+</td>
+                <td><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Built into every package</td>
+              </tr>
+              <tr>
+                <td>Support</td>
+                <td><span class="cross-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>Limited, paid maintenance</td>
+                <td><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>Dedicated WhatsApp support</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Included -->
+    <section class="included">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">What's Included</span>
+          <h2 class="section-title reveal reveal-delay-1">Everything You Need</h2>
+          <p class="section-desc reveal reveal-delay-2">No hidden fees. No surprises. Just complete solutions.</p>
+        </div>
+        <div class="included-grid">
+          <div class="included-item reveal reveal-delay-1">
+            <div class="included-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+            <span class="included-text">Custom Design</span>
+          </div>
+          <div class="included-item reveal reveal-delay-1">
+            <div class="included-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <span class="included-text">Trained AI Chatbot</span>
+          </div>
+          <div class="included-item reveal reveal-delay-2">
+            <div class="included-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+            <span class="included-text">Mobile Responsive</span>
+          </div>
+          <div class="included-item reveal reveal-delay-2">
+            <div class="included-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <span class="included-text">Fast Loading</span>
+          </div>
+          <div class="included-item reveal reveal-delay-3">
+            <div class="included-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+            <span class="included-text">GitHub Hosting</span>
+          </div>
+          <div class="included-item reveal reveal-delay-3">
+            <div class="included-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+            <span class="included-text">WhatsApp Integration</span>
+          </div>
+          <div class="included-item reveal reveal-delay-4">
+            <div class="included-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg></div>
+            <span class="included-text">1 Revision Round</span>
+          </div>
+          <div class="included-item reveal reveal-delay-4">
+            <div class="included-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+            <span class="included-text">You Own Everything</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Industries -->
+    <section class="industries">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">Industries We Serve</span>
+          <h2 class="section-title reveal reveal-delay-1">Built for Your Business</h2>
+          <p class="section-desc reveal reveal-delay-2">We understand the unique needs of Indian businesses across sectors.</p>
+        </div>
+        <div class="industries-wrapper reveal reveal-delay-3">
+          <div class="industry-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Real Estate
+          </div>
+          <div class="industry-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Coaching
+          </div>
+          <div class="industry-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            CA & Finance
+          </div>
+          <div class="industry-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Healthcare
+          </div>
+          <div class="industry-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg>
+            Events & Weddings
+          </div>
+          <div class="industry-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            Interior Design
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2 class="cta-title">Ready to Get Started?</h2>
+          <a href="contact.html" class="btn-primary">
+            Let's Talk
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">QUANTOR</a>
+          <p class="footer-tagline">AI-Powered Landing Pages & Chatbots. Live in 7 Days.</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2025 Quantor. All rights reserved.</p>
+        <p class="footer-built">Built with AI &nbsp;·&nbsp; Delivered fast &nbsp;·&nbsp; Owned by you</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+    mobileToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    if (!prefersReducedMotion) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  </script>
+
+</body>
+</html>
