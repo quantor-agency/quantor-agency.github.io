@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — QUANTOR</title>
+  <meta name="description" content="Simple, transparent pricing for AI-powered landing pages and chatbots. One-time fee. You own everything. Starting from $399.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-deep: #080d19;
+      --accent: #3b82f6;
+      --cyan: #06b6d4;
+      --blue: #1e40af;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --border: rgba(59, 130, 246, 0.14);
+      --card-bg: rgba(15, 23, 42, 0.7);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .bg-pattern {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; opacity: 0.5; }
+    .orb-1 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%); top: -100px; right: -100px; animation: float1 20s ease-in-out infinite; }
+    .orb-2 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(6,182,212,0.25) 0%, transparent 70%); bottom: 20%; left: -50px; animation: float2 25s ease-in-out infinite; }
+    .orb-3 { width: 250px; height: 250px; background: radial-gradient(circle, rgba(30,64,175,0.3) 0%, transparent 70%); top: 50%; right: 10%; animation: float3 22s ease-in-out infinite; }
+
+    @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(-30px,40px) scale(1.05);} 66%{transform:translate(20px,-20px) scale(0.95);} }
+    @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(40px,-30px) scale(1.1);} 66%{transform:translate(-20px,20px) scale(0.9);} }
+    @keyframes float3 { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-30px,30px) scale(1.08);} }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb { animation: none; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* Nav */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; transition: all 0.3s ease; }
+    nav.scrolled { background: rgba(8,13,25,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+
+    .nav-container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+
+    .logo {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: 0.05em; text-decoration: none;
+    }
+
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.2s ease; }
+    .nav-links a:hover { color: var(--text); }
+
+    .btn-nav {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--blue) 100%);
+      color: var(--text); padding: 0.65rem 1.5rem; border-radius: 8px;
+      text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease;
+    }
+    .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,0.3); }
+
+    .mobile-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+    .mobile-toggle span { width: 24px; height: 2px; background: var(--text); transition: all 0.3s ease; }
+
+    main { position: relative; z-index: 1; }
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* Page Hero */
+    .page-hero { min-height: 60vh; display: flex; align-items: center; padding-top: 8rem; text-align: center; }
+    .page-hero-content { max-width: 700px; margin: 0 auto; }
+
+    .page-tag {
+      font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--cyan);
+      text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem;
+      display: inline-block; background: rgba(6,182,212,0.1); padding: 0.4rem 1rem;
+      border-radius: 4px; border: 1px solid rgba(6,182,212,0.2);
+    }
+
+    .page-hero h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.15; margin-bottom: 1.5rem; }
+    .page-hero-body { font-size: 1.15rem; color: var(--muted); line-height: 1.8; }
+
+    /* Section Headers */
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-label { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; display: block; }
+    .section-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+    .section-desc { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+    /* Pricing */
+    .pricing-section { background: var(--bg-deep); padding-bottom: 4rem; }
+
+    .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; align-items: stretch; }
+
+    .pricing-card {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px;
+      padding: 2rem 1.5rem; transition: all 0.4s ease; position: relative;
+      display: flex; flex-direction: column;
+    }
+    .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(0,0,0,0.3); }
+
+    .pricing-card.popular {
+      background: linear-gradient(180deg, rgba(59,130,246,0.12) 0%, rgba(6,182,212,0.05) 100%);
+      border-color: rgba(59,130,246,0.3); transform: scale(1.02); z-index: 2;
+    }
+    .pricing-card.popular:hover { transform: scale(1.02) translateY(-8px); }
+
+    .popular-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 100%);
+      color: var(--bg); font-size: 0.7rem; font-weight: 700; padding: 0.4rem 1rem;
+      border-radius: 20px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+
+    .tier-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.3rem 0.75rem; border-radius: 4px; margin-bottom: 1rem; }
+    .tier-badge.pro { background: rgba(139,92,246,0.15); color: #a78bfa; }
+    .tier-badge.enterprise { background: rgba(234,179,8,0.15); color: #fbbf24; }
+
+    .pricing-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; margin-bottom: 0.5rem; }
+
+    .pricing-amount {
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--text) 0%, var(--muted) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.25rem;
+    }
+    .pricing-card.popular .pricing-amount {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .pricing-range { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; }
+
+    .pricing-features { list-style: none; margin-bottom: 1.5rem; flex-grow: 1; }
+    .pricing-features li { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem; line-height: 1.5; }
+    .pricing-features li svg { width: 16px; height: 16px; stroke: var(--cyan); flex-shrink: 0; margin-top: 2px; }
+    .pricing-card.popular .pricing-features li svg { stroke: var(--accent); }
+
+    .btn-pricing {
+      width: 100%; padding: 0.875rem 1rem; border-radius: 10px; text-decoration: none;
+      font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease;
+      text-align: center; display: block; border: 1px solid var(--border);
+      background: transparent; color: var(--text); cursor: pointer;
+    }
+    .btn-pricing:hover { background: rgba(59,130,246,0.1); border-color: var(--accent); }
+
+    .pricing-card.popular .btn-pricing {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--blue) 100%);
+      border: none; color: var(--text);
+    }
+    .pricing-card.popular .btn-pricing:hover { box-shadow: 0 10px 30px rgba(59,130,246,0.4); transform: translateY(-2px); }
+
+    /* Included */
+    .included-section { background: var(--bg); }
+
+    .included-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 900px; margin: 0 auto; }
+
+    .included-item { display: flex; align-items: center; gap: 1rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; transition: all 0.3s ease; }
+    .included-item:hover { border-color: rgba(59,130,246,0.25); transform: translateX(5px); }
+
+    .included-check { width: 24px; height: 24px; background: linear-gradient(135deg, rgba(6,182,212,0.2) 0%, rgba(59,130,246,0.1) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .included-check svg { width: 14px; height: 14px; stroke: var(--cyan); }
+    .included-text { font-weight: 500; font-size: 0.95rem; }
+
+    /* FAQ */
+    .faq-section { background: var(--bg-deep); }
+    .faq-container { max-width: 800px; margin: 0 auto; }
+
+    .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; transition: all 0.3s ease; }
+    .faq-item:hover { border-color: rgba(59,130,246,0.2); }
+    .faq-item.active { border-color: rgba(59,130,246,0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+
+    .faq-question { width: 100%; background: none; border: none; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; text-align: left; }
+    .faq-question span { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text); }
+
+    .faq-icon { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+    .faq-icon svg { width: 16px; height: 16px; stroke: var(--muted); transition: stroke 0.3s ease; }
+    .faq-item.active .faq-icon { transform: rotate(45deg); }
+    .faq-item.active .faq-icon svg { stroke: var(--accent); }
+
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-item.active .faq-answer { max-height: 300px; }
+    .faq-answer-inner { padding: 0 1.5rem 1.5rem; color: var(--muted); font-size: 0.95rem; line-height: 1.7; }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%); text-align: center; }
+
+    .cta-box { background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(6,182,212,0.05) 100%); border: 1px solid var(--border); border-radius: 24px; padding: 4rem 2rem; max-width: 600px; margin: 0 auto; }
+    .cta-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 2rem; }
+
+    .btn-whatsapp { background: #25D366; color: white; padding: 1rem 2.5rem; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-whatsapp:hover { background: #20bd5a; transform: translateY(-3px); box-shadow: 0 12px 40px rgba(37,211,102,0.3); }
+    .btn-whatsapp svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* Footer */
+    footer { background: var(--bg-deep); border-top: 1px solid var(--border); padding: 3rem 2rem; }
+    .footer-container { max-width: 1200px; margin: 0 auto; }
+
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem; }
+    .footer-brand .logo { margin-bottom: 0.5rem; display: inline-block; }
+    .footer-tagline { color: var(--muted); font-size: 0.9rem; }
+
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; transition: color 0.2s ease; }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-copyright { color: var(--muted); font-size: 0.85rem; }
+    .footer-built { color: var(--muted); font-size: 0.85rem; font-family: 'DM Mono', monospace; }
+
+    /* Mobile */
+    @media (max-width: 1024px) {
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-card.popular { transform: none; }
+      .pricing-card.popular:hover { transform: translateY(-8px); }
+    }
+
+    @media (max-width: 968px) {
+      .nav-links { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-deep); flex-direction: column; justify-content: center; gap: 2rem; transform: translateX(100%); transition: transform 0.3s ease; }
+      .nav-links.active { transform: translateX(0); }
+      .nav-links a { font-size: 1.2rem; }
+      .mobile-toggle { display: flex; z-index: 1001; }
+      .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+      .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+      .included-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 4rem 1.5rem; }
+      .page-hero { padding-top: 6rem; min-height: 50vh; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card.popular { order: -1; }
+      .cta-box { padding: 2.5rem 1.5rem; }
+      .footer-top { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">QUANTOR</a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn-nav">Get Started</a>
+      </div>
+      <div class="mobile-toggle" id="mobileToggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero-content">
+          <span class="page-tag reveal">Simple Pricing</span>
+          <h1 class="reveal reveal-delay-1">One-Time Fee. You Own Everything.</h1>
+          <p class="page-hero-body reveal reveal-delay-2">No monthly subscriptions forced on you. Pay once, get leads forever.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Cards -->
+    <section class="pricing-section">
+      <div class="container">
+        <div class="pricing-grid">
+
+          <!-- Chatbot Only -->
+          <div class="pricing-card reveal reveal-delay-1">
+            <h3 class="pricing-name">Chatbot Only</h3>
+            <div class="pricing-amount">$399</div>
+            <p class="pricing-range">$399 – $599</p>
+            <ul class="pricing-features">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Trained AI chatbot</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Lead capture 24/7</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>WhatsApp handoff</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Embed on any site</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>7 day delivery</li>
+            </ul>
+            <a href="https://wa.me/919359163507?text=Hi%20Quantor%2C%20I%27m%20interested%20in%20the%20Chatbot%20Only%20plan%20%28from%20%24399%29" class="btn-pricing" target="_blank" rel="noopener noreferrer">Get Started</a>
+          </div>
+
+          <!-- Landing Page + Chatbot (Popular) -->
+          <div class="pricing-card popular reveal reveal-delay-2">
+            <span class="popular-badge">Most Popular</span>
+            <h3 class="pricing-name">Landing Page + Chatbot</h3>
+            <div class="pricing-amount">$699</div>
+            <p class="pricing-range">$699 – $899</p>
+            <ul class="pricing-features">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Custom landing page</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>AI chatbot included</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Mobile-first design</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>WhatsApp CTA button</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>GitHub Pages hosting</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>7–10 day delivery</li>
+            </ul>
+            <a href="https://wa.me/919359163507?text=Hi%20Quantor%2C%20I%27m%20interested%20in%20the%20Landing%20Page%20%2B%20Chatbot%20plan%20%28from%20%24699%29" class="btn-pricing" target="_blank" rel="noopener noreferrer">Get Started</a>
+          </div>
+
+          <!-- Full Website + Chatbot (Pro) -->
+          <div class="pricing-card reveal reveal-delay-3">
+            <span class="tier-badge pro">Pro</span>
+            <h3 class="pricing-name">Full Website + Chatbot</h3>
+            <div class="pricing-amount">$1,999</div>
+            <p class="pricing-range">Fixed price</p>
+            <ul class="pricing-features">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Multi-page website</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Advanced AI chatbot</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Google Analytics setup</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Contact form integration</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>2–3 week delivery</li>
+            </ul>
+            <a href="https://wa.me/919359163507?text=Hi%20Quantor%2C%20I%27m%20interested%20in%20the%20Full%20Website%20%2B%20Chatbot%20plan%20%28%241%2C999%29" class="btn-pricing" target="_blank" rel="noopener noreferrer">Get Started</a>
+          </div>
+
+          <!-- Full Site + SEO + Chatbot (Enterprise) -->
+          <div class="pricing-card reveal reveal-delay-4">
+            <span class="tier-badge enterprise">Enterprise</span>
+            <h3 class="pricing-name">Full Site + SEO + Chatbot</h3>
+            <div class="pricing-amount">$3,000</div>
+            <p class="pricing-range">Fixed price</p>
+            <ul class="pricing-features">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>On-page SEO optimization</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Keyword research</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Google Search Console</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Priority support</li>
+            </ul>
+            <a href="https://wa.me/919359163507?text=Hi%20Quantor%2C%20I%27m%20interested%20in%20the%20Full%20Site%20%2B%20SEO%20%2B%20Chatbot%20plan%20%28%243%2C000%29" class="btn-pricing" target="_blank" rel="noopener noreferrer">Get Started</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Always Included -->
+    <section class="included-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">Always Included</span>
+          <h2 class="section-title reveal reveal-delay-1">What's Always Included</h2>
+          <p class="section-desc reveal reveal-delay-2">Every package comes with these essentials.</p>
+        </div>
+        <div class="included-grid">
+          <div class="included-item reveal reveal-delay-1">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="included-text">Mobile responsive design</span>
+          </div>
+          <div class="included-item reveal reveal-delay-1">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="included-text">Trained AI chatbot</span>
+          </div>
+          <div class="included-item reveal reveal-delay-2">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="included-text">GitHub Pages hosting</span>
+          </div>
+          <div class="included-item reveal reveal-delay-2">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="included-text">WhatsApp integration</span>
+          </div>
+          <div class="included-item reveal reveal-delay-3">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="included-text">1 revision round</span>
+          </div>
+          <div class="included-item reveal reveal-delay-3">
+            <div class="included-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span class="included-text">You own the code</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label reveal">FAQ</span>
+          <h2 class="section-title reveal reveal-delay-1">Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-container">
+          <div class="faq-item reveal reveal-delay-1">
+            <button class="faq-question">
+              <span>How long does delivery take?</span>
+              <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Most landing pages are delivered within 7 days. Full websites take 2–3 weeks depending on complexity. We'll give you an exact timeline before we start, and we stick to it.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal reveal-delay-2">
+            <button class="faq-question">
+              <span>Do I need to know any tech?</span>
+              <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Absolutely not. We handle everything — design, development, hosting, and setup. You just fill out a simple form about your business, and we take it from there. No coding, no hosting panels, no confusion.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal reveal-delay-3">
+            <button class="faq-question">
+              <span>What platform do you host on?</span>
+              <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">We host on GitHub Pages — it's fast, reliable, and completely free forever. No monthly hosting fees. Your site gets a clean URL and SSL certificate automatically.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal reveal-delay-4">
+            <button class="faq-question">
+              <span>Can I update the page after delivery?</span>
+              <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">Yes! You own everything. We hand over all files and can walk you through making simple updates. For bigger changes, we offer affordable maintenance or can update it for you at a reasonable rate.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal reveal-delay-4">
+            <button class="faq-question">
+              <span>Do you work with any business type?</span>
+              <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">We work with most business types — real estate agents, coaches, accountants, healthcare clinics, event planners, interior designers, and more. If you need leads, we can build for you.</div>
+            </div>
+          </div>
+          <div class="faq-item reveal reveal-delay-4">
+            <button class="faq-question">
+              <span>What if I already have a website?</span>
+              <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">We can add an AI chatbot to your existing site, or build a high-converting landing page that works alongside your current website. Many clients use our landing pages specifically for ad campaigns.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h2 class="cta-title">Get a Custom Quote</h2>
+          <a href="https://wa.me/919359163507?text=Hi%20Quantor%2C%20I%27d%20like%20a%20custom%20quote%20for%20my%20business" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">QUANTOR</a>
+          <p class="footer-tagline">AI-Powered Landing Pages & Chatbots. Live in 7 Days.</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2025 Quantor. All rights reserved.</p>
+        <p class="footer-built">Built with AI &nbsp;·&nbsp; Delivered fast &nbsp;·&nbsp; Owned by you</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navbar = document.getElementById('navbar');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
+    mobileToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => {
+        document.querySelectorAll('.faq-item').forEach(other => {
+          if (other !== item) other.classList.remove('active');
+        });
+        item.classList.toggle('active');
+      });
+    });
+
+    if (!prefersReducedMotion) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  </script>
+
+  <!-- Chatling AI Chatbot -->
+  <script>window.chtlConfig = { chatbotId: "5192877623" }</script>
+  <script async data-id="5192877623" id="chtl-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
+
+</body>
+</html>
