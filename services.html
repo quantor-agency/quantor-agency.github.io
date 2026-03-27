@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | QUANTOR - AI-Powered Websites & Chatbots</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@300;400&family=Syne:wght@700;800&display=swap');
+
+        :root {
+            --navy: #0f172a;
+            --navy-light: #1a2744;
+            --brand-blue: #1e40af;
+            --action-blue: #3b82f6;
+            --cyan: #06b6d4;
+            --off-white: #f8fafc;
+            --muted: rgba(248,250,252,0.6);
+            --card-bg: rgba(255,255,255,0.04);
+            --card-border: rgba(255,255,255,0.08);
+            --glow-blue: 0 0 30px rgba(59,130,246,0.4);
+            --glow-cyan: 0 0 30px rgba(6,182,212,0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--navy);
+            color: var(--off-white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            color: var(--off-white);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            color: var(--off-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--cyan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--cyan);
+        }
+
+        .cta-btn {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            padding: 12px 24px;
+            background: var(--action-blue);
+            color: var(--off-white);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            box-shadow: var(--glow-blue);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 2px;
+            background: var(--off-white);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* PAGE HERO */
+        .page-hero {
+            position: relative;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 120px 20px 60px;
+            max-width: 900px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(32px, 5vw, 56px);
+            color: var(--off-white);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .hero-content p {
+            font-size: clamp(16px, 2vw, 20px);
+            color: var(--muted);
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 0.8s ease 0.2s forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* WAVE DIVIDER */
+        .wave-divider {
+            width: 100%;
+            height: 80px;
+            position: relative;
+        }
+
+        .wave-divider svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 100px 40px;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: clamp(32px, 4vw, 48px);
+            color: var(--off-white);
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        /* SERVICE BLOCKS */
+        .service-block {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .service-block.reverse {
+            direction: rtl;
+        }
+
+        .service-block.reverse > * {
+            direction: ltr;
+        }
+
+        .service-text h2 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: clamp(28px, 3vw, 40px);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .service-text p {
+            font-size: 17px;
+            color: var(--muted);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .service-text ul {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .service-text li {
+            font-size: 16px;
+            color: var(--off-white);
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .service-text li:last-child {
+            border-bottom: none;
+        }
+
+        .service-text li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan);
+        }
+
+        .service-text.accent-cyan li::before {
+            background: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan);
+        }
+
+        .service-text.accent-blue li::before {
+            background: var(--action-blue);
+            box-shadow: 0 0 10px var(--action-blue);
+        }
+
+        .service-text.accent-brand li::before {
+            background: var(--brand-blue);
+            box-shadow: 0 0 10px var(--brand-blue);
+        }
+
+        .service-btn {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .service-btn.cyan {
+            background: var(--cyan);
+            color: var(--navy);
+        }
+
+        .service-btn.cyan:hover {
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-3px);
+        }
+
+        .service-btn.blue {
+            background: var(--action-blue);
+            color: var(--off-white);
+        }
+
+        .service-btn.blue:hover {
+            box-shadow: var(--glow-blue);
+            transform: translateY(-3px);
+        }
+
+        .service-btn.brand {
+            background: var(--brand-blue);
+            color: var(--off-white);
+        }
+
+        .service-btn.brand:hover {
+            box-shadow: 0 0 30px rgba(30, 64, 175, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* SERVICE VISUALS */
+        .service-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 350px;
+        }
+
+        /* Chatbot Visual */
+        .chatbot-visual {
+            position: relative;
+            width: 280px;
+            height: 280px;
+        }
+
+        .cube-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            perspective: 800px;
+            margin: 60px;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 20s linear infinite;
+        }
+
+        @keyframes rotateCube {
+            0% { transform: rotateX(-20deg) rotateY(0deg); }
+            100% { transform: rotateX(-20deg) rotateY(360deg); }
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(59, 130, 246, 0.15));
+            border: 2px solid rgba(6, 182, 212, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .cube-face svg {
+            width: 60px;
+            height: 60px;
+            color: var(--cyan);
+        }
+
+        .cube-face.front { transform: translateZ(80px); }
+        .cube-face.back { transform: rotateY(180deg) translateZ(80px); }
+        .cube-face.right { transform: rotateY(90deg) translateZ(80px); }
+        .cube-face.left { transform: rotateY(-90deg) translateZ(80px); }
+        .cube-face.top { transform: rotateX(90deg) translateZ(80px); }
+        .cube-face.bottom { transform: rotateX(-90deg) translateZ(80px); }
+
+        .cube-glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        /* Browser Visual */
+        .browser-visual {
+            position: relative;
+            width: 320px;
+        }
+
+        .browser-frame {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .browser-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .browser-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .browser-dot.red { background: #ef4444; }
+        .browser-dot.yellow { background: #eab308; }
+        .browser-dot.green { background: #22c55e; }
+
+        .browser-url {
+            flex: 1;
+            margin-left: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-family: 'DM Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .browser-content {
+            padding: 20px;
+            min-height: 180px;
+            position: relative;
+        }
+
+        .browser-line {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .browser-line.short { width: 60%; }
+        .browser-line.medium { width: 80%; }
+        .browser-line.long { width: 95%; }
+
+        .browser-cursor {
+            position: absolute;
+            width: 12px;
+            height: 20px;
+            bottom: 40px;
+            right: 60px;
+            animation: cursorMove 4s ease-in-out infinite;
+        }
+
+        .browser-cursor svg {
+            width: 100%;
+            height: 100%;
+            color: var(--action-blue);
+            filter: drop-shadow(0 0 8px var(--action-blue));
+        }
+
+        @keyframes cursorMove {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(-40px, 20px); }
+            50% { transform: translate(-80px, -10px); }
+            75% { transform: translate(-20px, 30px); }
+        }
+
+        .browser-glow {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* Multi-page Visual */
+        .multipage-visual {
+            position: relative;
+            width: 280px;
+            height: 280px;
+        }
+
+        .page-stack {
+            position: relative;
+            width: 200px;
+            height: 140px;
+        }
+
+        .page-card {
+            position: absolute;
+            width: 180px;
+            height: 120px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .page-card:nth-child(1) {
+            top: 0;
+            left: 0;
+            z-index: 3;
+        }
+
+        .page-card:nth-child(2) {
+            top: 30px;
+            left: 40px;
+            z-index: 2;
+        }
+
+        .page-card:nth-child(3) {
+            top: 60px;
+            left: 80px;
+            z-index: 1;
+        }
+
+        .page-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(30, 64, 175, 0.3);
+        }
+
+        .page-mini-line {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 3px;
+            margin-bottom: 8px;
+        }
+
+        .page-mini-line.w-full { width: 100%; }
+        .page-mini-line.w-half { width: 50%; }
+        .page-mini-line.w-three { width: 75%; }
+
+        .multipage-glow {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(30, 64, 175, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        /* COMPARISON TABLE */
+        .comparison-section {
+            background: var(--navy-light);
+        }
+
+        .table-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 18px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .comparison-table th {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--off-white);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .comparison-table th:first-child {
+            text-align: left;
+        }
+
+        .comparison-table th.feature-col {
+            color: var(--muted);
+            font-weight: 400;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .comparison-table td {
+            font-size: 15px;
+            color: var(--off-white);
+        }
+
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 400;
+            color: var(--muted);
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .check {
+            color: var(--cyan);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .dash {
+            color: var(--muted);
+        }
+
+        .cta-center {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* CTA BANNER */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--brand-blue), var(--action-blue));
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .cta-banner h2 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: clamp(28px, 4vw, 42px);
+            color: var(--off-white);
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .cta-banner p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .btn-white {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            padding: 18px 40px;
+            background: var(--off-white);
+            color: var(--brand-blue);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0a1121;
+            padding: 60px 40px 30px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .footer-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            color: var(--off-white);
+            letter-spacing: 2px;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            font-size: 15px;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-contact {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact a {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom p {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyan);
+        }
+
+        /* SCROLL ANIMATIONS */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu a {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            color: var(--off-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+            color: var(--cyan);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .service-block {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .service-block.reverse {
+                direction: ltr;
+            }
+
+            .service-visual {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .browser-visual {
+                width: 280px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+
+            .footer-top {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-nav {
+                justify-content: center;
+            }
+
+            .footer-contact {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            .service-text h2 {
+                font-size: 24px;
+            }
+
+            .chatbot-visual,
+            .multipage-visual {
+                width: 220px;
+                height: 220px;
+            }
+
+            .cube-container {
+                width: 120px;
+                height: 120px;
+                margin: 50px;
+            }
+
+            .cube-face {
+                width: 120px;
+                height: 120px;
+            }
+
+            .cube-face.front { transform: translateZ(60px); }
+            .cube-face.back { transform: rotateY(180deg) translateZ(60px); }
+            .cube-face.right { transform: rotateY(90deg) translateZ(60px); }
+            .cube-face.left { transform: rotateY(-90deg) translateZ(60px); }
+            .cube-face.top { transform: rotateX(90deg) translateZ(60px); }
+            .cube-face.bottom { transform: rotateX(-90deg) translateZ(60px); }
+        }
+
+        /* REDUCED MOTION */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="logo">QUANTOR</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="contact.html" class="cta-btn">Get Started</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="cta-btn">Get Started</a>
+    </div>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <div id="canvas-container"></div>
+        <div class="hero-content">
+            <h1>Everything Built For You. Nothing Left To Chance.</h1>
+            <p>AI-powered sites and chatbots, fully done-for-you, live in days.</p>
+        </div>
+    </section>
+
+    <!-- WAVE DIVIDER -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#1a2744;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <path d="M0,50 C480,80 960,0 1440,30 L1440,80 L0,80 Z" fill="url(#waveGrad1)"/>
+        </svg>
+    </div>
+
+    <!-- SERVICE 1: AI CHATBOTS -->
+    <section id="chatbots">
+        <div class="service-block fade-up">
+            <div class="service-text accent-cyan">
+                <h2>AI Chatbot That Works While You Sleep</h2>
+                <p>Every plan includes a Tidio Lyro AI chatbot, trained on your business, answering leads 24/7, capturing contacts, and booking inquiries without any human intervention. Your best salesperson never takes a day off.</p>
+                <ul>
+                    <li>Always-on lead capture</li>
+                    <li>Trained on your business</li>
+                    <li>Instant replies to customer questions</li>
+                    <li>Works on any device</li>
+                    <li>Powered by Tidio Lyro AI</li>
+                </ul>
+                <a href="contact.html" class="service-btn cyan">Get My Chatbot</a>
+            </div>
+            <div class="service-visual">
+                <div class="chatbot-visual">
+                    <div class="cube-glow"></div>
+                    <div class="cube-container">
+                        <div class="cube">
+                            <div class="cube-face front">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                </svg>
+                            </div>
+                            <div class="cube-face back">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                    <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                    <line x1="15" y1="9" x2="15.01" y2="9"/>
+                                </svg>
+                            </div>
+                            <div class="cube-face right">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Z"/>
+                                    <path d="M8 12h8M12 8v8"/>
+                                </svg>
+                            </div>
+                            <div class="cube-face left">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                                </svg>
+                            </div>
+                            <div class="cube-face top">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                </svg>
+                            </div>
+                            <div class="cube-face bottom">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                                    <path d="M12 6v6l4 2"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WAVE DIVIDER -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#1a2744;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <path d="M0,30 C480,0 960,80 1440,50 L1440,80 L0,80 Z" fill="url(#waveGrad2)"/>
+        </svg>
+    </div>
+
+    <!-- SERVICE 2: LANDING PAGES -->
+    <section id="landing-pages">
+        <div class="service-block reverse fade-up">
+            <div class="service-text accent-blue">
+                <h2>A Landing Page That Converts Visitors Into Leads</h2>
+                <p>A high-converting single-page site built for one purpose: turning visitors into leads. Deployed on your custom domain with an AI chatbot embedded. Everything done for you in days, not months.</p>
+                <ul>
+                    <li>Custom domain included</li>
+                    <li>AI chatbot embedded</li>
+                    <li>Mobile-first design</li>
+                    <li>Fast loading</li>
+                    <li>Built for conversions not just looks</li>
+                </ul>
+                <a href="contact.html" class="service-btn blue">Get My Landing Page</a>
+            </div>
+            <div class="service-visual">
+                <div class="browser-visual">
+                    <div class="browser-glow"></div>
+                    <div class="browser-frame">
+                        <div class="browser-header">
+                            <div class="browser-dot red"></div>
+                            <div class="browser-dot yellow"></div>
+                            <div class="browser-dot green"></div>
+                            <div class="browser-url">yoursite.com</div>
+                        </div>
+                        <div class="browser-content">
+                            <div class="browser-line long"></div>
+                            <div class="browser-line medium"></div>
+                            <div class="browser-line short"></div>
+                            <div class="browser-line medium"></div>
+                            <div class="browser-line long"></div>
+                            <div class="browser-line short"></div>
+                            <div class="browser-cursor">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M4 4l16 8-8 4-4 8z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WAVE DIVIDER -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="waveGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#1a2744;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <path d="M0,50 C480,80 960,0 1440,30 L1440,80 L0,80 Z" fill="url(#waveGrad3)"/>
+        </svg>
+    </div>
+
+    <!-- SERVICE 3: FULL WEBSITES -->
+    <section id="full-websites">
+        <div class="service-block fade-up">
+            <div class="service-text accent-brand">
+                <h2>A Full Website That Makes You Look Like the Best in Your Industry</h2>
+                <p>A complete multi-page website built to establish your authority. Home, about, services, portfolio, contact — all professionally designed. Hosting, domain, and AI chatbot included. Pro covers core pages, Enterprise adds SEO optimization.</p>
+                <ul>
+                    <li>5–6 fully designed pages</li>
+                    <li>Hostinger hosting included</li>
+                    <li>Custom domain included</li>
+                    <li>AI chatbot on every page</li>
+                    <li>SEO-optimized structure (Enterprise)</li>
+                </ul>
+                <a href="contact.html" class="service-btn brand">Get My Website</a>
+            </div>
+            <div class="service-visual">
+                <div class="multipage-visual">
+                    <div class="multipage-glow"></div>
+                    <div class="page-stack">
+                        <div class="page-card">
+                            <div class="page-mini-line w-half"></div>
+                            <div class="page-mini-line w-three"></div>
+                            <div class="page-mini-line w-full"></div>
+                            <div class="page-mini-line w-three"></div>
+                        </div>
+                        <div class="page-card">
+                            <div class="page-mini-line w-half"></div>
+                            <div class="page-mini-line w-full"></div>
+                            <div class="page-mini-line w-three"></div>
+                        </div>
+                        <div class="page-card">
+                            <div class="page-mini-line w-three"></div>
+                            <div class="page-mini-line w-full"></div>
+                            <div class="page-mini-line w-half"></div>
+                            <div class="page-mini-line w-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WAVE DIVIDER -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="waveGrad4" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#1a2744;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <path d="M0,30 C480,0 960,80 1440,50 L1440,80 L0,80 Z" fill="url(#waveGrad4)"/>
+        </svg>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <section class="comparison-section" id="comparison">
+        <h2 class="section-title fade-up">Which Plan Is Right For You</h2>
+        <div class="table-container fade-up stagger-1">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="feature-col">Feature</th>
+                        <th>Chatbot Only</th>
+                        <th>Landing</th>
+                        <th>Pro</th>
+                        <th>Enterprise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Custom Domain</td>
+                        <td class="dash">—</td>
+                        <td class="check">Included</td>
+                        <td class="check">Included</td>
+                        <td class="check">Included</td>
+                    </tr>
+                    <tr>
+                        <td>Hosting Included</td>
+                        <td class="dash">—</td>
+                        <td class="check">1 Year</td>
+                        <td class="check">1 Year</td>
+                        <td class="check">1 Year</td>
+                    </tr>
+                    <tr>
+                        <td>Number of Pages</td>
+                        <td class="dash">—</td>
+                        <td>1</td>
+                        <td>5–6</td>
+                        <td>5–6+</td>
+                    </tr>
+                    <tr>
+                        <td>AI Chatbot</td>
+                        <td class="check">Yes</td>
+                        <td class="check">Yes</td>
+                        <td class="check">Yes</td>
+                        <td class="check">Yes</td>
+                    </tr>
+                    <tr>
+                        <td>SEO Optimization</td>
+                        <td class="dash">—</td>
+                        <td class="dash">—</td>
+                        <td class="dash">—</td>
+                        <td class="check">Full SEO</td>
+                    </tr>
+                    <tr>
+                        <td>Delivery Time</td>
+                        <td>2 Days</td>
+                        <td>4 Days</td>
+                        <td>7 Days</td>
+                        <td>9 Days</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="cta-center fade-up stagger-2">
+            <a href="pricing.html" class="btn-white" style="background: var(--action-blue); color: var(--off-white);">See Full Pricing</a>
+        </div>
+    </section>
+
+    <!-- WAVE DIVIDER -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="waveGrad5" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <path d="M0,50 C480,80 960,0 1440,30 L1440,80 L0,80 Z" fill="url(#waveGrad5)"/>
+        </svg>
+    </div>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+        <h2>Not Sure Which Plan Fits</h2>
+        <p>Message us on WhatsApp and we'll tell you exactly what your business needs.</p>
+        <a href="https://wa.me/919599234747" class="btn-white" target="_blank">WhatsApp Us Now</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-logo">QUANTOR</div>
+            <div class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-contact">
+                <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
+                <a href="https://wa.me/919599234747" target="_blank">+91 9599234747</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>2025 QUANTOR. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms.html">Terms</a>
+                <a href="refund-policy.html">Refund Policy</a>
+                <a href="disclaimer.html">Disclaimer</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- THREE.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        // Initialize all variables at the top
+        let scene = null;
+        let camera = null;
+        let renderer = null;
+        let particles = null;
+        let lines = null;
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetMouseX = 0;
+        let targetMouseY = 0;
+        let animationId = null;
+        const particleCount = 120;
+        const velocities = [];
+
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // THREE.JS PARTICLE NETWORK
+        function initThreeJS() {
+            const container = document.getElementById('canvas-container');
+            if (!container) return;
+
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+            camera.position.z = 50;
+
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: true, 
+                alpha: true 
+            });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setClearColor(0x0f172a, 1);
+            container.appendChild(renderer.domElement);
+
+            // Create particles
+            const geometry = new THREE.BufferGeometry();
+            const posArray = new Float32Array(particleCount * 3);
+            const colorArray = new Float32Array(particleCount * 3);
+
+            const cyan = new THREE.Color(0x06b6d4);
+            const blue = new THREE.Color(0x3b82f6);
+
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+                posArray[i3] = (Math.random() - 0.5) * 100;
+                posArray[i3 + 1] = (Math.random() - 0.5) * 100;
+                posArray[i3 + 2] = (Math.random() - 0.5) * 60;
+
+                velocities.push({
+                    x: (Math.random() - 0.5) * 0.015,
+                    y: (Math.random() - 0.5) * 0.015,
+                    z: (Math.random() - 0.5) * 0.015
+                });
+
+                const color = Math.random() > 0.5 ? cyan : blue;
+                colorArray[i3] = color.r;
+                colorArray[i3 + 1] = color.g;
+                colorArray[i3 + 2] = color.b;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.7,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.85,
+                sizeAttenuation: true
+            });
+
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            // Create lines
+            const lineGeometry = new THREE.BufferGeometry();
+            const linePositions = new Float32Array(particleCount * particleCount * 6);
+            lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+            lineGeometry.setDrawRange(0, 0);
+
+            const lineMaterial = new THREE.LineBasicMaterial({
+                color: 0x06b6d4,
+                transparent: true,
+                opacity: 0.12
+            });
+
+            lines = new THREE.LineSegments(lineGeometry, lineMaterial);
+            scene.add(lines);
+
+            if (!prefersReducedMotion) {
+                animate();
+            } else {
+                renderer.render(scene, camera);
+            }
+        }
+
+        function updateLines() {
+            if (!particles || !lines) return;
+            
+            const posAttr = lines.geometry.attributes.position;
+            const positions = particles.geometry.attributes.position.array;
+            const linePositions = posAttr.array;
+
+            let lineIndex = 0;
+            const maxDistance = 18;
+
+            for (let i = 0; i < particleCount; i++) {
+                for (let j = i + 1; j < particleCount; j++) {
+                    const i3 = i * 3;
+                    const j3 = j * 3;
+
+                    const dx = positions[i3] - positions[j3];
+                    const dy = positions[i3 + 1] - positions[j3 + 1];
+                    const dz = positions[i3 + 2] - positions[j3 + 2];
+                    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+                    if (dist < maxDistance) {
+                        const idx = lineIndex * 6;
+
+                        linePositions[idx] = positions[i3];
+                        linePositions[idx + 1] = positions[i3 + 1];
+                        linePositions[idx + 2] = positions[i3 + 2];
+                        linePositions[idx + 3] = positions[j3];
+                        linePositions[idx + 4] = positions[j3 + 1];
+                        linePositions[idx + 5] = positions[j3 + 2];
+
+                        lineIndex++;
+                    }
+                }
+            }
+
+            lines.geometry.setDrawRange(0, lineIndex * 2);
+            posAttr.needsUpdate = true;
+        }
+
+        function animate() {
+            animationId = requestAnimationFrame(animate);
+
+            if (!particles || !renderer || !camera || !scene) return;
+
+            // Smooth mouse follow
+            mouseX += (targetMouseX - mouseX) * 0.05;
+            mouseY += (targetMouseY - mouseY) * 0.05;
+
+            const positions = particles.geometry.attributes.position.array;
+
+            for (let i = 0; i < particleCount; i++) {
+                const i3 = i * 3;
+
+                positions[i3] += velocities[i].x;
+                positions[i3 + 1] += velocities[i].y;
+                positions[i3 + 2] += velocities[i].z;
+
+                // Boundary check
+                if (Math.abs(positions[i3]) > 50) velocities[i].x *= -1;
+                if (Math.abs(positions[i3 + 1]) > 50) velocities[i].y *= -1;
+                if (Math.abs(positions[i3 + 2]) > 30) velocities[i].z *= -1;
+            }
+
+            particles.geometry.attributes.position.needsUpdate = true;
+
+            // Rotate based on mouse
+            particles.rotation.y = mouseX * 0.0003;
+            particles.rotation.x = mouseY * 0.0003;
+
+            if (lines) {
+                lines.rotation.y = mouseX * 0.0003;
+                lines.rotation.x = mouseY * 0.0003;
+                updateLines();
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Mouse move handler
+        function onMouseMove(event) {
+            if (prefersReducedMotion) return;
+            targetMouseX = event.clientX - window.innerWidth / 2;
+            targetMouseY = event.clientY - window.innerHeight / 2;
+        }
+
+        // Resize handler
+        function onWindowResize() {
+            if (!camera || !renderer) return;
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initThreeJS();
+
+            window.addEventListener('resize', onWindowResize);
+            document.addEventListener('mousemove', onMouseMove);
+        });
+
+        // NAVBAR SCROLL
+        const navbar = document.getElementById('navbar');
+        
+        function handleScroll() {
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+        
+        window.addEventListener('scroll', handleScroll);
+
+        // HAMBURGER MENU
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // SCROLL ANIMATIONS - IntersectionObserver
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const fadeObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        const fadeElements = document.querySelectorAll('.fade-up');
+        fadeElements.forEach(function(el) {
+            fadeObserver.observe(el);
+        });
+
+        // SMOOTH SCROLL FOR ANCHOR LINKS
+        const anchorLinks = document.querySelectorAll('a[href^="#"]');
+        anchorLinks.forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
