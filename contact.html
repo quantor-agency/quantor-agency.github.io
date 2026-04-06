@@ -3,556 +3,665 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | QUANTOR - AI-Powered Websites & Chatbots</title>
+    <title>Contact Us | QUANTOR</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@300;400&family=Syne:wght@700;800&display=swap');
-
         :root {
-            --navy: #0f172a;
-            --navy-light: #1a2744;
-            --brand-blue: #1e40af;
-            --action-blue: #3b82f6;
-            --cyan: #06b6d4;
-            --off-white: #f8fafc;
-            --muted: rgba(248,250,252,0.6);
-            --card-bg: rgba(255,255,255,0.04);
-            --card-border: rgba(255,255,255,0.08);
-            --glow-blue: 0 0 30px rgba(59,130,246,0.4);
-            --glow-cyan: 0 0 30px rgba(6,182,212,0.4);
+            --bg-dark: #0a0a0f;
+            --card-dark: #12121a;
+            --input-dark: #1a1a24;
+            --accent-blue: #4F8EF7;
+            --accent-purple: #7C3AED;
+            --text-white: #ffffff;
+            --text-muted: #a0a0b0;
+            --text-body: #c8c8d8;
+            --border-blue: rgba(79, 142, 247, 0.2);
+            --green-whatsapp: #25D366;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
             scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: var(--navy);
-            color: var(--off-white);
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: var(--font-main);
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* NAVBAR */
-        .navbar {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            font-size: 0.95rem;
+            border: none;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-filled {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 142, 247, 0.3);
+        }
+
+        .btn-filled:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(79, 142, 247, 0.5);
+        }
+
+        nav {
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             z-index: 1000;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 1.5rem 0;
             transition: all 0.3s ease;
         }
 
-        .navbar.scrolled {
-            background: rgba(15, 23, 42, 0.8);
+        nav.scrolled {
+            background: rgba(10, 10, 15, 0.85);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--border-blue);
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 28px;
-            color: var(--off-white);
-            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 900;
             letter-spacing: 2px;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 2.5rem;
             align-items: center;
         }
 
         .nav-links a {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            color: var(--off-white);
+            color: var(--text-muted);
             text-decoration: none;
+            font-size: 0.9rem;
             transition: color 0.3s ease;
-            position: relative;
+            font-weight: 500;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--cyan);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--cyan);
-        }
-
-        .cta-btn {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 400;
-            font-size: 14px;
-            padding: 12px 24px;
-            background: var(--action-blue);
-            color: var(--off-white);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn:hover {
-            box-shadow: var(--glow-blue);
-            transform: translateY(-2px);
+        .nav-links a:hover {
+            color: var(--accent-blue);
         }
 
         .hamburger {
             display: none;
-            flex-direction: column;
-            gap: 5px;
             cursor: pointer;
-            padding: 10px;
-            z-index: 1001;
+            background: none;
+            border: none;
+            z-index: 1100;
+            padding: 5px;
         }
 
         .hamburger span {
+            display: block;
             width: 28px;
             height: 2px;
-            background: var(--off-white);
-            transition: all 0.3s ease;
+            background: white;
+            margin: 6px 0;
+            transition: 0.3s;
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        /* PAGE HERO */
-        .page-hero {
+        .contact-hero {
             position: relative;
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            padding-top: 140px;
+            padding-bottom: 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(79, 142, 247, 0.05) 0%, transparent 50%);
         }
 
-        #canvas-container {
+        #bg-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .contact-hero .container {
+            position: relative;
             z-index: 1;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 120px 20px 60px;
-            max-width: 900px;
+        .contact-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
         }
 
-        .hero-content h1 {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: clamp(32px, 5vw, 56px);
-            color: var(--off-white);
-            line-height: 1.15;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeUp 0.8s ease forwards;
-        }
-
-        .hero-content p {
-            font-size: clamp(16px, 2vw, 20px);
-            color: var(--muted);
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeUp 0.8s ease 0.2s forwards;
-        }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* WAVE DIVIDER */
-        .wave-divider {
-            width: 100%;
-            height: 80px;
-            position: relative;
-        }
-
-        .wave-divider svg {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        /* SECTIONS */
-        section {
-            padding: 100px 40px;
-            position: relative;
-        }
-
-        /* CONTACT OPTIONS */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            max-width: 1000px;
+        .contact-hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .contact-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 50px 40px;
-            text-align: center;
-            transition: all 0.4s ease;
-            transform-style: preserve-3d;
+        .contact-layout {
+            padding: 4rem 0 6rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .contact-card.cyan-border {
-            border: 1px solid var(--cyan);
-            box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
         }
 
-        .contact-card.blue-border {
-            border: 1px solid var(--action-blue);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.15);
+        .contact-left {
+            position: relative;
         }
 
-        .contact-card:hover {
-            transform: translateY(-10px);
+        .contact-cta-main {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
-        .contact-card.cyan-border:hover {
-            box-shadow: var(--glow-cyan);
-        }
-
-        .contact-card.blue-border:hover {
-            box-shadow: var(--glow-blue);
-        }
-
-        .contact-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 24px;
-        }
-
-        .contact-card h3 {
-            font-family: 'Syne', sans-serif;
+        .whatsapp-btn-large {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 1.5rem 2rem;
+            background: var(--green-whatsapp);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
             font-weight: 700;
-            font-size: 26px;
-            margin-bottom: 16px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
         }
 
-        .contact-card p {
-            font-size: 16px;
-            color: var(--muted);
-            margin-bottom: 12px;
-            max-width: 300px;
-            margin-left: auto;
-            margin-right: auto;
+        .whatsapp-btn-large:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-btn-large svg {
+            width: 28px;
+            height: 28px;
         }
 
         .contact-detail {
-            font-family: 'DM Mono', monospace;
-            font-size: 14px;
-            color: var(--off-white);
-            margin-bottom: 24px;
-            display: block;
-        }
-
-        .contact-btn {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            padding: 14px 32px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
             text-decoration: none;
+            font-size: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-blue);
+            transition: color 0.3s;
+        }
+
+        .contact-detail:hover {
+            color: var(--accent-blue);
+        }
+
+        .contact-detail svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .reply-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        .trust-tiles {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .trust-tile {
+            background: var(--card-dark);
+            border: 1px solid var(--border-blue);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
             transition: all 0.3s ease;
-            display: inline-block;
         }
 
-        .contact-btn.cyan {
-            background: var(--cyan);
-            color: var(--navy);
+        .trust-tile:hover {
+            border-color: var(--accent-blue);
+            transform: translateX(5px);
         }
 
-        .contact-btn.cyan:hover {
-            box-shadow: var(--glow-cyan);
+        .trust-icon {
+            width: 36px;
+            height: 36px;
+            color: var(--accent-blue);
+            flex-shrink: 0;
+        }
+
+        .trust-content h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .trust-content p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .whatsapp-form-card {
+            background: var(--card-dark);
+            border: 1px solid var(--border-blue);
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--green-whatsapp), #128C7E);
+        }
+
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header svg {
+            width: 28px;
+            height: 28px;
+            color: var(--green-whatsapp);
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .form-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background: var(--input-dark);
+            border: 1px solid var(--border-blue);
+            border-radius: 6px;
+            color: white;
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #666;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--green-whatsapp);
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a0a0b0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-whatsapp-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--green-whatsapp);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-whatsapp-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
         }
 
-        .contact-btn.blue {
-            background: var(--action-blue);
-            color: var(--off-white);
+        .submit-whatsapp-btn svg {
+            width: 22px;
+            height: 22px;
         }
 
-        .contact-btn.blue:hover {
-            box-shadow: var(--glow-blue);
-            transform: translateY(-2px);
+        .message-preview {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px dashed rgba(37, 211, 102, 0.3);
+            border-radius: 8px;
         }
 
-        /* RESPONSE STRIP */
-        .response-strip {
-            background: var(--navy-light);
+        .message-preview-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .response-grid {
+        .message-preview-content {
+            font-size: 0.85rem;
+            color: var(--text-body);
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .faq-section {
+            padding: 4rem 0;
+            background: var(--card-dark);
+            border-top: 1px solid var(--border-blue);
+            border-bottom: 1px solid var(--border-blue);
+        }
+
+        .faq-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .faq-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
+            gap: 2rem;
         }
 
-        .response-card {
-            text-align: center;
-            padding: 30px;
+        .faq-item {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-blue);
+            border-radius: 12px;
+            overflow: hidden;
         }
 
-        .response-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 16px;
-            color: var(--cyan);
-        }
-
-        .response-card h4 {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-
-        .response-card p {
-            font-size: 14px;
-            color: var(--muted);
-        }
-
-        /* FOOTER */
-        footer {
-            background: #0a1121;
-            padding: 60px 40px 30px;
-        }
-
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .footer-logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 28px;
-            color: var(--off-white);
-            letter-spacing: 2px;
-        }
-
-        .footer-nav {
-            display: flex;
-            gap: 32px;
-            flex-wrap: wrap;
-        }
-
-        .footer-nav a {
-            font-size: 15px;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-nav a:hover {
-            color: var(--cyan);
-        }
-
-        .footer-contact {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        .footer-contact a {
-            font-size: 14px;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-contact a:hover {
-            color: var(--cyan);
-        }
-
-        .footer-bottom {
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            color: white;
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
+            gap: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .footer-bottom p {
-            font-size: 14px;
-            color: var(--muted);
+        .faq-question:hover {
+            background: rgba(79, 142, 247, 0.05);
+        }
+
+        .faq-question svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question svg {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            padding: 0 1.5rem 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 5rem 0 2rem;
+            background: #050508;
+            border-top: 1px solid var(--border-blue);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand .logo {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            max-width: 300px;
+            font-size: 0.95rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
         }
 
         .footer-links {
             display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .footer-links a {
-            font-size: 13px;
-            color: var(--muted);
+            color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            transition: 0.3s;
         }
 
         .footer-links a:hover {
-            color: var(--cyan);
+            color: var(--accent-blue);
         }
 
-        /* SCROLL ANIMATIONS */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stagger-1 { transition-delay: 0.1s; }
-        .stagger-2 { transition-delay: 0.2s; }
-        .stagger-3 { transition-delay: 0.3s; }
-
-        /* MOBILE MENU */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(15, 23, 42, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 999;
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex-wrap: wrap;
+            justify-content: space-between;
             align-items: center;
-            gap: 30px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            gap: 1.5rem;
+            color: #555;
+            font-size: 0.85rem;
         }
 
-        .mobile-menu.active {
-            opacity: 1;
-            visibility: visible;
+        .footer-contact {
+            display: flex;
+            gap: 2rem;
         }
 
-        .mobile-menu a {
-            font-family: 'Syne', sans-serif;
-            font-size: 28px;
-            color: var(--off-white);
+        .footer-contact a {
+            color: #555;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: 0.3s;
         }
 
-        .mobile-menu a:hover,
-        .mobile-menu a.active {
-            color: var(--cyan);
+        .footer-contact a:hover {
+            color: var(--accent-blue);
         }
 
-        /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .response-grid {
+            .faq-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                padding: 16px 20px;
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 85%;
+                height: 100vh;
+                background: var(--card-dark);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.4s ease;
+                box-shadow: -10px 0 40px rgba(0,0,0,0.7);
+                gap: 2rem;
             }
 
-            .nav-links {
-                display: none;
+            .nav-links.active {
+                right: 0;
             }
 
             .hamburger {
-                display: flex;
+                display: block;
             }
 
-            section {
-                padding: 60px 20px;
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .contact-hero {
+                padding-top: 100px;
             }
 
             .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 3rem;
             }
 
-            .footer-top {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
+            .whatsapp-form-card {
+                padding: 2rem 1.5rem;
             }
 
-            .footer-nav {
-                justify-content: center;
-            }
-
-            .footer-contact {
-                justify-content: center;
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
             }
 
             .footer-bottom {
@@ -560,446 +669,407 @@
                 text-align: center;
             }
 
-            .footer-links {
-                justify-content: center;
+            .footer-contact {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 28px;
-            }
-        }
-
-        /* REDUCED MOTION */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
+            #bg-canvas {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
-        <a href="index.html" class="logo">QUANTOR</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="pricing.html">Pricing</a>
-            <a href="portfolio.html">Portfolio</a>
-            <a href="about.html">About</a>
-            <a href="contact.html" class="active">Contact</a>
-            <a href="contact.html" class="cta-btn">Get Started</a>
-        </div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
 
-    <!-- MOBILE MENU -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="active">Contact</a>
-        <a href="contact.html" class="cta-btn">Get Started</a>
-    </div>
-
-    <!-- PAGE HERO -->
-    <section class="page-hero">
-        <div id="canvas-container"></div>
-        <div class="hero-content">
-            <h1>Let's Get Your Business Online</h1>
-            <p>Pick how you want to reach us — we respond fast.</p>
-        </div>
-    </section>
-
-    <!-- WAVE DIVIDER -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1"/>
-                    <stop offset="100%" style="stop-color:#1a2744;stop-opacity:1"/>
-                </linearGradient>
-            </defs>
-            <path d="M0,50 C480,80 960,0 1440,30 L1440,80 L0,80 Z" fill="url(#waveGrad1)"/>
-        </svg>
-    </div>
-
-    <!-- CONTACT OPTIONS -->
-    <section id="contact-options">
-        <div class="contact-grid">
-            <div class="contact-card cyan-border fade-up" data-tilt>
-                <div class="contact-icon">
-                    <svg viewBox="0 0 24 24" fill="var(--cyan)">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                    </svg>
-                </div>
-                <h3>Message Us on WhatsApp</h3>
-                <p>Fastest way to reach us. Tell us about your business and we'll get back within hours.</p>
-                <span class="contact-detail">+91 9599234747</span>
-                <a href="https://wa.me/919599234747" class="contact-btn cyan" target="_blank">Open WhatsApp</a>
-            </div>
-            <div class="contact-card blue-border fade-up stagger-1" data-tilt>
-                <div class="contact-icon">
-                    <svg viewBox="0 0 24 24" fill="var(--action-blue)">
-                        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                </div>
-                <h3>Send Us an Email</h3>
-                <p>Prefer email? Send us your requirements and we'll reply within 24 hours.</p>
-                <span class="contact-detail">quantorleads@gmail.com</span>
-                <a href="mailto:quantorleads@gmail.com" class="contact-btn blue">Send Email</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- WAVE DIVIDER -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1"/>
-                    <stop offset="100%" style="stop-color:#1a2744;stop-opacity:1"/>
-                </linearGradient>
-            </defs>
-            <path d="M0,50 C480,80 960,0 1440,30 L1440,80 L0,80 Z" fill="url(#waveGrad2)"/>
-        </svg>
-    </div>
-
-    <!-- RESPONSE TIME STRIP -->
-    <section class="response-strip" id="response-times">
-        <div class="response-grid fade-up">
-            <div class="response-card">
-                <div class="response-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                </div>
-                <h4>Under 2 Hours</h4>
-                <p>WhatsApp response time</p>
-            </div>
-            <div class="response-card">
-                <div class="response-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                </div>
-                <h4>Within 24 Hours</h4>
-                <p>Email response time</p>
-            </div>
-            <div class="response-card">
-                <div class="response-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                        <line x1="16" y1="2" x2="16" y2="6"/>
-                        <line x1="8" y1="2" x2="8" y2="6"/>
-                        <line x1="3" y1="10" x2="21" y2="10"/>
-                    </svg>
-                </div>
-                <h4>Mon – Sat</h4>
-                <p>9AM – 7PM IST</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-top">
-            <div class="footer-logo">QUANTOR</div>
-            <div class="footer-nav">
+    <nav id="main-nav">
+        <div class="nav-content">
+            <a href="index.html" class="logo">QUANTOR</a>
+            <div class="nav-links" id="nav-menu">
                 <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
+                <a href="index.html#services">Services</a>
                 <a href="pricing.html">Pricing</a>
                 <a href="portfolio.html">Portfolio</a>
                 <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="btn btn-filled">Get Started</a>
             </div>
-            <div class="footer-contact">
-                <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
-                <a href="https://wa.me/919599234747" target="_blank">+91 9599234747</a>
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="contact-hero">
+        <div id="bg-canvas"></div>
+        <div class="container">
+            <h1>Let's Get Your Business Online</h1>
+            <p>Tell us about your business and we'll recommend the right plan. No tech knowledge needed on your end.</p>
+        </div>
+    </section>
+
+    <section class="contact-layout">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-left">
+                    <div class="contact-cta-main">
+                        <a href="https://wa.me/919599234747" class="whatsapp-btn-large" target="_blank">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            WhatsApp Us Now
+                        </a>
+                    </div>
+                    
+                    <a href="mailto:quantorleads@gmail.com" class="contact-detail">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        quantorleads@gmail.com
+                    </a>
+                    
+                    <a href="tel:+919599234747" class="contact-detail">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        +91 9599234747
+                    </a>
+                    
+                    <p class="reply-note">We typically reply within 2 hours on WhatsApp.</p>
+
+                    <div class="trust-tiles">
+                        <div class="trust-tile">
+                            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            <div class="trust-content">
+                                <h4>50% Upfront, 50% on Delivery</h4>
+                                <p>You never pay everything before seeing results.</p>
+                            </div>
+                        </div>
+                        <div class="trust-tile">
+                            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <div class="trust-content">
+                                <h4>Delivery in Days</h4>
+                                <p>Not weeks. Not months.</p>
+                            </div>
+                        </div>
+                        <div class="trust-tile">
+                            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                            <div class="trust-content">
+                                <h4>You Own Everything</h4>
+                                <p>Your domain, your hosting, your site. Always.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whatsapp-form-card">
+                    <div class="form-header">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <h3 class="form-title">Quick Inquiry</h3>
+                    </div>
+                    <p class="form-subtitle">Fill in your details and we'll start your project.</p>
+                    
+                    <form id="whatsapp-form">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" placeholder="John Doe" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="business">Business Name</label>
+                            <input type="text" id="business" placeholder="Your Business LLC" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp Number</label>
+                            <input type="tel" id="whatsapp" placeholder="+91 9876543210" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">What do you need?</label>
+                            <select id="service" required>
+                                <option value="" disabled selected>Select a service</option>
+                                <option value="AI Chatbot Only">AI Chatbot Only</option>
+                                <option value="Landing Page">Landing Page</option>
+                                <option value="Full Website">Full Website</option>
+                                <option value="Not Sure">Not Sure</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Tell us about your business</label>
+                            <textarea id="message" rows="3" placeholder="Describe briefly what you do and what you need..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-whatsapp-btn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            Send via WhatsApp
+                        </button>
+                    </form>
+                    
+                    <div class="message-preview">
+                        <div class="message-preview-label">Your message will look like:</div>
+                        <div class="message-preview-content" id="message-preview"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>2026 QUANTOR. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms.html">Terms</a>
-                <a href="refund-policy.html">Refund Policy</a>
-                <a href="disclaimer.html">Disclaimer</a>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h3 class="faq-title">Frequently Asked Questions</h3>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How fast will you reply?
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Usually within 2 hours on WhatsApp, same day on email. We prioritize messages from potential clients!</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Do I need to know anything technical?
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Not at all. You answer a short form about your business, we handle everything else. If you can send a WhatsApp message, you can work with us.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Can I see examples before deciding?
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes — visit our portfolio page to see live demos of our work across different industries.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">QUANTOR</a>
+                    <p>Next-generation AI agency helping businesses scale through intelligent web experiences.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="index.html#services">Services</a>
+                        <a href="portfolio.html">Portfolio</a>
+                        <a href="about.html">About</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Pricing</h4>
+                    <div class="footer-links">
+                        <a href="pricing.html">View Plans</a>
+                        <a href="contact.html">Custom Quote</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <div class="footer-links">
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="refund-policy.html">Refund Policy</a>
+                        <a href="disclaimer.html">Disclaimer</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-contact">
+                    <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
+                    <a href="tel:+919599234747">+91 9599234747</a>
+                </div>
+                <div>&copy; 2026 QUANTOR. All rights reserved.</div>
             </div>
         </div>
     </footer>
 
-    <!-- THREE.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
     <script>
-        // Initialize variables
-        let scene = null;
-        let camera = null;
-        let renderer = null;
-        let particles = null;
-        let lines = null;
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetMouseX = 0;
-        let targetMouseY = 0;
-        let animationId = null;
-        const particleCount = 120;
-        const velocities = [];
+        const nav = document.getElementById('main-nav');
+        const hamburger = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
 
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
 
-        // THREE.JS
-        function initThreeJS() {
-            const container = document.getElementById('canvas-container');
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        const whatsappForm = document.getElementById('whatsapp-form');
+        const messagePreview = document.getElementById('message-preview');
+        
+        const updatePreview = () => {
+            const name = document.getElementById('name').value || 'John Doe';
+            const business = document.getElementById('business').value || 'Your Business LLC';
+            const whatsapp = document.getElementById('whatsapp').value || '+91 9876543210';
+            const service = document.getElementById('service').value || 'Landing Page';
+            const message = document.getElementById('message').value || 'I need a landing page for my coaching business...';
+            
+            messagePreview.textContent = `Hi, I'm interested in your services!
+
+Name: ${name}
+Business: ${business}
+WhatsApp: ${whatsapp}
+Service Needed: ${service}
+
+About my business:
+${message}`;
+        };
+        
+        document.querySelectorAll('#whatsapp-form input, #whatsapp-form select, #whatsapp-form textarea').forEach(field => {
+            field.addEventListener('input', updatePreview);
+            field.addEventListener('change', updatePreview);
+        });
+
+        whatsappForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const business = document.getElementById('business').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
+            
+            const whatsappMessage = `Hi, I'm interested in your services!
+
+Name: ${name}
+Business: ${business}
+WhatsApp: ${whatsapp}
+Service Needed: ${service}
+
+About my business:
+${message}`;
+            
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            const whatsappURL = `https://wa.me/919599234747?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+        });
+
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        const initBackground = () => {
+            const container = document.getElementById('bg-canvas');
             if (!container) return;
-
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-            camera.position.z = 50;
-
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(width, height);
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(container.clientWidth, container.clientHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.setClearColor(0x0f172a, 1);
             container.appendChild(renderer.domElement);
 
-            const geometry = new THREE.BufferGeometry();
-            const posArray = new Float32Array(particleCount * 3);
-            const colorArray = new Float32Array(particleCount * 3);
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 80;
+            const posArray = new Float32Array(particlesCount * 3);
 
-            const cyan = new THREE.Color(0x06b6d4);
-            const blue = new THREE.Color(0x3b82f6);
-
-            for (let i = 0; i < particleCount; i++) {
-                const i3 = i * 3;
-                posArray[i3] = (Math.random() - 0.5) * 100;
-                posArray[i3 + 1] = (Math.random() - 0.5) * 100;
-                posArray[i3 + 2] = (Math.random() - 0.5) * 60;
-
-                velocities.push({
-                    x: (Math.random() - 0.5) * 0.015,
-                    y: (Math.random() - 0.5) * 0.015,
-                    z: (Math.random() - 0.5) * 0.015
-                });
-
-                const color = Math.random() > 0.5 ? cyan : blue;
-                colorArray[i3] = color.r;
-                colorArray[i3 + 1] = color.g;
-                colorArray[i3 + 2] = color.b;
+            for (let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 15;
             }
 
-            geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            geometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-            const material = new THREE.PointsMaterial({
-                size: 0.7,
-                vertexColors: true,
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.05,
+                color: 0x4F8EF7,
                 transparent: true,
-                opacity: 0.85,
-                sizeAttenuation: true
+                opacity: 0.6
             });
 
-            particles = new THREE.Points(geometry, material);
-            scene.add(particles);
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
 
-            const lineGeometry = new THREE.BufferGeometry();
-            const linePositions = new Float32Array(particleCount * particleCount * 6);
-            lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-            lineGeometry.setDrawRange(0, 0);
-
-            const lineMaterial = new THREE.LineBasicMaterial({
-                color: 0x06b6d4,
+            const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
+            const sphereMaterial = new THREE.MeshBasicMaterial({
+                color: 0x4F8EF7,
                 transparent: true,
-                opacity: 0.12
+                opacity: 0.1,
+                wireframe: true
+            });
+            const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+            scene.add(sphere);
+
+            camera.position.z = 5;
+
+            let mouseX = 0;
+            let mouseY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
             });
 
-            lines = new THREE.LineSegments(lineGeometry, lineMaterial);
-            scene.add(lines);
-
-            if (!prefersReducedMotion) {
-                animate();
-            } else {
+            const animate = () => {
+                requestAnimationFrame(animate);
+                
+                particlesMesh.rotation.x += 0.0005;
+                particlesMesh.rotation.y += 0.0005;
+                
+                sphere.rotation.x += 0.002;
+                sphere.rotation.y += 0.002;
+                
+                sphere.position.x += (mouseX * 0.5 - sphere.position.x) * 0.02;
+                sphere.position.y += (mouseY * 0.5 - sphere.position.y) * 0.02;
+                
                 renderer.render(scene, camera);
-            }
-        }
+            };
 
-        function updateLines() {
-            if (!particles || !lines) return;
-            const posAttr = lines.geometry.attributes.position;
-            const positions = particles.geometry.attributes.position.array;
-            const linePositions = posAttr.array;
+            animate();
 
-            let lineIndex = 0;
-            const maxDistance = 18;
-
-            for (let i = 0; i < particleCount; i++) {
-                for (let j = i + 1; j < particleCount; j++) {
-                    const i3 = i * 3;
-                    const j3 = j * 3;
-
-                    const dx = positions[i3] - positions[j3];
-                    const dy = positions[i3 + 1] - positions[j3 + 1];
-                    const dz = positions[i3 + 2] - positions[j3 + 2];
-                    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-                    if (dist < maxDistance) {
-                        const idx = lineIndex * 6;
-
-                        linePositions[idx] = positions[i3];
-                        linePositions[idx + 1] = positions[i3 + 1];
-                        linePositions[idx + 2] = positions[i3 + 2];
-                        linePositions[idx + 3] = positions[j3];
-                        linePositions[idx + 4] = positions[j3 + 1];
-                        linePositions[idx + 5] = positions[j3 + 2];
-
-                        lineIndex++;
-                    }
-                }
-            }
-
-            lines.geometry.setDrawRange(0, lineIndex * 2);
-            posAttr.needsUpdate = true;
-        }
-
-        function animate() {
-            animationId = requestAnimationFrame(animate);
-            if (!particles || !renderer || !camera || !scene) return;
-
-            mouseX += (targetMouseX - mouseX) * 0.05;
-            mouseY += (targetMouseY - mouseY) * 0.05;
-
-            const positions = particles.geometry.attributes.position.array;
-
-            for (let i = 0; i < particleCount; i++) {
-                const i3 = i * 3;
-
-                positions[i3] += velocities[i].x;
-                positions[i3 + 1] += velocities[i].y;
-                positions[i3 + 2] += velocities[i].z;
-
-                if (Math.abs(positions[i3]) > 50) velocities[i].x *= -1;
-                if (Math.abs(positions[i3 + 1]) > 50) velocities[i].y *= -1;
-                if (Math.abs(positions[i3 + 2]) > 30) velocities[i].z *= -1;
-            }
-
-            particles.geometry.attributes.position.needsUpdate = true;
-            particles.rotation.y = mouseX * 0.0003;
-            particles.rotation.x = mouseY * 0.0003;
-
-            if (lines) {
-                lines.rotation.y = mouseX * 0.0003;
-                lines.rotation.x = mouseY * 0.0003;
-                updateLines();
-            }
-
-            renderer.render(scene, camera);
-        }
-
-        function onMouseMove(event) {
-            if (prefersReducedMotion) return;
-            targetMouseX = event.clientX - window.innerWidth / 2;
-            targetMouseY = event.clientY - window.innerHeight / 2;
-        }
-
-        function onWindowResize() {
-            if (!camera || !renderer) return;
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            initThreeJS();
-            window.addEventListener('resize', onWindowResize);
-            document.addEventListener('mousemove', onMouseMove);
-        });
-
-        // NAVBAR
-        const navbar = document.getElementById('navbar');
-        
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 80) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // HAMBURGER
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-
-        mobileMenu.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
+            window.addEventListener('resize', () => {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
             });
-        });
-
-        // SCROLL ANIMATIONS
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
         };
 
-        const fadeObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-up').forEach(function(el) {
-            fadeObserver.observe(el);
-        });
-
-        // 3D TILT EFFECT
-        const tiltCards = document.querySelectorAll('[data-tilt]');
-
-        tiltCards.forEach(function(card) {
-            card.addEventListener('mousemove', function(e) {
-                if (prefersReducedMotion) return;
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 15;
-                const rotateY = (centerX - x) / 15;
-
-                card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.02, 1.02, 1.02)';
-            });
-
-            card.addEventListener('mouseleave', function() {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-            });
+        document.addEventListener('DOMContentLoaded', () => {
+            initBackground();
+            updatePreview();
         });
     </script>
-
-            <!-- PASTE YOUR CHATLING CODE RIGHT HERE -->
-    <script> window.chtlConfig = { chatbotId: "9955974989" } </script>
-<script async data-id="9955974989" id="chtl-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
 </body>
 </html>
+
+
