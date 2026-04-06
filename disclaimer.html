@@ -6,412 +6,497 @@
     <title>Disclaimer | QUANTOR</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@300;400&family=Syne:wght@700;800&display=swap');
-
         :root {
-            --navy: #0f172a;
-            --navy-light: #1a2744;
-            --brand-blue: #1e40af;
-            --action-blue: #3b82f6;
-            --cyan: #06b6d4;
-            --off-white: #f8fafc;
-            --muted: rgba(248,250,252,0.6);
-            --card-bg: rgba(255,255,255,0.04);
-            --card-border: rgba(255,255,255,0.08);
-            --glow-blue: 0 0 30px rgba(59,130,246,0.4);
+            --bg-dark: #0a0a0f;
+            --card-dark: #12121a;
+            --accent-blue: #4F8EF7;
+            --accent-purple: #7C3AED;
+            --text-white: #ffffff;
+            --text-muted: #a0a0b0;
+            --text-body: #c8c8d8;
+            --border-blue: rgba(79, 142, 247, 0.2);
+            --border-subtle: #1e1e2e;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
             scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: var(--navy);
-            color: var(--off-white);
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: var(--font-main);
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* NAVBAR */
-        .navbar {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            font-size: 0.95rem;
+            border: none;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-filled {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 142, 247, 0.3);
+        }
+
+        .btn-filled:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(79, 142, 247, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--border-blue);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-blue);
+            background: rgba(79, 142, 247, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Navbar */
+        nav {
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             z-index: 1000;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 1.5rem 0;
             transition: all 0.3s ease;
         }
 
-        .navbar.scrolled {
-            background: rgba(15, 23, 42, 0.8);
+        nav.scrolled {
+            background: rgba(10, 10, 15, 0.85);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--border-blue);
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 28px;
-            color: var(--off-white);
-            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 900;
             letter-spacing: 2px;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 2.5rem;
             align-items: center;
         }
 
         .nav-links a {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            color: var(--off-white);
+            color: var(--text-muted);
             text-decoration: none;
+            font-size: 0.9rem;
             transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--cyan);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
         .nav-links a:hover {
-            color: var(--cyan);
-        }
-
-        .cta-btn {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 400;
-            font-size: 14px;
-            padding: 12px 24px;
-            background: var(--action-blue);
-            color: var(--off-white);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn:hover {
-            box-shadow: var(--glow-blue);
-            transform: translateY(-2px);
+            color: var(--accent-blue);
         }
 
         .hamburger {
             display: none;
-            flex-direction: column;
-            gap: 5px;
             cursor: pointer;
-            padding: 10px;
-            z-index: 1001;
+            background: none;
+            border: none;
+            z-index: 1100;
+            padding: 5px;
         }
 
         .hamburger span {
+            display: block;
             width: 28px;
             height: 2px;
-            background: var(--off-white);
+            background: white;
+            margin: 6px 0;
+            transition: 0.3s;
+        }
+
+        /* Legal Hero */
+        .legal-hero {
+            position: relative;
+            min-height: 35vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            padding-bottom: 3rem;
+            background: linear-gradient(135deg, rgba(79, 142, 247, 0.05) 0%, transparent 50%);
+            overflow: hidden;
+        }
+
+        .legal-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(79, 142, 247, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .legal-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-blue), transparent);
+        }
+
+        .legal-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+        }
+
+        .legal-eyebrow {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .legal-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .legal-hero p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .legal-rule {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            margin-top: 2rem;
+            border-radius: 2px;
+        }
+
+        /* Legal Content */
+        .legal-content {
+            padding: 5rem 0;
+        }
+
+        .legal-body {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .legal-section {
+            margin-bottom: 3rem;
+        }
+
+        .legal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .legal-section h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-white);
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent-blue);
+            margin-bottom: 1.2rem;
+            line-height: 1.4;
+        }
+
+        .legal-section p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-body);
+            margin-bottom: 0;
+        }
+
+        .legal-section a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .legal-section a:hover {
+            opacity: 0.8;
+        }
+
+        .legal-divider {
+            height: 1px;
+            background: var(--border-subtle);
+            margin: 3rem 0;
+        }
+
+        /* Trust Tiles */
+        .trust-section {
+            padding: 4rem 0;
+            background: var(--card-dark);
+            border-top: 1px solid var(--border-blue);
+            border-bottom: 1px solid var(--border-blue);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .trust-tile {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-blue);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
             transition: all 0.3s ease;
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+        .trust-tile:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-3px);
         }
 
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
+        .trust-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 1rem;
+            color: var(--accent-blue);
         }
 
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        /* PAGE HERO */
-        .page-hero {
-            position: relative;
-            min-height: 40vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background: linear-gradient(180deg, var(--navy) 0%, var(--navy-light) 100%);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 120px 20px 60px;
-            max-width: 900px;
-        }
-
-        .hero-content h1 {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: clamp(40px, 6vw, 64px);
-            color: var(--off-white);
-            line-height: 1.15;
-            margin-bottom: 16px;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeUp 0.8s ease forwards;
-        }
-
-        .hero-content p {
-            font-size: clamp(14px, 2vw, 16px);
-            color: var(--muted);
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeUp 0.8s ease 0.2s forwards;
-        }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* SECTIONS */
-        section {
-            padding: 100px 40px;
-            position: relative;
-        }
-
-        /* DISCLAIMER CONTENT */
-        .legal-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .legal-block {
-            margin-bottom: 50px;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .legal-block.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .legal-block h2 {
-            font-family: 'Syne', sans-serif;
+        .trust-tile h4 {
+            font-size: 0.85rem;
             font-weight: 700;
-            font-size: 24px;
-            color: var(--action-blue);
-            margin-bottom: 16px;
+            margin-bottom: 0.5rem;
+            color: var(--text-white);
         }
 
-        .legal-block p {
-            font-size: 16px;
-            color: var(--off-white);
-            line-height: 1.8;
-            margin-bottom: 20px;
+        .trust-tile p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.5;
         }
 
-        .legal-block a {
-            color: var(--cyan);
-            text-decoration: none;
-            transition: color 0.3s ease;
+        /* Contact CTA */
+        .contact-cta {
+            padding: 5rem 0;
+            text-align: center;
         }
 
-        .legal-block a:hover {
-            color: var(--off-white);
-        }
-
-        hr.cyan-hr {
-            border: 0;
-            height: 1px;
-            background-image: linear-gradient(to right, rgba(6, 182, 212, 0), rgba(6, 182, 212, 0.75), rgba(6, 182, 212, 0));
-            margin: 50px 0;
-        }
-
-        /* FOOTER */
-        footer {
-            background: #0a1121;
-            padding: 60px 40px 30px;
-        }
-
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .footer-logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 28px;
-            color: var(--off-white);
-            letter-spacing: 2px;
-        }
-
-        .footer-nav {
-            display: flex;
-            gap: 32px;
-            flex-wrap: wrap;
-        }
-
-        .footer-nav a {
-            font-size: 15px;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-nav a:hover {
-            color: var(--cyan);
-        }
-
-        .footer-contact {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        .footer-contact a {
-            font-size: 14px;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-contact a:hover {
-            color: var(--cyan);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            max-width: 1400px;
+        .contact-cta-box {
+            max-width: 600px;
             margin: 0 auto;
+            padding: 3rem;
+            background: var(--card-dark);
+            border: 1px solid var(--border-blue);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .footer-bottom p {
-            font-size: 14px;
-            color: var(--muted);
+        .contact-cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+        }
+
+        .contact-cta h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-cta p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem 0 2rem;
+            background: #050508;
+            border-top: 1px solid var(--border-blue);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand .logo {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            max-width: 300px;
+            font-size: 0.95rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
         }
 
         .footer-links {
             display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .footer-links a {
-            font-size: 13px;
-            color: var(--muted);
+            color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            transition: 0.3s;
         }
 
         .footer-links a:hover {
-            color: var(--cyan);
+            color: var(--accent-blue);
         }
 
-        /* MOBILE MENU */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(15, 23, 42, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 999;
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            flex-wrap: wrap;
+            justify-content: space-between;
             align-items: center;
-            gap: 30px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            gap: 1.5rem;
+            color: #555;
+            font-size: 0.85rem;
         }
 
-        .mobile-menu.active {
-            opacity: 1;
-            visibility: visible;
+        .footer-contact {
+            display: flex;
+            gap: 2rem;
         }
 
-        .mobile-menu a {
-            font-family: 'Syne', sans-serif;
-            font-size: 28px;
-            color: var(--off-white);
+        .footer-contact a {
+            color: #555;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: 0.3s;
         }
 
-        .mobile-menu a:hover {
-            color: var(--cyan);
+        .footer-contact a:hover {
+            color: var(--accent-blue);
         }
 
-        /* RESPONSIVE */
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .trust-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
-            .navbar {
-                padding: 16px 20px;
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 85%;
+                height: 100vh;
+                background: var(--card-dark);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.4s ease;
+                box-shadow: -10px 0 40px rgba(0,0,0,0.7);
+                gap: 2rem;
             }
 
-            .nav-links {
-                display: none;
+            .nav-links.active {
+                right: 0;
             }
 
             .hamburger {
-                display: flex;
+                display: block;
             }
 
-            section {
-                padding: 60px 20px;
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
             }
 
-            .footer-top {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
+            .legal-hero {
+                min-height: 30vh;
+                padding-top: 80px;
             }
 
-            .footer-nav {
-                justify-content: center;
+            .trust-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
-            .footer-contact {
-                justify-content: center;
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
             }
 
             .footer-bottom {
@@ -419,18 +504,16 @@
                 text-align: center;
             }
 
-            .footer-links {
-                justify-content: center;
+            .footer-contact {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .contact-cta-box {
+                padding: 2rem 1.5rem;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 32px;
-            }
-        }
-
-        /* REDUCED MOTION */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -441,166 +524,201 @@
     </style>
 </head>
 <body>
-    <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
-        <a href="index.html" class="logo">QUANTOR</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="pricing.html">Pricing</a>
-            <a href="portfolio.html">Portfolio</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-            <a href="contact.html" class="cta-btn">Get Started</a>
-        </div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
 
-    <!-- MOBILE MENU -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="contact.html" class="cta-btn">Get Started</a>
-    </div>
-
-    <!-- PAGE HERO -->
-    <section class="page-hero">
-        <div class="hero-content">
-            <h1>Disclaimer</h1>
-            <p>Last updated: March 2026</p>
-        </div>
-    </section>
-
-    <!-- DISCLAIMER CONTENT -->
-    <section id="disclaimer-content">
-        <div class="legal-content">
-            <div class="legal-block">
-                <h2>No Guarantee of Results</h2>
-                <p>QUANTOR builds websites and chatbots designed for lead generation and conversion. We do not guarantee specific business results, revenue, or lead volumes. Results depend on your industry, offer, and market conditions.</p>
-            </div>
-
-            <hr class="cyan-hr">
-
-            <div class="legal-block">
-                <h2>Website Accuracy</h2>
-                <p>We make every effort to keep information on this website accurate and current. We are not liable for errors, outdated information, or omissions.</p>
-            </div>
-
-            <hr class="cyan-hr">
-
-            <div class="legal-block">
-                <h2>Third-Party Services</h2>
-                <p>Our services involve third-party platforms including Tidio, Hostinger, Namecheap, and GitHub Pages. We are not responsible for downtime, changes, or data practices of these platforms.</p>
-            </div>
-
-            <hr class="cyan-hr">
-
-            <div class="legal-block">
-                <h2>Professional Advice</h2>
-                <p>Nothing on this website constitutes legal, financial, or business advice. For such matters, consult a qualified professional.</p>
-            </div>
-
-            <hr class="cyan-hr">
-
-            <div class="legal-block">
-                <h2>External Links</h2>
-                <p>This site may link to external websites. We are not responsible for the content or practices of those sites.</p>
-            </div>
-
-            <hr class="cyan-hr">
-
-            <div class="legal-block">
-                <h2>Contact</h2>
-                <p>For questions regarding this disclaimer, please contact us at <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-top">
-            <div class="footer-logo">QUANTOR</div>
-            <div class="footer-nav">
+    <nav id="main-nav">
+        <div class="nav-content">
+            <a href="index.html" class="logo">QUANTOR</a>
+            <div class="nav-links" id="nav-menu">
                 <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
+                <a href="index.html#services">Services</a>
                 <a href="pricing.html">Pricing</a>
                 <a href="portfolio.html">Portfolio</a>
                 <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+                <a href="contact.html" class="btn btn-filled">Get Started</a>
             </div>
-            <div class="footer-contact">
-                <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
-                <a href="https://wa.me/919599234747" target="_blank">+91 9599234747</a>
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="legal-hero">
+        <div class="container">
+            <div class="legal-hero-content">
+                <div class="legal-eyebrow">Legal</div>
+                <h1>Disclaimer</h1>
+                <p>Last updated: March 2026</p>
+                <div class="legal-rule"></div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>2026 QUANTOR. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms.html">Terms</a>
-                <a href="refund-policy.html">Refund Policy</a>
-                <a href="disclaimer.html">Disclaimer</a>
+    </section>
+
+    <section class="legal-content">
+        <div class="container">
+            <div class="legal-body">
+                
+                <div class="legal-section">
+                    <h2>No Guarantee of Results</h2>
+                    <p>QUANTOR builds websites and chatbots designed for lead generation and conversion. We do not guarantee specific business results, revenue, or lead volumes. Results depend on your industry, your offer, market conditions, and factors outside our control. Every business is different, and past results from our demos or client examples do not constitute a promise of future performance.</p>
+                </div>
+
+                <div class="legal-divider"></div>
+
+                <div class="legal-section">
+                    <h2>Website Accuracy</h2>
+                    <p>We make every reasonable effort to keep information on this website accurate and current. However, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, or reliability of any information on this site. We are not liable for errors, outdated information, or omissions, and reserve the right to update content at any time without notice.</p>
+                </div>
+
+                <div class="legal-divider"></div>
+
+                <div class="legal-section">
+                    <h2>Third-Party Services</h2>
+                    <p>Our services involve third-party platforms including Tidio, Hostinger, Namecheap, Razorpay, and GitHub Pages. We are not responsible for the availability, uptime, pricing changes, data practices, or terms of service of these platforms. Any changes to third-party services that affect our deliverables will be communicated to affected clients promptly.</p>
+                </div>
+
+                <div class="legal-divider"></div>
+
+                <div class="legal-section">
+                    <h2>Professional Advice</h2>
+                    <p>Nothing on this website constitutes legal, financial, tax, or business advice. All content is for informational purposes only. For matters requiring professional guidance, please consult a qualified legal, financial, or business professional in your jurisdiction.</p>
+                </div>
+
+                <div class="legal-divider"></div>
+
+                <div class="legal-section">
+                    <h2>External Links</h2>
+                    <p>This site may contain links to external websites operated by third parties. These links are provided for convenience only. We have no control over the content, privacy practices, or availability of those sites and are not responsible for any loss or damage that may arise from your use of them.</p>
+                </div>
+
+                <div class="legal-divider"></div>
+
+                <div class="legal-section">
+                    <h2>Contact</h2>
+                    <p>For questions regarding this disclaimer, please contact us:<br>
+                    Email: <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a><br>
+                    Phone: <a href="tel:+919599234747">+91 9599234747</a></p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-section">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-tile">
+                    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M2 12h20"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    <h4>Governed by Indian Law</h4>
+                    <p>Disputes handled under India's legal framework</p>
+                </div>
+                <div class="trust-tile">
+                    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    <h4>DPDPA 2023 Compliant</h4>
+                    <p>Data handled per India's data protection act</p>
+                </div>
+                <div class="trust-tile">
+                    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    <h4>Transparent Policies</h4>
+                    <p>No hidden terms, no surprise clauses</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-cta">
+        <div class="container">
+            <div class="contact-cta-box">
+                <h2>Questions about this disclaimer?</h2>
+                <p>We're here to help. Reach out and we'll get back to you promptly.</p>
+                <a href="mailto:quantorleads@gmail.com" class="btn btn-filled">Email Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">QUANTOR</a>
+                    <p>Next-generation AI agency helping businesses scale through intelligent web experiences.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="index.html#services">Services</a>
+                        <a href="portfolio.html">Portfolio</a>
+                        <a href="about.html">About</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Pricing</h4>
+                    <div class="footer-links">
+                        <a href="pricing.html">View Plans</a>
+                        <a href="contact.html">Custom Quote</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <div class="footer-links">
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="refund-policy.html">Refund Policy</a>
+                        <a href="disclaimer.html">Disclaimer</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-contact">
+                    <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
+                    <a href="tel:+919599234747">+91 9599234747</a>
+                </div>
+                <div>&copy; 2026 QUANTOR. All rights reserved.</div>
             </div>
         </div>
     </footer>
 
     <script>
-        // NAVBAR
-        const navbar = document.getElementById('navbar');
-        
-        window.addEventListener('scroll', function() {
+        // Navbar Logic
+        const nav = document.getElementById('main-nav');
+        const hamburger = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        window.addEventListener('scroll', () => {
             if (window.scrollY > 80) {
-                navbar.classList.add('scrolled');
+                nav.classList.add('scrolled');
             } else {
-                navbar.classList.remove('scrolled');
+                nav.classList.remove('scrolled');
             }
         });
 
-        // HAMBURGER
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        hamburger.addEventListener('click', function() {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
         });
 
-        mobileMenu.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', function() {
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
             });
-        });
-
-        // SCROLL ANIMATIONS
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const fadeObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.legal-block').forEach(function(el) {
-            fadeObserver.observe(el);
         });
     </script>
-
-            <!-- PASTE YOUR CHATLING CODE RIGHT HERE -->
-<script> window.chtlConfig = { chatbotId: "9955974989" } </script>
-<script async data-id="9955974989" id="chtl-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
 </body>
 </html>
