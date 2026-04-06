@@ -1,244 +1,213 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio — QUANTOR</title>
+    <title>Portfolio | QUANTOR - AI-Powered Website & Chatbot Agency</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap');
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
         :root {
-            --navy: #0f172a;
-            --navy-light: #1a2744;
-            --navy-deep: #080d19;
-            --brand-blue: #1e40af;
-            --action-blue: #3b82f6;
-            --cyan: #06b6d4;
-            --off-white: #f8fafc;
-            --muted: rgba(248,250,252,0.6);
-            --card-bg: rgba(255,255,255,0.04);
-            --card-border: rgba(255,255,255,0.08);
-            --glow-blue: 0 0 30px rgba(59,130,246,0.4);
-            --glow-cyan: 0 0 30px rgba(6,182,212,0.4);
+            --bg-dark: #0a0a0f;
+            --card-dark: #12121a;
+            --accent-blue: #4F8EF7;
+            --accent-purple: #7C3AED;
+            --text-white: #ffffff;
+            --text-muted: #a0a0b0;
+            --border-blue: rgba(79, 142, 247, 0.2);
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
             scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: var(--navy);
-            color: var(--off-white);
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: var(--font-main);
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* NAVBAR */
-        .navbar {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            font-size: 0.95rem;
+            border: none;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-filled {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 142, 247, 0.3);
+        }
+
+        .btn-filled:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(79, 142, 247, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--border-blue);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-blue);
+            background: rgba(79, 142, 247, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* ========== NAVBAR ========== */
+        nav {
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             z-index: 1000;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 1.5rem 0;
             transition: all 0.3s ease;
         }
 
-        .navbar.scrolled {
-            background: rgba(15, 23, 42, 0.8);
+        nav.scrolled {
+            background: rgba(10, 10, 15, 0.85);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--border-blue);
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 28px;
-            color: var(--off-white);
-            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 900;
             letter-spacing: 2px;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 2.5rem;
             align-items: center;
         }
 
         .nav-links a {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            color: var(--off-white);
+            color: var(--text-muted);
             text-decoration: none;
+            font-size: 0.9rem;
             transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--cyan);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
         .nav-links a:hover,
         .nav-links a.active {
-            color: var(--cyan);
-        }
-
-        .cta-btn {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 400;
-            font-size: 14px;
-            padding: 12px 24px;
-            background: var(--action-blue);
-            color: var(--off-white);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn:hover {
-            box-shadow: var(--glow-blue);
-            transform: translateY(-2px);
+            color: var(--accent-blue);
         }
 
         .hamburger {
             display: none;
-            flex-direction: column;
-            gap: 5px;
             cursor: pointer;
-            padding: 10px;
+            background: none;
+            border: none;
+            z-index: 1100;
+            padding: 5px;
         }
 
         .hamburger span {
+            display: block;
             width: 28px;
             height: 2px;
-            background: var(--off-white);
-            transition: all 0.3s ease;
+            background: white;
+            margin: 6px 0;
+            transition: 0.3s;
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        /* MOBILE MENU */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(15, 23, 42, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .mobile-menu a {
-            font-family: 'Syne', sans-serif;
-            font-size: 28px;
-            color: var(--off-white);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-menu a:hover {
-            color: var(--cyan);
-        }
-
-        .mobile-menu a.active {
-            color: var(--cyan);
-        }
-
-        /* PAGE HERO */
+        /* ========== PAGE HERO ========== */
         .page-hero {
             position: relative;
-            min-height: 50vh;
+            min-height: 55vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
             overflow: hidden;
-            padding-top: 80px;
+            background: #000;
         }
 
-        #canvas-container {
+        #hero-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
+            opacity: 0.3;
         }
 
         .hero-content {
             position: relative;
             z-index: 10;
-            text-align: center;
-            padding: 0 20px;
-            max-width: 900px;
+            max-width: 800px;
+            padding: 8rem 2rem 4rem;
         }
 
         .hero-content h1 {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: clamp(36px, 5vw, 56px);
-            color: var(--off-white);
-            line-height: 1.15;
-            margin-bottom: 20px;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-transform: uppercase;
             opacity: 0;
             transform: translateY(40px);
             animation: fadeUp 0.8s ease forwards;
         }
 
+        .hero-content h1 span {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .hero-content p {
-            font-size: clamp(16px, 2vw, 20px);
-            color: var(--muted);
-            margin-bottom: 0;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
             opacity: 0;
             transform: translateY(40px);
             animation: fadeUp 0.8s ease 0.2s forwards;
@@ -251,403 +220,551 @@
             }
         }
 
-        /* WAVE DIVIDER */
-        .wave-divider {
-            width: 100%;
-            height: 100px;
+        /* ========== STATS BAR ========== */
+        .stats-bar {
+            background: var(--card-dark);
+            border-top: 1px solid var(--border-blue);
+            border-bottom: 1px solid var(--border-blue);
+            padding: 3.5rem 0;
+            position: relative;
+            z-index: 20;
+        }
+
+        .stats-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 300%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            animation: scanLine 4s linear infinite;
+        }
+
+        @keyframes scanLine {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(33.33%); }
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
             position: relative;
         }
 
-        .wave-divider svg {
-            width: 100%;
-            height: 100%;
-            display: block;
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 40px;
+            background: var(--border-blue);
         }
 
-        /* FILTER TABS */
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-number span {
+            font-size: 2rem;
+            color: var(--accent-purple);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* ========== FILTER BAR ========== */
         .filter-section {
-            padding: 60px 40px 40px;
-            text-align: center;
+            padding: 4rem 0 2rem;
         }
 
-        .filter-tabs {
+        .filter-bar {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 1rem;
             flex-wrap: wrap;
         }
 
         .filter-btn {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            font-weight: 500;
-            padding: 12px 28px;
-            background: var(--card-bg);
-            color: var(--off-white);
-            border: 1px solid var(--card-border);
-            border-radius: 30px;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover {
-            border-color: rgba(6, 182, 212, 0.3);
-            background: rgba(6, 182, 212, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: var(--font-main);
         }
 
         .filter-btn.active {
-            background: var(--action-blue);
-            border-color: var(--action-blue);
-            color: var(--off-white);
-            box-shadow: var(--glow-blue);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(79, 142, 247, 0.3);
         }
 
-        /* PORTFOLIO GRID */
+        .filter-btn:not(.active) {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border-blue);
+        }
+
+        .filter-btn:not(.active):hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            background: rgba(79, 142, 247, 0.05);
+        }
+
+        /* ========== PORTFOLIO GRID ========== */
         .portfolio-section {
-            padding: 40px 40px 80px;
+            padding: 2rem 0 8rem;
         }
 
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 2rem;
+            transition: all 0.4s ease;
         }
 
+        /* ========== PORTFOLIO CARD ========== */
         .portfolio-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--card-border);
+            background: var(--card-dark);
+            border: 1px solid var(--border-blue);
             border-radius: 16px;
-            padding: 28px;
-            position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
             display: flex;
             flex-direction: column;
-            min-height: 280px;
-            opacity: 0;
-            transform: translateY(40px);
-        }
-
-        .portfolio-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .portfolio-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--cyan);
-            opacity: 0.8;
-        }
-
-        .portfolio-card.full-site::before {
-            background: var(--action-blue);
         }
 
         .portfolio-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(6, 182, 212, 0.3);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), var(--glow-cyan);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(79, 142, 247, 0.2);
+            border-color: var(--accent-blue);
         }
 
-        .portfolio-card.full-site:hover {
-            border-color: rgba(59, 130, 246, 0.3);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), var(--glow-blue);
+        .portfolio-card.hiding {
+            opacity: 0;
+            transform: scale(0.85) translateY(20px);
+            pointer-events: none;
+            position: absolute;
+            visibility: hidden;
         }
 
-        .card-category {
-            font-family: 'DM Mono', monospace;
-            font-size: 12px;
-            color: var(--cyan);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 16px;
+        .portfolio-card.showing {
+            animation: cardShow 0.5s ease forwards;
         }
 
-        .portfolio-card.full-site .card-category {
-            color: var(--action-blue);
+        @keyframes cardShow {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
-        .card-title {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 22px;
-            color: var(--off-white);
-            margin-bottom: 8px;
-        }
-
-        .card-business-type {
-            font-family: 'DM Mono', monospace;
-            font-size: 13px;
-            color: var(--cyan);
-            margin-bottom: 16px;
-        }
-
-        .portfolio-card.full-site .card-business-type {
-            color: var(--action-blue);
-        }
-
-        .card-description {
-            font-size: 15px;
-            color: var(--muted);
-            line-height: 1.6;
-            flex-grow: 1;
-            margin-bottom: 20px;
-        }
-
-        .card-footer {
+        .card-visual {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding-top: 16px;
-            border-top: 1px solid var(--card-border);
+            justify-content: center;
+            flex-shrink: 0;
         }
 
-        .card-tag {
-            font-family: 'DM Mono', monospace;
-            font-size: 11px;
-            color: var(--muted);
-            background: rgba(148, 163, 184, 0.1);
-            padding: 6px 12px;
+        .card-visual-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.08;
+        }
+
+        /* Card 1: Real Estate - Blue */
+        .card-visual.realestate .card-visual-bg {
+            background: linear-gradient(135deg, var(--accent-blue), #1a5fd0);
+        }
+        /* Card 2: Healthcare - Teal */
+        .card-visual.healthcare .card-visual-bg {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+        }
+        /* Card 3: Fitness - Purple */
+        .card-visual.fitness .card-visual-bg {
+            background: linear-gradient(135deg, var(--accent-purple), #6d28d9);
+        }
+        /* Card 4: Legal - Gold */
+        .card-visual.legal .card-visual-bg {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        /* Card 5: Food - Green */
+        .card-visual.food .card-visual-bg {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+        }
+        /* Card 6: IT - Blue-Purple */
+        .card-visual.it .card-visual-bg {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+        }
+
+        .card-visual-icon {
+            position: relative;
+            z-index: 2;
+            width: 80px;
+            height: 80px;
+            opacity: 0.5;
+            transition: all 0.5s ease;
+        }
+
+        .portfolio-card:hover .card-visual-icon {
+            opacity: 0.8;
+            transform: scale(1.1);
+        }
+
+        .card-visual-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            z-index: 2;
+        }
+
+        .card-visual.realestate .card-visual-line { background: linear-gradient(90deg, var(--accent-blue), #1a5fd0); }
+        .card-visual.healthcare .card-visual-line { background: linear-gradient(90deg, #06b6d4, #0891b2); }
+        .card-visual.fitness .card-visual-line { background: linear-gradient(90deg, var(--accent-purple), #6d28d9); }
+        .card-visual.legal .card-visual-line { background: linear-gradient(90deg, #f59e0b, #d97706); }
+        .card-visual.food .card-visual-line { background: linear-gradient(90deg, #22c55e, #16a34a); }
+        .card-visual.it .card-visual-line { background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); }
+
+        /* Card Overlay */
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .portfolio-card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        .card-overlay-content {
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+            text-align: center;
+        }
+
+        .portfolio-card:hover .card-overlay-content {
+            transform: translateY(0);
+        }
+
+        .card-overlay-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(79, 142, 247, 0.4);
+        }
+
+        .card-overlay-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(79, 142, 247, 0.6);
+        }
+
+        .card-overlay-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Card Body */
+        .card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 10px;
             border-radius: 4px;
         }
 
-        .view-demo-btn {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
+        .badge-landing {
+            background: rgba(79, 142, 247, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(79, 142, 247, 0.25);
+        }
+
+        .badge-full {
+            background: rgba(124, 58, 237, 0.15);
+            color: var(--accent-purple);
+            border: 1px solid rgba(124, 58, 237, 0.25);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .card-industry {
+            font-size: 0.8rem;
+            color: var(--accent-blue);
             font-weight: 600;
-            color: var(--cyan);
-            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .card-link {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 1rem;
             transition: all 0.3s ease;
         }
 
-        .portfolio-card.full-site .view-demo-btn {
-            color: var(--action-blue);
+        .card-link:hover {
+            gap: 12px;
         }
 
-        .view-demo-btn:hover {
-            gap: 10px;
-        }
-
-        .view-demo-btn svg {
+        .card-link svg {
             width: 16px;
             height: 16px;
-            stroke: currentColor;
             transition: transform 0.3s ease;
         }
 
-        .portfolio-card:hover .view-demo-btn svg {
+        .card-link:hover svg {
             transform: translateX(3px);
         }
 
-        /* STATS SECTION */
-        .stats-section {
-            padding: 100px 40px;
-            background: var(--navy-light);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 48px 32px;
+        /* ========== FINAL CTA ========== */
+        .final-cta {
             text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            border-color: rgba(6, 182, 212, 0.3);
-            box-shadow: var(--glow-cyan);
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: clamp(48px, 6vw, 64px);
-            color: var(--cyan);
-            text-shadow: 0 0 40px rgba(6, 182, 212, 0.5);
-            margin-bottom: 12px;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 16px;
-            color: var(--off-white);
-        }
-
-        /* CTA BANNER */
-        .cta-banner {
-            background: linear-gradient(135deg, var(--brand-blue), var(--action-blue));
-            padding: 80px 40px;
-            text-align: center;
+            padding: 8rem 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #12121a 50%, var(--bg-dark) 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .cta-banner::before {
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(79, 142, 247, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .final-cta::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), var(--accent-purple), transparent);
         }
 
-        .cta-banner h2 {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: clamp(28px, 4vw, 42px);
-            color: var(--off-white);
-            margin-bottom: 16px;
+        .final-cta h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
             position: relative;
         }
 
-        .cta-banner p {
-            font-size: 18px;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 32px;
+        .final-cta p {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
             position: relative;
         }
 
-        .btn-white {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 16px;
-            padding: 18px 40px;
-            background: var(--off-white);
-            color: var(--brand-blue);
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.1rem 2.5rem;
+            background: #25D366;
+            color: white;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
             position: relative;
-            display: inline-block;
         }
 
-        .btn-white:hover {
+        .btn-whatsapp:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
         }
 
-        /* FOOTER */
+        .btn-whatsapp svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        /* ========== FOOTER ========== */
         footer {
-            background: #0a1121;
-            padding: 60px 40px 30px;
+            padding: 5rem 0 2rem;
+            background: #050508;
+            border-top: 1px solid var(--border-blue);
         }
 
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--card-border);
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
         }
 
-        .footer-logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 28px;
-            color: var(--off-white);
+        .footer-brand .logo {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            max-width: 300px;
+            font-size: 0.95rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
             letter-spacing: 2px;
-        }
-
-        .footer-nav {
-            display: flex;
-            gap: 32px;
-            flex-wrap: wrap;
-        }
-
-        .footer-nav a {
-            font-size: 15px;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-nav a:hover {
-            color: var(--cyan);
-        }
-
-        .footer-contact {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        .footer-contact a {
-            font-size: 14px;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-contact a:hover {
-            color: var(--cyan);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-bottom p {
-            font-size: 14px;
-            color: var(--muted);
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
         }
 
         .footer-links {
             display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .footer-links a {
-            font-size: 13px;
-            color: var(--muted);
+            color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            transition: 0.3s;
         }
 
         .footer-links a:hover {
-            color: var(--cyan);
+            color: var(--accent-blue);
         }
 
-        /* SCROLL ANIMATIONS */
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        .footer-contact {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-contact a {
+            color: #555;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-contact a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* ========== SCROLL ANIMATIONS ========== */
         .fade-up {
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
         .fade-up.visible {
@@ -655,77 +772,73 @@
             transform: translateY(0);
         }
 
-        .stagger-1 { transition-delay: 0.1s; }
-        .stagger-2 { transition-delay: 0.2s; }
-        .stagger-3 { transition-delay: 0.3s; }
-        .stagger-4 { transition-delay: 0.4s; }
-        .stagger-5 { transition-delay: 0.5s; }
-        .stagger-6 { transition-delay: 0.6s; }
-
-        /* RESPONSIVE */
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 1024px) {
             .portfolio-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                padding: 16px 20px;
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 85%;
+                height: 100vh;
+                background: var(--card-dark);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.4s ease;
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.7);
+                gap: 2rem;
             }
 
-            .nav-links {
-                display: none;
+            .nav-links.active {
+                right: 0;
             }
 
             .hamburger {
-                display: flex;
+                display: block;
             }
 
-            .page-hero {
-                padding-top: 100px;
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
             }
 
-            .filter-section {
-                padding: 40px 20px 30px;
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
             }
 
-            .portfolio-section {
-                padding: 30px 20px 60px;
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
             }
 
             .portfolio-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .stats-section {
-                padding: 60px 20px;
+                max-width: 450px;
+                margin: 0 auto;
             }
 
             .stats-grid {
+                gap: 2.5rem;
+            }
+
+            .stat-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .footer-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .cta-banner {
-                padding: 60px 20px;
-            }
-
-            footer {
-                padding: 40px 20px 20px;
-            }
-
-            .footer-top {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .footer-nav {
-                justify-content: center;
-            }
-
-            .footer-contact {
-                justify-content: center;
+                gap: 3rem;
             }
 
             .footer-bottom {
@@ -733,24 +846,21 @@
                 text-align: center;
             }
 
-            .footer-links {
-                justify-content: center;
+            .footer-contact {
+                flex-direction: column;
+                gap: 0.5rem;
             }
-        }
 
-        @media (max-width: 480px) {
+            .filter-bar {
+                gap: 0.75rem;
+            }
+
             .filter-btn {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-
-            .portfolio-card {
-                min-height: 260px;
-                padding: 24px;
+                padding: 0.6rem 1.2rem;
+                font-size: 0.8rem;
             }
         }
 
-        /* REDUCED MOTION */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -758,573 +868,506 @@
                 transition-duration: 0.01ms !important;
             }
         }
-
-        /* Hidden class for filtering */
-        .portfolio-card.hidden {
-            opacity: 0;
-            transform: scale(0.9);
-            pointer-events: none;
-            position: absolute;
-            visibility: hidden;
-        }
     </style>
 </head>
 <body>
-    <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
-        <a href="https://quantor-agency.github.io/" class="logo">QUANTOR</a>
-        <div class="nav-links">
-            <a href="https://quantor-agency.github.io/">Home</a>
-            <a href="https://quantor-agency.github.io/services.html">Services</a>
-            <a href="https://quantor-agency.github.io/pricing.html">Pricing</a>
-            <a href="https://quantor-agency.github.io/portfolio.html" class="active">Portfolio</a>
-            <a href="https://quantor-agency.github.io/about.html">About</a>
-            <a href="https://quantor-agency.github.io/contact.html">Contact</a>
-            <a href="https://quantor-agency.github.io/contact.html" class="cta-btn">Get Started</a>
-        </div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav id="main-nav">
+        <div class="nav-content">
+            <a href="index.html" class="logo">QUANTOR</a>
+            <div class="nav-links" id="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="portfolio.html" class="active">Portfolio</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="btn btn-filled">Get Started</a>
+            </div>
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
-    <!-- MOBILE MENU -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="https://quantor-agency.github.io/">Home</a>
-        <a href="https://quantor-agency.github.io/services.html">Services</a>
-        <a href="https://quantor-agency.github.io/pricing.html">Pricing</a>
-        <a href="https://quantor-agency.github.io/portfolio.html" class="active">Portfolio</a>
-        <a href="https://quantor-agency.github.io/about.html">About</a>
-        <a href="https://quantor-agency.github.io/contact.html">Contact</a>
-        <a href="https://quantor-agency.github.io/contact.html" class="cta-btn">Get Started</a>
-    </div>
-
-    <!-- PAGE HERO -->
+    <!-- ========== PAGE HERO ========== -->
     <section class="page-hero">
-        <div id="canvas-container"></div>
+        <div id="hero-canvas"></div>
         <div class="hero-content">
-            <h1>Real Sites. Real Results.</h1>
+            <h1>Real Sites. <span>Real Results.</span></h1>
             <p>Every demo below is a live example of what we build for our clients.</p>
         </div>
     </section>
 
-    <!-- WAVE DIVIDER -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1"></stop>
-                    <stop offset="100%" style="stop-color:#1a2744;stop-opacity:1"></stop>
-                </linearGradient>
-            </defs>
-            <path d="M0,60 C480,100 960,0 1440,40 L1440,100 L0,100 Z" fill="url(#waveGrad1)"></path>
-        </svg>
+    <!-- ========== STATS BAR (Static / Hardcoded) ========== -->
+    <div class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Demos Live</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Industries Served</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100<span>%</span></span>
+                    <span class="stat-label">Client Satisfaction</span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- FILTER TABS -->
+    <!-- ========== FILTER BAR ========== -->
     <section class="filter-section">
-        <div class="filter-tabs">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="landing">Landing Pages</button>
-            <button class="filter-btn" data-filter="full-site">Full Websites</button>
+        <div class="container">
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="landing">Landing Pages</button>
+                <button class="filter-btn" data-filter="full">Full Websites</button>
+            </div>
         </div>
     </section>
 
-    <!-- PORTFOLIO GRID -->
+    <!-- ========== PORTFOLIO GRID ========== -->
     <section class="portfolio-section">
-        <div class="portfolio-grid" id="portfolioGrid">
-            <!-- Card 1: Sharma Properties -->
-            <div class="portfolio-card landing stagger-1" data-category="landing">
-                <span class="card-category">Landing Page</span>
-                <h3 class="card-title">Sharma Properties</h3>
-                <span class="card-business-type">Real Estate</span>
-                <p class="card-description">Premium property listings with inquiry forms and lead capture for a real estate consultancy.</p>
-                <div class="card-footer">
-                    <span class="card-tag">Landing Page</span>
-                    <a href="https://quantor-agency.github.io/sharma-properties/" class="view-demo-btn" target="_blank">
-                        View Demo
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+        <div class="container">
+            <div class="portfolio-grid" id="portfolioGrid">
 
-            <!-- Card 2: Mehta Dental Clinic -->
-            <div class="portfolio-card landing stagger-2" data-category="landing">
-                <span class="card-category">Landing Page</span>
-                <h3 class="card-title">Mehta Dental Clinic</h3>
-                <span class="card-business-type">Healthcare</span>
-                <p class="card-description">Professional dental clinic landing page with appointment booking and service showcase.</p>
-                <div class="card-footer">
-                    <span class="card-tag">Landing Page</span>
-                    <a href="https://quantor-agency.github.io/mehta-dental-clinic/" class="view-demo-btn" target="_blank">
-                        View Demo
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                <!-- Card 1: Sharma Properties -->
+                <div class="portfolio-card fade-up" data-type="landing" style="transition-delay: 0.05s;">
+                    <div class="card-visual realestate">
+                        <div class="card-visual-bg"></div>
+                        <!-- Building icon -->
+                        <svg class="card-visual-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(79,142,247,0.7)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                            <path d="M9 22V12h6v10"></path>
+                            <path d="M8 6h.01"></path><path d="M16 6h.01"></path>
+                            <path d="M12 6h.01"></path><path d="M12 10h.01"></path>
+                            <path d="M12 14h.01"></path>
+                            <path d="M16 10h.01"></path><path d="M16 14h.01"></path>
+                            <path d="M8 10h.01"></path><path d="M8 14h.01"></path>
                         </svg>
-                    </a>
+                        <div class="card-visual-line"></div>
+                        <!-- Hover Overlay -->
+                        <div class="card-overlay">
+                            <div class="card-overlay-content">
+                                <a href="https://quantor-agency.github.io/sharma-properties/" target="_blank" class="card-overlay-btn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-badges">
+                            <span class="card-badge badge-landing">Landing Page</span>
+                        </div>
+                        <h3 class="card-title">Sharma Properties</h3>
+                        <div class="card-industry">Real Estate</div>
+                        <p class="card-desc">Premium property listings with inquiry forms and lead capture.</p>
+                        <a href="https://quantor-agency.github.io/sharma-properties/" target="_blank" class="card-link">
+                            View Demo
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Card 3: FitCore Gym -->
-            <div class="portfolio-card full-site stagger-3" data-category="full-site">
-                <span class="card-category">Full Website</span>
-                <h3 class="card-title">FitCore Gym</h3>
-                <span class="card-business-type">Fitness</span>
-                <p class="card-description">Complete fitness center website with class schedules, membership plans, and trainer profiles.</p>
-                <div class="card-footer">
-                    <span class="card-tag">Full Website</span>
-                    <a href="https://quantor-agency.github.io/fitcore/fitcore-index.html" class="view-demo-btn" target="_blank">
-                        View Demo
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                <!-- Card 2: Mehta Dental Clinic -->
+                <div class="portfolio-card fade-up" data-type="landing" style="transition-delay: 0.15s;">
+                    <div class="card-visual healthcare">
+                        <div class="card-visual-bg"></div>
+                        <!-- Medical icon -->
+                        <svg class="card-visual-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(6,182,212,0.7)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                         </svg>
-                    </a>
+                        <div class="card-visual-line"></div>
+                        <div class="card-overlay">
+                            <div class="card-overlay-content">
+                                <a href="https://quantor-agency.github.io/mehta-dental-clinic/" target="_blank" class="card-overlay-btn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-badges">
+                            <span class="card-badge badge-landing">Landing Page</span>
+                        </div>
+                        <h3 class="card-title">Mehta Dental Clinic</h3>
+                        <div class="card-industry">Healthcare</div>
+                        <p class="card-desc">Professional dental clinic page with appointment booking and service showcase.</p>
+                        <a href="https://quantor-agency.github.io/mehta-dental-clinic/" target="_blank" class="card-link">
+                            View Demo
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Card 4: LegalEdge Consultants -->
-            <div class="portfolio-card full-site stagger-4" data-category="full-site">
-                <span class="card-category">Full Website</span>
-                <h3 class="card-title">LegalEdge Consultants</h3>
-                <span class="card-business-type">Legal Services</span>
-                <p class="card-description">Multi-page legal consultancy website with practice areas, attorney profiles, and contact forms.</p>
-                <div class="card-footer">
-                    <span class="card-tag">Full Website</span>
-                    <a href="https://quantor-agency.github.io/legaledge/legaledge-index.html" class="view-demo-btn" target="_blank">
-                        View Demo
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                <!-- Card 3: FitCore Gym -->
+                <div class="portfolio-card fade-up" data-type="full" style="transition-delay: 0.25s;">
+                    <div class="card-visual fitness">
+                        <div class="card-visual-bg"></div>
+                        <!-- Dumbbell icon -->
+                        <svg class="card-visual-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(124,58,237,0.7)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6.5 6.5h11M6.5 17.5h11M3 10.5V6.5a1 1 0 0 1 1-1h1.5v13H4a1 1 0 0 1-1-1v-4"></path>
+                            <path d="M21 10.5V6.5a1 1 0 0 0-1-1h-1.5v13H20a1 1 0 0 0 1-1v-4"></path>
+                            <path d="M6.5 6.5v11"></path>
+                            <path d="M17.5 6.5v11"></path>
                         </svg>
-                    </a>
+                        <div class="card-visual-line"></div>
+                        <div class="card-overlay">
+                            <div class="card-overlay-content">
+                                <a href="https://quantor-agency.github.io/fitcore/fitcore-index.html" target="_blank" class="card-overlay-btn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-badges">
+                            <span class="card-badge badge-full">Full Website</span>
+                        </div>
+                        <h3 class="card-title">FitCore Gym</h3>
+                        <div class="card-industry">Fitness</div>
+                        <p class="card-desc">Complete fitness center website with class schedules, membership plans, trainer profiles.</p>
+                        <a href="https://quantor-agency.github.io/fitcore/fitcore-index.html" target="_blank" class="card-link">
+                            View Demo
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Card 5: Brew & Bean Café -->
-            <div class="portfolio-card landing stagger-5" data-category="landing">
-                <span class="card-category">Landing Page</span>
-                <h3 class="card-title">Brew & Bean Café</h3>
-                <span class="card-business-type">Food & Beverage</span>
-                <p class="card-description">Inviting café landing page with menu highlights, location info, and reservation requests.</p>
-                <div class="card-footer">
-                    <span class="card-tag">Landing Page</span>
-                    <a href="https://quantor-agency.github.io/brew-and-bean/" class="view-demo-btn" target="_blank">
-                        View Demo
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                <!-- Card 4: LegalEdge Consultants -->
+                <div class="portfolio-card fade-up" data-type="full" style="transition-delay: 0.35s;">
+                    <div class="card-visual legal">
+                        <div class="card-visual-bg"></div>
+                        <!-- Scale/balance icon -->
+                        <svg class="card-visual-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(245,158,11,0.7)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3v18"></path>
+                            <path d="M5 8h14"></path>
+                            <path d="M5 8l-3 6h6L5 8z"></path>
+                            <path d="M19 8l-3 6h6l-3-6z"></path>
+                            <path d="M8 21h8"></path>
                         </svg>
-                    </a>
+                        <div class="card-visual-line"></div>
+                        <div class="card-overlay">
+                            <div class="card-overlay-content">
+                                <a href="https://quantor-agency.github.io/legaledge/legaledge-index.html" target="_blank" class="card-overlay-btn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-badges">
+                            <span class="card-badge badge-full">Full Website</span>
+                        </div>
+                        <h3 class="card-title">LegalEdge Consultants</h3>
+                        <div class="card-industry">Legal Services</div>
+                        <p class="card-desc">Multi-page legal consultancy with practice areas, attorney profiles, contact forms.</p>
+                        <a href="https://quantor-agency.github.io/legaledge/legaledge-index.html" target="_blank" class="card-link">
+                            View Demo
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Card 6: TechVault Solutions -->
-            <div class="portfolio-card full-site stagger-6" data-category="full-site">
-                <span class="card-category">Full Website</span>
-                <h3 class="card-title">TechVault Solutions</h3>
-                <span class="card-business-type">IT Services</span>
-                <p class="card-description">Comprehensive IT services website with solution pages, case studies, and client testimonials.</p>
-                <div class="card-footer">
-                    <span class="card-tag">Full Website</span>
-                    <a href="https://quantor-agency.github.io/techvault/techvault-index.html" class="view-demo-btn" target="_blank">
-                        View Demo
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                <!-- Card 5: Brew & Bean Café -->
+                <div class="portfolio-card fade-up" data-type="landing" style="transition-delay: 0.45s;">
+                    <div class="card-visual food">
+                        <div class="card-visual-bg"></div>
+                        <!-- Coffee cup icon -->
+                        <svg class="card-visual-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(34,197,94,0.7)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 8h1a4 4 0 0 1 0 8h-1"></path>
+                            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"></path>
+                            <line x1="6" y1="2" x2="6" y2="4"></line>
+                            <line x1="10" y1="2" x2="10" y2="4"></line>
+                            <line x1="14" y1="2" x2="14" y2="4"></line>
                         </svg>
-                    </a>
+                        <div class="card-visual-line"></div>
+                        <div class="card-overlay">
+                            <div class="card-overlay-content">
+                                <a href="https://quantor-agency.github.io/brew-and-bean/" target="_blank" class="card-overlay-btn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-badges">
+                            <span class="card-badge badge-landing">Landing Page</span>
+                        </div>
+                        <h3 class="card-title">Brew & Bean Café</h3>
+                        <div class="card-industry">Food & Beverage</div>
+                        <p class="card-desc">Inviting café page with menu highlights, location info, and reservation requests.</p>
+                        <a href="https://quantor-agency.github.io/brew-and-bean/" target="_blank" class="card-link">
+                            View Demo
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Card 6: TechVault Solutions -->
+                <div class="portfolio-card fade-up" data-type="full" style="transition-delay: 0.55s;">
+                    <div class="card-visual it">
+                        <div class="card-visual-bg"></div>
+                        <!-- Server/code icon -->
+                        <svg class="card-visual-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(79,142,247,0.7)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                            <line x1="14" y1="4" x2="10" y2="20"></line>
+                        </svg>
+                        <div class="card-visual-line"></div>
+                        <div class="card-overlay">
+                            <div class="card-overlay-content">
+                                <a href="https://quantor-agency.github.io/techvault/techvault-index.html" target="_blank" class="card-overlay-btn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-badges">
+                            <span class="card-badge badge-full">Full Website</span>
+                        </div>
+                        <h3 class="card-title">TechVault Solutions</h3>
+                        <div class="card-industry">IT Services</div>
+                        <p class="card-desc">Comprehensive IT services website with solution pages and client testimonials.</p>
+                        <a href="https://quantor-agency.github.io/techvault/techvault-index.html" target="_blank" class="card-link">
+                            View Demo
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- WAVE DIVIDER -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#1a2744;stop-opacity:1"></stop>
-                    <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1"></stop>
-                </linearGradient>
-            </defs>
-            <path d="M0,40 C480,0 960,100 1440,60 L1440,100 L0,100 Z" fill="url(#waveGrad2)"></path>
-        </svg>
-    </div>
-
-    <!-- RESULTS STATS -->
-    <section class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-card fade-up stagger-1">
-                <div class="stat-number" data-target="6">0</div>
-                <div class="stat-label">Demos Live</div>
-            </div>
-            <div class="stat-card fade-up stagger-2">
-                <div class="stat-number" data-target="3">0</div>
-                <div class="stat-label">Industries Served</div>
-            </div>
-            <div class="stat-card fade-up stagger-3">
-                <div class="stat-number" data-target="100">0</div>
-                <div class="stat-label">Client Satisfaction</div>
-            </div>
+    <!-- ========== FINAL CTA ========== -->
+    <section class="final-cta">
+        <div class="container">
+            <h2 class="fade-up">Your competitors already have this. <span>Do you?</span></h2>
+            <p class="fade-up" style="transition-delay: 0.1s;">Get your AI-powered site and chatbot live in days.</p>
+            <a href="https://wa.me/919599234747" target="_blank" class="btn-whatsapp fade-up" style="transition-delay: 0.2s;">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Start Now — WhatsApp Us
+            </a>
         </div>
     </section>
 
-    <!-- WAVE DIVIDER -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1"></stop>
-                    <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1"></stop>
-                </linearGradient>
-            </defs>
-            <path d="M0,60 C480,100 960,0 1440,40 L1440,100 L0,100 Z" fill="url(#waveGrad3)"></path>
-        </svg>
-    </div>
-
-    <!-- CTA BANNER -->
-    <section class="cta-banner">
-        <h2>Your competitors already have this. Do you?</h2>
-        <p>Get your AI-powered site and chatbot live in days.</p>
-        <a href="https://wa.me/919599234747" class="btn-white" target="_blank">Start Now — WhatsApp Us</a>
-    </section>
-
-    <!-- FOOTER -->
+    <!-- ========== FOOTER ========== -->
     <footer>
-        <div class="footer-top">
-            <div class="footer-logo">QUANTOR</div>
-            <div class="footer-nav">
-                <a href="https://quantor-agency.github.io/">Home</a>
-                <a href="https://quantor-agency.github.io/services.html">Services</a>
-                <a href="https://quantor-agency.github.io/pricing.html">Pricing</a>
-                <a href="https://quantor-agency.github.io/portfolio.html">Portfolio</a>
-                <a href="https://quantor-agency.github.io/about.html">About</a>
-                <a href="https://quantor-agency.github.io/contact.html">Contact</a>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">QUANTOR</a>
+                    <p>Next-generation AI agency helping businesses scale through intelligent web experiences.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="services.html">Services</a>
+                        <a href="portfolio.html">Portfolio</a>
+                        <a href="about.html">About</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Pricing</h4>
+                    <div class="footer-links">
+                        <a href="pricing.html">View Plans</a>
+                        <a href="contact.html">Custom Quote</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="refund.html">Refund Policy</a>
+                        <a href="disclaimer.html">Disclaimer</a>
+                    </div>
+                </div>
             </div>
-            <div class="footer-contact">
-                <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
-                <a href="https://wa.me/919599234747" target="_blank">+91 9599234747</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>2026 QUANTOR. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="https://quantor-agency.github.io/privacy-policy.html">Privacy Policy</a>
-                <a href="https://quantor-agency.github.io/terms.html">Terms</a>
-                <a href="https://quantor-agency.github.io/refund-policy.html">Refund Policy</a>
-                <a href="https://quantor-agency.github.io/disclaimer.html">Disclaimer</a>
+            <div class="footer-bottom">
+                <div class="footer-contact">
+                    <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
+                    <a href="tel:+919599234747">+91 9599234747</a>
+                </div>
+                <div>&copy; 2026 QUANTOR. All rights reserved.</div>
             </div>
         </div>
     </footer>
 
-    <!-- THREE.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
+    <!-- ========== JAVASCRIPT ========== -->
     <script>
-        // Initialize variables first
-        let scene, camera, renderer, particles, lines;
-        let mouseX = 0, mouseY = 0;
-        let targetMouseX = 0, targetMouseY = 0;
-        const particleCount = 150;
-        const positions = [];
-        const velocities = [];
-        const particlePositions = [];
-        let animationId = null;
-
-        // Check for reduced motion preference
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        // THREE.JS PARTICLE NETWORK
-        function initThreeJS() {
-            const container = document.getElementById('canvas-container');
-            if (!container) return;
-
-            const width = window.innerWidth;
-            const height = container.offsetHeight || window.innerHeight * 0.5;
-
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-            camera.position.z = 50;
-
-            renderer = new THREE.WebGLRenderer({
-                antialias: true,
-                alpha: true
-            });
-            renderer.setSize(width, height);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.setClearColor(0x0f172a, 1);
-            container.appendChild(renderer.domElement);
-
-            // Create particles
-            const geometry = new THREE.BufferGeometry();
-            const posArray = new Float32Array(particleCount * 3);
-            const colorArray = new Float32Array(particleCount * 3);
-
-            const cyan = new THREE.Color(0x06b6d4);
-            const blue = new THREE.Color(0x3b82f6);
-
-            for (let i = 0; i < particleCount; i++) {
-                const i3 = i * 3;
-                posArray[i3] = (Math.random() - 0.5) * 100;
-                posArray[i3 + 1] = (Math.random() - 0.5) * 50;
-                posArray[i3 + 2] = (Math.random() - 0.5) * 60;
-
-                positions.push({
-                    x: posArray[i3],
-                    y: posArray[i3 + 1],
-                    z: posArray[i3 + 2]
-                });
-
-                velocities.push({
-                    x: (Math.random() - 0.5) * 0.02,
-                    y: (Math.random() - 0.5) * 0.02,
-                    z: (Math.random() - 0.5) * 0.02
-                });
-
-                const color = Math.random() > 0.5 ? cyan : blue;
-                colorArray[i3] = color.r;
-                colorArray[i3 + 1] = color.g;
-                colorArray[i3 + 2] = color.b;
-            }
-
-            geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            geometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
-
-            const material = new THREE.PointsMaterial({
-                size: 0.8,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.9,
-                sizeAttenuation: true
-            });
-
-            particles = new THREE.Points(geometry, material);
-            scene.add(particles);
-
-            // Create lines
-            const lineGeometry = new THREE.BufferGeometry();
-            const linePositions = new Float32Array(particleCount * particleCount * 6);
-            lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-            lineGeometry.setDrawRange(0, 0);
-
-            const lineMaterial = new THREE.LineBasicMaterial({
-                color: 0x06b6d4,
-                transparent: true,
-                opacity: 0.15
-            });
-
-            lines = new THREE.LineSegments(lineGeometry, lineMaterial);
-            scene.add(lines);
-
-            if (!prefersReducedMotion) {
-                animate();
-            }
-        }
-
-        function updateLines() {
-            const posAttr = lines.geometry.attributes.position;
-            const posArray = particles.geometry.attributes.position.array;
-            const linePositions = posAttr.array;
-
-            let lineIndex = 0;
-            const maxDistance = 15;
-
-            for (let i = 0; i < particleCount; i++) {
-                for (let j = i + 1; j < particleCount; j++) {
-                    const i3 = i * 3;
-                    const j3 = j * 3;
-
-                    const dx = posArray[i3] - posArray[j3];
-                    const dy = posArray[i3 + 1] - posArray[j3 + 1];
-                    const dz = posArray[i3 + 2] - posArray[j3 + 2];
-                    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-                    if (dist < maxDistance) {
-                        const li = lineIndex * 6;
-                        linePositions[li] = posArray[i3];
-                        linePositions[li + 1] = posArray[i3 + 1];
-                        linePositions[li + 2] = posArray[i3 + 2];
-                        linePositions[li + 3] = posArray[j3];
-                        linePositions[li + 4] = posArray[j3 + 1];
-                        linePositions[li + 5] = posArray[j3 + 2];
-                        lineIndex++;
-                    }
-                }
-            }
-
-            lines.geometry.setDrawRange(0, lineIndex * 2);
-            posAttr.needsUpdate = true;
-        }
-
-        function animate() {
-            animationId = requestAnimationFrame(animate);
-
-            const posAttr = particles.geometry.attributes.position;
-            const posArray = posAttr.array;
-
-            for (let i = 0; i < particleCount; i++) {
-                const i3 = i * 3;
-
-                posArray[i3] += velocities[i].x;
-                posArray[i3 + 1] += velocities[i].y;
-                posArray[i3 + 2] += velocities[i].z;
-
-                // Boundary check
-                if (Math.abs(posArray[i3]) > 50) velocities[i].x *= -1;
-                if (Math.abs(posArray[i3 + 1]) > 25) velocities[i].y *= -1;
-                if (Math.abs(posArray[i3 + 2]) > 30) velocities[i].z *= -1;
-            }
-
-            posAttr.needsUpdate = true;
-
-            updateLines();
-
-            // Mouse interaction
-            targetMouseX += (mouseX - targetMouseX) * 0.05;
-            targetMouseY += (mouseY - targetMouseY) * 0.05;
-
-            camera.position.x = targetMouseX * 0.02;
-            camera.position.y = targetMouseY * 0.02;
-            camera.lookAt(scene.position);
-
-            renderer.render(scene, camera);
-        }
-
-        // Mouse move handler
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX - window.innerWidth / 2);
-            mouseY = (e.clientY - window.innerHeight / 2);
-        });
-
-        // Resize handler
-        window.addEventListener('resize', () => {
-            if (!renderer || !camera) return;
-
-            const container = document.getElementById('canvas-container');
-            const width = window.innerWidth;
-            const height = container ? container.offsetHeight : window.innerHeight * 0.5;
-
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
-        });
-
-        // Initialize Three.js when DOM is ready
-        document.addEventListener('DOMContentLoaded', initThreeJS);
-
-        // NAVBAR SCROLL
-        const navbar = document.getElementById('navbar');
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
+        // --- Navbar scroll & mobile menu ---
+        const nav = document.getElementById('main-nav');
+        const hamburger = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
 
         window.addEventListener('scroll', () => {
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
+            if (window.scrollY > 80) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
 
-        // HAMBURGER MENU
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
         });
 
-        // Close mobile menu on link click
-        mobileMenu.querySelectorAll('a').forEach(link => {
+        document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
             });
         });
 
-        // FILTER TABS
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const portfolioCards = document.querySelectorAll('.portfolio-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Update active state
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const filter = btn.dataset.filter;
-
-                // Filter cards
-                portfolioCards.forEach(card => {
-                    if (filter === 'all' || card.dataset.category === filter) {
-                        card.classList.remove('hidden');
-                        card.classList.add('visible');
-                    } else {
-                        card.classList.add('hidden');
-                        card.classList.remove('visible');
-                    }
-                });
-            });
-        });
-
-        // SCROLL ANIMATIONS
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // --- Scroll animations ---
+        const fadeElements = document.querySelectorAll('.fade-up');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        // Observe fade-up elements
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        fadeElements.forEach(el => observer.observe(el));
 
-        // Observe portfolio cards
-        portfolioCards.forEach(card => observer.observe(card));
+        // --- Portfolio Filter ---
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+        const grid = document.getElementById('portfolioGrid');
 
-        // COUNT-UP ANIMATION FOR STATS
-        const statNumbers = document.querySelectorAll('.stat-number');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
 
-        const countObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = parseInt(entry.target.dataset.target);
-                    animateCount(entry.target, target);
-                    countObserver.unobserve(entry.target);
-                }
+                const filter = btn.getAttribute('data-filter');
+
+                // Hide all first
+                portfolioCards.forEach(card => {
+                    card.classList.remove('showing');
+                    card.classList.add('hiding');
+                });
+
+                // After hide transition, show matching
+                setTimeout(() => {
+                    portfolioCards.forEach(card => {
+                        const type = card.getAttribute('data-type');
+                        if (filter === 'all' || type === filter) {
+                            card.classList.remove('hiding');
+                            card.classList.add('showing');
+                            card.style.display = '';
+                            // Reset grid placement
+                        } else {
+                            card.classList.remove('showing');
+                            card.classList.add('hiding');
+                            card.style.display = 'none';
+                        }
+                    });
+                }, 400);
             });
-        }, { threshold: 0.5 });
+        });
 
-        statNumbers.forEach(num => countObserver.observe(num));
+        // --- Three.js Blueprint Wireframe ---
+        const initBlueprint = () => {
+            const container = document.getElementById('hero-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
 
-        function animateCount(element, target) {
-            let current = 0;
-            const increment = target / 50;
-            const duration = 1500;
-            const stepTime = duration / 50;
+            const material = new THREE.LineBasicMaterial({ color: 0x4F8EF7, transparent: true, opacity: 0.6 });
 
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
+            // Create a wireframe "website layout" group
+            const layoutGroup = new THREE.Group();
 
-                // Add + sign for numbers that need it
-                if (target === 6) {
-                    element.textContent = Math.floor(current) + '+';
-                } else if (target === 100) {
-                    element.textContent = Math.floor(current) + '%';
-                } else {
-                    element.textContent = Math.floor(current);
-                }
-            }, stepTime);
-        }
+            // Helper: create a box outline
+            function addBox(x, y, z, w, h, d) {
+                const geo = new THREE.BoxGeometry(w, h, d);
+                const edges = new THREE.EdgesGeometry(geo);
+                const line = new THREE.LineSegments(edges, material);
+                line.position.set(x, y, z);
+                layoutGroup.add(line);
+            }
 
-        // Initial navbar state check
-        navbar.classList.toggle('scrolled', window.scrollY > 50);
+            // Outer frame (browser window)
+            addBox(0, 0, 0, 5, 3.5, 0.1);
+
+            // Header bar
+            addBox(0, 1.3, 0.05, 4.8, 0.4, 0.05);
+
+            // Hero block
+            addBox(0, 0.5, 0.05, 4.8, 1.2, 0.05);
+
+            // Three columns (content blocks)
+            addBox(-1.5, -0.7, 0.05, 1.4, 1.0, 0.05);
+            addBox(0, -0.7, 0.05, 1.4, 1.0, 0.05);
+            addBox(1.5, -0.7, 0.05, 1.4, 1.0, 0.05);
+
+            // CTA button bar
+            addBox(0, -1.5, 0.05, 1.5, 0.3, 0.05);
+
+            // Footer bar
+            addBox(0, -1.8, 0.05, 4.8, 0.3, 0.05);
+
+            // Add some grid lines on the "page"
+            for (let i = -2; i <= 2; i += 0.5) {
+                const points = [new THREE.Vector3(i, 1.7, 0.07), new THREE.Vector3(i, -2, 0.07)];
+                const geo = new THREE.BufferGeometry().setFromPoints(points);
+                const lineMat = new THREE.LineBasicMaterial({ color: 0x4F8EF7, transparent: true, opacity: 0.12 });
+                layoutGroup.add(new THREE.Line(geo, lineMat));
+            }
+
+            for (let j = -2; j <= 1.7; j += 0.4) {
+                const points = [new THREE.Vector3(-2.5, j, 0.07), new THREE.Vector3(2.5, j, 0.07)];
+                const geo = new THREE.BufferGeometry().setFromPoints(points);
+                const lineMat = new THREE.LineBasicMaterial({ color: 0x4F8EF7, transparent: true, opacity: 0.12 });
+                layoutGroup.add(new THREE.Line(geo, lineMat));
+            }
+
+            scene.add(layoutGroup);
+            camera.position.set(0, 0, 6);
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, container.clientHeight);
+            });
+
+            const animate = () => {
+                requestAnimationFrame(animate);
+                layoutGroup.rotation.y += 0.003;
+                layoutGroup.rotation.x = Math.sin(Date.now() * 0.0003) * 0.1;
+                renderer.render(scene, camera);
+            };
+            animate();
+        };
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', initBlueprint);
     </script>
 
-            <!-- PASTE YOUR CHATLING CODE RIGHT HERE -->
-    <script> window.chtlConfig = { chatbotId: "9955974989" } </script>
-<script async data-id="9955974989" id="chtl-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
 </body>
 </html>
