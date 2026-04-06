@@ -6,485 +6,574 @@
     <title>Privacy Policy | QUANTOR</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Syne:wght@700;800&display=swap');
-        
         :root {
-            --bg-dark: #0a0e17;
-            --bg-navy: #0f1629;
-            --bg-card: #141b2d;
-            --fg: #ffffff;
-            --fg-muted: #94a3b8;
-            --fg-off-white: #e2e8f0;
-            --accent-blue: #2563eb;
-            --accent-blue-hover: #3b82f6;
-            --action-blue: #3b82f6;
-            --cyan: #06b6d4;
-            --cyan-muted: rgba(6, 182, 212, 0.3);
-            --border: rgba(255, 255, 255, 0.08);
-            --gradient-navy: linear-gradient(180deg, #0a0e17 0%, #0f1629 50%, #141b2d 100%);
+            --bg-dark: #0a0a0f;
+            --card-dark: #12121a;
+            --accent-blue: #4F8EF7;
+            --accent-purple: #7C3AED;
+            --text-white: #ffffff;
+            --text-muted: #a0a0b0;
+            --text-body: #c8c8d8;
+            --border-blue: rgba(79, 142, 247, 0.2);
+            --border-subtle: #1e1e2e;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
             scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg-dark);
-            color: var(--fg-off-white);
-            line-height: 1.7;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: var(--font-main);
             overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            font-size: 0.95rem;
+            border: none;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-filled {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 142, 247, 0.3);
+        }
+
+        .btn-filled:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(79, 142, 247, 0.5);
         }
 
         /* Navbar */
-        .navbar {
+        nav {
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             z-index: 1000;
-            background: rgba(10, 14, 23, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+            padding: 1.5rem 0;
             transition: all 0.3s ease;
         }
 
-        .navbar.scrolled {
-            background: rgba(10, 14, 23, 0.98);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        nav.scrolled {
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-blue);
+            padding: 1rem 0;
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            height: 72px;
+        .nav-content {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        .nav-brand {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 24px;
-            color: var(--fg);
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: white;
             text-decoration: none;
-            letter-spacing: -0.5px;
-            transition: opacity 0.2s ease;
+            text-transform: uppercase;
         }
 
-        .nav-brand:hover {
-            opacity: 0.85;
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
         }
 
-        .nav-menu {
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 1100;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: white;
+            margin: 6px 0;
+            transition: 0.3s;
+        }
+
+        /* Legal Hero */
+        .legal-hero {
+            position: relative;
+            min-height: 35vh;
             display: flex;
             align-items: center;
-            gap: 28px;
-            list-style: none;
+            padding-top: 100px;
+            padding-bottom: 3rem;
+            background: linear-gradient(135deg, rgba(79, 142, 247, 0.05) 0%, transparent 50%);
+            overflow: hidden;
         }
 
-        .nav-link {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--fg-muted);
-            text-decoration: none;
-            transition: color 0.2s ease;
-            position: relative;
-        }
-
-        .nav-link::after {
+        .legal-hero::before {
             content: '';
             position: absolute;
-            bottom: -4px;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(79, 142, 247, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .legal-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
             left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--cyan);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--fg);
-        }
-
-        .nav-link:hover::after {
             width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-blue), transparent);
         }
 
-        .nav-contact {
+        .legal-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .legal-eyebrow {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .legal-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .legal-hero p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .legal-rule {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            margin-top: 2rem;
+            border-radius: 2px;
+        }
+
+        /* Legal Layout */
+        .legal-layout {
+            padding: 5rem 0;
+        }
+
+        .legal-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 4rem;
+        }
+
+        /* Sticky TOC */
+        .legal-toc {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .toc-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .toc-list {
+            list-style: none;
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            gap: 2px;
+            gap: 0.5rem;
         }
 
-        .nav-contact-item {
-            font-size: 13px;
-            color: var(--fg-muted);
+        .toc-list a {
+            color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.2s ease;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-left: 2px solid transparent;
+            transition: all 0.3s ease;
+            display: block;
         }
 
-        .nav-contact-item:hover {
-            color: var(--cyan);
+        .toc-list a:hover,
+        .toc-list a.active {
+            color: var(--accent-blue);
+            border-left-color: var(--accent-blue);
+            background: rgba(79, 142, 247, 0.05);
         }
 
-        .nav-toggle {
+        /* Mobile Pill Nav */
+        .pill-nav {
             display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 8px;
-            background: transparent;
-            border: none;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
         }
 
-        .nav-toggle span {
-            width: 24px;
-            height: 2px;
-            background: var(--fg);
+        .pill-nav::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .pill-nav::-webkit-scrollbar-track {
+            background: var(--card-dark);
+        }
+
+        .pill-nav::-webkit-scrollbar-thumb {
+            background: var(--border-blue);
+            border-radius: 2px;
+        }
+
+        .pill-list {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            width: max-content;
+        }
+
+        .pill-list a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-blue);
+            border-radius: 20px;
+            white-space: nowrap;
             transition: all 0.3s ease;
         }
 
-        /* Hero Section */
-        .hero {
-            min-height: 40vh;
-            background: var(--gradient-navy);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .pill-list a:hover,
+        .pill-list a.active {
+            color: white;
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        /* Legal Content */
+        .legal-body {
+            max-width: 800px;
+        }
+
+        .legal-section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 120px;
+        }
+
+        .legal-section h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--accent-blue);
+            line-height: 1.4;
+        }
+
+        .legal-section p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-body);
+            margin-bottom: 1rem;
+        }
+
+        .legal-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .legal-section ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .legal-section ul li {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-body);
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-section ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        .legal-section strong {
+            color: var(--text-white);
+            font-weight: 600;
+        }
+
+        .legal-section a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .legal-section a:hover {
+            opacity: 0.8;
+        }
+
+        .legal-divider {
+            height: 1px;
+            background: var(--border-subtle);
+            margin: 3rem 0;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            padding: 4rem 0;
             text-align: center;
-            padding: 120px 24px 80px;
+        }
+
+        .contact-cta-box {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--card-dark);
+            border: 1px solid var(--border-blue);
+            border-radius: 16px;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        .contact-cta-box::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37, 99, 235, 0.15), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(6, 182, 212, 0.08), transparent);
-            pointer-events: none;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-        }
-
-        .hero-title {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: clamp(32px, 6vw, 56px);
-            color: var(--fg);
-            line-height: 1.15;
-            margin-bottom: 16px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 0.8s ease forwards;
-        }
-
-        .hero-subtitle {
-            font-size: 18px;
-            color: var(--fg-muted);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s ease 0.15s forwards;
-        }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Policy Content */
-        .policy-section {
-            padding: 80px 24px;
-            background: var(--bg-dark);
-            position: relative;
-        }
-
-        .policy-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--cyan-muted), transparent);
-        }
-
-        .policy-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .policy-block {
-            margin-bottom: 48px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
-        }
-
-        .policy-block.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .policy-heading {
-            font-family: 'Syne', sans-serif;
+        .contact-cta h2 {
+            font-size: 1.5rem;
             font-weight: 700;
-            font-size: 24px;
-            color: var(--action-blue);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            margin-bottom: 1rem;
         }
 
-        .policy-heading .number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: var(--cyan-muted);
-            border-radius: 6px;
-            font-size: 14px;
-            color: var(--cyan);
-        }
-
-        .policy-text {
-            font-size: 16px;
-            color: var(--fg-off-white);
-            line-height: 1.8;
-        }
-
-        .policy-text a {
-            color: var(--cyan);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .policy-text a:hover {
-            color: var(--fg);
-        }
-
-        .policy-hr {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-            margin: 48px 0;
-            opacity: 0.4;
-        }
-
-        .highlight-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--cyan);
-            border-radius: 8px;
-            padding: 20px 24px;
-            margin-top: 12px;
-        }
-
-        .highlight-box p {
-            margin: 0;
+        .contact-cta p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
         }
 
         /* Footer */
-        .footer {
-            background: var(--bg-navy);
-            border-top: 1px solid var(--border);
+        footer {
+            padding: 5rem 0 2rem;
+            background: #050508;
+            border-top: 1px solid var(--border-blue);
         }
 
-        .footer-main {
-            padding: 40px 24px;
-            border-bottom: 1px solid var(--border);
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
         }
 
-        .footer-main-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .footer-brand .logo {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            max-width: 300px;
+            font-size: 0.95rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-links {
             display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 24px;
-        }
-
-        .footer-brand {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 22px;
-            color: var(--fg);
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-
-        .footer-nav {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            list-style: none;
-        }
-
-        .footer-nav-link {
-            font-size: 14px;
-            color: var(--fg-muted);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .footer-nav-link:hover {
-            color: var(--cyan);
+            gap: 1.5rem;
+            color: #555;
+            font-size: 0.85rem;
         }
 
         .footer-contact {
             display: flex;
-            align-items: center;
-            gap: 20px;
+            gap: 2rem;
         }
 
-        .footer-contact-item {
-            font-size: 14px;
-            color: var(--fg-muted);
+        .footer-contact a {
+            color: #555;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.2s ease;
+            transition: 0.3s;
         }
 
-        .footer-contact-item:hover {
-            color: var(--cyan);
+        .footer-contact a:hover {
+            color: var(--accent-blue);
         }
 
-        .footer-contact-item svg {
-            width: 16px;
-            height: 16px;
-            color: var(--cyan);
-        }
+        /* Mobile Responsiveness */
+        @media (max-width: 1024px) {
+            .legal-grid {
+                grid-template-columns: 1fr;
+            }
 
-        .footer-bottom {
-            padding: 20px 24px;
-        }
-
-        .footer-bottom-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-
-        .footer-copyright {
-            font-size: 14px;
-            color: var(--fg-muted);
-        }
-
-        .footer-legal {
-            display: flex;
-            gap: 24px;
-        }
-
-        .footer-legal a {
-            font-size: 14px;
-            color: var(--fg-muted);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .footer-legal a:hover {
-            color: var(--cyan);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 900px) {
-            .nav-contact {
+            .legal-toc {
                 display: none;
+            }
+
+            .pill-nav {
+                display: block;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            .nav-menu {
+            .nav-links {
                 position: fixed;
-                top: 72px;
-                left: 0;
-                right: 0;
-                background: rgba(10, 14, 23, 0.98);
+                top: 0;
+                right: -100%;
+                width: 85%;
+                height: 100vh;
+                background: var(--card-dark);
                 flex-direction: column;
-                padding: 24px;
-                gap: 20px;
-                transform: translateY(-100%);
-                opacity: 0;
-                pointer-events: none;
-                transition: all 0.3s ease;
-                border-bottom: 1px solid var(--border);
+                justify-content: center;
+                transition: 0.4s ease;
+                box-shadow: -10px 0 40px rgba(0,0,0,0.7);
+                gap: 2rem;
             }
 
-            .nav-menu.active {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: all;
+            .nav-links.active {
+                right: 0;
             }
 
-            .nav-toggle {
-                display: flex;
+            .hamburger {
+                display: block;
             }
 
-            .nav-toggle.active span:nth-child(1) {
+            .hamburger.active span:nth-child(1) {
                 transform: rotate(45deg) translate(5px, 5px);
             }
-
-            .nav-toggle.active span:nth-child(2) {
+            .hamburger.active span:nth-child(2) {
                 opacity: 0;
             }
-
-            .nav-toggle.active span:nth-child(3) {
+            .hamburger.active span:nth-child(3) {
                 transform: rotate(-45deg) translate(5px, -5px);
             }
 
-            .footer-main-container {
-                flex-direction: column;
-                text-align: center;
+            .legal-hero {
+                min-height: 30vh;
+                padding-top: 80px;
             }
 
-            .footer-nav {
-                flex-wrap: wrap;
-                justify-content: center;
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
             }
 
             .footer-contact {
                 flex-direction: column;
-                gap: 12px;
+                gap: 0.5rem;
             }
 
-            .footer-bottom-container {
-                flex-direction: column;
-                text-align: center;
+            .contact-cta-box {
+                padding: 2rem 1.5rem;
             }
         }
 
-        /* Reduced Motion */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -495,23 +584,19 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-brand">QUANTOR</a>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="services.html" class="nav-link">Services</a></li>
-                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-                <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
-                <li><a href="contact.html" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="nav-contact">
-                <a href="mailto:quantorleads@gmail.com" class="nav-contact-item">quantorleads@gmail.com</a>
-                <a href="tel:+919599234747" class="nav-contact-item">+91 9599234747</a>
+
+    <nav id="main-nav">
+        <div class="nav-content">
+            <a href="index.html" class="logo">QUANTOR</a>
+            <div class="nav-links" id="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="btn btn-filled">Get Started</a>
             </div>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <button class="hamburger" id="hamburger-btn" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -519,274 +604,274 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Privacy Policy</h1>
-            <p class="hero-subtitle">Last updated: March  2026</p>
+    <section class="legal-hero">
+        <div class="container">
+            <div class="legal-hero-content">
+                <div class="legal-eyebrow">Legal</div>
+                <h1>Privacy Policy</h1>
+                <p>Last updated: March 2026</p>
+                <div class="legal-rule"></div>
+            </div>
         </div>
     </section>
 
-    <!-- Policy Content -->
-    <section class="policy-section">
-        <div class="policy-container">
-            
-            <div class="policy-block">
-                <h2 class="policy-heading">
-                    <span class="number">1</span>
-                    Introduction
-                </h2>
-                <p class="policy-text">
-                    QUANTOR ("we", "us", "our") operates quantor.agency. This policy explains how we collect, use, and protect your personal information in compliance with India's Digital Personal Data Protection Act 2023. We are committed to ensuring the privacy and security of all personal data entrusted to us.
-                </p>
-            </div>
+    <!-- Mobile Pill Navigation -->
+    <div class="pill-nav">
+        <div class="container">
+            <ul class="pill-list">
+                <li><a href="#introduction">1. Intro</a></li>
+                <li><a href="#collection">2. Collect</a></li>
+                <li><a href="#usage">3. Usage</a></li>
+                <li><a href="#sharing">4. Sharing</a></li>
+                <li><a href="#storage">5. Storage</a></li>
+                <li><a href="#rights">6. Rights</a></li>
+                <li><a href="#cookies">7. Cookies</a></li>
+                <li><a href="#links">8. Links</a></li>
+                <li><a href="#changes">9. Changes</a></li>
+                <li><a href="#contact">10. Contact</a></li>
+            </ul>
+        </div>
+    </div>
 
-            <hr class="policy-hr">
+    <section class="legal-layout">
+        <div class="container">
+            <div class="legal-grid">
+                <!-- Sticky TOC -->
+                <aside class="legal-toc">
+                    <div class="toc-title">On This Page</div>
+                    <ul class="toc-list">
+                        <li><a href="#introduction">1. Introduction</a></li>
+                        <li><a href="#collection">2. Information We Collect</a></li>
+                        <li><a href="#usage">3. How We Use Your Information</a></li>
+                        <li><a href="#sharing">4. Data Sharing</a></li>
+                        <li><a href="#storage">5. Data Storage</a></li>
+                        <li><a href="#rights">6. Your Rights</a></li>
+                        <li><a href="#cookies">7. Cookies</a></li>
+                        <li><a href="#links">8. Third-Party Links</a></li>
+                        <li><a href="#changes">9. Changes to This Policy</a></li>
+                        <li><a href="#contact">10. Contact</a></li>
+                    </ul>
+                </aside>
 
-            <div class="policy-block">
-                <h2 class="policy-heading">
-                    <span class="number">2</span>
-                    Information We Collect
-                </h2>
-                <p class="policy-text">
-                    We collect information that you provide directly to us, including:
-                </p>
-                <div class="highlight-box">
-                    <p class="policy-text">
-                        <strong>Personal Data:</strong> Name, email address, phone number, and business name submitted via our contact form or WhatsApp communication.<br><br>
-                        <strong>Usage Data:</strong> We collect anonymous usage data via analytics tools, including page views, browser type, device type, and geographic location.
-                    </p>
+                <!-- Content -->
+                <div class="legal-body">
+
+                    <div class="legal-section" id="introduction">
+                        <h2>1. Introduction</h2>
+                        <p>QUANTOR ("we", "us", "our") operates quantor-agency.github.io. This policy explains how we collect, use, and protect your personal information in compliance with India's <strong>Digital Personal Data Protection Act 2023</strong>. We are committed to ensuring the privacy and security of all personal data entrusted to us.</p>
+                    </div>
+
+                    <div class="legal-divider"></div>
+
+                    <div class="legal-section" id="collection">
+                        <h2>2. Information We Collect</h2>
+                        <p>We collect information that you provide directly to us, including:</p>
+                        <ul>
+                            <li><strong>Personal Data:</strong> Name, email address, phone number, and business name submitted via our contact form or WhatsApp communication.</li>
+                            <li><strong>Usage Data:</strong> We collect anonymous usage data via analytics tools, including page views, browser type, device type, and geographic location.</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-divider"></div>
+
+                    <div class="legal-section" id="usage">
+                        <h2>3. How We Use Your Information</h2>
+                        <p>We use the information we collect for the following purposes:</p>
+                        <ul>
+                            <li>To respond to your enquiries and provide customer support.</li>
+                            <li>To deliver the services you have requested.</li>
+                            <li>To send you updates about your project status.</li>
+                            <li>To improve our website and service offerings based on user feedback and analytics.</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-divider"></div>
+
+                    <div class="legal-section" id="sharing">
+                        <h2>4. Data Sharing</h2>
+                        <p>We do not sell, trade, or rent your personal data to third parties. We may share your information with trusted third-party service providers solely for service delivery purposes. These partners include:</p>
+                        <ul>
+                            <li><strong>Tidio:</strong> For live chat support functionality.</li>
+                            <li><strong>Hostinger:</strong> For website hosting services.</li>
+                            <li><strong>Google Analytics:</strong> For anonymous usage statistics.</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-divider"></div>
+
+                    <div class="legal-section" id="storage">
+                        <h2>5. Data Storage</h2>
+                        <p>Your data is stored securely on protected servers. We implement appropriate technical and organizational measures to safeguard your information against unauthorized access, alteration, or destruction.</p>
+                        <p>We retain client data for up to <strong>2 years</strong> after project completion for reference and support purposes, after which it is securely deleted.</p>
+                    </div>
+
+                    <div class="legal-divider"></div>
+
+                    <div class="legal-section" id="rights">
+                        <h2>6. Your Rights</h2>
+                        <p>Under the <strong>Digital Personal Data Protection Act 2023</strong>, you have the right to:</p>
+                        <ul>
+                            <li>Request access to the personal data we hold about you.</li>
+                            <li>Request correction of inaccurate or incomplete data.</li>
+                            <li>Request deletion of your personal data.</li>
+                        </ul>
+                        <p>To exercise any of these rights, please email us at <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>.</p>
+                    </div>
+
+                    <div class="legal-divider"></div>
+
+                    <div class="legal-section" id="cookies">
+                        <h2>7. Cookies</h2>
+                        <p>We may use basic analytics cookies to understand how visitors interact with our website. These cookies collect anonymous statistical data.</p>
+                        <p>We do not use advertising cookies or tracking pixels for targeted advertising purposes. You can control cookie settings through your browser preferences.</p>
+                    </div>
+
+                    <div class="legal-divider"></div>
+
+                    <div class="legal-section" id="links">
+                        <h2>8. Third-Party Links</h2>
+                        <p>Our website may contain links to external platforms and websites operated by third parties. We are not responsible for the privacy practices or content of these external sites. We encourage you to review the privacy policies of any third-party sites you visit.</p>
+                    </div>
+
+                    <div class="legal-divider"></div>
+
+                    <div class="legal-section" id="changes">
+                        <h2>9. Changes to This Policy</h2>
+                        <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. Any updates will be posted on this page with a revised "Last updated" date.</p>
+                        <p>Continued use of our website and services after changes constitutes acceptance of the updated policy.</p>
+                    </div>
+
+                    <div class="legal-divider"></div>
+
+                    <div class="legal-section" id="contact">
+                        <h2>10. Contact</h2>
+                        <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
+                        <p>Email: <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a><br>
+                        Phone: <a href="tel:+919599234747">+91 9599234747</a></p>
+                    </div>
+
                 </div>
             </div>
-
-            <hr class="policy-hr">
-
-            <div class="policy-block">
-                <h2 class="policy-heading">
-                    <span class="number">3</span>
-                    How We Use Your Information
-                </h2>
-                <p class="policy-text">
-                    We use the information we collect for the following purposes:
-                </p>
-                <div class="highlight-box">
-                    <p class="policy-text">
-                        To respond to your enquiries and provide customer support.<br>
-                        To deliver the services you have requested.<br>
-                        To send you updates about your project status.<br>
-                        To improve our website and service offerings based on user feedback and analytics.
-                    </p>
-                </div>
-            </div>
-
-            <hr class="policy-hr">
-
-            <div class="policy-block">
-                <h2 class="policy-heading">
-                    <span class="number">4</span>
-                    Data Sharing
-                </h2>
-                <p class="policy-text">
-                    We do not sell, trade, or rent your personal data to third parties. We may share your information with trusted third-party service providers solely for service delivery purposes. These partners include:
-                </p>
-                <div class="highlight-box">
-                    <p class="policy-text">
-                        <strong>Tidio:</strong> For live chat support functionality.<br>
-                        <strong>Hostinger:</strong> For website hosting services.<br>
-                        <strong>Google Analytics:</strong> For anonymous usage statistics.
-                    </p>
-                </div>
-            </div>
-
-            <hr class="policy-hr">
-
-            <div class="policy-block">
-                <h2 class="policy-heading">
-                    <span class="number">5</span>
-                    Data Storage
-                </h2>
-                <p class="policy-text">
-                    Your data is stored securely on protected servers. We implement appropriate technical and organizational measures to safeguard your information against unauthorized access, alteration, or destruction. We retain client data for up to 2 years after project completion for reference and support purposes, after which it is securely deleted.
-                </p>
-            </div>
-
-            <hr class="policy-hr">
-
-            <div class="policy-block">
-                <h2 class="policy-heading">
-                    <span class="number">6</span>
-                    Your Rights
-                </h2>
-                <p class="policy-text">
-                    Under the Digital Personal Data Protection Act 2023, you have the right to:
-                </p>
-                <div class="highlight-box">
-                    <p class="policy-text">
-                        Request access to the personal data we hold about you.<br>
-                        Request correction of inaccurate or incomplete data.<br>
-                        Request deletion of your personal data.
-                    </p>
-                </div>
-                <p class="policy-text" style="margin-top: 16px;">
-                    To exercise any of these rights, please email us at <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>.
-                </p>
-            </div>
-
-            <hr class="policy-hr">
-
-            <div class="policy-block">
-                <h2 class="policy-heading">
-                    <span class="number">7</span>
-                    Cookies
-                </h2>
-                <p class="policy-text">
-                    We may use basic analytics cookies to understand how visitors interact with our website. These cookies collect anonymous statistical data. We do not use advertising cookies or tracking pixels for targeted advertising purposes. You can control cookie settings through your browser preferences.
-                </p>
-            </div>
-
-            <hr class="policy-hr">
-
-            <div class="policy-block">
-                <h2 class="policy-heading">
-                    <span class="number">8</span>
-                    Third-Party Links
-                </h2>
-                <p class="policy-text">
-                    Our website may contain links to external platforms and websites operated by third parties. We are not responsible for the privacy practices or content of these external sites. We encourage you to review the privacy policies of any third-party sites you visit.
-                </p>
-            </div>
-
-            <hr class="policy-hr">
-
-            <div class="policy-block">
-                <h2 class="policy-heading">
-                    <span class="number">9</span>
-                    Changes to This Policy
-                </h2>
-                <p class="policy-text">
-                    We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. Any updates will be posted on this page with a revised "Last updated" date. Continued use of our website and services after changes constitutes acceptance of the updated policy.
-                </p>
-            </div>
-
-            <hr class="policy-hr">
-
-            <div class="policy-block">
-                <h2 class="policy-heading">
-                    <span class="number">10</span>
-                    Contact
-                </h2>
-                <p class="policy-text">
-                    If you have any questions about this Privacy Policy or our data practices, please contact us:
-                </p>
-                <div class="highlight-box">
-                    <p class="policy-text">
-                        <strong>Email:</strong> <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a><br>
-                        <strong>Phone:</strong> +91 9599234747
-                    </p>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-main">
-            <div class="footer-main-container">
-                <a href="index.html" class="footer-brand">QUANTOR</a>
-                <ul class="footer-nav">
-                    <li><a href="index.html" class="footer-nav-link">Home</a></li>
-                    <li><a href="services.html" class="footer-nav-link">Services</a></li>
-                    <li><a href="pricing.html" class="footer-nav-link">Pricing</a></li>
-                    <li><a href="portfolio.html" class="footer-nav-link">Portfolio</a></li>
-                    <li><a href="about.html" class="footer-nav-link">About</a></li>
-                    <li><a href="contact.html" class="footer-nav-link">Contact</a></li>
-                </ul>
+    <section class="contact-cta">
+        <div class="container">
+            <div class="contact-cta-box">
+                <h2>Have a question about your data?</h2>
+                <p>We're here to help. Reach out and we'll get back to you promptly.</p>
+                <a href="mailto:quantorleads@gmail.com" class="btn btn-filled">Email Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">QUANTOR</a>
+                    <p>Next-generation AI agency helping businesses scale through intelligent web experiences.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="index.html#services">Services</a>
+                        <a href="portfolio.html">Portfolio</a>
+                        <a href="about.html">About</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Pricing</h4>
+                    <div class="footer-links">
+                        <a href="pricing.html">View Plans</a>
+                        <a href="contact.html">Custom Quote</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <div class="footer-links">
+                        <a href="privacy-policy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="refund-policy.html">Refund Policy</a>
+                        <a href="disclaimer.html">Disclaimer</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
                 <div class="footer-contact">
-                    <a href="mailto:quantorleads@gmail.com" class="footer-contact-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        quantorleads@gmail.com
-                    </a>
-                    <a href="tel:+919599234747" class="footer-contact-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                        </svg>
-                        +91 9599234747
-                    </a>
+                    <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
+                    <a href="tel:+919599234747">+91 9599234747</a>
                 </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="footer-bottom-container">
-                <p class="footer-copyright">2026 QUANTOR. All rights reserved.</p>
-                <div class="footer-legal">
-                    <a href="privacy-policy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="refund-policy.html">Refund Policy</a>
-                </div>
+                <div>&copy; 2026 QUANTOR. All rights reserved.</div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        let lastScroll = 0;
+        // Navbar Logic
+        const nav = document.getElementById('main-nav');
+        const hamburger = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
 
-        window.addEventListener('scroll', function() {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 50) {
-                navbar.classList.add('scrolled');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                nav.classList.add('scrolled');
             } else {
-                navbar.classList.remove('scrolled');
+                nav.classList.remove('scrolled');
             }
-            
-            lastScroll = currentScroll;
         });
 
-        // Mobile menu toggle
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-
-        navToggle.addEventListener('click', function() {
-            navToggle.classList.toggle('active');
+        hamburger.addEventListener('click', () => {
             navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
         });
 
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                navToggle.classList.remove('active');
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
             });
         });
 
-        // Scroll reveal for policy blocks
-        const policyBlocks = document.querySelectorAll('.policy-block');
+        // TOC Active State & IntersectionObserver
+        const sections = document.querySelectorAll('.legal-section');
+        const tocLinks = document.querySelectorAll('.toc-list a');
+        const pillLinks = document.querySelectorAll('.pill-list a');
 
         const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '-20% 0% -80% 0%',
+            threshold: 0
         };
 
-        const observer = new IntersectionObserver(function(entries) {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    const id = entry.target.getAttribute('id');
+                    
+                    tocLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
+
+                    pillLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + id) {
+                            link.classList.add('active');
+                        }
+                    });
                 }
             });
         }, observerOptions);
 
-        policyBlocks.forEach(block => {
-            observer.observe(block);
-        });
+        sections.forEach(section => observer.observe(section));
 
-        // Smooth scroll for anchor links
+        // Smooth scroll for TOC and pill nav
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
@@ -798,9 +883,5 @@
             });
         });
     </script>
-
-            <!-- PASTE YOUR CHATLING CODE RIGHT HERE -->
-    <script> window.chtlConfig = { chatbotId: "9955974989" } </script>
-<script async data-id="9955974989" id="chtl-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
 </body>
 </html>
