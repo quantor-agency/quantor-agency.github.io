@@ -1,1603 +1,656 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing | QUANTOR - AI-Powered Websites & Chatbots</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=DM+Sans:wght@300;400&family=Syne:wght@700;800&display=swap');
-
-        :root {
-            --navy: #0f172a;
-            --navy-light: #1a2744;
-            --brand-blue: #1e40af;
-            --action-blue: #3b82f6;
-            --cyan: #06b6d4;
-            --off-white: #f8fafc;
-            --muted: rgba(248,250,252,0.6);
-            --card-bg: rgba(255,255,255,0.04);
-            --card-border: rgba(255,255,255,0.08);
-            --glow-blue: 0 0 30px rgba(59,130,246,0.4);
-            --glow-cyan: 0 0 30px rgba(6,182,212,0.4);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background-color: var(--navy);
-            color: var(--off-white);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* NAVBAR */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 28px;
-            color: var(--off-white);
-            text-decoration: none;
-            letter-spacing: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            color: var(--off-white);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--cyan);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--cyan);
-        }
-
-        .cta-btn {
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 400;
-            font-size: 14px;
-            padding: 12px 24px;
-            background: var(--action-blue);
-            color: var(--off-white);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn:hover {
-            box-shadow: var(--glow-blue);
-            transform: translateY(-2px);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1001;
-        }
-
-        .hamburger span {
-            width: 28px;
-            height: 2px;
-            background: var(--off-white);
-            transition: all 0.3s ease;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        /* PAGE HERO */
-        .page-hero {
-            position: relative;
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        #canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            padding: 120px 20px 60px;
-            max-width: 900px;
-        }
-
-        .hero-content h1 {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: clamp(32px, 5vw, 56px);
-            color: var(--off-white);
-            line-height: 1.15;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeUp 0.8s ease forwards;
-        }
-
-        .hero-content p {
-            font-size: clamp(16px, 2vw, 20px);
-            color: var(--muted);
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeUp 0.8s ease 0.2s forwards;
-        }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* WAVE DIVIDER */
-        .wave-divider {
-            width: 100%;
-            height: 80px;
-            position: relative;
-        }
-
-        .wave-divider svg {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        /* SECTIONS */
-        section {
-            padding: 100px 40px;
-            position: relative;
-        }
-
-        .section-title {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: clamp(32px, 4vw, 48px);
-            color: var(--off-white);
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-subtitle {
-            font-family: 'DM Mono', monospace;
-            font-size: 14px;
-            color: var(--cyan);
-            text-align: center;
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* PRICING TOGGLE */
-        .toggle-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 60px;
-        }
-
-        .toggle-label {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 16px;
-            color: var(--muted);
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
-
-        .toggle-label.active {
-            color: var(--off-white);
-        }
-
-        .toggle-switch {
-            width: 60px;
-            height: 30px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 15px;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background: var(--cyan);
-            border-radius: 50%;
-            top: 2px;
-            left: 3px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px var(--cyan);
-        }
-
-        .toggle-switch.annual::after {
-            left: 33px;
-        }
-
-        /* PRICING SECTIONS */
-        .pricing-section-block {
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        .pricing-section-block.hidden {
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-            position: absolute;
-            visibility: hidden;
-        }
-
-        /* PRICING CARDS */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .pricing-grid.three-col {
-            grid-template-columns: repeat(3, 1fr);
-            max-width: 1200px;
-        }
-
-        .pricing-grid.single-col {
-            grid-template-columns: 1fr;
-            max-width: 450px;
-        }
-
-        .pricing-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 40px 30px;
-            position: relative;
-            transition: all 0.4s ease;
-            transform-style: preserve-3d;
-        }
-
-        .pricing-card:hover {
-            border-color: rgba(6, 182, 212, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .pricing-card.elevated {
-            transform: scale(1.05);
-            border: 2px solid var(--action-blue);
-            box-shadow: var(--glow-blue);
-            background: rgba(59, 130, 246, 0.05);
-        }
-
-        .pricing-card.elevated:hover {
-            transform: scale(1.05) translateY(-10px);
-        }
-
-        .pricing-badge {
-            display: inline-block;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 12px;
-            font-weight: 500;
-            padding: 6px 14px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-        }
-
-        .badge-save {
-            background: var(--action-blue);
-            color: var(--off-white);
-        }
-
-        .badge-popular {
-            background: linear-gradient(135deg, var(--cyan), var(--action-blue));
-            color: var(--off-white);
-        }
-
-        .pricing-card h3 {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 22px;
-            color: var(--off-white);
-            margin-bottom: 16px;
-        }
-
-        .price-main {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 42px;
-            color: var(--off-white);
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-
-        .price-sub {
-            font-family: 'DM Mono', monospace;
-            font-size: 14px;
-            color: var(--cyan);
-            margin-bottom: 24px;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .pricing-features li {
-            font-size: 15px;
-            color: var(--muted);
-            padding: 10px 0;
-            padding-left: 24px;
-            position: relative;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .pricing-features li:last-child {
-            border-bottom: none;
-        }
-
-        .pricing-features li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--cyan);
-        }
-
-        .pricing-btn {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 15px;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: block;
-            text-align: center;
-            width: 100%;
-        }
-
-        .pricing-btn.cyan {
-            background: var(--cyan);
-            color: var(--navy);
-        }
-
-        .pricing-btn.cyan:hover {
-            box-shadow: var(--glow-cyan);
-            transform: translateY(-2px);
-        }
-
-        .pricing-btn.blue {
-            background: var(--action-blue);
-            color: var(--off-white);
-        }
-
-        .pricing-btn.blue:hover {
-            box-shadow: var(--glow-blue);
-            transform: translateY(-2px);
-        }
-
-        /* COMPARISON TABLE */
-        .comparison-section {
-            background: var(--navy-light);
-        }
-
-        .table-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            overflow-x: auto;
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--card-bg);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--card-border);
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            padding: 16px 18px;
-            text-align: center;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .comparison-table th {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 15px;
-            color: var(--off-white);
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .comparison-table th:first-child {
-            text-align: left;
-        }
-
-        .comparison-table th.feature-col {
-            color: var(--muted);
-            font-weight: 400;
-            font-family: 'DM Sans', sans-serif;
-        }
-
-        .comparison-table td {
-            font-size: 14px;
-            color: var(--off-white);
-        }
-
-        .comparison-table td:first-child {
-            text-align: left;
-            font-weight: 400;
-            color: var(--muted);
-        }
-
-        .comparison-table tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .comparison-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .check {
-            color: var(--cyan);
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .dash {
-            color: var(--muted);
-        }
-
-        /* FAQ ACCORDION */
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            margin-bottom: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item.active {
-            border-left: 3px solid var(--cyan);
-        }
-
-        .faq-question {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--off-white);
-            padding: 20px 24px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question:hover {
-            color: var(--cyan);
-        }
-
-        .faq-icon {
-            width: 24px;
-            height: 24px;
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-        }
-
-        .faq-answer-inner {
-            padding: 0 24px 20px;
-            font-size: 16px;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-
-        /* CTA BANNER */
-        .cta-banner {
-            background: linear-gradient(135deg, var(--brand-blue), var(--action-blue));
-            padding: 80px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
-        }
-
-        .cta-banner h2 {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: clamp(28px, 4vw, 42px);
-            color: var(--off-white);
-            margin-bottom: 16px;
-            position: relative;
-        }
-
-        .cta-banner p {
-            font-size: 18px;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .btn-white {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 16px;
-            padding: 18px 40px;
-            background: var(--off-white);
-            color: var(--brand-blue);
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            display: inline-block;
-        }
-
-        .btn-white:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        /* FOOTER */
-        footer {
-            background: #0a1121;
-            padding: 60px 40px 30px;
-        }
-
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .footer-logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: 28px;
-            color: var(--off-white);
-            letter-spacing: 2px;
-        }
-
-        .footer-nav {
-            display: flex;
-            gap: 32px;
-            flex-wrap: wrap;
-        }
-
-        .footer-nav a {
-            font-size: 15px;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-nav a:hover {
-            color: var(--cyan);
-        }
-
-        .footer-contact {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        .footer-contact a {
-            font-size: 14px;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-contact a:hover {
-            color: var(--cyan);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-bottom p {
-            font-size: 14px;
-            color: var(--muted);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            font-size: 13px;
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--cyan);
-        }
-
-        /* SCROLL ANIMATIONS */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .stagger-1 { transition-delay: 0.1s; }
-        .stagger-2 { transition-delay: 0.2s; }
-        .stagger-3 { transition-delay: 0.3s; }
-        .stagger-4 { transition-delay: 0.4s; }
-
-        /* MOBILE MENU */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(15, 23, 42, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .mobile-menu a {
-            font-family: 'Syne', sans-serif;
-            font-size: 28px;
-            color: var(--off-white);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-menu a:hover,
-        .mobile-menu a.active {
-            color: var(--cyan);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .pricing-grid.three-col {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            .pricing-card.elevated {
-                transform: scale(1);
-            }
-
-            .pricing-card.elevated:hover {
-                transform: translateY(-10px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 16px 20px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            section {
-                padding: 60px 20px;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .comparison-table th,
-            .comparison-table td {
-                padding: 12px 10px;
-                font-size: 12px;
-            }
-
-            .footer-top {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .footer-nav {
-                justify-content: center;
-            }
-
-            .footer-contact {
-                justify-content: center;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-links {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 28px;
-            }
-
-            .price-main {
-                font-size: 36px;
-            }
-
-            .toggle-container {
-                gap: 12px;
-            }
-
-            .toggle-label {
-                font-size: 14px;
-            }
-        }
-
-        /* REDUCED MOTION */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing | QUANTOR — AI-Powered Websites & Chatbots</title>
+<meta name="description" content="Simple pricing for AI-powered websites and chatbots. No hidden fees. No lock-in. Everything yours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & VARIABLES ========== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-dark:#0a0a0f;--card-dark:#12121a;--accent-blue:#4F8EF7;--accent-purple:#7C3AED;
+  --text-white:#ffffff;--text-muted:#a0a0b0;--text-body:#c8c8d8;
+  --border-blue:rgba(79,142,247,0.2);--border-subtle:#1e1e2e;
+  --font-main:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg-dark);color:var(--text-white);font-family:var(--font-main);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+
+/* ========== BUTTONS ========== */
+.btn{display:inline-block;padding:1rem 2.5rem;border-radius:6px;text-decoration:none;font-weight:700;transition:all .3s cubic-bezier(.4,0,.2,1);cursor:pointer;font-size:.95rem;border:none;text-align:center;text-transform:uppercase;letter-spacing:.5px}
+.btn-filled{background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple));color:white;box-shadow:0 4px 15px rgba(79,142,247,.3)}
+.btn-filled:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(79,142,247,.5)}
+.btn-outline{background:transparent;color:white;border:1px solid var(--border-blue)}
+.btn-outline:hover{border-color:var(--accent-blue);background:rgba(79,142,247,.1);transform:translateY(-3px)}
+
+/* ========== NAVBAR ========== */
+nav{position:fixed;top:0;width:100%;z-index:1000;padding:1.5rem 0;transition:all .3s ease}
+nav.scrolled{background:rgba(10,10,15,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border-blue);padding:1rem 0}
+.nav-content{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto;padding:0 2rem}
+.logo{font-size:1.5rem;font-weight:900;letter-spacing:2px;color:white;text-decoration:none;text-transform:uppercase}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:.9rem;transition:color .3s ease;font-weight:500;letter-spacing:.3px}
+.nav-links a:hover,.nav-links a.active{color:var(--accent-blue)}
+.hamburger{display:none;cursor:pointer;background:none;border:none;z-index:1100;padding:5px}
+.hamburger span{display:block;width:28px;height:2px;background:white;margin:6px 0;transition:.3s}
+
+/* ========== PAGE HERO ========== */
+.page-hero{text-align:center;padding:10rem 0 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(79,142,247,.06) 0%,transparent 70%);pointer-events:none}
+.page-hero-label{display:inline-flex;align-items:center;gap:12px;margin-bottom:1.5rem}
+.page-hero-label .line{width:40px;height:1px;background:var(--accent-blue);display:inline-block}
+.page-hero-label span{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-blue)}
+.page-hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:1rem;line-height:1.15}
+.page-hero h1 .word{display:inline-block;overflow:hidden;vertical-align:bottom}
+.page-hero h1 .word span{display:inline-block;transform:translateY(110%);opacity:0;animation:cutReveal .6s cubic-bezier(.16,1,.3,1) forwards}
+@keyframes cutReveal{to{transform:translateY(0);opacity:1}}
+.page-hero p{color:var(--text-muted);font-size:1.1rem;max-width:540px;margin:0 auto}
+
+/* ========== TOGGLE ========== */
+.toggle-section{display:flex;flex-direction:column;align-items:center;gap:1rem;margin-bottom:3.5rem}
+.toggle-wrap{display:flex;align-items:center;background:#1a1a24;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:4px;position:relative}
+.toggle-option{padding:10px 24px;font-size:.88rem;font-weight:600;color:var(--text-muted);cursor:pointer;position:relative;z-index:2;transition:color .3s;user-select:none;border-radius:999px}
+.toggle-option.active{color:var(--text-white)}
+.toggle-pill{position:absolute;top:4px;height:calc(100% - 8px);background:linear-gradient(135deg,#1a2a4a,#0d1a30);border:1px solid var(--accent-blue);border-radius:999px;transition:all .35s cubic-bezier(.34,1.56,.64,1);z-index:1}
+.toggle-badge{display:inline-block;background:var(--accent-blue);color:white;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:6px;text-transform:uppercase;letter-spacing:.03em;vertical-align:middle}
+
+/* ========== PRICING GRID ========== */
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:5rem}
+.pricing-card{background:var(--card-dark);border:1px solid var(--border-blue);border-radius:12px;padding:2rem 1.8rem;display:flex;flex-direction:column;position:relative;transition:transform .4s ease,box-shadow .4s ease;opacity:0;filter:blur(10px);transform:translateY(20px);animation:cardReveal .6s ease forwards}
+@keyframes cardReveal{to{opacity:1;filter:blur(0);transform:translateY(0)}}
+.pricing-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(79,142,247,.1)}
+/* Featured card */
+.pricing-card.featured{background:linear-gradient(to bottom,#0d0d18,#000000);border:2px solid var(--accent-blue);box-shadow:0 0 40px rgba(79,142,247,.15);transform:scale(1.02);z-index:2;opacity:0;filter:blur(10px);animation:cardReveal .6s ease forwards}
+.pricing-card.featured:hover{transform:scale(1.02) translateY(-4px);box-shadow:0 0 50px rgba(79,142,247,.25)}
+.card-badge{display:inline-block;padding:4px 14px;border-radius:999px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1.2rem}
+.card-badge.gray{background:rgba(255,255,255,.08);color:var(--text-muted)}
+.card-badge.teal{background:rgba(52,211,153,.12);color:#34d399}
+.card-badge.blue{background:var(--accent-blue);color:white;position:absolute;top:-1px;left:50%;transform:translateX(-50%)}
+.card-badge.purple{background:rgba(124,58,237,.15);color:var(--accent-purple)}
+.card-title{font-size:1.4rem;font-weight:800;margin-bottom:.6rem;letter-spacing:-.5px}
+.card-desc{color:var(--text-muted);font-size:.85rem;line-height:1.6;margin-bottom:1.5rem;min-height:60px}
+.card-price{margin-bottom:.5rem}
+.price-amount{font-size:2.6rem;font-weight:900;letter-spacing:-1px;display:inline}
+.price-period{font-size:.9rem;color:var(--text-muted);font-weight:500}
+.price-savings{display:block;font-size:.78rem;color:#34d399;margin-bottom:1.2rem;font-weight:600}
+.price-range-note{font-size:.78rem;color:var(--text-muted);margin-bottom:.4rem}
+.price-sub-value{font-size:.78rem;color:#34d399;margin-bottom:1.2rem;font-weight:600}
+.card-features-title{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:1rem}
+.card-features{list-style:none;display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.5rem;flex:1}
+.card-features li{font-size:.85rem;color:var(--text-body);display:flex;align-items:flex-start;gap:.6rem;line-height:1.5}
+.card-features li svg{width:16px;height:16px;min-width:16px;stroke:#34d399;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;margin-top:3px}
+.card-note{font-size:.75rem;color:rgba(160,160,176,.7);line-height:1.55;margin-bottom:1.2rem;padding:10px 12px;background:rgba(255,255,255,.02);border-radius:8px;border-left:2px solid var(--border-blue)}
+.card-note-highlight{font-size:.78rem;color:var(--text-body);line-height:1.55;margin-bottom:1.2rem;padding:12px;background:rgba(124,58,237,.06);border-radius:8px;border:1px solid rgba(124,58,237,.15)}
+.card-note-highlight strong{color:var(--accent-purple)}
+.card-purchase-box{font-size:.75rem;color:var(--text-muted);line-height:1.55;margin-bottom:1.2rem;padding:10px 12px;background:rgba(255,255,255,.02);border-radius:8px}
+.card-purchase-box p{margin-bottom:.3rem}
+.card-addons{border-top:1px solid rgba(255,255,255,.05);padding-top:1rem;margin-bottom:1rem}
+.card-addons-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(160,160,176,.5);margin-bottom:.6rem}
+.card-addons ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.card-addons li{font-size:.8rem;color:var(--text-muted);display:flex;align-items:flex-start;gap:.5rem;line-height:1.5}
+.card-addons li svg{width:14px;height:14px;min-width:14px;stroke:var(--accent-blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.card-cta{margin-top:auto;width:100%;padding:14px 20px;border-radius:10px;font-size:.88rem;font-weight:700;cursor:pointer;text-align:center;transition:all .3s ease;display:block;text-transform:uppercase;letter-spacing:.4px}
+.cta-blue-outline{background:transparent;border:1.5px solid var(--accent-blue);color:var(--accent-blue)}
+.cta-blue-outline:hover{background:var(--accent-blue);color:white;box-shadow:0 4px 20px rgba(79,142,247,.3)}
+.cta-white-outline{background:transparent;border:1.5px solid rgba(255,255,255,.25);color:white}
+.cta-white-outline:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4)}
+.cta-blue-filled{background:linear-gradient(135deg,var(--accent-blue),#3a7be8);color:white;border:none;box-shadow:0 4px 20px rgba(79,142,247,.35);font-size:.95rem;padding:16px 20px}
+.cta-blue-filled:hover{box-shadow:0 6px 30px rgba(79,142,247,.5);transform:translateY(-2px)}
+.cta-purple-gradient{background:linear-gradient(135deg,var(--accent-purple),#6d28d9);color:white;border:none;box-shadow:0 4px 20px rgba(124,58,237,.3)}
+.cta-purple-gradient:hover{box-shadow:0 6px 30px rgba(124,58,237,.45);transform:translateY(-2px)}
+
+/* ========== COMPARISON TABLE ========== */
+.comparison{margin-bottom:5rem}
+.comparison h2{font-size:1.3rem;font-weight:700;margin-bottom:1.5rem}
+.comp-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border-blue)}
+.comp-table{width:100%;border-collapse:collapse;min-width:700px;font-size:.85rem}
+.comp-table thead{background:var(--card-dark)}
+.comp-table th{padding:14px 16px;text-align:center;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border-blue)}
+.comp-table th:first-child{text-align:left;color:var(--text-muted)}
+.comp-table th.plan-chatbot{color:var(--text-muted)}
+.comp-table th.plan-starter{color:#34d399}
+.comp-table th.plan-pro{color:var(--accent-blue)}
+.comp-table th.plan-enterprise{color:var(--accent-purple)}
+.comp-table tbody tr{transition:background .2s}
+.comp-table tbody tr:hover{background:rgba(79,142,247,.04)}
+.comp-table td{padding:12px 16px;text-align:center;border-bottom:1px solid rgba(255,255,255,.03);color:var(--text-body)}
+.comp-table td:first-child{text-align:left;color:var(--text-muted);font-weight:500}
+.comp-table tbody tr:nth-child(even){background:rgba(255,255,255,.01)}
+.comp-check{color:#34d399;font-weight:700;font-size:1rem}
+.comp-dash{color:rgba(160,160,176,.3);font-size:1.1rem}
+.comp-no{color:#ef4444;font-weight:700;font-size:.85rem}
+.comp-footer-note{font-size:.78rem;color:var(--text-muted);margin-top:1rem;line-height:1.6}
+
+/* ========== FAQ ========== */
+.faq{margin-bottom:5rem}
+.faq h2{font-size:1.3rem;font-weight:700;margin-bottom:1.5rem}
+.faq-item{border:1px solid rgba(255,255,255,.05);border-radius:10px;margin-bottom:.75rem;overflow:hidden;transition:border-color .3s}
+.faq-item.open{border-color:rgba(79,142,247,.2)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:.92rem;transition:color .3s;user-select:none;gap:1rem}
+.faq-q:hover{color:var(--accent-blue)}
+.faq-item.open .faq-q{color:var(--accent-blue);border-left:3px solid var(--accent-blue);padding-left:calc(1.5rem - 3px)}
+.faq-icon{width:20px;height:20px;min-width:20px;transition:transform .3s;stroke:var(--text-muted);fill:none;stroke-width:2;stroke-linecap:round}
+.faq-item.open .faq-icon{transform:rotate(180deg);stroke:var(--accent-blue)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a-inner{padding:0 1.5rem 1.2rem;color:var(--text-muted);font-size:.88rem;line-height:1.7}
+
+/* ========== FINAL CTA ========== */
+.final-cta{text-align:center;padding:8rem 0;background:linear-gradient(180deg,var(--bg-dark) 0%,#12121a 50%,var(--bg-dark) 100%);position:relative;overflow:hidden}
+.final-cta::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,transparent,var(--accent-blue),var(--accent-purple),transparent)}
+.final-cta::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(79,142,247,.1) 0%,transparent 70%);pointer-events:none}
+.final-cta .container{position:relative;z-index:1}
+.final-cta h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:1.2rem}
+.final-cta p{color:var(--text-muted);margin-bottom:2.5rem;font-size:1.1rem;max-width:600px;margin-left:auto;margin-right:auto}
+
+/* ========== FOOTER ========== */
+footer{padding:5rem 0 2rem;background:#050508;border-top:1px solid var(--border-blue)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem}
+.footer-brand .logo{display:inline-block;margin-bottom:1.5rem}
+.footer-brand p{color:var(--text-muted);max-width:300px;font-size:.95rem}
+.footer-col h4{font-size:.85rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin-bottom:1.5rem;font-weight:700}
+.footer-links{display:flex;flex-direction:column;gap:1rem}
+.footer-links a{color:var(--text-muted);text-decoration:none;font-size:.9rem;transition:.3s}
+.footer-links a:hover{color:var(--accent-blue)}
+.footer-bottom{padding-top:2rem;border-top:1px solid rgba(255,255,255,.05);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem;color:#555;font-size:.85rem}
+.footer-contact{display:flex;gap:2rem}
+.footer-contact a{color:#555;text-decoration:none;transition:.3s}
+.footer-contact a:hover{color:var(--accent-blue)}
+
+/* ========== MOBILE ========== */
+@media(max-width:1100px){
+  .pricing-grid{grid-template-columns:repeat(2,1fr)}
+  .pricing-card.featured{transform:none}
+  .pricing-card.featured:hover{transform:translateY(-4px)}
+}
+@media(max-width:768px){
+  .nav-links{position:fixed;top:0;right:-100%;width:85%;height:100vh;background:var(--card-dark);flex-direction:column;justify-content:center;transition:.4s ease;box-shadow:-10px 0 40px rgba(0,0,0,.7);gap:2rem;z-index:1000}
+  .nav-links.active{right:0}
+  .hamburger{display:block}
+  .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+  .hamburger.active span:nth-child(2){opacity:0}
+  .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+  .pricing-grid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto}
+  .page-hero{padding:8rem 0 2rem}
+  .footer-grid{grid-template-columns:1fr;gap:3rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .footer-contact{flex-direction:column;gap:.5rem}
+  .toggle-option{padding:8px 16px;font-size:.82rem}
+}
+@media(max-width:480px){
+  .page-hero h1{font-size:1.8rem}
+}
+
+/* ========== REDUCED MOTION ========== */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .pricing-card{opacity:1!important;filter:none!important;transform:none!important}
+  .page-hero h1 .word span{transform:none!important;opacity:1!important}
+}
+</style>
 </head>
 <body>
-    <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
+
+<!-- ========== NAVBAR ========== -->
+<nav id="main-nav">
+  <div class="nav-content">
+    <a href="index.html" class="logo">QUANTOR</a>
+    <div class="nav-links" id="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="pricing.html" class="active">Pricing</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="btn btn-filled">Get Started</a>
+    </div>
+    <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ========== PAGE HERO ========== -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-label">
+      <span class="line"></span>
+      <span>Pricing</span>
+      <span class="line"></span>
+    </div>
+    <h1 id="hero-title">
+      <span class="word"><span style="animation-delay:0s">Simple</span></span>
+      <span class="word"><span style="animation-delay:.15s">Pricing.</span></span>
+      <span class="word"><span style="animation-delay:.3s">Everything</span></span>
+      <span class="word"><span style="animation-delay:.45s">Included.</span></span>
+    </h1>
+    <p>No hidden fees. No tech headaches. Just results.</p>
+  </div>
+</section>
+
+<!-- ========== PRICING SECTION ========== -->
+<section style="padding:0 0 5rem">
+  <div class="container">
+
+    <!-- TOGGLE -->
+    <div class="toggle-section">
+      <div class="toggle-wrap" id="billingToggle">
+        <div class="toggle-pill" id="billingPill"></div>
+        <div class="toggle-option active" data-value="monthly" onclick="setBilling('monthly')">Monthly</div>
+        <div class="toggle-option" data-value="yearly" onclick="setBilling('yearly')">Yearly <span class="toggle-badge">Save more</span></div>
+      </div>
+    </div>
+
+    <!-- CARDS -->
+    <div class="pricing-grid">
+
+      <!-- CARD 1: CHATBOT -->
+      <div class="pricing-card" style="animation-delay:.1s">
+        <span class="card-badge gray">Chatbot Only</span>
+        <h3 class="card-title">Chatbot</h3>
+        <p class="card-desc">For businesses that already have a website and need an AI chatbot to capture leads and answer questions 24/7.</p>
+        <div class="card-price">
+          <span class="price-amount" id="chatbotPrice">$90</span>
+          <span class="price-period" id="chatbotPeriod">/mo</span>
+        </div>
+        <span class="price-savings" id="chatbotSavings" style="display:none"></span>
+        <div class="card-features-title">Everything in this plan:</div>
+        <ul class="card-features">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Chatling AI chatbot account (yours forever)</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Chatbot trained on your business</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="chatbotRetrain">1 retraining session per month</span></li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Embed code for your existing website</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>24/7 automated lead capture</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>32 AI models via Chatling</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full chatbot customization</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Chatbot analytics dashboard</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Credentials handed over — we hold nothing</li>
+        </ul>
+        <div class="card-note" id="chatbotExtraNote">Extra retraining: $20/session</div>
+        <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Chatbot%20plan." target="_blank" rel="noopener" class="card-cta cta-blue-outline">Get My Chatbot</a>
+      </div>
+
+      <!-- CARD 2: STARTER -->
+      <div class="pricing-card" style="animation-delay:.25s">
+        <span class="card-badge teal">One-time</span>
+        <h3 class="card-title">Starter</h3>
+        <p class="card-desc">For small businesses that want a professional online presence with minimal investment before scaling up.</p>
+        <div class="card-price">
+          <span class="price-amount" style="font-size:1.1rem;color:var(--text-muted);font-weight:600">From</span>
+          <span class="price-amount">$129</span>
+        </div>
+        <span class="price-range-note">one-time setup fee</span>
+        <div class="card-features-title">Everything in this plan:</div>
+        <ul class="card-features">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1-page landing site (5 sections)</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Hosted on GitHub Pages (free, forever)</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>AI chatbot embedded and trained</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Chatling account — yours to keep</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>WhatsApp click-to-chat button</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mobile responsive design</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>AI-written copy for your business</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Delivered in 3 days</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>30-day post-delivery fix coverage</li>
+        </ul>
+        <div class="card-addons">
+          <div class="card-addons-title">Optional upgrades:</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Custom domain: +$10/yr</li>
+            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Hostinger hosting: +$22/yr upgrade</li>
+          </ul>
+        </div>
+        <div class="card-note">Default hosting is GitHub Pages — free, fast, reliable. Custom domain and hosting are optional extras.</div>
+        <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Starter%20landing%20page%20plan." target="_blank" rel="noopener" class="card-cta cta-white-outline">Get My Landing Page</a>
+      </div>
+
+      <!-- CARD 3: PRO (FEATURED) -->
+      <div class="pricing-card featured" style="animation-delay:.4s">
+        <span class="card-badge blue">Most Popular</span>
+        <h3 class="card-title">Pro</h3>
+        <p class="card-desc">For businesses ready to establish a full online presence with AI chatbot, proper hosting, and 3 months of included support.</p>
+        <div class="card-price">
+          <span class="price-amount" style="font-size:1.1rem;color:var(--text-muted);font-weight:600">From</span>
+          <span class="price-amount">$699</span>
+        </div>
+        <span class="price-range-note">one-time setup fee</span>
+        <span class="price-sub-value">Includes 3 months support — worth $54</span>
+        <div class="card-purchase-box">
+          <p><strong style="color:var(--text-body)">We purchase for you & you own forever:</strong></p>
+          <p>• Hosting: ~$22/yr</p>
+          <p>• Your domain (.in or .com): ~$10–$12/yr</p>
+          <p style="margin-top:.3rem;color:rgba(160,160,176,.6)">We purchase and set up everything, then hand over all credentials to you.</p>
+        </div>
+        <div class="card-features-title">Everything in this plan:</div>
+        <ul class="card-features">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full website (5–6 pages)</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Home, About, Services, Portfolio/Gallery, Contact</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>AI chatbot on every page</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Chatling account — yours forever</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>3 months free support included</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Website bugs from our side fixed free (3 months)</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Retraining: 3 sessions/month via Chatling plan</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mobile responsive, fast loading</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>WhatsApp integration</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>AI-written copy for all pages</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Delivered in 5 days</li>
+        </ul>
+        <div class="card-note">After 3 months: $18/fix session | $30/mo ongoing support</div>
+        <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Pro%20website%20plan." target="_blank" rel="noopener" class="card-cta cta-blue-filled">Get My Website</a>
+      </div>
+
+      <!-- CARD 4: ENTERPRISE -->
+      <div class="pricing-card" style="animation-delay:.55s">
+        <span class="card-badge purple">Full Power</span>
+        <h3 class="card-title">Enterprise</h3>
+        <p class="card-desc">For businesses that want everything — full website, AI chatbot, SEO optimization, and 6 months of dedicated support.</p>
+        <div class="card-price">
+          <span class="price-amount" style="font-size:1.1rem;color:var(--text-muted);font-weight:600">From</span>
+          <span class="price-amount">$1,499</span>
+        </div>
+        <span class="price-range-note">one-time setup fee</span>
+        <span class="price-sub-value">Includes 6 months support — worth $108</span>
+        <div class="card-purchase-box">
+          <p><strong style="color:var(--text-body)">We purchase for you & you own forever:</strong></p>
+          <p>• Business hosting: ~$36/yr (faster, daily backups)</p>
+          <p>• Your domain: ~$10–$12/yr</p>
+        </div>
+        <div class="card-note-highlight">
+          <strong>We buy hosting & domain for you:</strong> we handle the full setup and hand over all credentials. Your website support extends for the entire year at no extra charge.
+        </div>
+        <div class="card-features-title">Everything in Pro, plus:</div>
+        <ul class="card-features">
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SEO optimization (on-page)</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Google Search Console setup & indexing</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Site speed optimization</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority delivery (9 days)</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>6 months free support included</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Website bugs fixed free (6 months)</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Retraining: 3 sessions/month via Chatling plan</li>
+          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated WhatsApp support line</li>
+        </ul>
+        <div class="card-note">After 6 months: $24/fix session | $48/mo ongoing support</div>
+        <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Enterprise%20plan." target="_blank" rel="noopener" class="card-cta cta-purple-gradient">Get Enterprise</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== COMPARISON TABLE ========== -->
+<section style="padding:0 0 5rem">
+  <div class="container">
+    <div class="comparison">
+      <h2>Compare all plans</h2>
+      <div class="comp-table-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="plan-chatbot">Chatbot</th>
+              <th class="plan-starter">Starter</th>
+              <th class="plan-pro">Pro</th>
+              <th class="plan-enterprise">Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>AI Chatbot</td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td></tr>
+            <tr><td>Website included</td><td><span class="comp-dash">—</span></td><td>1 page</td><td>5–6 pages</td><td>5–6 pages + SEO</td></tr>
+            <tr><td>Default hosting</td><td><span class="comp-dash">—</span></td><td>GitHub Pages</td><td>Hostinger Premium*</td><td>Hostinger Business*</td></tr>
+            <tr><td>Custom domain</td><td>Extra</td><td>Extra</td><td>Extra*</td><td>Extra*</td></tr>
+            <tr><td>Chatling account (yours)</td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td></tr>
+            <tr><td>Retraining sessions</td><td>1/mo or 2/yr</td><td>As per plan</td><td>3/mo</td><td>3/mo</td></tr>
+            <tr><td>Free support period</td><td><span class="comp-dash">—</span></td><td>30 days fixes</td><td>3 months</td><td>6 months</td></tr>
+            <tr><td>SEO optimization</td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-check">✓</span></td></tr>
+            <tr><td>Google indexing</td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-check">✓</span></td></tr>
+            <tr><td>Priority delivery</td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-check">✓</span></td></tr>
+            <tr><td>We hold your credentials</td><td><span class="comp-no">✗</span></td><td><span class="comp-no">✗</span></td><td><span class="comp-no">✗</span></td><td><span class="comp-no">✗</span></td></tr>
+            <tr><td>Delivery time</td><td>2 days</td><td>3 days</td><td>5 days</td><td>9 days</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="comp-footer-note">* We purchase hosting and domain on your behalf and hand over all credentials to you. We don't hold any of your data except the business information needed to build your project.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section style="padding:0 0 5rem">
+  <div class="container">
+    <div class="faq">
+      <h2>Common questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Who owns the chatbot and website after delivery?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">You own everything. We purchase your Chatling account and hosting plan on your behalf, set everything up, and hand over every login and credential to you. We don't hold any of your data except the business information needed to build your project. Your accounts, your passwords, your business.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What does "retraining" mean?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Retraining means updating your chatbot's knowledge — adding new services, changing prices, updating FAQs, adding new responses. Monthly plan users get 1 session included per month. Annual plan users get 2 sessions per year. Extra sessions are $20 (monthly) or $25 (annual).</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What is GitHub Pages hosting on the Starter plan?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">GitHub Pages is a free, reliable hosting service by GitHub (owned by Microsoft). Your site lives at a free web address. It's fast, secure, and costs nothing. If you want a proper custom domain (like yoursalon.com) and traditional hosting, that's an optional upgrade — we purchase it for you and hand over all credentials.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What does "3 months free support" mean on the Pro plan?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">If anything on your website breaks or has an issue caused by our work, we fix it for free within 3 months of delivery. After 3 months, fixes are $18 per session.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Do you do maintenance on the Starter plan?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">The Starter plan is a one-time delivery. We cover minor fixes for 30 days after delivery. After that, any changes or fixes are billed per session. It's built to be simple enough that most clients never need changes.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>How do I pay?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">India: UPI, Razorpay, debit/credit card. International: PayPal or Wise. 50% upfront before work begins, 50% on delivery.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What if I already have a website and just need the chatbot?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">We build and train your chatbot, then give you the embed code to paste into your existing website. Once it's live and working, we hand over your Chatling account and credentials. Simple.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FINAL CTA ========== -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Every plan. Everything yours. No lock-in.</h2>
+    <p>Pick a plan and WhatsApp us — we'll confirm what's right for your business before any payment.</p>
+    <a href="https://wa.me/919599234747?text=Hi%2C%20I%27d%20like%20to%20discuss%20pricing%20for%20my%20business." target="_blank" rel="noopener" class="btn btn-filled">WhatsApp Us to Get Started</a>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
         <a href="index.html" class="logo">QUANTOR</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="pricing.html" class="active">Pricing</a>
-            <a href="portfolio.html">Portfolio</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-            <a href="contact.html" class="cta-btn">Get Started</a>
+        <p>Next-generation AI agency helping businesses scale through intelligent web experiences.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="index.html#services">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
         </div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+      </div>
+      <div class="footer-col">
+        <h4>Pricing</h4>
+        <div class="footer-links">
+          <a href="pricing.html">View Plans</a>
+          <a href="contact.html">Custom Quote</a>
         </div>
-    </nav>
-
-    <!-- MOBILE MENU -->
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html" class="active">Pricing</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="contact.html" class="cta-btn">Get Started</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <div class="footer-links">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="refund-policy.html">Refund Policy</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
     </div>
-
-    <!-- PAGE HERO -->
-    <section class="page-hero">
-        <div id="canvas-container"></div>
-        <div class="hero-content">
-            <h1>Simple Pricing. Everything Included.</h1>
-            <p>No hidden fees. No tech headaches. Just results.</p>
-        </div>
-    </section>
-
-    <!-- WAVE DIVIDER -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#1a2744;stop-opacity:1" />
-                </linearGradient>
-            </defs>
-            <path d="M0,50 C480,80 960,0 1440,30 L1440,80 L0,80 Z" fill="url(#waveGrad1)"/>
-        </svg>
+    <div class="footer-bottom">
+      <div class="footer-contact">
+        <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
+        <a href="tel:+919599234747">+91 9599234747</a>
+      </div>
+      <div>© 2026 QUANTOR. All rights reserved.</div>
     </div>
-
-    <!-- PRICING TOGGLE -->
-    <section id="pricing-section">
-        <div class="toggle-container fade-up">
-            <span class="toggle-label" id="monthlyLabel">Monthly</span>
-            <div class="toggle-switch annual" id="pricingToggle"></div>
-            <span class="toggle-label active" id="annualLabel">Annual</span>
-        </div>
-
-        <!-- MONTHLY VIEW -->
-        <div class="pricing-section-block hidden" id="monthlyView">
-            <p class="section-subtitle fade-up">Chatbot Only</p>
-            <div class="pricing-grid single-col fade-up stagger-1">
-                <div class="pricing-card" data-tilt style="margin: 0 auto;">
-                    <h3>Chatbot Monthly</h3>
-                    <div class="price-main">$129/mo</div>
-                    <div class="price-sub">₹10,700/mo</div>
-                    <ul class="pricing-features">
-                        <li>Tidio Lyro AI setup</li>
-                        <li>Chatbot trained on your business</li>
-                        <li>Unlimited conversations</li>
-                        <li>24/7 lead capture</li>
-                        <li>Monthly subscription managed for you</li>
-                    </ul>
-                    <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Chatbot%20Monthly%20plan%20%28%24129%2Fmo%29." class="pricing-btn cyan" target="_blank">Get Started</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- ANNUAL VIEW -->
-        <div class="pricing-section-block" id="annualView">
-            <!-- CHATBOT ONLY PLAN -->
-            <p class="section-subtitle fade-up">Chatbot Only</p>
-            <div class="pricing-grid single-col fade-up stagger-1">
-                <div class="pricing-card" data-tilt style="margin: 0 auto;">
-                    <span class="pricing-badge badge-save">Save 65% vs Monthly</span>
-                    <h3>Chatbot Annual</h3>
-                    <div class="price-main">$549/yr</div>
-                    <div class="price-sub">₹45,700/yr</div>
-                    <ul class="pricing-features">
-                        <li>Everything in Monthly</li>
-                        <li>Priority setup</li>
-                        <li>Annual subscription managed for you</li>
-                        <li>Free chatbot retraining once per year</li>
-                    </ul>
-                    <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Chatbot%20Annual%20plan%20%28%24549%2Fyr%29." class="pricing-btn cyan" target="_blank">Get Started</a>
-                </div>
-            </div>
-
-            <!-- SITE + CHATBOT PLANS -->
-            <p class="section-subtitle fade-up" style="margin-top: 80px;">Site + Chatbot Plans</p>
-            <div class="pricing-grid three-col fade-up stagger-1" style="margin-top: 40px;">
-                <div class="pricing-card" data-tilt>
-                    <h3>Landing</h3>
-                    <div class="price-main">$799/yr</div>
-                    <div class="price-sub">₹66,500/yr</div>
-                    <ul class="pricing-features">
-                        <li>1-page landing site</li>
-                        <li>Custom domain included</li>
-                        <li>AI chatbot embedded</li>
-                        <li>Mobile responsive</li>
-                        <li>Delivered in 3–5 days</li>
-                    </ul>
-                    <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Landing%20Page%20plan%20%28%24799%2Fyr%29." class="pricing-btn blue" target="_blank">Get My Landing Page</a>
-                </div>
-                <div class="pricing-card elevated" data-tilt>
-                    <span class="pricing-badge badge-popular">Most Popular</span>
-                    <h3>Pro</h3>
-                    <div class="price-main">$1,499/yr</div>
-                    <div class="price-sub">₹1,24,900/yr</div>
-                    <ul class="pricing-features">
-                        <li>Full website (5–6 pages)</li>
-                        <li>Hostinger hosting included</li>
-                        <li>Custom domain included</li>
-                        <li>AI chatbot on every page</li>
-                        <li>Mobile responsive</li>
-                        <li>Delivered in 5–7 days</li>
-                    </ul>
-                    <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Pro%20Website%20plan%20%28%241%2C499%2Fyr%29." class="pricing-btn blue" target="_blank">Get My Website</a>
-                </div>
-                <div class="pricing-card" data-tilt>
-                    <h3>Enterprise</h3>
-                    <div class="price-main">$2,199/yr</div>
-                    <div class="price-sub">₹1,83,000/yr</div>
-                    <ul class="pricing-features">
-                        <li>Everything in Pro</li>
-                        <li>SEO optimization</li>
-                        <li>Google indexing setup</li>
-                        <li>Site speed optimization</li>
-                        <li>Priority delivery</li>
-                        <li>Dedicated support</li>
-                    </ul>
-                    <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Enterprise%20plan%20%28%242%2C199%2Fyr%29." class="pricing-btn blue" target="_blank">Get Enterprise</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- WAVE DIVIDER -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#1a2744;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
-                </linearGradient>
-            </defs>
-            <path d="M0,30 C480,0 960,80 1440,50 L1440,80 L0,80 Z" fill="url(#waveGrad2)"/>
-        </svg>
-    </div>
-
-    <!-- COMPARISON TABLE -->
-    <section class="comparison-section" id="comparison">
-        <h2 class="section-title fade-up">What's Included</h2>
-        <div class="table-container fade-up stagger-1">
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th class="feature-col">Feature</th>
-                        <th>Chatbot Annual</th>
-                        <th>Landing</th>
-                        <th>Pro</th>
-                        <th>Enterprise</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Number of Pages</td>
-                        <td class="dash">—</td>
-                        <td>1</td>
-                        <td>5–6</td>
-                        <td>5–6+</td>
-                    </tr>
-                    <tr>
-                        <td>Custom Domain</td>
-                        <td class="dash">—</td>
-                        <td class="check">Included</td>
-                        <td class="check">Included</td>
-                        <td class="check">Included</td>
-                    </tr>
-                    <tr>
-                        <td>Hosting Included</td>
-                        <td class="dash">—</td>
-                        <td class="dash">—</td>
-                        <td class="check">1 Year</td>
-                        <td class="check">1 Year</td>
-                    </tr>
-                    <tr>
-                        <td>AI Chatbot</td>
-                        <td class="check">Yes</td>
-                        <td class="check">Yes</td>
-                        <td class="check">Yes</td>
-                        <td class="check">Yes</td>
-                    </tr>
-                    <tr>
-                        <td>Mobile Responsive</td>
-                        <td class="dash">—</td>
-                        <td class="check">Yes</td>
-                        <td class="check">Yes</td>
-                        <td class="check">Yes</td>
-                    </tr>
-                    <tr>
-                        <td>SEO Optimization</td>
-                        <td class="dash">—</td>
-                        <td class="dash">—</td>
-                        <td class="dash">—</td>
-                        <td class="check">Full SEO</td>
-                    </tr>
-                    <tr>
-                        <td>Google Indexing</td>
-                        <td class="dash">—</td>
-                        <td class="dash">—</td>
-                        <td class="dash">—</td>
-                        <td class="check">Yes</td>
-                    </tr>
-                    <tr>
-                        <td>Speed Optimization</td>
-                        <td class="dash">—</td>
-                        <td class="dash">—</td>
-                        <td class="dash">—</td>
-                        <td class="check">Yes</td>
-                    </tr>
-                    <tr>
-                        <td>Delivery Time</td>
-                        <td>2 Days</td>
-                        <td>3–5 Days</td>
-                        <td>5–7 Days</td>
-                        <td>Priority</td>
-                    </tr>
-                    <tr>
-                        <td>Support</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Email</td>
-                        <td>Dedicated</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- WAVE DIVIDER -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad3" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#1a2744;stop-opacity:1" />
-                </linearGradient>
-            </defs>
-            <path d="M0,50 C480,80 960,0 1440,30 L1440,80 L0,80 Z" fill="url(#waveGrad3)"/>
-        </svg>
-    </div>
-
-    <!-- PRICING FAQ -->
-    <section id="faq">
-        <h2 class="section-title fade-up">Pricing FAQ</h2>
-        <div class="faq-container fade-up stagger-1">
-            <div class="faq-item">
-                <div class="faq-question">
-                    What is included in "done for you"?
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">Everything. We handle design, development, domain setup, hosting configuration, chatbot training, and deployment. You provide the business information, we deliver a complete, working solution. No technical work required on your end.</div>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    Do I need to pay for Tidio separately?
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">No. The Tidio Lyro AI subscription is included in your plan and managed by us. You don't need to create a separate account or worry about billing. We handle everything for you.</div>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    What happens when my annual plan renews?
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">We'll contact you 30 days before renewal to confirm continuation. Your renewal fee covers the cost of hosting, domain, and chatbot subscription — no extra hidden charges or service fees added. Your site and chatbot continue running without interruption.</div>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    Can I upgrade from Landing to Pro later?
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">Yes. You can upgrade anytime by paying the difference between plans. We'll expand your landing page into a full website while preserving your existing design and chatbot configuration.</div>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    Is the domain and hosting mine to keep?
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">The domain is registered in your name and belongs to you. Hosting is provided for the duration of your plan. If you ever want to move to another provider, we'll help transfer everything to you.</div>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    How do I pay?
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                </div>
-                <div class="faq-answer">
-                    <div class="faq-answer-inner">We accept multiple payment methods for your convenience. For Indian customers: Razorpay, UPI, and Debit/Credit cards. For international customers: PayPal and Wise. Payment is collected after we discuss your requirements and before work begins. 50% upfront, 50% on delivery for site plans.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- WAVE DIVIDER -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="waveGrad4" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#1a2744;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
-                </linearGradient>
-            </defs>
-            <path d="M0,30 C480,0 960,80 1440,50 L1440,80 L0,80 Z" fill="url(#waveGrad4)"/>
-        </svg>
-    </div>
-
-    <!-- CTA BANNER -->
-    <section class="cta-banner">
-        <h2>Every plan includes a live AI chatbot. Pick yours.</h2>
-        <p>Get started today with a plan that fits your business.</p>
-        <a href="https://wa.me/919599234747?text=Hi%2C%20I%27d%20like%20to%20discuss%20which%20plan%20fits%20my%20business." class="btn-white" target="_blank">WhatsApp Us to Get Started</a>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-top">
-            <div class="footer-logo">QUANTOR</div>
-            <div class="footer-nav">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <a href="pricing.html">Pricing</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <div class="footer-contact">
-                <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
-                <a href="https://wa.me/919599234747" target="_blank">+91 9599234747</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>2026 QUANTOR. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms.html">Terms</a>
-                <a href="refund-policy.html">Refund Policy</a>
-                <a href="disclaimer.html">Disclaimer</a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- THREE.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <script>
-        // Initialize all variables
-        let scene = null;
-        let camera = null;
-        let renderer = null;
-        let particles = null;
-        let lines = null;
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetMouseX = 0;
-        let targetMouseY = 0;
-        let animationId = null;
-        const particleCount = 120;
-        const velocities = [];
-
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        // THREE.JS
-        function initThreeJS() {
-            const container = document.getElementById('canvas-container');
-            if (!container) return;
-
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-            camera.position.z = 50;
-
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(width, height);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.setClearColor(0x0f172a, 1);
-            container.appendChild(renderer.domElement);
-
-            const geometry = new THREE.BufferGeometry();
-            const posArray = new Float32Array(particleCount * 3);
-            const colorArray = new Float32Array(particleCount * 3);
-
-            const cyan = new THREE.Color(0x06b6d4);
-            const blue = new THREE.Color(0x3b82f6);
-
-            for (let i = 0; i < particleCount; i++) {
-                const i3 = i * 3;
-                posArray[i3] = (Math.random() - 0.5) * 100;
-                posArray[i3 + 1] = (Math.random() - 0.5) * 100;
-                posArray[i3 + 2] = (Math.random() - 0.5) * 60;
-
-                velocities.push({
-                    x: (Math.random() - 0.5) * 0.015,
-                    y: (Math.random() - 0.5) * 0.015,
-                    z: (Math.random() - 0.5) * 0.015
-                });
-
-                const color = Math.random() > 0.5 ? cyan : blue;
-                colorArray[i3] = color.r;
-                colorArray[i3 + 1] = color.g;
-                colorArray[i3 + 2] = color.b;
-            }
-
-            geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            geometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
-
-            const material = new THREE.PointsMaterial({
-                size: 0.7,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.85,
-                sizeAttenuation: true
-            });
-
-            particles = new THREE.Points(geometry, material);
-            scene.add(particles);
-
-            const lineGeometry = new THREE.BufferGeometry();
-            const linePositions = new Float32Array(particleCount * particleCount * 6);
-            lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-            lineGeometry.setDrawRange(0, 0);
-
-            const lineMaterial = new THREE.LineBasicMaterial({
-                color: 0x06b6d4,
-                transparent: true,
-                opacity: 0.12
-            });
-
-            lines = new THREE.LineSegments(lineGeometry, lineMaterial);
-            scene.add(lines);
-
-            if (!prefersReducedMotion) {
-                animate();
-            } else {
-                renderer.render(scene, camera);
-            }
-        }
-
-        function updateLines() {
-            if (!particles || !lines) return;
-            const posAttr = lines.geometry.attributes.position;
-            const positions = particles.geometry.attributes.position.array;
-            const linePositions = posAttr.array;
-
-            let lineIndex = 0;
-            const maxDistance = 18;
-
-            for (let i = 0; i < particleCount; i++) {
-                for (let j = i + 1; j < particleCount; j++) {
-                    const i3 = i * 3;
-                    const j3 = j * 3;
-
-                    const dx = positions[i3] - positions[j3];
-                    const dy = positions[i3 + 1] - positions[j3 + 1];
-                    const dz = positions[i3 + 2] - positions[j3 + 2];
-                    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-                    if (dist < maxDistance) {
-                        const idx = lineIndex * 6;
-                        linePositions[idx] = positions[i3];
-                        linePositions[idx + 1] = positions[i3 + 1];
-                        linePositions[idx + 2] = positions[i3 + 2];
-                        linePositions[idx + 3] = positions[j3];
-                        linePositions[idx + 4] = positions[j3 + 1];
-                        linePositions[idx + 5] = positions[j3 + 2];
-                        lineIndex++;
-                    }
-                }
-            }
-
-            lines.geometry.setDrawRange(0, lineIndex * 2);
-            posAttr.needsUpdate = true;
-        }
-
-        function animate() {
-            animationId = requestAnimationFrame(animate);
-            if (!particles || !renderer || !camera || !scene) return;
-
-            mouseX += (targetMouseX - mouseX) * 0.05;
-            mouseY += (targetMouseY - mouseY) * 0.05;
-
-            const positions = particles.geometry.attributes.position.array;
-
-            for (let i = 0; i < particleCount; i++) {
-                const i3 = i * 3;
-                positions[i3] += velocities[i].x;
-                positions[i3 + 1] += velocities[i].y;
-                positions[i3 + 2] += velocities[i].z;
-
-                if (Math.abs(positions[i3]) > 50) velocities[i].x *= -1;
-                if (Math.abs(positions[i3 + 1]) > 50) velocities[i].y *= -1;
-                if (Math.abs(positions[i3 + 2]) > 30) velocities[i].z *= -1;
-            }
-
-            particles.geometry.attributes.position.needsUpdate = true;
-            particles.rotation.y = mouseX * 0.0003;
-            particles.rotation.x = mouseY * 0.0003;
-
-            if (lines) {
-                lines.rotation.y = mouseX * 0.0003;
-                lines.rotation.x = mouseY * 0.0003;
-                updateLines();
-            }
-
-            renderer.render(scene, camera);
-        }
-
-        function onMouseMove(event) {
-            if (prefersReducedMotion) return;
-            targetMouseX = event.clientX - window.innerWidth / 2;
-            targetMouseY = event.clientY - window.innerHeight / 2;
-        }
-
-        function onWindowResize() {
-            if (!camera || !renderer) return;
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            initThreeJS();
-            window.addEventListener('resize', onWindowResize);
-            document.addEventListener('mousemove', onMouseMove);
-        });
-
-        // NAVBAR
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 80) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // HAMBURGER
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-        });
-
-        mobileMenu.querySelectorAll('a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-            });
-        });
-
-        // PRICING TOGGLE
-        const pricingToggle = document.getElementById('pricingToggle');
-        const monthlyLabel = document.getElementById('monthlyLabel');
-        const annualLabel = document.getElementById('annualLabel');
-        const monthlyView = document.getElementById('monthlyView');
-        const annualView = document.getElementById('annualView');
-
-        pricingToggle.addEventListener('click', function() {
-            const isAnnual = pricingToggle.classList.contains('annual');
-            
-            if (isAnnual) {
-                // Switch to Monthly
-                pricingToggle.classList.remove('annual');
-                monthlyLabel.classList.add('active');
-                annualLabel.classList.remove('active');
-                monthlyView.classList.remove('hidden');
-                annualView.classList.add('hidden');
-            } else {
-                // Switch to Annual
-                pricingToggle.classList.add('annual');
-                annualLabel.classList.add('active');
-                monthlyLabel.classList.remove('active');
-                annualView.classList.remove('hidden');
-                monthlyView.classList.add('hidden');
-            }
-        });
-
-        // FAQ ACCORDION
-        const faqItems = document.querySelectorAll('.faq-item');
-
-        faqItems.forEach(function(item) {
-            const question = item.querySelector('.faq-question');
-            const answer = item.querySelector('.faq-answer');
-            const answerInner = item.querySelector('.faq-answer-inner');
-
-            question.addEventListener('click', function() {
-                const isActive = item.classList.contains('active');
-
-                faqItems.forEach(function(otherItem) {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                        otherItem.querySelector('.faq-answer').style.maxHeight = '0';
-                    }
-                });
-
-                if (isActive) {
-                    item.classList.remove('active');
-                    answer.style.maxHeight = '0';
-                } else {
-                    item.classList.add('active');
-                    answer.style.maxHeight = answerInner.scrollHeight + 40 + 'px';
-                }
-            });
-        });
-
-        // SCROLL ANIMATIONS
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-
-        const fadeObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-up').forEach(function(el) {
-            fadeObserver.observe(el);
-        });
-
-        // 3D TILT
-        const tiltCards = document.querySelectorAll('[data-tilt]');
-
-        tiltCards.forEach(function(card) {
-            card.addEventListener('mousemove', function(e) {
-                if (prefersReducedMotion) return;
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 15;
-                const rotateY = (centerX - x) / 15;
-
-                card.style.transform = 'perspective(1000px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.02, 1.02, 1.02)';
-            });
-
-            card.addEventListener('mouseleave', function() {
-                if (card.classList.contains('elevated')) {
-                    card.style.transform = 'scale(1.05)';
-                } else {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-                }
-            });
-        });
-    </script>
-
-            <!-- PASTE YOUR CHATLING CODE RIGHT HERE -->
-    <<script> window.chtlConfig = { chatbotId: "9955974989" } </script>
-<script async data-id="9955974989" id="chtl-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
+  </div>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+(function(){
+'use strict';
+
+/* ========== NAVBAR ========== */
+var nav=document.getElementById('main-nav');
+var hamburger=document.getElementById('hamburger-btn');
+var navMenu=document.getElementById('nav-menu');
+
+window.addEventListener('scroll',function(){
+  if(window.scrollY>80) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+},{passive:true});
+
+hamburger.addEventListener('click',function(){
+  navMenu.classList.toggle('active');
+  hamburger.classList.toggle('active');
+});
+
+document.querySelectorAll('.nav-links a').forEach(function(link){
+  link.addEventListener('click',function(){
+    navMenu.classList.remove('active');
+    hamburger.classList.remove('active');
+  });
+});
+
+/* ========== BILLING TOGGLE ========== */
+var currentBilling='monthly';
+var chatbotPrices={monthly:90,yearly:389};
+
+window.setBilling=function(val){
+  if(val===currentBilling) return;
+  currentBilling=val;
+  var options=document.querySelectorAll('#billingToggle .toggle-option');
+  var pill=document.getElementById('billingPill');
+  options.forEach(function(o){o.classList.remove('active')});
+  var activeOpt=document.querySelector('[data-value="'+val+'"]');
+  activeOpt.classList.add('active');
+  pill.style.left=activeOpt.offsetLeft+'px';
+  pill.style.width=activeOpt.offsetWidth+'px';
+
+  var priceEl=document.getElementById('chatbotPrice');
+  var periodEl=document.getElementById('chatbotPeriod');
+  var savingsEl=document.getElementById('chatbotSavings');
+  var retrainEl=document.getElementById('chatbotRetrain');
+  var extraEl=document.getElementById('chatbotExtraNote');
+
+  animateCounter(priceEl,chatbotPrices[val],'$',val==='monthly'?'/mo':'/yr');
+
+  if(val==='yearly'){
+    savingsEl.textContent='Save $691/yr';
+    savingsEl.style.display='block';
+    retrainEl.textContent='2 retraining sessions per year';
+    extraEl.textContent='Extra retraining: $25/session';
+  }else{
+    savingsEl.style.display='none';
+    retrainEl.textContent='1 retraining session per month';
+    extraEl.textContent='Extra retraining: $20/session';
+  }
+};
+
+// Position pill on load
+function positionPill(){
+  var activeOpt=document.querySelector('#billingToggle .toggle-option.active');
+  var pill=document.getElementById('billingPill');
+  if(activeOpt&&pill){
+    pill.style.left=activeOpt.offsetLeft+'px';
+    pill.style.width=activeOpt.offsetWidth+'px';
+  }
+}
+window.addEventListener('load',positionPill);
+window.addEventListener('resize',positionPill);
+
+/* ========== ANIMATED COUNTER ========== */
+function animateCounter(el,target,prefix,suffix){
+  var start=parseFloat(el.textContent.replace(/[^0-9.]/g,''))||0;
+  var startTime=null;
+  var duration=400;
+
+  function easeOutCubic(t){return 1-Math.pow(1-t,3)}
+
+  function step(ts){
+    if(!startTime) startTime=ts;
+    var progress=Math.min((ts-startTime)/duration,1);
+    var eased=easeOutCubic(progress);
+    var current=Math.round(start+(target-start)*eased);
+    el.textContent=prefix+current+suffix;
+    if(progress<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ========== FAQ ACCORDION ========== */
+window.toggleFaq=function(qEl){
+  var item=qEl.parentElement;
+  var answer=item.querySelector('.faq-a');
+  var isOpen=item.classList.contains('open');
+
+  // Close all
+  document.querySelectorAll('.faq-item.open').forEach(function(openItem){
+    openItem.classList.remove('open');
+    openItem.querySelector('.faq-a').style.maxHeight='0';
+  });
+
+  if(!isOpen){
+    item.classList.add('open');
+    answer.style.maxHeight=answer.scrollHeight+'px';
+  }
+};
+
+})();
+</script>
 </body>
 </html>
