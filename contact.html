@@ -1,1075 +1,1180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | QUANTOR</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
-    <style>
-        :root {
-            --bg-dark: #0a0a0f;
-            --card-dark: #12121a;
-            --input-dark: #1a1a24;
-            --accent-blue: #4F8EF7;
-            --accent-purple: #7C3AED;
-            --text-white: #ffffff;
-            --text-muted: #a0a0b0;
-            --text-body: #c8c8d8;
-            --border-blue: rgba(79, 142, 247, 0.2);
-            --green-whatsapp: #25D366;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            font-family: var(--font-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            font-size: 0.95rem;
-            border: none;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-filled {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-            box-shadow: 0 4px 15px rgba(79, 142, 247, 0.3);
-        }
-
-        .btn-filled:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(79, 142, 247, 0.5);
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1.5rem 0;
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-blue);
-            padding: 1rem 0;
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: white;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            background: none;
-            border: none;
-            z-index: 1100;
-            padding: 5px;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 28px;
-            height: 2px;
-            background: white;
-            margin: 6px 0;
-            transition: 0.3s;
-        }
-
-        .contact-hero {
-            position: relative;
-            padding-top: 140px;
-            padding-bottom: 4rem;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(79, 142, 247, 0.05) 0%, transparent 50%);
-        }
-
-        #bg-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        .contact-hero .container {
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 900;
-            letter-spacing: -2px;
-            margin-bottom: 1rem;
-        }
-
-        .contact-hero p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-layout {
-            padding: 4rem 0 6rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-        }
-
-        .contact-left {
-            position: relative;
-        }
-
-        .contact-cta-main {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .whatsapp-btn-large {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 1.5rem 2rem;
-            background: var(--green-whatsapp);
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .whatsapp-btn-large:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
-        }
-
-        .whatsapp-btn-large svg {
-            width: 28px;
-            height: 28px;
-        }
-
-        .contact-detail {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 1rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border-blue);
-            transition: color 0.3s;
-        }
-
-        .contact-detail:hover {
-            color: var(--accent-blue);
-        }
-
-        .contact-detail svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-        }
-
-        .reply-note {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 1rem;
-            font-style: italic;
-        }
-
-        .trust-tiles {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .trust-tile {
-            background: var(--card-dark);
-            border: 1px solid var(--border-blue);
-            border-radius: 12px;
-            padding: 1.25rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .trust-tile:hover {
-            border-color: var(--accent-blue);
-            transform: translateX(5px);
-        }
-
-        .trust-icon {
-            width: 36px;
-            height: 36px;
-            color: var(--accent-blue);
-            flex-shrink: 0;
-        }
-
-        .trust-content h4 {
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        .trust-content p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .whatsapp-form-card {
-            background: var(--card-dark);
-            border: 1px solid var(--border-blue);
-            border-radius: 16px;
-            padding: 2.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .whatsapp-form-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--green-whatsapp), #128C7E);
-        }
-
-        .form-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-header svg {
-            width: 28px;
-            height: 28px;
-            color: var(--green-whatsapp);
-        }
-
-        .form-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .form-subtitle {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            background: var(--input-dark);
-            border: 1px solid var(--border-blue);
-            border-radius: 6px;
-            color: white;
-            font-family: var(--font-main);
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: #666;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--green-whatsapp);
-            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
-        }
-
-        .form-group select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a0a0b0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .submit-whatsapp-btn {
-            width: 100%;
-            padding: 1rem;
-            background: var(--green-whatsapp);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-family: var(--font-main);
-            font-size: 1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .submit-whatsapp-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-        }
-
-        .submit-whatsapp-btn svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .message-preview {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background: rgba(37, 211, 102, 0.1);
-            border: 1px dashed rgba(37, 211, 102, 0.3);
-            border-radius: 8px;
-        }
-
-        .message-preview-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .message-preview-content {
-            font-size: 0.85rem;
-            color: var(--text-body);
-            line-height: 1.6;
-            white-space: pre-wrap;
-        }
-
-        .faq-section {
-            padding: 4rem 0;
-            background: var(--card-dark);
-            border-top: 1px solid var(--border-blue);
-            border-bottom: 1px solid var(--border-blue);
-        }
-
-        .faq-title {
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-        }
-
-        .faq-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .faq-item {
-            background: var(--bg-dark);
-            border: 1px solid var(--border-blue);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            width: 100%;
-            padding: 1.5rem;
-            background: none;
-            border: none;
-            color: white;
-            font-family: var(--font-main);
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-align: left;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question:hover {
-            background: rgba(79, 142, 247, 0.05);
-        }
-
-        .faq-question svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-question svg {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 200px;
-        }
-
-        .faq-answer p {
-            padding: 0 1.5rem 1.5rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        footer {
-            padding: 5rem 0 2rem;
-            background: #050508;
-            border-top: 1px solid var(--border-blue);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-brand .logo {
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-brand p {
-            color: var(--text-muted);
-            max-width: 300px;
-            font-size: 0.95rem;
-        }
-
-        .footer-col h4 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-            color: #555;
-            font-size: 0.85rem;
-        }
-
-        .footer-contact {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-contact a {
-            color: #555;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .footer-contact a:hover {
-            color: var(--accent-blue);
-        }
-
-        @media (max-width: 1024px) {
-            .faq-grid {
-                grid-template-columns: 1fr;
-                max-width: 600px;
-                margin: 0 auto;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 85%;
-                height: 100vh;
-                background: var(--card-dark);
-                flex-direction: column;
-                justify-content: center;
-                transition: 0.4s ease;
-                box-shadow: -10px 0 40px rgba(0,0,0,0.7);
-                gap: 2rem;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .hamburger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-            .hamburger.active span:nth-child(2) {
-                opacity: 0;
-            }
-            .hamburger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
-            }
-
-            .contact-hero {
-                padding-top: 100px;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .whatsapp-form-card {
-                padding: 2rem 1.5rem;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-contact {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-            #bg-canvas {
-                display: none;
-            }
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact — QUANTOR | Start Your Project Today</title>
+<meta name="description" content="Ready to build something extraordinary? Talk to QUANTOR — we respond fast, build fast, and deliver results that grow your business 24/7."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════════════════════════
+   QUANTOR — CONTACT PAGE — AWWWARD EDITION
+   Design System: Dark Luxury Futurism v3.0
+════════════════════════════════════════════ */
+:root {
+  --ink:    #030507;
+  --ink2:   #070c12;
+  --ink3:   #0c1420;
+  --mint:   #00ffb2;
+  --coral:  #ff2d55;
+  --gold:   #e8a020;
+  --chalk:  #e2ecff;
+  --dim:    #4a5a78;
+  --dimmer: #1e2a3d;
+  --border: rgba(0,255,178,0.1);
+  --head: "Bebas Neue", sans-serif;
+  --body: "Manrope", sans-serif;
+  --mono: "JetBrains Mono", monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { background: var(--ink); color: var(--chalk); font-family: var(--body); overflow-x: hidden; cursor: none; }
+body.loading { overflow: hidden; }
+::selection { background: var(--mint); color: #000; }
+body::after {
+  content:""; position: fixed; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.35;
+}
+
+/* ── PRELOADER ── */
+#preloader {
+  position: fixed; inset: 0; background: var(--ink); z-index: 9998;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  transition: opacity 0.8s var(--ease), visibility 0.8s;
+}
+#preloader.hide { opacity: 0; visibility: hidden; }
+.pre-logo { font-family: var(--head); font-size: clamp(3rem,8vw,6rem); letter-spacing: 0.3em; color: var(--chalk); overflow: hidden; display: flex; }
+.pre-logo span { display: inline-block; transform: translateY(100%); opacity: 0; animation: charUp 0.6s var(--ease) forwards; }
+.pre-logo span:nth-child(1){animation-delay:.05s} .pre-logo span:nth-child(2){animation-delay:.1s}
+.pre-logo span:nth-child(3){animation-delay:.15s} .pre-logo span:nth-child(4){animation-delay:.2s}
+.pre-logo span:nth-child(5){animation-delay:.25s} .pre-logo span:nth-child(6){animation-delay:.3s}
+.pre-logo span:nth-child(7){animation-delay:.35s} .pre-logo span:nth-child(8){color:var(--mint);animation-delay:.35s}
+.pre-bar-wrap { width: 280px; height: 1px; background: var(--dimmer); position: relative; overflow: visible; }
+.pre-bar { position: absolute; left: 0; top: 0; height: 100%; background: var(--mint); width: 0%; animation: loadBar 2s var(--ease) forwards 0.5s; box-shadow: 0 0 20px var(--mint); }
+.pre-count { position: absolute; right: 0; bottom: 8px; font-family: var(--mono); font-size: 0.65rem; color: var(--mint); letter-spacing: 0.1em; }
+.pre-page-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.25em; color: var(--dim); text-transform: uppercase; }
+@keyframes charUp { to { transform: translateY(0); opacity: 1; } }
+@keyframes loadBar { to { width: 100%; } }
+
+/* ── CURSOR ── */
+#cursor-outer { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(0,255,178,0.5); border-radius: 50%; pointer-events: none; z-index: 9997; transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s, border-color 0.3s; transform: translate(-50%,-50%); will-change: left,top; }
+#cursor-dot { position: fixed; width: 5px; height: 5px; background: var(--mint); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%,-50%); box-shadow: 0 0 10px var(--mint); will-change: left,top; }
+body.cursor-hover #cursor-outer { width: 70px; height: 70px; background: rgba(0,255,178,0.05); border-color: var(--mint); }
+
+/* ── NAV ── */
+#nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.8rem 4%; display: flex; align-items: center; justify-content: space-between; transition: padding 0.4s var(--ease), background 0.4s, border-bottom 0.4s; }
+#nav.scrolled { padding: 1.2rem 4%; background: rgba(3,5,7,0.92); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--head); font-size: 1.8rem; letter-spacing: 0.15em; color: var(--chalk); text-decoration: none; }
+.nav-logo em { color: var(--mint); font-style: normal; }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { color: var(--dim); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; position: relative; transition: color 0.3s; }
+.nav-links a::after { content:""; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--mint); transition: width 0.3s var(--ease); }
+.nav-links a:hover { color: var(--chalk); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links a.active { color: var(--chalk); }
+.nav-price-btn { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mint); border: 1px solid rgba(0,255,178,0.3); padding: 0.4rem 0.9rem; border-radius: 100px; text-decoration: none; transition: background 0.3s, border-color 0.3s; }
+.nav-price-btn:hover { background: rgba(0,255,178,0.08); border-color: var(--mint); }
+.nav-price-btn::after { display: none !important; }
+.nav-cta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink) !important; background: var(--mint); padding: 0.65rem 1.4rem; border-radius: 4px; text-decoration: none; transition: box-shadow 0.3s, transform 0.3s; box-shadow: 0 0 30px rgba(0,255,178,0.2); }
+.nav-cta:hover { box-shadow: 0 0 60px rgba(0,255,178,0.5); transform: scale(1.03); }
+.nav-cta::after { display: none !important; }
+
+/* ════════════════════════════════════════════
+   CONTACT HERO
+════════════════════════════════════════════ */
+#contact-hero {
+  position: relative; min-height: 100vh; display: flex; align-items: center;
+  overflow: hidden;
+}
+#contact-canvas { position: absolute; inset: 0; z-index: 0; }
+.contact-hero-gradient {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 65% at 85% 50%, rgba(0,255,178,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 55% at 5% 70%, rgba(255,45,85,0.03) 0%, transparent 70%);
+}
+.contact-hero-inner {
+  position: relative; z-index: 2; padding: 8rem 4% 5rem;
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: 6rem; align-items: center; max-width: 1400px; width: 100%;
+}
+.contact-hero-left {}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 2.5rem; overflow: hidden;
+}
+.hero-eyebrow-inner {
+  display: flex; align-items: center; gap: 0.8rem;
+  transform: translateY(60px); opacity: 0;
+  animation: slideUp 1s var(--ease) 2.8s forwards;
+}
+.eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); animation: blink 1.5s infinite; box-shadow: 0 0 8px var(--mint); }
+.eyebrow-line { width: 40px; height: 1px; background: var(--mint); box-shadow: 0 0 10px var(--mint); }
+.eyebrow-text { font-family: var(--mono); font-size: 0.7rem; color: var(--mint); letter-spacing: 0.2em; text-transform: uppercase; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+
+.contact-headline {
+  font-family: var(--head); font-size: clamp(4rem, 8vw, 9rem);
+  line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 2rem;
+}
+.headline-row { display: block; overflow: hidden; }
+.headline-row span { display: block; transform: translateY(110%); opacity: 0; }
+.headline-row:nth-child(1) span { animation: slideUp 1.1s var(--ease) 2.9s forwards; }
+.headline-row:nth-child(2) span { animation: slideUp 1.1s var(--ease) 3.0s forwards; }
+.headline-row:nth-child(3) span { animation: slideUp 1.1s var(--ease) 3.1s forwards; }
+.mint-word { color: var(--mint); }
+.outline-word { -webkit-text-stroke: 1px rgba(226,236,255,0.25); color: transparent; }
+
+.contact-hero-sub {
+  font-size: 1rem; color: var(--dim); line-height: 1.75; font-weight: 300;
+  max-width: 480px; margin-bottom: 3rem;
+  transform: translateY(30px); opacity: 0;
+  animation: slideUp 1s var(--ease) 3.2s forwards;
+}
+
+.hero-promise-list {
+  display: flex; flex-direction: column; gap: 0.8rem;
+  transform: translateY(30px); opacity: 0;
+  animation: slideUp 1s var(--ease) 3.3s forwards;
+}
+.promise-item {
+  display: flex; align-items: center; gap: 0.8rem;
+  font-family: var(--mono); font-size: 0.72rem; color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.promise-check {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(0,255,178,0.1); border: 1px solid rgba(0,255,178,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; color: var(--mint); flex-shrink: 0;
+}
+
+/* Hero right — quick contact cards */
+.contact-hero-right {
+  display: flex; flex-direction: column; gap: 1.5rem;
+  transform: translateX(40px); opacity: 0;
+  animation: slideUp 1s var(--ease) 3.4s forwards;
+}
+.quick-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  border: 1px solid var(--border); border-radius: 16px; padding: 2rem;
+  position: relative; overflow: hidden; text-decoration: none; color: var(--chalk);
+  transition: border-color 0.3s, transform 0.3s;
+  display: flex; align-items: center; gap: 1.5rem; cursor: none;
+}
+.quick-card::before {
+  content:""; position: absolute; inset: 0; opacity: 0;
+  border-radius: 16px; transition: opacity 0.3s;
+}
+.quick-card.qc-wa::before { background: linear-gradient(135deg, rgba(37,211,102,0.06), transparent 60%); }
+.quick-card.qc-email::before { background: linear-gradient(135deg, rgba(0,255,178,0.05), transparent 60%); }
+.quick-card.qc-wa:hover { border-color: rgba(37,211,102,0.4); transform: translateX(8px); }
+.quick-card.qc-email:hover { border-color: rgba(0,255,178,0.3); transform: translateX(8px); }
+.quick-card:hover::before { opacity: 1; }
+.qc-icon {
+  width: 56px; height: 56px; border-radius: 12px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+}
+.qc-wa .qc-icon { background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.2); }
+.qc-email .qc-icon { background: rgba(0,255,178,0.08); border: 1px solid rgba(0,255,178,0.15); }
+.qc-body {}
+.qc-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; margin-bottom: 0.3rem; }
+.qc-value { font-family: var(--head); font-size: 1.4rem; letter-spacing: 0.04em; }
+.qc-sub { font-size: 0.78rem; color: var(--dim); margin-top: 0.2rem; font-weight: 300; }
+.qc-arrow { margin-left: auto; flex-shrink: 0; font-size: 1.1rem; color: var(--dim); transition: transform 0.3s var(--ease), color 0.3s; }
+.quick-card:hover .qc-arrow { transform: translateX(5px); color: var(--mint); }
+
+.response-badge {
+  display: flex; align-items: center; gap: 0.8rem;
+  background: rgba(0,255,178,0.04); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1rem 1.5rem;
+  font-family: var(--mono); font-size: 0.68rem; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase;
+}
+.rb-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); animation: pulse 2s infinite; box-shadow: 0 0 8px var(--mint); }
+@keyframes pulse { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.4);opacity:0.5;} }
+.rb-text span { color: var(--mint); }
+
+.contact-scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  opacity: 0; animation: fadeIn 1s var(--ease) 4s forwards; z-index: 2;
+}
+.scroll-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.2em; color: var(--dim); text-transform: uppercase; }
+.scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--mint), transparent); animation: scrollPulse 2s infinite; }
+@keyframes scrollPulse { 0%{transform:scaleY(0);transform-origin:top;} 50%{transform:scaleY(1);transform-origin:top;} 100%{transform:scaleY(1);transform-origin:bottom;opacity:0;} }
+@keyframes slideUp { to { transform: translateY(0) translateX(0); opacity: 1; } }
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ════════════════════════════════════════════
+   MARQUEE
+════════════════════════════════════════════ */
+.marquee-section {
+  overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 1.2rem 0; background: var(--ink2); position: relative; z-index: 2;
+}
+.marquee-track { display: flex; gap: 0; width: max-content; animation: marqueeScroll 30s linear infinite; }
+.marquee-item {
+  display: flex; align-items: center; gap: 1.2rem; padding: 0 2rem; white-space: nowrap;
+  font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim);
+}
+.marquee-item b { color: var(--mint); font-weight: 400; }
+.marquee-item .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--dimmer); }
+@keyframes marqueeScroll { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ════════════════════════════════════════════
+   FORM SECTION
+════════════════════════════════════════════ */
+#form-section {
+  padding: 8rem 4%; background: var(--ink); position: relative; overflow: hidden;
+}
+.form-grid {
+  display: grid; grid-template-columns: 1fr 1.6fr; gap: 8rem; align-items: start;
+}
+
+/* Left sidebar */
+.form-sidebar {}
+.section-tag {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--mint); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;
+}
+.section-tag::before { content:""; width: 20px; height: 1px; background: var(--mint); }
+.section-title { font-family: var(--head); font-size: clamp(2.5rem,4.5vw,4rem); line-height: 1.0; letter-spacing: 0.02em; margin-bottom: 1.5rem; }
+.sidebar-desc { font-size: 0.92rem; color: var(--dim); line-height: 1.8; font-weight: 300; max-width: 360px; margin-bottom: 3rem; }
+
+.sidebar-stats { display: flex; flex-direction: column; gap: 0; }
+.sidebar-stat {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 0; border-bottom: 1px solid var(--border);
+  opacity: 0; transform: translateX(-20px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.sidebar-stat.visible { opacity: 1; transform: translateX(0); }
+.sidebar-stat:nth-child(2).visible { transition-delay: 0.1s; }
+.sidebar-stat:nth-child(3).visible { transition-delay: 0.2s; }
+.sidebar-stat:nth-child(4).visible { transition-delay: 0.3s; }
+.sidebar-stat-label { font-family: var(--mono); font-size: 0.68rem; color: var(--dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.sidebar-stat-val { font-family: var(--head); font-size: 1.5rem; letter-spacing: 0.05em; color: var(--mint); }
+
+/* ── THE FORM ── */
+.contact-form-wrap {
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid var(--border); border-radius: 20px; padding: 3.5rem;
+  position: relative; overflow: hidden;
+}
+.contact-form-wrap::before {
+  content:""; position: absolute; top: -100px; right: -100px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,178,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.form-header { margin-bottom: 2.5rem; }
+.form-header h3 { font-family: var(--head); font-size: 2rem; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+.form-header p { font-size: 0.85rem; color: var(--dim); font-weight: 300; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+.form-row.full { grid-template-columns: 1fr; }
+
+.field-group { position: relative; }
+.field-label {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; color: var(--dim);
+  text-transform: uppercase; display: block; margin-bottom: 0.6rem; transition: color 0.3s;
+}
+.field-group:focus-within .field-label { color: var(--mint); }
+
+.field-input, .field-select, .field-textarea {
+  width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--dimmer);
+  border-radius: 8px; padding: 1rem 1.2rem; color: var(--chalk);
+  font-family: var(--body); font-size: 0.9rem; font-weight: 400;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+  outline: none; resize: none;
+  -webkit-appearance: none;
+}
+.field-input::placeholder, .field-textarea::placeholder { color: var(--dim); opacity: 0.6; }
+.field-input:focus, .field-select:focus, .field-textarea:focus {
+  border-color: rgba(0,255,178,0.4);
+  background: rgba(0,255,178,0.02);
+  box-shadow: 0 0 0 3px rgba(0,255,178,0.06), 0 0 20px rgba(0,255,178,0.05);
+}
+.field-select { cursor: pointer; }
+.field-select option { background: var(--ink2); color: var(--chalk); }
+.field-textarea { min-height: 140px; }
+
+/* Budget slider */
+.budget-display {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;
+}
+.budget-label-text { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; color: var(--dim); text-transform: uppercase; }
+.budget-value { font-family: var(--head); font-size: 1.4rem; letter-spacing: 0.05em; color: var(--mint); }
+.budget-slider {
+  -webkit-appearance: none; width: 100%; height: 2px;
+  background: var(--dimmer); border-radius: 2px; outline: none;
+}
+.budget-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px;
+  background: var(--mint); border-radius: 50%; cursor: pointer;
+  box-shadow: 0 0 20px rgba(0,255,178,0.4);
+  transition: box-shadow 0.3s;
+}
+.budget-slider::-webkit-slider-thumb:hover { box-shadow: 0 0 30px rgba(0,255,178,0.7); }
+
+/* Service chips */
+.service-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.chip-input { display: none; }
+.chip-label {
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 0.4rem 0.9rem; border-radius: 4px;
+  border: 1px solid var(--dimmer); color: var(--dim); cursor: pointer;
+  transition: all 0.25s;
+}
+.chip-input:checked + .chip-label {
+  border-color: var(--mint); color: var(--mint); background: rgba(0,255,178,0.08);
+}
+.chip-label:hover { border-color: rgba(0,255,178,0.3); color: var(--chalk); }
+
+.form-submit-row { margin-top: 2.5rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.submit-btn {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  padding: 1.1rem 2.8rem; background: var(--mint); color: #000;
+  font-weight: 800; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase;
+  border: none; border-radius: 8px; cursor: pointer;
+  transition: box-shadow 0.3s, transform 0.2s;
+  box-shadow: 0 0 40px rgba(0,255,178,0.25); font-family: var(--body);
+}
+.submit-btn:hover { box-shadow: 0 0 80px rgba(0,255,178,0.5); transform: scale(1.02); }
+.submit-btn .arrow { display: inline-block; transition: transform 0.3s var(--ease); }
+.submit-btn:hover .arrow { transform: translateX(5px); }
+.form-note { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--dim); text-transform: uppercase; }
+
+/* Success state */
+.form-success {
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 4rem 2rem; gap: 1.5rem;
+}
+.form-success.show { display: flex; }
+.success-icon {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: rgba(0,255,178,0.1); border: 2px solid rgba(0,255,178,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem; animation: successPop 0.5s var(--ease);
+}
+@keyframes successPop { from{transform:scale(0);} to{transform:scale(1);} }
+.success-title { font-family: var(--head); font-size: 3rem; letter-spacing: 0.03em; }
+.success-sub { font-size: 0.9rem; color: var(--dim); line-height: 1.7; font-weight: 300; max-width: 400px; }
+
+/* ════════════════════════════════════════════
+   FAQ SECTION
+════════════════════════════════════════════ */
+#faq { padding: 8rem 4%; background: var(--ink2); position: relative; overflow: hidden; }
+.faq-grid { display: grid; grid-template-columns: 1fr 1.8fr; gap: 8rem; margin-top: 5rem; align-items: start; }
+.faq-left p { font-size: 0.9rem; color: var(--dim); line-height: 1.8; font-weight: 300; max-width: 320px; margin-top: 1.5rem; }
+.faq-list { display: flex; flex-direction: column; gap: 0; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.faq-item.visible { opacity: 1; transform: translateY(0); }
+.faq-item:nth-child(2).visible { transition-delay: 0.1s; }
+.faq-item:nth-child(3).visible { transition-delay: 0.2s; }
+.faq-item:nth-child(4).visible { transition-delay: 0.3s; }
+.faq-item:nth-child(5).visible { transition-delay: 0.4s; }
+.faq-item:nth-child(6).visible { transition-delay: 0.5s; }
+
+.faq-btn {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 1.8rem 0; background: none; border: none; cursor: pointer;
+  color: var(--chalk); text-align: left; gap: 1rem;
+}
+.faq-q { font-family: var(--head); font-size: 1.5rem; letter-spacing: 0.03em; }
+.faq-chevron {
+  width: 32px; height: 32px; border: 1px solid var(--dimmer); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; color: var(--dim); flex-shrink: 0;
+  transition: all 0.3s var(--ease);
+}
+.faq-item.open .faq-chevron { background: var(--mint); border-color: var(--mint); color: #000; transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease), padding 0.3s;
+}
+.faq-item.open .faq-answer { max-height: 300px; }
+.faq-answer p { font-size: 0.9rem; color: var(--dim); line-height: 1.8; font-weight: 300; padding-bottom: 1.5rem; }
+.faq-answer span { color: var(--mint); }
+
+/* ════════════════════════════════════════════
+   LOCATION / INFO STRIP
+════════════════════════════════════════════ */
+#info-strip { padding: 6rem 4%; background: var(--ink3); position: relative; overflow: hidden; }
+.info-strip-inner {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2rem; position: relative; z-index: 1;
+}
+.info-block {
+  padding: 2.5rem 2rem; border: 1px solid var(--border); border-radius: 12px;
+  background: rgba(255,255,255,0.02); position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(25px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.info-block.visible { opacity: 1; transform: translateY(0); }
+.info-block:nth-child(2).visible { transition-delay: 0.1s; }
+.info-block:nth-child(3).visible { transition-delay: 0.2s; }
+.info-block:nth-child(4).visible { transition-delay: 0.3s; }
+.info-block::after {
+  content:""; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  transform: scaleX(0); transition: transform 0.5s var(--ease);
+}
+.info-block.visible::after { transform: scaleX(1); transition-delay: 0.4s; }
+.info-block:nth-child(1)::after { background: var(--mint); }
+.info-block:nth-child(2)::after { background: var(--coral); }
+.info-block:nth-child(3)::after { background: var(--gold); }
+.info-block:nth-child(4)::after { background: var(--mint); }
+.info-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+.info-label { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; margin-bottom: 0.5rem; }
+.info-val { font-family: var(--head); font-size: 1.2rem; letter-spacing: 0.04em; color: var(--chalk); margin-bottom: 0.3rem; }
+.info-val a { color: inherit; text-decoration: none; }
+.info-val a:hover { color: var(--mint); }
+.info-sub { font-size: 0.78rem; color: var(--dim); font-weight: 300; }
+
+/* ════════════════════════════════════════════
+   THREE.JS SECTION — CRYSTAL BRIDGE
+════════════════════════════════════════════ */
+#crystal-section {
+  position: relative; height: 550px; overflow: hidden; background: var(--ink);
+  display: flex; align-items: center;
+}
+#crystal-canvas { position: absolute; inset: 0; z-index: 0; }
+.crystal-content { position: relative; z-index: 1; padding: 0 4%; max-width: 700px; }
+.crystal-tag {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--mint); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;
+}
+.crystal-tag::before { content:""; width: 20px; height: 1px; background: var(--mint); }
+.crystal-headline {
+  font-family: var(--head); font-size: clamp(2.5rem,5vw,5rem);
+  line-height: 1.0; letter-spacing: 0.02em; margin-bottom: 1.5rem;
+}
+.crystal-sub { font-size: 0.95rem; color: var(--dim); line-height: 1.75; font-weight: 300; max-width: 500px; }
+
+/* ════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════ */
+footer { background: var(--ink); border-top: 1px solid var(--border); }
+.footer-main { padding: 4rem 4% 3rem; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; }
+.footer-brand {}
+.footer-logo { font-family: var(--head); font-size: 1.8rem; letter-spacing: 0.15em; margin-bottom: 0.4rem; }
+.footer-logo em { color: var(--mint); font-style: normal; }
+.footer-tagline { font-size: 0.78rem; color: var(--dim); letter-spacing: 0.05em; font-weight: 300; margin-bottom: 1.5rem; }
+.footer-socials { display: flex; gap: 0.8rem; margin-bottom: 1.5rem; }
+.social-btn { width: 40px; height: 40px; border: 1px solid var(--dimmer); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--dim); font-size: 0.9rem; transition: all 0.3s; }
+.social-btn:hover { border-color: var(--mint); color: var(--mint); background: rgba(0,255,178,0.06); }
+.footer-contact-links a { display: block; color: var(--mint); text-decoration: none; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.05em; margin-bottom: 0.3rem; transition: opacity 0.2s; }
+.footer-contact-links a:hover { opacity: 0.7; }
+.footer-col h5 { font-family: var(--head); font-size: 1rem; letter-spacing: 0.1em; margin-bottom: 1.2rem; color: var(--chalk); }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a { color: var(--dim); text-decoration: none; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.03em; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--chalk); }
+.footer-pricing-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mint); border: 1px solid rgba(0,255,178,0.3); padding: 0.4rem 0.9rem; border-radius: 100px; text-decoration: none; transition: background 0.3s, border-color 0.3s; margin-top: 0.4rem; }
+.footer-pricing-btn:hover { background: rgba(0,255,178,0.08); border-color: var(--mint); }
+.footer-bottom { border-top: 1px solid var(--border); padding: 1.5rem 4%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.72rem; color: var(--dimmer); }
+.footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.footer-legal a { font-size: 0.72rem; color: var(--dimmer); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--dim); }
+
+/* ── UTILITY ── */
+.reveal-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 1100px) {
+  .contact-hero-inner { grid-template-columns: 1fr; gap: 4rem; }
+  .form-grid { grid-template-columns: 1fr; gap: 4rem; }
+  .faq-grid { grid-template-columns: 1fr; gap: 4rem; }
+  .info-strip-inner { grid-template-columns: 1fr 1fr; }
+  .footer-main { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .info-strip-inner { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr; text-align: center; }
+  .footer-right { text-align: center; }
+  .footer-center { justify-content: center; }
+  .contact-hero-inner { padding: 8rem 4% 5rem; }
+  .contact-form-wrap { padding: 2rem; }
+  .footer-main { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+</style>
 </head>
-<body>
+<body class="loading">
 
-    <nav id="main-nav">
-        <div class="nav-content">
-            <a href="index.html" class="logo">QUANTOR</a>
-            <div class="nav-links" id="nav-menu">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <a href="pricing.html">Pricing</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="about.html">About</a>
-                <a href="contact.html" class="btn btn-filled">Get Started</a>
-            </div>
-            <button class="hamburger" id="hamburger-btn" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo"><span>Q</span><span>U</span><span>A</span><span>N</span><span>T</span><span>O</span><span>R</span><span>.</span></div>
+  <div class="pre-bar-wrap"><div class="pre-bar"></div><div class="pre-count" id="preCount">0%</div></div>
+  <div class="pre-page-label">Contact</div>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor-outer"></div>
+<div id="cursor-dot"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">QUAN<em>TOR</em></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="pricing.html" class="nav-price-btn">&#8377; / $</a></li>
+  </ul>
+  <a href="#form-section" class="nav-cta">Start a Project &#8594;</a>
+</nav>
+
+<!-- HERO -->
+<section id="contact-hero">
+  <canvas id="contact-canvas"></canvas>
+  <div class="contact-hero-gradient"></div>
+  <div class="contact-hero-inner">
+    <div class="contact-hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-inner">
+          <div class="eyebrow-dot"></div>
+          <div class="eyebrow-line"></div>
+          <span class="eyebrow-text">Response within 24 Hours</span>
         </div>
-    </nav>
-
-    <section class="contact-hero">
-        <div id="bg-canvas"></div>
-        <div class="container">
-            <h1>Let's Get Your Business Online</h1>
-            <p>Tell us about your business and we'll recommend the right plan. No tech knowledge needed on your end.</p>
+      </div>
+      <h1 class="contact-headline">
+        <span class="headline-row"><span>LET&#8217;S</span></span>
+        <span class="headline-row"><span class="mint-word">BUILD</span></span>
+        <span class="headline-row"><span class="outline-word">SOMETHING.</span></span>
+      </h1>
+      <p class="contact-hero-sub">
+        One conversation is all it takes. Tell us what you need, and we&#8217;ll tell you exactly how fast we can build it &#8212; with an AI that works for your business around the clock.
+      </p>
+      <div class="hero-promise-list">
+        <div class="promise-item"><div class="promise-check">&#10003;</div> No commitment required &#8212; just a conversation</div>
+        <div class="promise-item"><div class="promise-check">&#10003;</div> 50% upfront &#8212; 50% only after you approve</div>
+        <div class="promise-item"><div class="promise-check">&#10003;</div> Delivery in as little as 2 days</div>
+        <div class="promise-item"><div class="promise-check">&#10003;</div> UPI, PayPal, Wise &#8212; global payments accepted</div>
+      </div>
+    </div>
+    <div class="contact-hero-right">
+      <a href="https://wa.me/919599234747" class="quick-card qc-wa" target="_blank">
+        <div class="qc-icon">&#128172;</div>
+        <div class="qc-body">
+          <div class="qc-label">WhatsApp</div>
+          <div class="qc-value">+91 9599 234 747</div>
+          <div class="qc-sub">Fastest way to reach us</div>
         </div>
-    </section>
-
-    <section class="contact-layout">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-left">
-                    <div class="contact-cta-main">
-                        <a href="https://wa.me/919599234747" class="whatsapp-btn-large" target="_blank">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                            WhatsApp Us Now
-                        </a>
-                    </div>
-                    
-                    <a href="mailto:quantorleads@gmail.com" class="contact-detail">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                        quantorleads@gmail.com
-                    </a>
-                    
-                    <a href="tel:+919599234747" class="contact-detail">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        +91 9599234747
-                    </a>
-                    
-                    <p class="reply-note">We typically reply within 2 hours on WhatsApp.</p>
-
-                    <div class="trust-tiles">
-                        <div class="trust-tile">
-                            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                            <div class="trust-content">
-                                <h4>50% Upfront, 50% on Delivery</h4>
-                                <p>You never pay everything before seeing results.</p>
-                            </div>
-                        </div>
-                        <div class="trust-tile">
-                            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                            <div class="trust-content">
-                                <h4>Delivery in Days</h4>
-                                <p>Not weeks. Not months.</p>
-                            </div>
-                        </div>
-                        <div class="trust-tile">
-                            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                            <div class="trust-content">
-                                <h4>You Own Everything</h4>
-                                <p>Your domain, your hosting, your site. Always.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="whatsapp-form-card">
-                    <div class="form-header">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                        <h3 class="form-title">Quick Inquiry</h3>
-                    </div>
-                    <p class="form-subtitle">Fill in your details and we'll start your project.</p>
-                    
-                    <form id="whatsapp-form">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" placeholder="John Doe" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="business">Business Name</label>
-                            <input type="text" id="business" placeholder="Your Business LLC" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="whatsapp">WhatsApp Number</label>
-                            <input type="tel" id="whatsapp" placeholder="+91 9876543210" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">What do you need?</label>
-                            <select id="service" required>
-                                <option value="" disabled selected>Select a service</option>
-                                <option value="AI Chatbot Only">AI Chatbot Only</option>
-                                <option value="Landing Page">Landing Page</option>
-                                <option value="Full Website">Full Website</option>
-                                <option value="Not Sure">Not Sure</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Tell us about your business</label>
-                            <textarea id="message" rows="3" placeholder="Describe briefly what you do and what you need..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-whatsapp-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                            Send via WhatsApp
-                        </button>
-                    </form>
-                    
-                    <div class="message-preview">
-                        <div class="message-preview-label">Your message will look like:</div>
-                        <div class="message-preview-content" id="message-preview"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="qc-arrow">&#8594;</div>
+      </a>
+      <a href="mailto:quantorleads@gmail.com" class="quick-card qc-email">
+        <div class="qc-icon">&#9993;</div>
+        <div class="qc-body">
+          <div class="qc-label">Email</div>
+          <div class="qc-value">quantorleads@gmail.com</div>
+          <div class="qc-sub">For detailed project briefs</div>
         </div>
-    </section>
+        <div class="qc-arrow">&#8594;</div>
+      </a>
+      <div class="response-badge">
+        <div class="rb-dot"></div>
+        <div class="rb-text">We&#8217;re <span>online</span> &#8212; typical response under <span>4 hours</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-scroll-hint">
+    <span class="scroll-label">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
 
-    <section class="faq-section">
-        <div class="container">
-            <h3 class="faq-title">Frequently Asked Questions</h3>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How fast will you reply?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Usually within 2 hours on WhatsApp, same day on email. We prioritize messages from potential clients!</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Do I need to know anything technical?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Not at all. You answer a short form about your business, we handle everything else. If you can send a WhatsApp message, you can work with us.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Can I see examples before deciding?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes — visit our portfolio page to see live demos of our work across different industries.</p>
-                    </div>
-                </div>
-            </div>
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="dot"></span> <b>Free</b> Consultation Call</div>
+    <div class="marquee-item"><span class="dot"></span> <b>2-Day</b> Minimum Delivery</div>
+    <div class="marquee-item"><span class="dot"></span> <b>50%</b> Upfront Only</div>
+    <div class="marquee-item"><span class="dot"></span> <b>AI Chatbot</b> Included</div>
+    <div class="marquee-item"><span class="dot"></span> <b>6 Months</b> Support Available</div>
+    <div class="marquee-item"><span class="dot"></span> <b>Global</b> Payments Accepted</div>
+    <div class="marquee-item"><span class="dot"></span> <b>India</b> &#8594; Global Reach</div>
+    <div class="marquee-item"><span class="dot"></span> <b>Free</b> Consultation Call</div>
+    <div class="marquee-item"><span class="dot"></span> <b>2-Day</b> Minimum Delivery</div>
+    <div class="marquee-item"><span class="dot"></span> <b>50%</b> Upfront Only</div>
+    <div class="marquee-item"><span class="dot"></span> <b>AI Chatbot</b> Included</div>
+    <div class="marquee-item"><span class="dot"></span> <b>6 Months</b> Support Available</div>
+    <div class="marquee-item"><span class="dot"></span> <b>Global</b> Payments Accepted</div>
+    <div class="marquee-item"><span class="dot"></span> <b>India</b> &#8594; Global Reach</div>
+  </div>
+</div>
+
+<!-- FORM SECTION -->
+<section id="form-section">
+  <div class="form-grid">
+    <div class="form-sidebar reveal-up">
+      <div class="section-tag">Project Brief</div>
+      <h2 class="section-title">TELL US WHAT<br>YOU NEED.</h2>
+      <p class="sidebar-desc">Fill in the form and Ava will personally review your brief. No automated responses &#8212; you&#8217;ll hear from a real person who understands exactly what you&#8217;re trying to build.</p>
+      <div class="sidebar-stats">
+        <div class="sidebar-stat">
+          <span class="sidebar-stat-label">Average Response</span>
+          <span class="sidebar-stat-val">&#60; 4h</span>
         </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">QUANTOR</a>
-                    <p>Next-generation AI agency helping businesses scale through intelligent web experiences.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Navigation</h4>
-                    <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="index.html#services">Services</a>
-                        <a href="portfolio.html">Portfolio</a>
-                        <a href="about.html">About</a>
-                        <a href="contact.html">Contact</a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Pricing</h4>
-                    <div class="footer-links">
-                        <a href="pricing.html">View Plans</a>
-                        <a href="contact.html">Custom Quote</a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <div class="footer-links">
-                        <a href="privacy-policy.html">Privacy Policy</a>
-                        <a href="terms.html">Terms of Service</a>
-                        <a href="refund-policy.html">Refund Policy</a>
-                        <a href="disclaimer.html">Disclaimer</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-contact">
-                    <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
-                    <a href="tel:+919599234747">+91 9599234747</a>
-                </div>
-                <div>&copy; 2026 QUANTOR. All rights reserved.</div>
-            </div>
+        <div class="sidebar-stat">
+          <span class="sidebar-stat-label">First Delivery</span>
+          <span class="sidebar-stat-val">2 Days</span>
         </div>
-    </footer>
+        <div class="sidebar-stat">
+          <span class="sidebar-stat-label">Projects Live</span>
+          <span class="sidebar-stat-val">6+</span>
+        </div>
+        <div class="sidebar-stat">
+          <span class="sidebar-stat-label">Satisfaction</span>
+          <span class="sidebar-stat-val">100%</span>
+        </div>
+      </div>
+    </div>
 
-    <script>
-        const nav = document.getElementById('main-nav');
-        const hamburger = document.getElementById('hamburger-btn');
-        const navMenu = document.getElementById('nav-menu');
+    <div class="contact-form-wrap reveal-up">
+      <div id="formInner">
+        <div class="form-header">
+          <h3>START YOUR PROJECT</h3>
+          <p>Every field helps us understand your vision better. Takes under 3 minutes.</p>
+        </div>
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="field-group">
+              <label class="field-label" for="fname">First Name</label>
+              <input class="field-input" type="text" id="fname" name="fname" placeholder="Your first name" required/>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="lname">Last Name</label>
+              <input class="field-input" type="text" id="lname" name="lname" placeholder="Your last name"/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field-group">
+              <label class="field-label" for="email">Email Address</label>
+              <input class="field-input" type="email" id="email" name="email" placeholder="you@company.com" required/>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="phone">WhatsApp / Phone</label>
+              <input class="field-input" type="tel" id="phone" name="phone" placeholder="+91 or international"/>
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="field-group">
+              <label class="field-label" for="business">Business / Brand Name</label>
+              <input class="field-input" type="text" id="business" name="business" placeholder="What&#8217;s your business called?" required/>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field-group">
+              <label class="field-label" for="industry">Industry</label>
+              <select class="field-select field-input" id="industry" name="industry">
+                <option value="" disabled selected>Select your industry</option>
+                <option>Real Estate</option>
+                <option>Healthcare / Dental</option>
+                <option>Fitness / Wellness</option>
+                <option>Legal</option>
+                <option>Food &amp; Beverage</option>
+                <option>Technology / IT</option>
+                <option>E-Commerce</option>
+                <option>Education</option>
+                <option>Finance</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="timeline">Timeline</label>
+              <select class="field-select field-input" id="timeline" name="timeline">
+                <option value="" disabled selected>When do you need it?</option>
+                <option>ASAP &#8212; 2 to 3 days</option>
+                <option>This week &#8212; 4 to 7 days</option>
+                <option>This month &#8212; flexible</option>
+                <option>Planning ahead &#8212; no rush</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="field-group">
+              <label class="field-label">Services Needed</label>
+              <div class="service-chips">
+                <!-- Core Packages -->
+                <input class="chip-input" type="checkbox" id="c1" name="services" value="AI Chatbot Only"/>
+                <label class="chip-label" for="c1">AI Chatbot Only</label>
+                <input class="chip-input" type="checkbox" id="c2" name="services" value="Landing Page"/>
+                <label class="chip-label" for="c2">Landing Page</label>
+                <input class="chip-input" type="checkbox" id="c3" name="services" value="Full Website (Pro)"/>
+                <label class="chip-label" for="c3">Full Website (Pro)</label>
+                <input class="chip-input" type="checkbox" id="c4" name="services" value="Enterprise Package"/>
+                <label class="chip-label" for="c4">Enterprise Package</label>
+                <!-- Add-On Services -->
+                <input class="chip-input" type="checkbox" id="c5" name="services" value="WhatsApp Automation"/>
+                <label class="chip-label" for="c5">WhatsApp Automation</label>
+                <input class="chip-input" type="checkbox" id="c6" name="services" value="Local SEO Package"/>
+                <label class="chip-label" for="c6">Local SEO Package</label>
+                <input class="chip-input" type="checkbox" id="c7" name="services" value="Reputation Management"/>
+                <label class="chip-label" for="c7">Reputation Management</label>
+                <input class="chip-input" type="checkbox" id="c8" name="services" value="Social Media Engine"/>
+                <label class="chip-label" for="c8">Social Media Engine</label>
+                <input class="chip-input" type="checkbox" id="c9" name="services" value="Analytics Dashboard"/>
+                <label class="chip-label" for="c9">Analytics Dashboard</label>
+                <input class="chip-input" type="checkbox" id="c10" name="services" value="Email Nurture Setup"/>
+                <label class="chip-label" for="c10">Email Nurture Setup</label>
+                <input class="chip-input" type="checkbox" id="c11" name="services" value="CRO Audit + Setup"/>
+                <label class="chip-label" for="c11">CRO Audit + Setup</label>
+                <input class="chip-input" type="checkbox" id="c12" name="services" value="Content Strategy + SEO Copy"/>
+                <label class="chip-label" for="c12">Content Strategy + SEO Copy</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="field-group">
+              <div class="budget-display">
+                <label class="budget-label-text">Estimated Budget</label>
+                <span class="budget-value" id="budgetDisplay">$129</span>
+              </div>
+              <input class="budget-slider" type="range" id="budgetSlider" min="0" max="7" value="0"/>
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="field-group">
+              <label class="field-label" for="message">Tell Us About Your Project</label>
+              <textarea class="field-textarea" id="message" name="message" placeholder="What does your business do? Who are your customers? What problem are you trying to solve? The more detail you share, the better we can help." required></textarea>
+            </div>
+          </div>
+          <div class="form-submit-row">
+            <button type="submit" class="submit-btn">Send Brief <span class="arrow">&#8594;</span></button>
+            <span class="form-note">No spam &#183; Confidential &#183; Personal reply</span>
+          </div>
+        </form>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">&#10003;</div>
+        <div class="success-title">BRIEF RECEIVED.</div>
+        <p class="success-sub">Thank you. Ava has your brief and will be in touch within 4 hours. Check your WhatsApp or email for a personal response.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-grid">
+    <div class="reveal-up">
+      <div class="section-tag">Before You Ask</div>
+      <h2 class="section-title">COMMON<br>QUESTIONS.</h2>
+      <p>If something isn&#8217;t answered here, just send us a message &#8212; we&#8217;ll reply personally.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-btn">
+          <span class="faq-q">HOW FAST CAN YOU ACTUALLY DELIVER?</span>
+          <span class="faq-chevron">&#43;</span>
+        </button>
+        <div class="faq-answer">
+          <p>Our Chatbot Only package delivers in <span>2 days</span>. Landing Pages take <span>3 days</span>. Pro websites are ready in <span>5 days</span>. Enterprise projects take <span>9 days</span>. These aren&#8217;t aspirational timelines &#8212; they&#8217;re commitments we keep.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn">
+          <span class="faq-q">DO I PAY EVERYTHING UPFRONT?</span>
+          <span class="faq-chevron">&#43;</span>
+        </button>
+        <div class="faq-answer">
+          <p>Never. You pay <span>50% upfront</span> to start, and the remaining 50% only after you&#8217;ve reviewed and approved the final deliverable. No surprises, no risk.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn">
+          <span class="faq-q">WHAT IF I NEED CHANGES AFTER DELIVERY?</span>
+          <span class="faq-chevron">&#43;</span>
+        </button>
+        <div class="faq-answer">
+          <p>Every package includes support &#8212; from <span>30 days</span> on our starter plans to <span>6 months</span> on Enterprise. Bugs, tweaks, and questions are all covered.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn">
+          <span class="faq-q">CAN I PAY IN RUPEES OR DOLLARS?</span>
+          <span class="faq-chevron">&#43;</span>
+        </button>
+        <div class="faq-answer">
+          <p>Both. Indian clients pay in <span>INR via UPI</span>. International clients pay in <span>USD via PayPal or Wise</span>. The choice is yours.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn">
+          <span class="faq-q">IS THE AI CHATBOT INCLUDED IN EVERY PLAN?</span>
+          <span class="faq-chevron">&#43;</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes. <span>Every single plan</span> includes Chatling AI &#8212; trained on your business data, embedded on your site, capturing leads 24/7.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn">
+          <span class="faq-q">HOW DO I GET STARTED?</span>
+          <span class="faq-chevron">&#43;</span>
+        </button>
+        <div class="faq-answer">
+          <p>Fill out the form above or message us on <span>WhatsApp</span>. You&#8217;ll get a personal response within 4 hours with a clear plan, timeline, and quote.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
+<!-- INFO STRIP -->
+<section id="info-strip">
+  <div class="info-strip-inner">
+    <div class="info-block">
+      <span class="info-icon">&#127760;</span>
+      <div class="info-label">Headquarters</div>
+      <div class="info-val">India &#8212; Global</div>
+      <div class="info-sub">Serving clients worldwide remotely</div>
+    </div>
+    <div class="info-block">
+      <span class="info-icon">&#128172;</span>
+      <div class="info-label">WhatsApp</div>
+      <div class="info-val"><a href="https://wa.me/919599234747">+91 9599 234 747</a></div>
+      <div class="info-sub">Fastest response guaranteed</div>
+    </div>
+    <div class="info-block">
+      <span class="info-icon">&#9993;</span>
+      <div class="info-label">Email</div>
+      <div class="info-val"><a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a></div>
+      <div class="info-sub">For detailed briefs and proposals</div>
+    </div>
+    <div class="info-block">
+      <span class="info-icon">&#9200;</span>
+      <div class="info-label">Response Time</div>
+      <div class="info-val">Under 4 Hours</div>
+      <div class="info-sub">Mon&#8211;Sat, typically faster</div>
+    </div>
+  </div>
+</section>
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
-        });
+<!-- THREE.JS CRYSTAL BRIDGE -->
+<section id="crystal-section">
+  <canvas id="crystal-canvas"></canvas>
+  <div class="crystal-content">
+    <div class="crystal-tag">What Happens Next</div>
+    <div class="crystal-headline reveal-up">
+      YOU SEND THE BRIEF.<br><span style="color:var(--mint)">WE BUILD THE FUTURE.</span>
+    </div>
+    <p class="crystal-sub reveal-up">
+      Within 4 hours of your brief, Ava reviews it personally and sends you a clear project plan &#8212; timeline, deliverables, and exact cost. No surprises, no inflated proposals, no waiting weeks.
+    </p>
+  </div>
+</section>
 
-        const whatsappForm = document.getElementById('whatsapp-form');
-        const messagePreview = document.getElementById('message-preview');
-        
-        const updatePreview = () => {
-            const name = document.getElementById('name').value || 'John Doe';
-            const business = document.getElementById('business').value || 'Your Business LLC';
-            const whatsapp = document.getElementById('whatsapp').value || '+91 9876543210';
-            const service = document.getElementById('service').value || 'Landing Page';
-            const message = document.getElementById('message').value || 'I need a landing page for my coaching business...';
-            
-            messagePreview.textContent = `Hi, I'm interested in your services!
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo">QUAN<em>TOR</em></div>
+      <div class="footer-tagline">Your Business Deserves More Than a Dead Website.</div>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/YOURUSERNAME" target="_blank" class="social-btn" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://www.facebook.com/YOURUSERNAME" target="_blank" class="social-btn" title="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://wa.me/919599234747" target="_blank" class="social-btn" title="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </a>
+      </div>
+      <div class="footer-contact-links">
+        <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
+        <a href="https://wa.me/919599234747">+91 9599 234 747</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>NAVIGATE</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>PRICING</h5>
+      <ul>
+        <li><a href="pricing.html#core-plans">Core Packages</a></li>
+        <li><a href="pricing.html#addons">Add-On Services</a></li>
+        <li><a href="pricing.html#custom">Custom Quote</a></li>
+        <li><a href="pricing.html#pfaq">Pricing FAQ</a></li>
+        <li><a href="pricing.html#payment">Payment Methods</a></li>
+      </ul>
+      <a href="pricing.html" class="footer-pricing-btn">&#8377; / $ View Pricing</a>
+    </div>
+    <div class="footer-col">
+      <h5>COMPANY</h5>
+      <ul>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="https://wa.me/919599234747" target="_blank">WhatsApp Us</a></li>
+        <li><a href="contact.html">Start a Project</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 QUANTOR. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="refund-policy.html">Refund Policy</a>
+      <a href="disclaimer.html">Disclaimer</a>
+    </div>
+  </div>
+</footer>
 
-Name: ${name}
-Business: ${business}
-WhatsApp: ${whatsapp}
-Service Needed: ${service}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ── PRELOADER
+const preloader = document.getElementById("preloader");
+const preCount = document.getElementById("preCount");
+let prog = 0;
+const ci = setInterval(() => {
+  prog += Math.random() * 12;
+  if (prog >= 100) { prog = 100; clearInterval(ci); setTimeout(() => { preloader.classList.add("hide"); document.body.classList.remove("loading"); }, 400); }
+  preCount.textContent = Math.floor(prog) + "%";
+}, 80);
 
-About my business:
-${message}`;
-        };
-        
-        document.querySelectorAll('#whatsapp-form input, #whatsapp-form select, #whatsapp-form textarea').forEach(field => {
-            field.addEventListener('input', updatePreview);
-            field.addEventListener('change', updatePreview);
-        });
+// ── CURSOR
+const cO = document.getElementById("cursor-outer"), cD = document.getElementById("cursor-dot");
+let mx = 0, my = 0, ox = 0, oy = 0;
+document.addEventListener("mousemove", e => { mx = e.clientX; my = e.clientY; cD.style.left = mx+"px"; cD.style.top = my+"px"; });
+(function raf() { ox += (mx-ox)*0.12; oy += (my-oy)*0.12; cO.style.left=ox+"px"; cO.style.top=oy+"px"; requestAnimationFrame(raf); })();
+document.querySelectorAll("a,button,.chip-label,.faq-btn").forEach(el => {
+  el.addEventListener("mouseenter", () => document.body.classList.add("cursor-hover"));
+  el.addEventListener("mouseleave", () => document.body.classList.remove("cursor-hover"));
+});
 
-        whatsappForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const business = document.getElementById('business').value;
-            const whatsapp = document.getElementById('whatsapp').value;
-            const service = document.getElementById('service').value;
-            const message = document.getElementById('message').value;
-            
-            const whatsappMessage = `Hi, I'm interested in your services!
+// ── NAV SCROLL
+const nav = document.getElementById("nav");
+window.addEventListener("scroll", () => nav.classList.toggle("scrolled", window.scrollY > 60));
 
-Name: ${name}
-Business: ${business}
-WhatsApp: ${whatsapp}
-Service Needed: ${service}
+// ── THREE.JS HERO — FLOATING CRYSTALLINE RINGS + PARTICLES
+(function() {
+  const canvas = document.getElementById("contact-canvas");
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(70, innerWidth/innerHeight, 0.1, 1000);
+  camera.position.z = 5;
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 
-About my business:
-${message}`;
-            
-            const encodedMessage = encodeURIComponent(whatsappMessage);
-            const whatsappURL = `https://wa.me/919599234747?text=${encodedMessage}`;
-            
-            window.open(whatsappURL, '_blank');
-        });
+  const group = new THREE.Group();
+  scene.add(group);
 
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const faqItem = button.parentElement;
-                const isActive = faqItem.classList.contains('active');
-                
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    item.classList.remove('active');
-                });
-                
-                if (!isActive) {
-                    faqItem.classList.add('active');
-                }
-            });
-        });
+  // Torus rings
+  const torusGeo = new THREE.TorusGeometry(1.8, 0.02, 16, 100);
+  const torusMat = new THREE.MeshBasicMaterial({ color: 0x00ffb2, transparent: true, opacity: 0.3 });
+  for (let i = 0; i < 3; i++) {
+    const torus = new THREE.Mesh(torusGeo, torusMat.clone());
+    torus.rotation.x = Math.random() * Math.PI;
+    torus.rotation.y = Math.random() * Math.PI;
+    torus.scale.setScalar(0.6 + i * 0.4);
+    torus.userData = { rx: (Math.random() - 0.5) * 0.003, ry: (Math.random() - 0.5) * 0.004 };
+    group.add(torus);
+  }
 
-        const initBackground = () => {
-            const container = document.getElementById('bg-canvas');
-            if (!container) return;
-            
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            container.appendChild(renderer.domElement);
+  // Particles
+  const pGeo = new THREE.BufferGeometry();
+  const pCount = 200;
+  const pPos = new Float32Array(pCount * 3);
+  for (let i = 0; i < pCount * 3; i++) pPos[i] = (Math.random() - 0.5) * 10;
+  pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
+  const pMat = new THREE.PointsMaterial({ color: 0x00ffb2, size: 0.02, transparent: true, opacity: 0.6 });
+  const particles = new THREE.Points(pGeo, pMat);
+  scene.add(particles);
 
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 80;
-            const posArray = new Float32Array(particlesCount * 3);
+  let try_ = 0, trx = 0;
+  document.addEventListener("mousemove", e => { try_=(e.clientX/innerWidth-0.5)*0.35; trx=-(e.clientY/innerHeight-0.5)*0.25; });
 
-            for (let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 15;
-            }
+  (function animate() {
+    requestAnimationFrame(animate);
+    group.rotation.y += 0.002;
+    group.rotation.x = try_ * 0.3;
+    group.rotation.z = trx * 0.2;
+    group.children.forEach(c => { c.rotation.x += c.userData.rx; c.rotation.y += c.userData.ry; });
+    particles.rotation.y += 0.0005;
+    renderer.render(scene, camera);
+  })();
+  window.addEventListener("resize", () => { camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); });
+})();
 
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+// ── THREE.JS CRYSTAL SECTION
+(function() {
+  const canvas = document.getElementById("crystal-canvas");
+  if (!canvas) return;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 1000);
+  camera.position.z = 6;
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.05,
-                color: 0x4F8EF7,
-                transparent: true,
-                opacity: 0.6
-            });
+  const group = new THREE.Group();
+  scene.add(group);
 
-            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particlesMesh);
+  const icosGeo = new THREE.IcosahedronGeometry(2, 0);
+  const icosMat = new THREE.MeshBasicMaterial({ color: 0x00ffb2, wireframe: true, transparent: true, opacity: 0.15 });
+  const icos = new THREE.Mesh(icosGeo, icosMat);
+  group.add(icos);
 
-            const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
-            const sphereMaterial = new THREE.MeshBasicMaterial({
-                color: 0x4F8EF7,
-                transparent: true,
-                opacity: 0.1,
-                wireframe: true
-            });
-            const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-            scene.add(sphere);
+  const ringGeo = new THREE.TorusGeometry(2.8, 0.01, 16, 100);
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0x00ffb2, transparent: true, opacity: 0.2 });
+  for (let i = 0; i < 2; i++) {
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI / 2 + i * 0.3;
+    ring.rotation.z = i * 0.5;
+    group.add(ring);
+  }
 
-            camera.position.z = 5;
+  function resize() { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); }
+  (function animate() {
+    requestAnimationFrame(animate);
+    group.rotation.y += 0.002;
+    group.rotation.x += 0.001;
+    renderer.render(scene, camera);
+  })();
+  window.addEventListener("resize", resize);
+})();
 
-            let mouseX = 0;
-            let mouseY = 0;
+// ── BUDGET SLIDER
+(function() {
+  const steps = ["$90/mo", "$129", "$299", "$499", "$699", "$999", "$1,499", "Custom"];
+  const slider = document.getElementById("budgetSlider");
+  const display = document.getElementById("budgetDisplay");
+  slider.addEventListener("input", () => { display.textContent = steps[parseInt(slider.value)]; });
+})();
 
-            document.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-            });
+// ── FAQ ACCORDION
+document.querySelectorAll(".faq-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const item = btn.closest(".faq-item");
+    const isOpen = item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("open"));
+    if (!isOpen) item.classList.add("open");
+  });
+});
 
-            const animate = () => {
-                requestAnimationFrame(animate);
-                
-                particlesMesh.rotation.x += 0.0005;
-                particlesMesh.rotation.y += 0.0005;
-                
-                sphere.rotation.x += 0.002;
-                sphere.rotation.y += 0.002;
-                
-                sphere.position.x += (mouseX * 0.5 - sphere.position.x) * 0.02;
-                sphere.position.y += (mouseY * 0.5 - sphere.position.y) * 0.02;
-                
-                renderer.render(scene, camera);
-            };
+// ── FORM SUBMIT TO WHATSAPP
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  
+  // Get form values
+  const fname = document.getElementById("fname").value.trim();
+  const lname = document.getElementById("lname").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const business = document.getElementById("business").value.trim();
+  const industry = document.getElementById("industry").value;
+  const timeline = document.getElementById("timeline").value;
+  const message = document.getElementById("message").value.trim();
+  const budget = document.getElementById("budgetDisplay").textContent;
+  
+  // Get selected services
+  const services = [];
+  document.querySelectorAll('input[name="services"]:checked').forEach(cb => {
+    services.push(cb.value);
+  });
+  
+  // Build WhatsApp message
+  let waMessage = `*NEW PROJECT BRIEF FROM QUANTOR WEBSITE*\n`;
+  waMessage += `━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  waMessage += `*CLIENT DETAILS*\n`;
+  waMessage += `Name: ${fname} ${lname}\n`;
+  waMessage += `Email: ${email}\n`;
+  if (phone) waMessage += `Phone/WhatsApp: ${phone}\n`;
+  waMessage += `Business: ${business}\n\n`;
+  
+  waMessage += `*PROJECT DETAILS*\n`;
+  if (industry) waMessage += `Industry: ${industry}\n`;
+  if (timeline) waMessage += `Timeline: ${timeline}\n`;
+  waMessage += `Budget: ${budget}\n`;
+  
+  if (services.length > 0) {
+    waMessage += `\n*Services Needed:*\n`;
+    services.forEach(s => waMessage += `• ${s}\n`);
+  }
+  
+  if (message) {
+    waMessage += `\n*Project Description:*\n${message}\n`;
+  }
+  
+  waMessage += `\n━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+  waMessage += `_Sent via QUANTOR Contact Form_`;
+  
+  // Encode message for URL
+  const encodedMessage = encodeURIComponent(waMessage);
+  
+  // WhatsApp URL
+  const waUrl = `https://wa.me/919599234747?text=${encodedMessage}`;
+  
+  // Update button state
+  const btn = this.querySelector(".submit-btn");
+  btn.innerHTML = 'Opening WhatsApp... <span class="arrow">&#8594;</span>';
+  btn.style.opacity = "0.7";
+  
+  // Open WhatsApp in new tab
+  setTimeout(() => {
+    window.open(waUrl, '_blank');
+    
+    // Show success state
+    document.getElementById("formInner").style.display = "none";
+    document.getElementById("formSuccess").classList.add("show");
+  }, 500);
+});
 
-            animate();
+// ── SIDEBAR STATS REVEAL
+(function() {
+  const obs = new IntersectionObserver(en => { en.forEach(e => { if(e.isIntersecting) e.target.classList.add("visible"); }); }, { threshold: 0.3 });
+  document.querySelectorAll(".sidebar-stat").forEach(s => obs.observe(s));
+})();
 
-            window.addEventListener('resize', () => {
-                camera.aspect = container.clientWidth / container.clientHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(container.clientWidth, container.clientHeight);
-            });
-        };
+// ── FAQ ITEMS REVEAL
+(function() {
+  const obs = new IntersectionObserver(en => { en.forEach(e => { if(e.isIntersecting) e.target.classList.add("visible"); }); }, { threshold: 0.2 });
+  document.querySelectorAll(".faq-item").forEach(s => obs.observe(s));
+})();
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initBackground();
-            updatePreview();
-        });
-    </script>
+// ── INFO BLOCKS REVEAL
+(function() {
+  const obs = new IntersectionObserver(en => { en.forEach(e => { if(e.isIntersecting) e.target.classList.add("visible"); }); }, { threshold: 0.3 });
+  document.querySelectorAll(".info-block").forEach(b => obs.observe(b));
+})();
+
+// ── GENERIC REVEAL
+(function() {
+  const obs = new IntersectionObserver(en => { en.forEach(e => { if(e.isIntersecting) e.target.classList.add("visible"); }); }, { threshold: 0.15 });
+  document.querySelectorAll(".reveal-up").forEach(el => obs.observe(el));
+})();
+
+// ── MAGNETIC BUTTONS
+document.querySelectorAll(".submit-btn,.nav-cta").forEach(btn => {
+  btn.addEventListener("mousemove", e => { const r=btn.getBoundingClientRect(); btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*0.2}px,${(e.clientY-r.top-r.height/2)*0.2}px)`; });
+  btn.addEventListener("mouseleave", () => { btn.style.transform=""; btn.style.transition="transform 0.5s cubic-bezier(0.16,1,0.3,1)"; });
+  btn.addEventListener("mouseenter", () => { btn.style.transition="none"; });
+});
+
+// ── FIELD FOCUS GLOW TRAIL
+document.querySelectorAll(".field-input,.field-select,.field-textarea").forEach(f => {
+  f.addEventListener("focus", () => f.style.transform = "translateY(-2px)");
+  f.addEventListener("blur", () => f.style.transform = "");
+});
+</script>
 </body>
 </html>
-
-
