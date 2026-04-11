@@ -1,724 +1,1277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disclaimer | QUANTOR</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-dark: #0a0a0f;
-            --card-dark: #12121a;
-            --accent-blue: #4F8EF7;
-            --accent-purple: #7C3AED;
-            --text-white: #ffffff;
-            --text-muted: #a0a0b0;
-            --text-body: #c8c8d8;
-            --border-blue: rgba(79, 142, 247, 0.2);
-            --border-subtle: #1e1e2e;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            font-family: var(--font-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            font-size: 0.95rem;
-            border: none;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-filled {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-            box-shadow: 0 4px 15px rgba(79, 142, 247, 0.3);
-        }
-
-        .btn-filled:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(79, 142, 247, 0.5);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: white;
-            border: 1px solid var(--border-blue);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent-blue);
-            background: rgba(79, 142, 247, 0.1);
-            transform: translateY(-3px);
-        }
-
-        /* Navbar */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1.5rem 0;
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-blue);
-            padding: 1rem 0;
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: white;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            background: none;
-            border: none;
-            z-index: 1100;
-            padding: 5px;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 28px;
-            height: 2px;
-            background: white;
-            margin: 6px 0;
-            transition: 0.3s;
-        }
-
-        /* Legal Hero */
-        .legal-hero {
-            position: relative;
-            min-height: 35vh;
-            display: flex;
-            align-items: center;
-            padding-top: 100px;
-            padding-bottom: 3rem;
-            background: linear-gradient(135deg, rgba(79, 142, 247, 0.05) 0%, transparent 50%);
-            overflow: hidden;
-        }
-
-        .legal-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(79, 142, 247, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .legal-hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-blue), transparent);
-        }
-
-        .legal-hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 720px;
-        }
-
-        .legal-eyebrow {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent-blue);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .legal-hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            font-weight: 900;
-            letter-spacing: -2px;
-        }
-
-        .legal-hero p {
-            font-size: 1rem;
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        .legal-rule {
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            margin-top: 2rem;
-            border-radius: 2px;
-        }
-
-        /* Legal Content */
-        .legal-content {
-            padding: 5rem 0;
-        }
-
-        .legal-body {
-            max-width: 720px;
-            margin: 0 auto;
-        }
-
-        .legal-section {
-            margin-bottom: 3rem;
-        }
-
-        .legal-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .legal-section h2 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-white);
-            padding-left: 1rem;
-            border-left: 3px solid var(--accent-blue);
-            margin-bottom: 1.2rem;
-            line-height: 1.4;
-        }
-
-        .legal-section p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text-body);
-            margin-bottom: 0;
-        }
-
-        .legal-section a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .legal-section a:hover {
-            opacity: 0.8;
-        }
-
-        .legal-divider {
-            height: 1px;
-            background: var(--border-subtle);
-            margin: 3rem 0;
-        }
-
-        /* Trust Tiles */
-        .trust-section {
-            padding: 4rem 0;
-            background: var(--card-dark);
-            border-top: 1px solid var(--border-blue);
-            border-bottom: 1px solid var(--border-blue);
-        }
-
-        .trust-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .trust-tile {
-            background: var(--bg-dark);
-            border: 1px solid var(--border-blue);
-            border-radius: 12px;
-            padding: 2rem 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .trust-tile:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-3px);
-        }
-
-        .trust-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 1rem;
-            color: var(--accent-blue);
-        }
-
-        .trust-tile h4 {
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-white);
-        }
-
-        .trust-tile p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* Contact CTA */
-        .contact-cta {
-            padding: 5rem 0;
-            text-align: center;
-        }
-
-        .contact-cta-box {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 3rem;
-            background: var(--card-dark);
-            border: 1px solid var(--border-blue);
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-cta-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-        }
-
-        .contact-cta h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-cta p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 0.95rem;
-        }
-
-        /* Footer */
-        footer {
-            padding: 5rem 0 2rem;
-            background: #050508;
-            border-top: 1px solid var(--border-blue);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-brand .logo {
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-brand p {
-            color: var(--text-muted);
-            max-width: 300px;
-            font-size: 0.95rem;
-        }
-
-        .footer-col h4 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-            color: #555;
-            font-size: 0.85rem;
-        }
-
-        .footer-contact {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-contact a {
-            color: #555;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .footer-contact a:hover {
-            color: var(--accent-blue);
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 1024px) {
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .trust-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 85%;
-                height: 100vh;
-                background: var(--card-dark);
-                flex-direction: column;
-                justify-content: center;
-                transition: 0.4s ease;
-                box-shadow: -10px 0 40px rgba(0,0,0,0.7);
-                gap: 2rem;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .hamburger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-            .hamburger.active span:nth-child(2) {
-                opacity: 0;
-            }
-            .hamburger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
-            }
-
-            .legal-hero {
-                min-height: 30vh;
-                padding-top: 80px;
-            }
-
-            .trust-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-contact {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .contact-cta-box {
-                padding: 2rem 1.5rem;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Disclaimer — QUANTOR | Important Notices &amp; Limitations</title>
+<meta name="description" content="QUANTOR Disclaimer - Important notices about our services, limitations of liability, and client responsibilities. Read this before engaging our services."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════════════════════════
+   QUANTOR — DISCLAIMER PAGE
+   Design System: Dark Luxury Futurism v3.0
+════════════════════════════════════════════ */
+:root {
+  --ink:    #030507;
+  --ink2:   #070c12;
+  --ink3:   #0c1420;
+  --mint:   #00ffb2;
+  --coral:  #ff2d55;
+  --gold:   #e8a020;
+  --violet: #7c3aed;
+  --chalk:  #e2ecff;
+  --dim:    #4a5a78;
+  --dimmer: #1e2a3d;
+  --border: rgba(0,255,178,0.1);
+  --head: "Bebas Neue", sans-serif;
+  --body: "Manrope", sans-serif;
+  --mono: "JetBrains Mono", monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { background: var(--ink); color: var(--chalk); font-family: var(--body); overflow-x: hidden; cursor: none; }
+body.loading { overflow: hidden; }
+::selection { background: var(--mint); color: #000; }
+body::after {
+  content:""; position: fixed; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.35;
+}
+
+/* ── PRELOADER ── */
+#preloader {
+  position: fixed; inset: 0; background: var(--ink); z-index: 9998;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  transition: opacity 0.8s var(--ease), visibility 0.8s;
+}
+#preloader.hide { opacity: 0; visibility: hidden; }
+.pre-logo { font-family: var(--head); font-size: clamp(3rem,8vw,6rem); letter-spacing: 0.3em; color: var(--chalk); overflow: hidden; display: flex; }
+.pre-logo span { display: inline-block; transform: translateY(100%); opacity: 0; animation: charUp 0.6s var(--ease) forwards; }
+.pre-logo span:nth-child(1){animation-delay:.05s} .pre-logo span:nth-child(2){animation-delay:.1s}
+.pre-logo span:nth-child(3){animation-delay:.15s} .pre-logo span:nth-child(4){animation-delay:.2s}
+.pre-logo span:nth-child(5){animation-delay:.25s} .pre-logo span:nth-child(6){animation-delay:.3s}
+.pre-logo span:nth-child(7){animation-delay:.35s} .pre-logo span:nth-child(8){color:var(--mint);animation-delay:.35s}
+.pre-bar-wrap { width: 280px; height: 1px; background: var(--dimmer); position: relative; overflow: visible; }
+.pre-bar { position: absolute; left: 0; top: 0; height: 100%; background: var(--mint); width: 0%; animation: loadBar 2s var(--ease) forwards 0.5s; box-shadow: 0 0 20px var(--mint); }
+.pre-count { position: absolute; right: 0; bottom: 8px; font-family: var(--mono); font-size: 0.65rem; color: var(--mint); letter-spacing:0.1em; }
+.pre-page-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.25em; color: var(--dim); text-transform: uppercase; }
+@keyframes charUp { to { transform: translateY(0); opacity: 1; } }
+@keyframes loadBar { to { width: 100%; } }
+
+/* ── CURSOR ── */
+#cursor-outer { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(0,255,178,0.5); border-radius: 50%; pointer-events: none; z-index: 9997; transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s, border-color 0.3s; transform: translate(-50%,-50%); will-change: left,top; }
+#cursor-dot { position: fixed; width: 5px; height: 5px; background: var(--mint); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%,-50%); box-shadow: 0 0 10px var(--mint); will-change: left,top; }
+body.cursor-hover #cursor-outer { width: 70px; height: 70px; background: rgba(0,255,178,0.05); border-color: var(--mint); }
+
+/* ── NAV ── */
+#nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.8rem 4%; display: flex; align-items: center; justify-content: space-between; transition: padding 0.4s var(--ease), background 0.4s, border-bottom 0.4s; }
+#nav.scrolled { padding: 1.2rem 4%; background: rgba(3,5,7,0.92); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--head); font-size: 1.8rem; letter-spacing: 0.15em; color: var(--chalk); text-decoration: none; }
+.nav-logo em { color: var(--mint); font-style: normal; }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { color: var(--dim); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; position: relative; transition: color 0.3s; }
+.nav-links a::after { content:""; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--mint); transition: width 0.3s var(--ease); }
+.nav-links a:hover { color: var(--chalk); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links a.active { color: var(--chalk); }
+.nav-price-btn { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mint); border: 1px solid rgba(0,255,178,0.3); padding: 0.4rem 0.9rem; border-radius: 100px; text-decoration: none; transition: background 0.3s, border-color 0.3s; }
+.nav-price-btn:hover { background: rgba(0,255,178,0.08); border-color: var(--mint); }
+.nav-price-btn::after { display: none !important; }
+.nav-cta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink) !important; background: var(--mint); padding: 0.65rem 1.4rem; border-radius: 4px; text-decoration: none; transition: box-shadow 0.3s, transform 0.3s; box-shadow: 0 0 30px rgba(0,255,178,0.2); }
+.nav-cta:hover { box-shadow: 0 0 60px rgba(0,255,178,0.5); transform: scale(1.03); }
+.nav-cta::after { display: none !important; }
+
+/* ════════════════════════════════════════════
+   HERO SECTION
+════════════════════════════════════════════ */
+#policy-hero {
+  position: relative; min-height: 70vh; display: flex; align-items: center;
+  overflow: hidden;
+}
+.policy-hero-gradient {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 65% at 85% 50%, rgba(0,255,178,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 55% at 5% 70%, rgba(124,58,237,0.04) 0%, transparent 70%);
+}
+.policy-hero-inner {
+  position: relative; z-index: 1; padding: 10rem 4% 5rem;
+  max-width: 1000px; width: 100%;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 2.5rem; overflow: hidden;
+}
+.hero-eyebrow-inner {
+  display: flex; align-items: center; gap: 0.8rem;
+  transform: translateY(60px); opacity: 0;
+  animation: slideUp 1s var(--ease) 2.8s forwards;
+}
+.eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); animation: blink 1.5s infinite; box-shadow: 0 0 8px var(--mint); }
+.eyebrow-line { width: 40px; height: 1px; background: var(--mint); box-shadow: 0 0 10px var(--mint); }
+.eyebrow-text { font-family: var(--mono); font-size: 0.7rem; color: var(--mint); letter-spacing: 0.2em; text-transform: uppercase; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+
+.policy-headline {
+  font-family: var(--head); font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 2rem;
+}
+.headline-row { display: block; overflow: hidden; }
+.headline-row span { display: block; transform: translateY(110%); opacity: 0; }
+.headline-row:nth-child(1) span { animation: slideUp 1.1s var(--ease) 2.9s forwards; }
+.headline-row:nth-child(2) span { animation: slideUp 1.1s var(--ease) 3.0s forwards; }
+.mint-word { color: var(--mint); }
+.outline-word { -webkit-text-stroke: 1px rgba(226,236,255,0.25); color: transparent; }
+
+.policy-hero-sub {
+  font-size: 1.1rem; color: var(--dim); line-height: 1.75; font-weight: 300;
+  max-width: 600px; margin-bottom: 2rem;
+  transform: translateY(30px); opacity: 0;
+  animation: slideUp 1s var(--ease) 3.2s forwards;
+}
+
+.policy-meta {
+  display: flex; flex-wrap: wrap; gap: 2rem;
+  transform: translateY(30px); opacity: 0;
+  animation: slideUp 1s var(--ease) 3.3s forwards;
+}
+.meta-item {
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.meta-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; }
+.meta-value { font-family: var(--head); font-size: 1.1rem; letter-spacing: 0.04em; color: var(--mint); }
+
+@keyframes slideUp { to { transform: translateY(0) translateX(0); opacity: 1; } }
+
+/* ════════════════════════════════════════════
+   TABLE OF CONTENTS
+════════════════════════════════════════════ */
+#toc-section {
+  padding: 4rem 4%; background: var(--ink2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.toc-inner {
+  max-width: 1000px; margin: 0 auto;
+}
+.toc-header {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+}
+.toc-title { font-family: var(--head); font-size: 1.5rem; letter-spacing: 0.08em; }
+.toc-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+.toc-item {
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.5rem;
+  text-decoration: none; color: var(--dim); transition: all 0.3s;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.toc-item:hover { border-color: rgba(0,255,178,0.3); color: var(--chalk); transform: translateY(-2px); }
+.toc-num { font-family: var(--mono); font-size: 0.7rem; color: var(--mint); background: rgba(0,255,178,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; }
+.toc-text { font-size: 0.85rem; font-weight: 500; }
+
+/* ════════════════════════════════════════════
+   CONTENT SECTION
+════════════════════════════════════════════ */
+#content-section {
+  padding: 6rem 4%; background: var(--ink);
+}
+.content-inner {
+  max-width: 900px; margin: 0 auto;
+}
+.policy-block {
+  margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border);
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.policy-block.visible { opacity: 1; transform: translateY(0); }
+.policy-block:last-child { border-bottom: none; margin-bottom: 0; }
+.block-header {
+  display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem;
+}
+.block-num {
+  font-family: var(--mono); font-size: 0.8rem; color: var(--ink); background: var(--mint);
+  padding: 0.4rem 0.8rem; border-radius: 6px; flex-shrink: 0;
+}
+.block-title { font-family: var(--head); font-size: 2rem; letter-spacing: 0.04em; line-height: 1.1; }
+.block-content { padding-left: 3.5rem; }
+.block-content p {
+  font-size: 0.95rem; color: var(--dim); line-height: 1.85; font-weight: 300;
+  margin-bottom: 1.2rem;
+}
+.block-content p:last-child { margin-bottom: 0; }
+.block-content strong { color: var(--chalk); font-weight: 600; }
+.block-content em { color: var(--mint); font-style: normal; }
+.block-content a { color: var(--mint); text-decoration: none; border-bottom: 1px solid rgba(0,255,178,0.3); transition: border-color 0.3s; }
+.block-content a:hover { border-color: var(--mint); }
+
+/* Lists */
+.policy-list { list-style: none; margin: 1.5rem 0; }
+.policy-list li {
+  position: relative; padding-left: 1.8rem; margin-bottom: 1rem;
+  font-size: 0.95rem; color: var(--dim); line-height: 1.7;
+}
+.policy-list li::before {
+  content: ""; position: absolute; left: 0; top: 0.6rem;
+  width: 6px; height: 6px; background: var(--mint); border-radius: 50%;
+}
+
+/* Highlight Box */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(0,255,178,0.06), rgba(0,255,178,0.02));
+  border: 1px solid rgba(0,255,178,0.15); border-radius: 12px;
+  padding: 1.5rem 2rem; margin: 1.5rem 0;
+}
+.highlight-box p { margin-bottom: 0 !important; color: var(--chalk); }
+.highlight-box.warning {
+  background: linear-gradient(135deg, rgba(255,45,85,0.06), rgba(255,45,85,0.02));
+  border-color: rgba(255,45,85,0.15);
+}
+.highlight-box.warning p { color: var(--coral); }
+
+/* Info Table */
+.info-table {
+  width: 100%; border-collapse: collapse; margin: 1.5rem 0;
+}
+.info-table th, .info-table td {
+  padding: 1rem 1.2rem; text-align: left; border-bottom: 1px solid var(--border);
+}
+.info-table th {
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--mint); background: rgba(0,255,178,0.03);
+}
+.info-table td { font-size: 0.9rem; color: var(--dim); }
+.info-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* ════════════════════════════════════════════
+   CONTACT SECTION
+════════════════════════════════════════════ */
+#contact-section {
+  padding: 5rem 4%; background: var(--ink2);
+}
+.contact-inner {
+  max-width: 800px; margin: 0 auto; text-align: center;
+}
+.contact-title { font-family: var(--head); font-size: clamp(2rem,4vw,3rem); letter-spacing: 0.04em; margin-bottom: 1rem; }
+.contact-sub { font-size: 0.95rem; color: var(--dim); line-height: 1.7; margin-bottom: 2.5rem; }
+.contact-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.contact-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid var(--border); border-radius: 16px; padding: 2rem;
+  text-decoration: none; color: var(--chalk); transition: all 0.3s;
+}
+.contact-card:hover { border-color: rgba(0,255,178,0.3); transform: translateY(-4px); }
+.contact-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.contact-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; margin-bottom: 0.5rem; }
+.contact-value { font-family: var(--head); font-size: 1.3rem; letter-spacing: 0.04em; }
+
+/* ════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════ */
+footer { background: var(--ink); border-top: 1px solid var(--border); }
+.footer-main { padding: 4rem 4% 3rem; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; }
+.footer-brand {}
+.footer-logo { font-family: var(--head); font-size: 1.8rem; letter-spacing: 0.15em; margin-bottom: 0.4rem; }
+.footer-logo em { color: var(--mint); font-style: normal; }
+.footer-tagline { font-size: 0.78rem; color: var(--dim); letter-spacing: 0.05em; font-weight: 300; margin-bottom: 1.5rem; }
+.footer-socials { display: flex; gap: 0.8rem; margin-bottom: 1.5rem; }
+.social-btn { width: 40px; height: 40px; border: 1px solid var(--dimmer); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--dim); font-size: 0.9rem; transition: all 0.3s; }
+.social-btn:hover { border-color: var(--mint); color: var(--mint); background: rgba(0,255,178,0.06); }
+.footer-contact-links a { display: block; color: var(--mint); text-decoration: none; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.05em; margin-bottom: 0.3rem; transition: opacity 0.2s; }
+.footer-contact-links a:hover { opacity: 0.7; }
+.footer-col h5 { font-family: var(--head); font-size: 1rem; letter-spacing: 0.1em; margin-bottom: 1.2rem; color: var(--chalk); }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a { color: var(--dim); text-decoration: none; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.03em; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--chalk); }
+.footer-pricing-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mint); border: 1px solid rgba(0,255,178,0.3); padding: 0.4rem 0.9rem; border-radius: 100px; text-decoration: none; transition: background 0.3s, border-color 0.3s; margin-top: 0.4rem; }
+.footer-pricing-btn:hover { background: rgba(0,255,178,0.08); border-color: var(--mint); }
+.footer-bottom { border-top: 1px solid var(--border); padding: 1.5rem 4%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.72rem; color: var(--dimmer); }
+.footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.footer-legal a { font-size: 0.72rem; color: var(--dimmer); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--dim); }
+
+@media (max-width: 1100px) {
+  .toc-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-main { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .toc-grid { grid-template-columns: 1fr; }
+  .block-header { flex-direction: column; gap: 0.8rem; }
+  .block-content { padding-left: 0; margin-top: 1rem; }
+  .contact-cards { grid-template-columns: 1fr; }
+  .footer-main { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .info-table { font-size: 0.8rem; }
+  .info-table th, .info-table td { padding: 0.8rem; }
+}
+</style>
 </head>
-<body>
+<body class="loading">
 
-    <nav id="main-nav">
-        <div class="nav-content">
-            <a href="index.html" class="logo">QUANTOR</a>
-            <div class="nav-links" id="nav-menu">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <a href="pricing.html">Pricing</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="about.html">About</a>
-                <a href="contact.html" class="btn btn-filled">Get Started</a>
-            </div>
-            <button class="hamburger" id="hamburger-btn" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo"><span>Q</span><span>U</span><span>A</span><span>N</span><span>T</span><span>O</span><span>R</span><span>.</span></div>
+  <div class="pre-bar-wrap"><div class="pre-bar"></div><div class="pre-count" id="preCount">0%</div></div>
+  <div class="pre-page-label">Disclaimer</div>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor-outer"></div>
+<div id="cursor-dot"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">QUAN<em>TOR</em></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="pricing.html" class="nav-price-btn">&#8377; / $</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Start a Project &#8594;</a>
+</nav>
+
+<!-- HERO -->
+<section id="policy-hero">
+  <div class="policy-hero-gradient"></div>
+  <div class="policy-hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-inner">
+        <div class="eyebrow-dot"></div>
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">Legal Documentation</span>
+      </div>
+    </div>
+    <h1 class="policy-headline">
+      <span class="headline-row"><span>DISCLAIMER</span></span>
+      <span class="headline-row"><span class="mint-word">&amp; NOTICES.</span></span>
+    </h1>
+    <p class="policy-hero-sub">
+      This disclaimer outlines important limitations, clarifies what we do and don't guarantee, and protects both parties by setting clear expectations. Please read carefully before using our services.
+    </p>
+    <div class="policy-meta">
+      <div class="meta-item">
+        <span class="meta-label">Last Updated</span>
+        <span class="meta-value">January 12, 2025</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Effective Date</span>
+        <span class="meta-value">January 12, 2025</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Version</span>
+        <span class="meta-value">1.0</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<section id="toc-section">
+  <div class="toc-inner">
+    <div class="toc-header">
+      <span class="toc-title">QUICK NAVIGATION</span>
+    </div>
+    <div class="toc-grid">
+      <a href="#section1" class="toc-item"><span class="toc-num">01</span><span class="toc-text">General Disclaimer</span></a>
+      <a href="#section2" class="toc-item"><span class="toc-num">02</span><span class="toc-text">No Guarantees</span></a>
+      <a href="#section3" class="toc-item"><span class="toc-num">03</span><span class="toc-text">AI &amp; Chatbot Disclaimer</span></a>
+      <a href="#section4" class="toc-item"><span class="toc-num">04</span><span class="toc-text">SEO &amp; Marketing</span></a>
+      <a href="#section5" class="toc-item"><span class="toc-num">05</span><span class="toc-text">Website Disclaimer</span></a>
+      <a href="#section6" class="toc-item"><span class="toc-num">06</span><span class="toc-text">Third-Party Services</span></a>
+      <a href="#section7" class="toc-item"><span class="toc-num">07</span><span class="toc-text">Client Responsibilities</span></a>
+      <a href="#section8" class="toc-item"><span class="toc-num">08</span><span class="toc-text">Content &amp; Accuracy</span></a>
+      <a href="#section9" class="toc-item"><span class="toc-num">09</span><span class="toc-text">Professional Advice</span></a>
+      <a href="#section10" class="toc-item"><span class="toc-num">10</span><span class="toc-text">Limitation of Liability</span></a>
+      <a href="#section11" class="toc-item"><span class="toc-num">11</span><span class="toc-text">Force Majeure</span></a>
+      <a href="#section12" class="toc-item"><span class="toc-num">12</span><span class="toc-text">Agreement &amp; Contact</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section id="content-section">
+  <div class="content-inner">
+
+    <!-- SECTION 1: GENERAL DISCLAIMER -->
+    <div class="policy-block" id="section1">
+      <div class="block-header">
+        <span class="block-num">01</span>
+        <h2 class="block-title">GENERAL DISCLAIMER</h2>
+      </div>
+      <div class="block-content">
+        <p>This disclaimer applies to all services, products, communications, and interactions between QUANTOR ("we," "us," "our") and you ("client," "you," "your"). By accessing our website, requesting our services, making any payment, or engaging with us in any capacity, you acknowledge that you have read, understood, and agree to this disclaimer in its entirety.</p>
+
+        <p><strong>Services Provided "As Is":</strong></p>
+        <ul class="policy-list">
+          <li>All services provided by QUANTOR are offered on an "as is" and "as available" basis without any warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</li>
+          <li>We do not warrant that our services will be uninterrupted, error-free, secure, or free of viruses or other harmful components.</li>
+          <li>We do not warrant that the results from using our services will meet your specific requirements or expectations.</li>
+          <li>We do not warrant the accuracy, reliability, or completeness of any content, information, or materials provided as part of our services.</li>
+        </ul>
+
+        <p><strong>No Employment, Partnership, or Agency:</strong></p>
+        <ul class="policy-list">
+          <li>Nothing in our engagement creates an employer-employee relationship, partnership, joint venture, or agency relationship between you and QUANTOR.</li>
+          <li>We are independent contractors performing services as defined in our agreement.</li>
+          <li>Neither party has authority to bind the other or to represent that they have such authority.</li>
+          <li>You are solely responsible for your business decisions, operations, and outcomes.</li>
+        </ul>
+
+        <p><strong>Right to Refuse or Terminate:</strong></p>
+        <ul class="policy-list">
+          <li>We reserve the right to refuse service to anyone for any reason at any time.</li>
+          <li>We reserve the right to terminate ongoing services if we determine, in our sole discretion, that continuing the engagement is not in our best interest.</li>
+          <li>Reasons for refusal or termination may include but are not limited to: illegal or unethical requests, abusive behavior, payment issues, scope changes beyond our capabilities, or conflicts of interest.</li>
+          <li>Termination will be handled according to our Terms of Service and Refund Policy.</li>
+        </ul>
+
+        <p><strong>Changes to This Disclaimer:</strong></p>
+        <ul class="policy-list">
+          <li>We may update this disclaimer at any time. Changes will be effective immediately upon posting to our website.</li>
+          <li>Continued use of our services after changes constitutes acceptance of the updated disclaimer.</li>
+          <li>Significant changes will be communicated to active clients when practical.</li>
+          <li>The disclaimer in effect at the time of your engagement governs that specific relationship.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Important:</strong> This disclaimer is designed to protect both parties by setting clear expectations. It is not intended to limit our commitment to quality or our responsibility to deliver what we promise. We take our work seriously and stand behind our services, but we also need to protect ourselves from unrealistic expectations or unfair claims.</p>
         </div>
-    </nav>
+      </div>
+    </div>
 
-    <section class="legal-hero">
-        <div class="container">
-            <div class="legal-hero-content">
-                <div class="legal-eyebrow">Legal</div>
-                <h1>Disclaimer</h1>
-                <p>Last updated: March 2026</p>
-                <div class="legal-rule"></div>
-            </div>
+    <!-- SECTION 2: NO GUARANTEES -->
+    <div class="policy-block" id="section2">
+      <div class="block-header">
+        <span class="block-num">02</span>
+        <h2 class="block-title">NO GUARANTEES OR WARRANTIES</h2>
+      </div>
+      <div class="block-content">
+        <p>One of the most important things to understand about digital services is that many outcomes are beyond our control. This section clearly outlines what we do NOT guarantee, so you have realistic expectations before engaging our services.</p>
+
+        <p><strong>Business Outcomes We Do NOT Guarantee:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Revenue or Sales:</strong> We do not guarantee that your website or services will generate any specific amount of revenue, sales, or profit. Your business success depends on many factors outside our control including your product/service quality, pricing, market conditions, competition, and customer service.</li>
+          <li><strong>Traffic or Visitors:</strong> We do not guarantee specific levels of website traffic, visitor numbers, or user engagement. Traffic depends on numerous factors including marketing efforts, content quality, market demand, and search engine algorithms.</li>
+          <li><strong>Lead Generation:</strong> While we may implement lead capture mechanisms, we do not guarantee specific numbers of leads or lead quality. Lead generation depends on your offer, target audience, market conditions, and many other factors.</li>
+          <li><strong>Conversion Rates:</strong> We do not guarantee specific conversion rates or percentages. Conversions depend on your offer, pricing, credibility, competition, and visitor intent.</li>
+          <li><strong>Customer Acquisition:</strong> We do not guarantee customer acquisition or customer retention outcomes.</li>
+          <li><strong>Return on Investment:</strong> We do not guarantee any specific ROI from our services.</li>
+        </ul>
+
+        <p><strong>Technical Outcomes We Do NOT Guarantee:</strong></p>
+        <ul class="policy-list">
+          <li><strong>100% Uptime:</strong> Websites and services may experience downtime due to hosting issues, maintenance, security incidents, or factors outside our control.</li>
+          <li><strong>Error-Free Operation:</strong> Software, websites, and chatbots may contain bugs or experience issues despite our best testing efforts.</li>
+          <li><strong>Compatibility:</strong> We do not guarantee compatibility with all devices, browsers, operating systems, or third-party integrations not specifically tested.</li>
+          <li><strong>Security:</strong> No website or system can be guaranteed secure. We implement best practices but cannot guarantee against all possible security threats.</li>
+          <li><strong>Performance Speed:</strong> Website loading speeds depend on hosting, user location, network conditions, and other factors beyond our control.</li>
+          <li><strong>Data Preservation:</strong> We are not responsible for data loss that may occur due to hosting issues, security breaches, user actions, or other causes.</li>
+        </ul>
+
+        <p><strong>Timeline Guarantees:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Estimates Only:</strong> All timeline estimates are good-faith approximations, not binding commitments. Actual timelines may vary.</li>
+          <li><strong>External Factors:</strong> Delays caused by client responsiveness, third-party services, technical issues, or other factors are not our responsibility.</li>
+          <li><strong>Timeline Changes:</strong> We reserve the right to adjust timelines as needed based on project requirements, resource availability, or unforeseen circumstances.</li>
+        </ul>
+
+        <p><strong>Why We Make No Guarantees:</strong></p>
+        <p>We operate with integrity and will never promise outcomes we cannot deliver. The digital landscape is complex and constantly evolving. Search engines change algorithms, competitors adapt, technology shifts, and market conditions fluctuate. Making guarantees in this environment would be dishonest. What we CAN guarantee is that we will apply our expertise, experience, and best efforts to deliver quality work that meets the scope we agree upon.</p>
+
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>What We DO</th>
+              <th>What We DO NOT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Deliver agreed scope</td>
+              <td>Guarantee specific business results</td>
+            </tr>
+            <tr>
+              <td>Apply expertise and best practices</td>
+              <td>Guarantee #1 rankings or traffic</td>
+            </tr>
+            <tr>
+              <td>Communicate proactively</td>
+              <td>Guarantee error-free operation</td>
+            </tr>
+            <tr>
+              <td>Fix genuine bugs in delivered work</td>
+              <td>Guarantee 100% uptime</td>
+            </tr>
+            <tr>
+              <td>Provide reasonable estimates</td>
+              <td>Guarantee specific timelines</td>
+            </tr>
+            <tr>
+              <td>Stand behind our work quality</td>
+              <td>Guarantee ROI or revenue</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box warning">
+          <p><strong>Critical Understanding:</strong> If any service provider guarantees specific rankings, traffic numbers, or revenue outcomes, be very cautious. The digital marketing industry is full of providers who make impossible promises. We choose to be honest about what we can and cannot control. Our integrity is more important than making promises we cannot keep.</p>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <section class="legal-content">
-        <div class="container">
-            <div class="legal-body">
-                
-                <div class="legal-section">
-                    <h2>No Guarantee of Results</h2>
-                    <p>QUANTOR builds websites and chatbots designed for lead generation and conversion. We do not guarantee specific business results, revenue, or lead volumes. Results depend on your industry, your offer, market conditions, and factors outside our control. Every business is different, and past results from our demos or client examples do not constitute a promise of future performance.</p>
-                </div>
+    <!-- SECTION 3: AI & CHATBOT DISCLAIMER -->
+    <div class="policy-block" id="section3">
+      <div class="block-header">
+        <span class="block-num">03</span>
+        <h2 class="block-title">AI &amp; CHATBOT SERVICES DISCLAIMER</h2>
+      </div>
+      <div class="block-content">
+        <p>Artificial Intelligence services, including chatbots, have unique characteristics and limitations that are important to understand. This section disclaims specific risks and limitations associated with our AI-powered services.</p>
 
-                <div class="legal-divider"></div>
+        <p><strong>AI Behavior Unpredictability:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Variable Responses:</strong> AI chatbots may generate different responses to similar questions and may occasionally provide unexpected, irrelevant, or incorrect information.</li>
+          <li><strong>No Prediction Guarantee:</strong> We cannot predict or control every possible response a chatbot may generate. AI systems have inherent variability.</li>
+          <li><strong>Training Data Limitations:</strong> Chatbot responses are only as good as the training data provided. If information you provide is incomplete, inaccurate, or outdated, chatbot responses will reflect those limitations.</li>
+          <li><strong>Context Understanding:</strong> AI may misinterpret context, nuance, or intent in user questions, leading to inappropriate or confusing responses.</li>
+        </ul>
 
-                <div class="legal-section">
-                    <h2>Website Accuracy</h2>
-                    <p>We make every reasonable effort to keep information on this website accurate and current. However, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, or reliability of any information on this site. We are not liable for errors, outdated information, or omissions, and reserve the right to update content at any time without notice.</p>
-                </div>
+        <p><strong>Accuracy of Information:</strong></p>
+        <ul class="policy-list">
+          <li><strong>No Accuracy Guarantee:</strong> We do not guarantee that chatbot responses will be 100% accurate or appropriate for every situation.</li>
+          <li><strong>Information Verification:</strong> Users should verify important information received from chatbots through other channels before making decisions.</li>
+          <li><strong>Your Responsibility:</strong> You are responsible for reviewing and updating training data to ensure chatbot accuracy. We are not responsible for inaccuracies resulting from your training data.</li>
+          <li><strong>No Professional Advice:</strong> Chatbot responses should not be considered legal, medical, financial, or professional advice.</li>
+        </ul>
 
-                <div class="legal-divider"></div>
+        <p><strong>Third-Party AI Platform Limitations:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Platform Dependency:</strong> Our chatbot services are built on third-party platforms (primarily Chatling AI). Their capabilities, limitations, and terms apply.</li>
+          <li><strong>Platform Changes:</strong> The underlying AI platform may change features, pricing, or capabilities without notice. We have limited control over these changes.</li>
+          <li><strong>Platform Downtime:</strong> Chatbot availability depends on the platform's infrastructure. We are not responsible for platform outages or performance issues.</li>
+          <li><strong>Model Limitations:</strong> Different AI models have different capabilities and limitations. Not all models can perform all tasks equally.</li>
+        </ul>
 
-                <div class="legal-section">
-                    <h2>Third-Party Services</h2>
-                    <p>Our services involve third-party platforms including Tidio, Hostinger, Namecheap, Razorpay, and GitHub Pages. We are not responsible for the availability, uptime, pricing changes, data practices, or terms of service of these platforms. Any changes to third-party services that affect our deliverables will be communicated to affected clients promptly.</p>
-                </div>
+        <p><strong>Privacy and Data Collection:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Conversation Data:</strong> Chatbot conversations may be stored, logged, or analyzed by the AI platform for improvement purposes.</li>
+          <li><strong>User Information:</strong> Information users share with chatbots may be processed by third-party AI systems. Your privacy policy should disclose this.</li>
+          <li><strong>Your Compliance Responsibility:</strong> You are responsible for ensuring chatbot implementation complies with applicable privacy laws and regulations.</li>
+          <li><strong>Visitor Disclosure:</strong> You should inform website visitors that they are interacting with an AI chatbot, not a human.</li>
+        </ul>
 
-                <div class="legal-divider"></div>
+        <p><strong>Hallucination Risk:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Definition:</strong> "Hallucination" refers to AI generating confident-sounding but factually incorrect or fabricated information.</li>
+          <li><strong>Inherent Risk:</strong> All AI language models carry hallucination risk. We cannot eliminate this possibility.</li>
+          <li><strong>Mitigation Not Elimination:</strong> We take steps to minimize hallucinations through training and configuration, but cannot guarantee they won't occur.</li>
+          <li><strong>Not Our Fault:</strong> We are not liable for damages resulting from AI hallucinations or incorrect chatbot responses.</li>
+        </ul>
 
-                <div class="legal-section">
-                    <h2>Professional Advice</h2>
-                    <p>Nothing on this website constitutes legal, financial, tax, or business advice. All content is for informational purposes only. For matters requiring professional guidance, please consult a qualified legal, financial, or business professional in your jurisdiction.</p>
-                </div>
-
-                <div class="legal-divider"></div>
-
-                <div class="legal-section">
-                    <h2>External Links</h2>
-                    <p>This site may contain links to external websites operated by third parties. These links are provided for convenience only. We have no control over the content, privacy practices, or availability of those sites and are not responsible for any loss or damage that may arise from your use of them.</p>
-                </div>
-
-                <div class="legal-divider"></div>
-
-                <div class="legal-section">
-                    <h2>Contact</h2>
-                    <p>For questions regarding this disclaimer, please contact us:<br>
-                    Email: <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a><br>
-                    Phone: <a href="tel:+919599234747">+91 9599234747</a></p>
-                </div>
-
-            </div>
+        <div class="highlight-box warning">
+          <p><strong>AI is Not Perfect:</strong> Artificial intelligence is a powerful tool but has significant limitations. It is not a replacement for human judgment, professional advice, or quality control. Users should treat chatbot responses as informational, not authoritative. Critical decisions should always involve human verification and appropriate professionals.</p>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <section class="trust-section">
-        <div class="container">
-            <div class="trust-grid">
-                <div class="trust-tile">
-                    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M2 12h20"/>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                    </svg>
-                    <h4>Governed by Indian Law</h4>
-                    <p>Disputes handled under India's legal framework</p>
-                </div>
-                <div class="trust-tile">
-                    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
-                    <h4>DPDPA 2023 Compliant</h4>
-                    <p>Data handled per India's data protection act</p>
-                </div>
-                <div class="trust-tile">
-                    <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10 9 9 9 8 9"/>
-                    </svg>
-                    <h4>Transparent Policies</h4>
-                    <p>No hidden terms, no surprise clauses</p>
-                </div>
-            </div>
+    <!-- SECTION 4: SEO & MARKETING -->
+    <div class="policy-block" id="section4">
+      <div class="block-header">
+        <span class="block-num">04</span>
+        <h2 class="block-title">SEO &amp; DIGITAL MARKETING DISCLAIMER</h2>
+      </div>
+      <div class="block-content">
+        <p>Search Engine Optimization (SEO) and digital marketing services operate in a dynamic environment with many factors outside any service provider's control. This section disclaims specific risks and limitations associated with these services.</p>
+
+        <p><strong>Search Engine Rankings:</strong></p>
+        <ul class="policy-list">
+          <li><strong>No Ranking Guarantees:</strong> We do not guarantee specific search engine rankings, positions, or placement for any keywords. No ethical SEO provider can make such guarantees.</li>
+          <li><strong>Algorithm Changes:</strong> Search engines (Google, Bing, etc.) frequently update their algorithms. Rankings can fluctuate or drop due to changes completely outside our control.</li>
+          <li><strong>Competitor Actions:</strong> Your competitors may also invest in SEO. Their actions can affect your relative rankings.</li>
+          <li><strong>Previous Results Not Predictive:</strong> Past ranking successes do not guarantee future performance. The SEO landscape is constantly evolving.</li>
+          <li><strong>Timeframes:</strong> SEO is a long-term strategy. Results typically take months to materialize and there is no guaranteed timeline for improvement.</li>
+        </ul>
+
+        <p><strong>Organic Traffic:</strong></p>
+        <ul class="policy-list">
+          <li><strong>No Traffic Guarantees:</strong> We do not guarantee specific levels of organic traffic, visitor numbers, or traffic growth.</li>
+          <li><strong>Traffic Volatility:</strong> Organic traffic can fluctuate significantly due to search algorithm updates, seasonal trends, market changes, or other factors.</li>
+          <li><strong>Quality of Traffic:</strong> Not all traffic is valuable. We focus on relevant traffic but cannot guarantee conversion rates or user behavior.</li>
+          <li><strong>Zero Traffic Risk:</strong> There is always a possibility that SEO efforts may not result in meaningful traffic increases.</li>
+        </ul>
+
+        <p><strong>Local SEO Specifics:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Map Pack Placement:</strong> We do not guarantee placement in Google's "map pack" or local search results.</li>
+          <li><strong>Google Business Profile:</strong> Local SEO depends heavily on Google Business Profile, which is controlled by Google. Changes to this platform or your profile can affect results.</li>
+          <li><strong>Review Impact:</strong> Local rankings are influenced by customer reviews, which are outside our control.</li>
+          <li><strong>Location Factors:</strong> Local search results vary by user location, device, and search context.</li>
+        </ul>
+
+        <p><strong>Content and Social Media:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Content Performance:</strong> We do not guarantee that content will rank, attract traffic, or achieve engagement.</li>
+          <li><strong>Social Media Algorithms:</strong> Social media reach depends on platform algorithms that change frequently and prioritize certain types of content.</li>
+          <li><strong>Engagement Rates:</strong> We cannot control how users interact with or respond to content.</li>
+          <li><strong>Viral Expectations:</strong> We do not guarantee viral performance or widespread content distribution.</li>
+        </ul>
+
+        <p><strong>Third-Party Platforms:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Platform Dependency:</strong> SEO and marketing often rely on third-party platforms (Google Search Console, Analytics, social media platforms, etc.). Changes to these platforms can affect our services.</li>
+          <li><strong>Account Issues:</strong> Issues with your accounts on these platforms are your responsibility to resolve.</li>
+          <li><strong>Platform Policies:</strong> Violations of third-party platform policies (even unintentional) can result in penalties that we are not responsible for.</li>
+        </ul>
+
+        <p><strong>Past Performance Disclaimer:</strong></p>
+        <p>Any case studies, testimonials, or examples of past results shown on our website or in our communications represent specific situations and are not indicative of future performance. Your results may differ significantly based on your industry, competition, website history, budget, timeline, and many other factors. Past performance is NOT a guarantee of future results.</p>
+
+        <div class="highlight-box warning">
+          <p><strong>Honesty About SEO:</strong> SEO is not magic. It's a strategic, long-term process with no guaranteed outcomes. If any provider promises specific rankings or guarantees page-one placement, they are likely using tactics that may eventually harm your website. We use ethical, white-hat approaches that align with search engine guidelines, but results take time and cannot be guaranteed.</p>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <section class="contact-cta">
-        <div class="container">
-            <div class="contact-cta-box">
-                <h2>Questions about this disclaimer?</h2>
-                <p>We're here to help. Reach out and we'll get back to you promptly.</p>
-                <a href="mailto:quantorleads@gmail.com" class="btn btn-filled">Email Us</a>
-            </div>
+    <!-- SECTION 5: WEBSITE DISCLAIMER -->
+    <div class="policy-block" id="section5">
+      <div class="block-header">
+        <span class="block-num">05</span>
+        <h2 class="block-title">WEBSITE DEVELOPMENT DISCLAIMER</h2>
+      </div>
+      <div class="block-content">
+        <p>Website development involves creating digital products that depend on numerous external factors. This section disclaims specific risks and limitations associated with our website development services.</p>
+
+        <p><strong>Functionality Limitations:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Browser Compatibility:</strong> Websites may function differently across different browsers, versions, and devices. We test for major browsers but cannot guarantee perfect functionality on all configurations.</li>
+          <li><strong>Mobile Responsiveness:</strong> While we design for mobile devices, display may vary across different screen sizes, device types, and orientations.</li>
+          <li><strong>Third-Party Integrations:</strong> Integrations with third-party services (payment processors, chatbots, analytics, etc.) depend on those services' continued availability and compatibility.</li>
+          <li><strong>Feature Changes:</strong> Features may need to be modified or removed if underlying technologies or third-party services change.</li>
+        </ul>
+
+        <p><strong>Hosting and Performance:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Hosting Provider:</strong> Website performance, uptime, and security are largely dependent on your hosting provider. We are not responsible for hosting-related issues.</li>
+          <li><strong>Server Limitations:</strong> Some functionality may be limited by server configurations, resource allocations, or hosting restrictions.</li>
+          <li><strong>Speed Factors:</strong> Website loading speed depends on hosting quality, user location, network conditions, and content optimization—all of which are partially outside our control.</li>
+          <li><strong>SSL Certificates:</strong> SSL certificate management is typically handled by the hosting provider. Certificate issues are not our responsibility.</li>
+        </ul>
+
+        <p><strong>Security Disclaimer:</strong></p>
+        <ul class="policy-list">
+          <li><strong>No Absolute Security:</strong> No website can be guaranteed secure. New vulnerabilities are discovered regularly, and determined attackers may find ways to compromise even well-protected sites.</li>
+          <li><strong>Your Security Responsibilities:</strong> You are responsible for: maintaining strong passwords; keeping plugins and software updated; using secure hosting; implementing appropriate security measures; and regular backups.</li>
+          <li><strong>Security Breaches:</strong> We are not liable for security breaches, hacks, data loss, or unauthorized access to your website or data.</li>
+          <li><strong>Malware and Attacks:</strong> We are not responsible for malware infections, DDoS attacks, or other malicious activities targeting your website.</li>
+        </ul>
+
+        <p><strong>Content Management:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Client Content:</strong> You are solely responsible for content you add to your website after delivery, including ensuring it is legal, accurate, and not infringing.</li>
+          <li><strong>Content Updates:</strong> Ongoing content updates are not included unless specified in a maintenance agreement.</li>
+          <li><strong>Plugin/Theme Updates:</strong> If we use third-party plugins or themes, you are responsible for keeping them updated after delivery (unless you have a maintenance agreement).</li>
+          <li><strong>Backup Responsibility:</strong> You are responsible for maintaining regular backups of your website content and data.</li>
+        </ul>
+
+        <p><strong>Domain and Email:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Domain Registration:</strong> Domain registration and renewal are your responsibility. Expired domains may be registered by others.</li>
+          <li><strong>Email Services:</strong> Email functionality depends on your email provider and DNS configuration. We are not responsible for email delivery issues.</li>
+          <li><strong>DNS Management:</strong> DNS changes can take time to propagate and may temporarily affect website or email access.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Post-Delivery Responsibility:</strong> Once a website is delivered and approved, ongoing maintenance, security, updates, and content management become your responsibility unless you have a specific maintenance agreement with us. We provide guidance and documentation, but the day-to-day management of your digital presence is ultimately yours.</p>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">QUANTOR</a>
-                    <p>Next-generation AI agency helping businesses scale through intelligent web experiences.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Navigation</h4>
-                    <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="index.html#services">Services</a>
-                        <a href="portfolio.html">Portfolio</a>
-                        <a href="about.html">About</a>
-                        <a href="contact.html">Contact</a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Pricing</h4>
-                    <div class="footer-links">
-                        <a href="pricing.html">View Plans</a>
-                        <a href="contact.html">Custom Quote</a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <div class="footer-links">
-                        <a href="privacy-policy.html">Privacy Policy</a>
-                        <a href="terms.html">Terms of Service</a>
-                        <a href="refund-policy.html">Refund Policy</a>
-                        <a href="disclaimer.html">Disclaimer</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-contact">
-                    <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
-                    <a href="tel:+919599234747">+91 9599234747</a>
-                </div>
-                <div>&copy; 2026 QUANTOR. All rights reserved.</div>
-            </div>
+    <!-- SECTION 6: THIRD-PARTY SERVICES -->
+    <div class="policy-block" id="section6">
+      <div class="block-header">
+        <span class="block-num">06</span>
+        <h2 class="block-title">THIRD-PARTY SERVICES DISCLAIMER</h2>
+      </div>
+      <div class="block-content">
+        <p>Many of our services involve or integrate with third-party platforms, tools, and services. This section disclaims our responsibility for these external dependencies.</p>
+
+        <p><strong>General Third-Party Disclaimer:</strong></p>
+        <ul class="policy-list">
+          <li><strong>No Control:</strong> We have no control over third-party services, their policies, their performance, or their continued availability.</li>
+          <li><strong>No Endorsement:</strong> Our use of or integration with third-party services does not constitute endorsement of those services.</li>
+          <li><strong>Their Terms Apply:</strong> Third-party services have their own terms of service, privacy policies, and usage rules that apply to your use of their services.</li>
+          <li><strong>Account Responsibility:</strong> Accounts with third-party services are your responsibility to maintain, including payment, security, and compliance with their terms.</li>
+        </ul>
+
+        <p><strong>Specific Third-Party Services:</strong></p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Service Category</th>
+              <th>Examples</th>
+              <th>What We're Not Responsible For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hosting</td>
+              <td>Hostinger, GoDaddy, AWS</td>
+              <td>Uptime, speed, security, outages, data loss</td>
+            </tr>
+            <tr>
+              <td>AI Platforms</td>
+              <td>Chatling AI, OpenAI</td>
+              <td>AI outputs, platform changes, pricing changes, downtime</td>
+            </tr>
+            <tr>
+              <td>Payment Processors</td>
+              <td>PayPal, Wise, Stripe</td>
+              <td>Transaction issues, account holds, policy changes</td>
+            </tr>
+            <tr>
+              <td>Analytics</td>
+              <td>Google Analytics</td>
+              <td>Data accuracy, feature changes, data retention</td>
+            </tr>
+            <tr>
+              <td>Social Platforms</td>
+              <td>Facebook, Instagram, LinkedIn</td>
+              <td>Algorithm changes, reach, account issues, API changes</td>
+            </tr>
+            <tr>
+              <td>Domain Registrars</td>
+              <td>GoDaddy, Namecheap</td>
+              <td>Domain availability, renewal, transfer issues</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Platform Changes and Disruptions:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Feature Changes:</strong> Third-party platforms may change, remove, or add features without notice, affecting your services.</li>
+          <li><strong>Pricing Changes:</strong> Third-party services may change pricing, which may affect your costs.</li>
+          <li><strong>API Changes:</strong> Platforms may update or deprecate APIs, requiring modifications to integrations.</li>
+          <li><strong>Service Discontinuation:</strong> Platforms may discontinue services entirely, requiring migration to alternatives.</li>
+          <li><strong>Policy Changes:</strong> Platform policy changes may affect how services can be used.</li>
+        </ul>
+
+        <p><strong>Mitigation of Third-Party Issues:</strong></p>
+        <ul class="policy-list">
+          <li>We will make reasonable efforts to help you navigate third-party issues when they arise.</li>
+          <li>However, such assistance is not guaranteed and may require additional fees.</li>
+          <li>We cannot force third-party services to change their practices or restore functionality.</li>
+          <li>Migrating away from problematic third-party services is your choice and responsibility.</li>
+        </ul>
+
+        <div class="highlight-box warning">
+          <p><strong>Third-Party Reality:</strong> The modern digital landscape is built on interconnected services. When you engage digital services, you are inherently depending on multiple third parties. We select reliable partners, but cannot control their actions. Always understand the terms and reliability of any third-party service that will be part of your project.</p>
         </div>
-    </footer>
+      </div>
+    </div>
 
-    <script>
-        // Navbar Logic
-        const nav = document.getElementById('main-nav');
-        const hamburger = document.getElementById('hamburger-btn');
-        const navMenu = document.getElementById('nav-menu');
+    <!-- SECTION 7: CLIENT RESPONSIBILITIES -->
+    <div class="policy-block" id="section7">
+      <div class="block-header">
+        <span class="block-num">07</span>
+        <h2 class="block-title">CLIENT RESPONSIBILITIES DISCLAIMER</h2>
+      </div>
+      <div class="block-content">
+        <p>Successful projects require active client participation. This section disclaims our responsibility for issues caused by client actions or inactions.</p>
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
+        <p><strong>We Are Not Responsible For:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Delayed Materials:</strong> Project delays or quality issues resulting from your failure to provide required materials, content, or information on time.</li>
+          <li><strong>Incomplete Information:</strong> Issues arising from incomplete, inaccurate, or misleading information you provided.</li>
+          <li><strong>Late Responses:</strong> Delays or complications caused by your failure to respond to queries or provide approvals in a timely manner.</li>
+          <li><strong>Changed Requirements:</strong> Additional costs, timeline extensions, or quality issues resulting from mid-project requirement changes.</li>
+          <li><strong>Content Accuracy:</strong> Errors or issues in content that you provided or approved.</li>
+          <li><strong>Post-Delivery Changes:</strong> Problems arising from your modifications to delivered work after handover.</li>
+          <li><strong>Access Issues:</strong> Problems caused by incorrect credentials, revoked access, or failure to maintain necessary accounts.</li>
+          <li><strong>Stakeholder Conflicts:</strong> Issues arising from conflicting feedback or direction from multiple stakeholders on your side.</li>
+          <li><strong>Legal Compliance:</strong> Legal issues arising from your content, business practices, or use of delivered services.</li>
+          <li><strong>Third-Party Issues:</strong> Problems with services you control (hosting, domains, accounts, etc.).</li>
+        </ul>
 
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
+        <p><strong>Your Representations:</strong></p>
+        <p>By engaging our services, you represent and warrant that:</p>
+        <ul class="policy-list">
+          <li>You have the legal authority to engage us and enter into agreements on behalf of your organization.</li>
+          <li>All information you provide is accurate, complete, and not misleading.</li>
+          <li>You have the legal right to use all materials, content, and assets you provide.</li>
+          <li>Your use of our services will comply with all applicable laws and regulations.</li>
+          <li>You will not use our services for illegal, harmful, or unethical purposes.</li>
+          <li>You will maintain the confidentiality of any access credentials or sensitive information.</li>
+          <li>You will make timely payments as agreed.</li>
+          <li>You will respond to communications and provide required materials in a timely manner.</li>
+        </ul>
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
-        });
-    </script>
+        <p><strong>Consequences of Client Issues:</strong></p>
+        <ul class="policy-list">
+          <li>Client-caused issues do NOT qualify for refunds or compensation.</li>
+          <li>Additional work required due to client issues may incur additional charges.</li>
+          <li>Timeline extensions caused by client delays are not our responsibility.</li>
+          <li>We are not liable for project failures resulting from client non-cooperation.</li>
+          <li>Repeated client issues may result in project termination per our Terms of Service.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Partnership Mindset:</strong> We view projects as partnerships where both parties have responsibilities. We commit to delivering our best work, and we ask that you commit to being an engaged, responsive partner. When both parties fulfill their roles, projects succeed. When client responsibilities are not met, project quality and timelines suffer through no fault of ours.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 8: CONTENT & ACCURACY -->
+    <div class="policy-block" id="section8">
+      <div class="block-header">
+        <span class="block-num">08</span>
+        <h2 class="block-title">CONTENT &amp; ACCURACY DISCLAIMER</h2>
+      </div>
+      <div class="block-content">
+        <p>Content is a crucial part of digital services, but accuracy and appropriateness are complex responsibilities. This section disclaims our responsibility for content-related issues.</p>
+
+        <p><strong>Client-Provided Content:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Your Responsibility:</strong> You are solely responsible for the accuracy, legality, and appropriateness of all content you provide.</li>
+          <li><strong>No Verification:</strong> We do not verify the accuracy, truthfulness, or completeness of content you provide.</li>
+          <li><strong>No Legal Review:</strong> We do not provide legal review of content. Content should be reviewed by appropriate professionals if needed.</li>
+          <li><strong>Intellectual Property:</strong> You represent that you have the right to use all content you provide and that it does not infringe on others' rights.</li>
+          <li><strong>Not Liable:</strong> We are not liable for issues arising from content you provided, including legal claims, inaccuracies, or offensive material.</li>
+        </ul>
+
+        <p><strong>Website Copy and Marketing Content:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Information Accuracy:</strong> If we write copy based on information you provide, we are not responsible if that information is inaccurate.</li>
+          <li><strong>Claims and Promises:</strong> Any claims made in content (about products, services, results, etc.) are your responsibility to verify and honor.</li>
+          <li><strong>Compliance:</strong> You are responsible for ensuring marketing content complies with advertising laws, industry regulations, and platform policies.</li>
+          <li><strong>Approval:</strong> You should review all content before publication. Your approval signifies acceptance of the content.</li>
+        </ul>
+
+        <p><strong>Third-Party Content and Links:</strong></p>
+        <ul class="policy-list">
+          <li><strong>External Websites:</strong> We are not responsible for content on websites we link to or integrate with.</li>
+          <li><strong>Third-Party Materials:</strong> Stock photos, fonts, plugins, or other third-party materials are subject to their own licenses and terms.</li>
+          <li><strong>Embedded Content:</strong> Embedded content (videos, social posts, maps) is controlled by third parties and may change without notice.</li>
+          <li><strong>User-Generated Content:</strong> If your website accepts user-generated content, you are responsible for moderation and legal compliance.</li>
+        </ul>
+
+        <p><strong>Information on Our Website:</strong></p>
+        <ul class="policy-list">
+          <li><strong>General Information:</strong> Information on our website is for general purposes only and may not reflect current offerings or terms.</li>
+          <li><strong>Not Advice:</strong> Content on our website does not constitute professional advice of any kind.</li>
+          <li><strong>Subject to Change:</strong> Pricing, packages, and offerings described on our website are subject to change without notice.</li>
+          <li><strong>Errors:</strong> We strive for accuracy but do not warrant that our website is free of errors.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Content Ownership:</strong> You own your content and are responsible for it. We provide the technical implementation and design expertise, but the substance of what you communicate to your customers is your responsibility. We will flag obvious concerns when we see them, but comprehensive content review is not part of our standard services.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 9: PROFESSIONAL ADVICE -->
+    <div class="policy-block" id="section9">
+      <div class="block-header">
+        <span class="block-num">09</span>
+        <h2 class="block-title">PROFESSIONAL ADVICE DISCLAIMER</h2>
+      </div>
+      <div class="block-content">
+        <p>Our services do not constitute professional advice in regulated areas. This section clarifies what we do NOT provide and when you should consult appropriate professionals.</p>
+
+        <p><strong>We Do NOT Provide:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Legal Advice:</strong> We are not attorneys. We do not provide legal advice regarding intellectual property, contracts, privacy laws, terms of service, regulatory compliance, or any other legal matters. Consult a qualified attorney for legal guidance.</li>
+          <li><strong>Financial Advice:</strong> We are not financial advisors. We do not provide investment, tax, accounting, or financial planning advice. Consult qualified professionals for financial matters.</li>
+          <li><strong>Medical/Health Advice:</strong> If you are in a healthcare-related business, we do not provide medical advice and cannot ensure compliance with health information regulations. Consult healthcare compliance professionals.</li>
+          <li><strong>Regulatory Compliance:</strong> We do not guarantee compliance with industry-specific regulations (GDPR, HIPAA, PCI-DSS, etc.). Compliance is your responsibility; consult appropriate experts.</li>
+          <li><strong>Insurance Advice:</strong> We do not advise on insurance coverage, adequacy of protection, or risk management. Consult insurance professionals.</li>
+          <li><strong>Business Strategy:</strong> While we may offer strategic observations, we do not provide comprehensive business strategy consulting. Our focus is on digital implementation.</li>
+        </ul>
+
+        <p><strong>Information vs. Advice:</strong></p>
+        <ul class="policy-list">
+          <li>We may share general information, best practices, or observations based on our experience.</li>
+          <li>Such information is not professional advice and should not be relied upon as such.</li>
+          <li>You should independently verify any information we share before acting on it.</li>
+          <li>For regulated matters, always consult qualified professionals with appropriate credentials.</li>
+        </ul>
+
+        <p><strong>When to Seek Professional Help:</strong></p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Situation</th>
+              <th>Consult</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Privacy policy, terms of service, contracts</td>
+              <td>Attorney</td>
+            </tr>
+            <tr>
+              <td>Tax obligations, financial reporting</td>
+              <td>Accountant / Tax Professional</td>
+            </tr>
+            <tr>
+              <td>GDPR, HIPAA, or other compliance</td>
+              <td>Compliance Specialist / Attorney</td>
+            </tr>
+            <tr>
+              <td>Insurance needs, liability protection</td>
+              <td>Insurance Professional</td>
+            </tr>
+            <tr>
+              <td>Trademark, copyright, patents</td>
+              <td>IP Attorney</td>
+            </tr>
+            <tr>
+              <td>Industry-specific regulations</td>
+              <td>Relevant Industry Specialist</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Liability:</strong></p>
+        <p>We are not liable for any decisions you make based on information we provide, or for your failure to obtain appropriate professional advice when needed. If you are uncertain whether professional consultation is warranted, err on the side of consulting a qualified expert.</p>
+
+        <div class="highlight-box warning">
+          <p><strong>Important:</strong> Digital services intersect with legal, financial, and regulatory domains in complex ways. It is YOUR responsibility to ensure your business practices, content, and use of technology comply with applicable laws and regulations. We provide implementation services, not compliance expertise.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 10: LIMITATION OF LIABILITY -->
+    <div class="policy-block" id="section10">
+      <div class="block-header">
+        <span class="block-num">10</span>
+        <h2 class="block-title">LIMITATION OF LIABILITY</h2>
+      </div>
+      <div class="block-content">
+        <p>This section limits our liability for issues arising from our services. These limitations are reasonable given the nature of digital services and the minimal fees charged relative to potential risks.</p>
+
+        <p><strong>Maximum Liability Cap:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Cap Amount:</strong> Our total liability for any claim arising from or related to our services shall not exceed the total amount paid by you for the specific service giving rise to the claim.</li>
+          <li><strong>Example:</strong> If you paid us ₹50,000 for a project, our maximum liability for any issue with that project is ₹50,000.</li>
+          <li><strong>Cumulative:</strong> This cap is cumulative for all claims arising from the same project or service relationship.</li>
+          <li><strong>Not Per-Incident:</strong> The cap applies to all claims combined, not per individual issue.</li>
+        </ul>
+
+        <p><strong>Types of Damages Excluded:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Consequential Damages:</strong> We are not liable for indirect or consequential damages that result from our services or issues with them.</li>
+          <li><strong>Lost Profits:</strong> We are not liable for lost revenue, lost profits, or lost business opportunities.</li>
+          <li><strong>Data Loss:</strong> We are not liable for loss of data, content, or information.</li>
+          <li><strong>Business Interruption:</strong> We are not liable for costs arising from business interruption.</li>
+          <li><strong>Reputational Harm:</strong> We are not liable for damage to your reputation or brand.</li>
+          <li><strong>Third-Party Claims:</strong> We are not liable for claims against you by your customers, users, or other third parties.</li>
+          <li><strong>Punitive Damages:</strong> We are not liable for punitive, exemplary, or aggravated damages.</li>
+        </ul>
+
+        <p><strong>Specific Exclusions:</strong></p>
+        <ul class="policy-list">
+          <li>We are not liable for issues caused by your actions, content, or decisions.</li>
+          <li>We are not liable for issues caused by third-party services or platforms.</li>
+          <li>We are not liable for issues caused by events outside our control (force majeure).</li>
+          <li>We are not liable for issues resulting from your failure to maintain backups.</li>
+          <li>We are not liable for issues arising after project delivery and approval.</li>
+          <li>We are not liable for issues arising from modifications you made to delivered work.</li>
+        </ul>
+
+        <p><strong>Indemnification:</strong></p>
+        <p>You agree to indemnify, defend, and hold harmless QUANTOR and its owners, employees, agents, and affiliates from and against any and all claims, damages, losses, costs, and expenses (including reasonable attorneys' fees) arising from: your breach of our Terms of Service; your use of our services; content or materials you provide; your violation of any third-party rights; your violation of applicable laws; or claims by your customers or end users.</p>
+
+        <p><strong>Risk Allocation:</strong></p>
+        <p>The fees we charge reflect this liability allocation. If you require higher liability limits or different risk allocation, contact us to discuss custom enterprise agreements with adjusted pricing that reflects increased risk exposure.</p>
+
+        <div class="highlight-box warning">
+          <p><strong>Understanding Risk:</strong> Every business transaction involves risk allocation. Our pricing assumes the liability limitations described here. Asking for unlimited liability without corresponding price increases is unreasonable and not how service contracts work. If these limitations concern you, please discuss before engaging our services.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 11: FORCE MAJEURE -->
+    <div class="policy-block" id="section11">
+      <div class="block-header">
+        <span class="block-num">11</span>
+        <h2 class="block-title">FORCE MAJEURE DISCLAIMER</h2>
+      </div>
+      <div class="block-content">
+        <p>Some events are completely beyond anyone's control. This section disclaims our responsibility for such events and explains how they are handled.</p>
+
+        <p><strong>Force Majeure Events:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Natural Disasters:</strong> Earthquakes, floods, hurricanes, tsunamis, volcanic eruptions, and other natural catastrophes.</li>
+          <li><strong>Pandemics:</strong> Disease outbreaks, epidemics, pandemics, and related government restrictions.</li>
+          <li><strong>Government Actions:</strong> Laws, regulations, orders, embargoes, sanctions, or other government actions.</li>
+          <li><strong>War and Conflict:</strong> War, terrorism, civil unrest, riots, or military actions.</li>
+          <li><strong>Infrastructure Failures:</strong> Widespread power outages, telecommunications failures, internet disruptions, or infrastructure breakdowns.</li>
+          <li><strong>Cyber Attacks:</strong> Large-scale cyber attacks affecting multiple systems, not targeted at specific vulnerabilities we should have addressed.</li>
+          <li><strong>Labor Disputes:</strong> Strikes, lockouts, or labor disputes affecting critical services.</li>
+          <li><strong>Other Events:</strong> Any other event beyond the reasonable control of the affected party.</li>
+        </ul>
+
+        <p><strong>Effect of Force Majeure:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Suspension:</strong> Performance obligations are suspended during force majeure events.</li>
+          <li><strong>No Liability:</strong> Neither party is liable for delays or failures caused by force majeure events.</li>
+          <li><strong>Notification:</strong> The affected party should notify the other party promptly.</li>
+          <li><strong>Mitigation:</strong> The affected party should take reasonable steps to mitigate the impact.</li>
+          <li><strong>Extended Events:</strong> If a force majeure event continues for more than 60 days, either party may terminate the affected project without liability.</li>
+        </ul>
+
+        <p><strong>What Is NOT Force Majeure:</strong></p>
+        <ul class="policy-list">
+          <li>Ordinary business risks or market changes.</li>
+          <li>Financial difficulties or inability to pay.</li>
+          <li>Personnel changes on either side.</li>
+          <li>Changes in business priorities or strategy.</li>
+          <li>Ordinary technical issues that could have been prevented.</li>
+          <li>Third-party service changes that could have been anticipated.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Mutual Protection:</strong> Force majeure clauses protect both parties. Neither we nor you can be held responsible for events completely outside human control. If such events significantly affect a project, we will work together to find fair solutions, which may include timeline adjustments, scope modifications, or in rare cases, termination with prorated settlement.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 12: AGREEMENT & CONTACT -->
+    <div class="policy-block" id="section12">
+      <div class="block-header">
+        <span class="block-num">12</span>
+        <h2 class="block-title">AGREEMENT &amp; CONTACT INFORMATION</h2>
+      </div>
+      <div class="block-content">
+        <p>By engaging QUANTOR's services, you acknowledge and agree to this disclaimer in its entirety. If you do not agree with any part of this disclaimer, you should not use our services.</p>
+
+        <p><strong>Your Acknowledgment:</strong></p>
+        <ul class="policy-list">
+          <li>You have read and understood this entire disclaimer.</li>
+          <li>You understand that we do not guarantee specific outcomes.</li>
+          <li>You understand the limitations of AI and digital services.</li>
+          <li>You accept responsibility for client obligations and content.</li>
+          <li>You agree to the liability limitations described.</li>
+          <li>You will consult appropriate professionals when needed.</li>
+        </ul>
+
+        <p><strong>Related Documents:</strong></p>
+        <ul class="policy-list">
+          <li><a href="terms-of-service.html">Terms of Service</a> - Complete service agreement and legal terms</li>
+          <li><a href="privacy-policy.html">Privacy Policy</a> - How we handle your data</li>
+          <li><a href="refund-policy.html">Refund Policy</a> - Cancellation and refund terms</li>
+        </ul>
+
+        <p><strong>Questions?</strong></p>
+        <p>If anything in this disclaimer is unclear or if you have questions about how it applies to your specific situation, please contact us before engaging our services. We believe in transparency and want you to fully understand what you're agreeing to.</p>
+
+        <p><strong>Contact Information:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Email:</strong> <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a></li>
+          <li><strong>WhatsApp:</strong> <a href="https://wa.me/919599234747">+91 9599 234 747</a></li>
+          <li><strong>Business Hours:</strong> Monday - Friday, 10:00 AM - 7:00 PM IST</li>
+        </ul>
+
+        <p><strong>Document Information:</strong></p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Information</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Document Title</td>
+              <td>Disclaimer</td>
+            </tr>
+            <tr>
+              <td>Version</td>
+              <td>1.0</td>
+            </tr>
+            <tr>
+              <td>Last Updated</td>
+              <td>January 12, 2025</td>
+            </tr>
+            <tr>
+              <td>Effective Date</td>
+              <td>January 12, 2025</td>
+            </tr>
+            <tr>
+              <td>Governing Jurisdiction</td>
+              <td>India</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box">
+          <p><strong>Fair Notice:</strong> This disclaimer exists to protect both parties by setting clear expectations. We are committed to delivering quality work and treating clients fairly. In return, we ask that you understand the inherent limitations and risks of digital services, maintain realistic expectations, and fulfill your responsibilities as a client. When both parties approach the relationship with this mindset, successful outcomes are much more likely.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact-section">
+  <div class="contact-inner">
+    <h2 class="contact-title">QUESTIONS ABOUT THIS DISCLAIMER?</h2>
+    <p class="contact-sub">We want you to fully understand what you're agreeing to. If anything is unclear or seems unreasonable, let's discuss before you engage our services. Transparency builds better partnerships.</p>
+    <div class="contact-cards">
+      <a href="https://wa.me/919599234747?text=Hi%20QUANTOR%2C%20I%20have%20a%20question%20about%20your%20Disclaimer." target="_blank" class="contact-card">
+        <span class="contact-icon">&#128172;</span>
+        <span class="contact-label">WhatsApp</span>
+        <span class="contact-value">+91 9599 234 747</span>
+      </a>
+      <a href="mailto:quantorleads@gmail.com?subject=Disclaimer%20Inquiry" class="contact-card">
+        <span class="contact-icon">&#9993;</span>
+        <span class="contact-label">Email</span>
+        <span class="contact-value">quantorleads@gmail.com</span>
+      </a>
+      <a href="contact.html" class="contact-card">
+        <span class="contact-icon">&#128221;</span>
+        <span class="contact-label">Contact Form</span>
+        <span class="contact-value">Send a Message</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo">QUAN<em>TOR</em></div>
+      <div class="footer-tagline">Your Business Deserves More Than a Dead Website.</div>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/YOURUSERNAME" target="_blank" class="social-btn" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://www.facebook.com/YOURUSERNAME" target="_blank" class="social-btn" title="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://wa.me/919599234747" target="_blank" class="social-btn" title="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </a>
+      </div>
+      <div class="footer-contact-links">
+        <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
+        <a href="https://wa.me/919599234747">+91 9599 234 747</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>NAVIGATE</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>PRICING</h5>
+      <ul>
+        <li><a href="pricing.html#core-plans">Core Packages</a></li>
+        <li><a href="pricing.html#addons">Add-On Services</a></li>
+        <li><a href="pricing.html#custom">Custom Quote</a></li>
+        <li><a href="pricing.html#pfaq">Pricing FAQ</a></li>
+        <li><a href="pricing.html#payment">Payment Methods</a></li>
+      </ul>
+      <a href="pricing.html" class="footer-pricing-btn">View Plans &#8594;</a>
+    </div>
+    <div class="footer-col">
+      <h5>LEGAL</h5>
+      <ul>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-of-service.html">Terms of Service</a></li>
+        <li><a href="refund-policy.html">Refund Policy</a></li>
+        <li><a href="disclaimer.html">Disclaimer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 QUANTOR. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms-of-service.html">Terms</a>
+      <a href="refund-policy.html">Refunds</a>
+      <a href="disclaimer.html">Disclaimer</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════
+   INTERACTIONS
+════════════════════════════════════════════ */
+(function() {
+  // Preloader
+  const preloader = document.getElementById('preloader');
+  const preCount = document.getElementById('preCount');
+  let progress = 0;
+  const progressInterval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress >= 100) { progress = 100; clearInterval(progressInterval); }
+    preCount.textContent = Math.floor(progress) + '%';
+  }, 200);
+  
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      preloader.classList.add('hide');
+      document.body.classList.remove('loading');
+    }, 2500);
+  });
+
+  // Custom Cursor
+  const cursorOuter = document.getElementById('cursor-outer');
+  const cursorDot = document.getElementById('cursor-dot');
+  let mouseX = 0, mouseY = 0, outerX = 0, outerY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+  });
+
+  function animateCursor() {
+    outerX += (mouseX - outerX) * 0.15;
+    outerY += (mouseY - outerY) * 0.15;
+    cursorOuter.style.left = outerX + 'px';
+    cursorOuter.style.top = outerY + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document.querySelectorAll('a, button, .contact-card, .toc-item').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  // Nav Scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Scroll Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.policy-block').forEach(block => observer.observe(block));
+})();
+</script>
 </body>
 </html>
