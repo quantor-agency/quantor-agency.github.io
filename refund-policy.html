@@ -1,1003 +1,1377 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refund & Cancellation Policy | QUANTOR</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-dark: #0a0a0f;
-            --card-dark: #12121a;
-            --accent-blue: #4F8EF7;
-            --accent-purple: #7C3AED;
-            --text-white: #ffffff;
-            --text-muted: #a0a0b0;
-            --text-body: #c8c8d8;
-            --border-blue: rgba(79, 142, 247, 0.2);
-            --border-subtle: #1e1e2e;
-            --green-bg: #0d2b1a;
-            --green-border: #1a6b3a;
-            --green-text: #4ade80;
-            --amber-bg: #2b1a0d;
-            --amber-border: #6b3a1a;
-            --amber-text: #fb923c;
-            --blue-bg: #0d1a2b;
-            --blue-border: #1a3a6b;
-            --blue-text: #60a5fa;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            font-family: var(--font-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            font-size: 0.95rem;
-            border: none;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-filled {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-            box-shadow: 0 4px 15px rgba(79, 142, 247, 0.3);
-        }
-
-        .btn-filled:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(79, 142, 247, 0.5);
-        }
-
-        /* Navbar */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1.5rem 0;
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-blue);
-            padding: 1rem 0;
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: white;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            background: none;
-            border: none;
-            z-index: 1100;
-            padding: 5px;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 28px;
-            height: 2px;
-            background: white;
-            margin: 6px 0;
-            transition: 0.3s;
-        }
-
-        /* Legal Hero */
-        .legal-hero {
-            position: relative;
-            min-height: 35vh;
-            display: flex;
-            align-items: center;
-            padding-top: 100px;
-            padding-bottom: 3rem;
-            background: linear-gradient(135deg, rgba(79, 142, 247, 0.05) 0%, transparent 50%);
-            overflow: hidden;
-        }
-
-        .legal-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(79, 142, 247, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .legal-hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-blue), transparent);
-        }
-
-        .legal-hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .legal-eyebrow {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent-blue);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .legal-hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            font-weight: 900;
-            letter-spacing: -2px;
-        }
-
-        .legal-hero p {
-            font-size: 1rem;
-            color: var(--text-muted);
-            font-weight: 400;
-        }
-
-        .legal-rule {
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            margin-top: 2rem;
-            border-radius: 2px;
-        }
-
-        /* Legal Layout */
-        .legal-layout {
-            padding: 5rem 0;
-        }
-
-        .legal-grid {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 4rem;
-        }
-
-        /* Sticky TOC */
-        .legal-toc {
-            position: sticky;
-            top: 120px;
-            height: fit-content;
-        }
-
-        .toc-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-
-        .toc-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .toc-list a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 0.5rem 1rem;
-            border-left: 2px solid transparent;
-            transition: all 0.3s ease;
-            display: block;
-        }
-
-        .toc-list a:hover,
-        .toc-list a.active {
-            color: var(--accent-blue);
-            border-left-color: var(--accent-blue);
-            background: rgba(79, 142, 247, 0.05);
-        }
-
-        /* Mobile Pill Nav */
-        .pill-nav {
-            display: none;
-            margin-bottom: 2rem;
-            overflow-x: auto;
-            padding-bottom: 1rem;
-        }
-
-        .pill-nav::-webkit-scrollbar {
-            height: 4px;
-        }
-
-        .pill-nav::-webkit-scrollbar-track {
-            background: var(--card-dark);
-        }
-
-        .pill-nav::-webkit-scrollbar-thumb {
-            background: var(--border-blue);
-            border-radius: 2px;
-        }
-
-        .pill-list {
-            display: flex;
-            gap: 0.5rem;
-            list-style: none;
-            width: max-content;
-        }
-
-        .pill-list a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.8rem;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border-blue);
-            border-radius: 20px;
-            white-space: nowrap;
-            transition: all 0.3s ease;
-        }
-
-        .pill-list a:hover,
-        .pill-list a.active {
-            color: white;
-            background: var(--accent-blue);
-            border-color: var(--accent-blue);
-        }
-
-        /* Legal Content */
-        .legal-body {
-            max-width: 800px;
-        }
-
-        .legal-section {
-            margin-bottom: 3rem;
-            scroll-margin-top: 120px;
-        }
-
-        .legal-section h2 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-white);
-            margin-bottom: 1rem;
-        }
-
-        .legal-section p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text-body);
-            margin-bottom: 1rem;
-        }
-
-        .legal-section ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .legal-section ul li {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text-body);
-            padding-left: 1.5rem;
-            position: relative;
-            margin-bottom: 0.5rem;
-        }
-
-        .legal-section ul li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--accent-blue);
-        }
-
-        .legal-section a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .legal-section a:hover {
-            opacity: 0.8;
-        }
-
-        .legal-divider {
-            height: 1px;
-            background: var(--border-subtle);
-            margin: 3rem 0;
-        }
-
-        /* Callout Boxes */
-        .callout {
-            border-radius: 8px;
-            padding: 1.25rem;
-            margin: 1.5rem 0;
-        }
-
-        .callout-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .callout-body {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: var(--text-body);
-        }
-
-        .callout-green {
-            background: var(--green-bg);
-            border: 1px solid var(--green-border);
-        }
-
-        .callout-green .callout-label {
-            color: var(--green-text);
-        }
-
-        .callout-amber {
-            background: var(--amber-bg);
-            border: 1px solid var(--amber-border);
-        }
-
-        .callout-amber .callout-label {
-            color: var(--amber-text);
-        }
-
-        .callout-blue {
-            background: var(--blue-bg);
-            border: 1px solid var(--blue-border);
-        }
-
-        .callout-blue .callout-label {
-            color: var(--blue-text);
-        }
-
-        /* Plan Tiles */
-        .plan-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .plan-tile {
-            background: var(--card-dark);
-            border: 1px solid var(--border-blue);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .plan-tile:hover {
-            border-color: var(--accent-blue);
-        }
-
-        .plan-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-blue);
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .plan-tile p {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: var(--text-body);
-            margin-bottom: 0;
-        }
-
-        /* Trust Tiles */
-        .trust-section {
-            padding: 4rem 0;
-            background: var(--card-dark);
-            border-top: 1px solid var(--border-blue);
-            border-bottom: 1px solid var(--border-blue);
-        }
-
-        .trust-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .trust-tile {
-            background: var(--bg-dark);
-            border: 1px solid var(--border-blue);
-            border-radius: 12px;
-            padding: 2rem 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .trust-tile:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-3px);
-        }
-
-        .trust-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 1rem;
-            color: var(--accent-blue);
-        }
-
-        .trust-tile h4 {
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-white);
-        }
-
-        .trust-tile p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* Contact CTA */
-        .contact-cta {
-            padding: 5rem 0;
-            text-align: center;
-        }
-
-        .contact-cta-box {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 3rem;
-            background: var(--card-dark);
-            border: 1px solid var(--border-blue);
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-cta-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-        }
-
-        .contact-cta h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-cta p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 0.95rem;
-        }
-
-        /* Footer */
-        footer {
-            padding: 5rem 0 2rem;
-            background: #050508;
-            border-top: 1px solid var(--border-blue);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-brand .logo {
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-brand p {
-            color: var(--text-muted);
-            max-width: 300px;
-            font-size: 0.95rem;
-        }
-
-        .footer-col h4 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-            color: #555;
-            font-size: 0.85rem;
-        }
-
-        .footer-contact {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .footer-contact a {
-            color: #555;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .footer-contact a:hover {
-            color: var(--accent-blue);
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 1024px) {
-            .legal-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .legal-toc {
-                display: none;
-            }
-
-            .pill-nav {
-                display: block;
-            }
-
-            .trust-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 85%;
-                height: 100vh;
-                background: var(--card-dark);
-                flex-direction: column;
-                justify-content: center;
-                transition: 0.4s ease;
-                box-shadow: -10px 0 40px rgba(0,0,0,0.7);
-                gap: 2rem;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .hamburger.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-            .hamburger.active span:nth-child(2) {
-                opacity: 0;
-            }
-            .hamburger.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
-            }
-
-            .legal-hero {
-                min-height: 30vh;
-                padding-top: 80px;
-            }
-
-            .plan-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .trust-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-contact {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .contact-cta-box {
-                padding: 2rem 1.5rem;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Refund Policy — QUANTOR | Payment &amp; Cancellation Terms</title>
+<meta name="description" content="QUANTOR Refund Policy - Clear terms for cancellations, refunds, and payment disputes. Understand your rights and our policies before engaging services."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════════════════════════
+   QUANTOR — REFUND POLICY PAGE
+   Design System: Dark Luxury Futurism v3.0
+════════════════════════════════════════════ */
+:root {
+  --ink:    #030507;
+  --ink2:   #070c12;
+  --ink3:   #0c1420;
+  --mint:   #00ffb2;
+  --coral:  #ff2d55;
+  --gold:   #e8a020;
+  --violet: #7c3aed;
+  --chalk:  #e2ecff;
+  --dim:    #4a5a78;
+  --dimmer: #1e2a3d;
+  --border: rgba(0,255,178,0.1);
+  --head: "Bebas Neue", sans-serif;
+  --body: "Manrope", sans-serif;
+  --mono: "JetBrains Mono", monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { background: var(--ink); color: var(--chalk); font-family: var(--body); overflow-x: hidden; cursor: none; }
+body.loading { overflow: hidden; }
+::selection { background: var(--mint); color: #000; }
+body::after {
+  content:""; position: fixed; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.35;
+}
+
+/* ── PRELOADER ── */
+#preloader {
+  position: fixed; inset: 0; background: var(--ink); z-index: 9998;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  transition: opacity 0.8s var(--ease), visibility 0.8s;
+}
+#preloader.hide { opacity: 0; visibility: hidden; }
+.pre-logo { font-family: var(--head); font-size: clamp(3rem,8vw,6rem); letter-spacing: 0.3em; color: var(--chalk); overflow: hidden; display: flex; }
+.pre-logo span { display: inline-block; transform: translateY(100%); opacity: 0; animation: charUp 0.6s var(--ease) forwards; }
+.pre-logo span:nth-child(1){animation-delay:.05s} .pre-logo span:nth-child(2){animation-delay:.1s}
+.pre-logo span:nth-child(3){animation-delay:.15s} .pre-logo span:nth-child(4){animation-delay:.2s}
+.pre-logo span:nth-child(5){animation-delay:.25s} .pre-logo span:nth-child(6){animation-delay:.3s}
+.pre-logo span:nth-child(7){animation-delay:.35s} .pre-logo span:nth-child(8){color:var(--mint);animation-delay:.35s}
+.pre-bar-wrap { width: 280px; height: 1px; background: var(--dimmer); position: relative; overflow: visible; }
+.pre-bar { position: absolute; left: 0; top: 0; height: 100%; background: var(--mint); width: 0%; animation: loadBar 2s var(--ease) forwards 0.5s; box-shadow: 0 0 20px var(--mint); }
+.pre-count { position: absolute; right: 0; bottom: 8px; font-family: var(--mono); font-size: 0.65rem; color: var(--mint); letter-spacing: 0.1em; }
+.pre-page-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.25em; color: var(--dim); text-transform: uppercase; }
+@keyframes charUp { to { transform: translateY(0); opacity: 1; } }
+@keyframes loadBar { to { width: 100%; } }
+
+/* ── CURSOR ── */
+#cursor-outer { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(0,255,178,0.5); border-radius: 50%; pointer-events: none; z-index: 9997; transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s, border-color 0.3s; transform: translate(-50%,-50%); will-change: left,top; }
+#cursor-dot { position: fixed; width: 5px; height: 5px; background: var(--mint); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%,-50%); box-shadow: 0 0 10px var(--mint); will-change: left,top; }
+body.cursor-hover #cursor-outer { width: 70px; height: 70px; background: rgba(0,255,178,0.05); border-color: var(--mint); }
+
+/* ── NAV ── */
+#nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.8rem 4%; display: flex; align-items: center; justify-content: space-between; transition: padding 0.4s var(--ease), background 0.4s, border-bottom 0.4s; }
+#nav.scrolled { padding: 1.2rem 4%; background: rgba(3,5,7,0.92); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--head); font-size: 1.8rem; letter-spacing: 0.15em; color: var(--chalk); text-decoration: none; }
+.nav-logo em { color: var(--mint); font-style: normal; }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { color: var(--dim); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; position: relative; transition: color 0.3s; }
+.nav-links a::after { content:""; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--mint); transition: width 0.3s var(--ease); }
+.nav-links a:hover { color: var(--chalk); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links a.active { color: var(--chalk); }
+.nav-price-btn { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mint); border: 1px solid rgba(0,255,178,0.3); padding: 0.4rem 0.9rem; border-radius: 100px; text-decoration: none; transition: background 0.3s, border-color 0.3s; }
+.nav-price-btn:hover { background: rgba(0,255,178,0.08); border-color: var(--mint); }
+.nav-price-btn::after { display: none !important; }
+.nav-cta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink) !important; background: var(--mint); padding: 0.65rem 1.4rem; border-radius: 4px; text-decoration: none; transition: box-shadow 0.3s, transform 0.3s; box-shadow: 0 0 30px rgba(0,255,178,0.2); }
+.nav-cta:hover { box-shadow: 0 0 60px rgba(0,255,178,0.5); transform: scale(1.03); }
+.nav-cta::after { display: none !important; }
+
+/* ════════════════════════════════════════════
+   HERO SECTION
+════════════════════════════════════════════ */
+#policy-hero {
+  position: relative; min-height: 70vh; display: flex; align-items: center;
+  overflow: hidden;
+}
+.policy-hero-gradient {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 65% at 85% 50%, rgba(0,255,178,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 55% at 5% 70%, rgba(124,58,237,0.04) 0%, transparent 70%);
+}
+.policy-hero-inner {
+  position: relative; z-index: 1; padding: 10rem 4% 5rem;
+  max-width: 1000px; width: 100%;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 2.5rem; overflow: hidden;
+}
+.hero-eyebrow-inner {
+  display: flex; align-items: center; gap: 0.8rem;
+  transform: translateY(60px); opacity: 0;
+  animation: slideUp 1s var(--ease) 2.8s forwards;
+}
+.eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); animation: blink 1.5s infinite; box-shadow: 0 0 8px var(--mint); }
+.eyebrow-line { width: 40px; height: 1px; background: var(--mint); box-shadow: 0 0 10px var(--mint); }
+.eyebrow-text { font-family: var(--mono); font-size: 0.7rem; color: var(--mint); letter-spacing: 0.2em; text-transform: uppercase; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+
+.policy-headline {
+  font-family: var(--head); font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 2rem;
+}
+.headline-row { display: block; overflow: hidden; }
+.headline-row span { display: block; transform: translateY(110%); opacity: 0; }
+.headline-row:nth-child(1) span { animation: slideUp 1.1s var(--ease) 2.9s forwards; }
+.headline-row:nth-child(2) span { animation: slideUp 1.1s var(--ease) 3.0s forwards; }
+.mint-word { color: var(--mint); }
+.outline-word { -webkit-text-stroke: 1px rgba(226,236,255,0.25); color: transparent; }
+
+.policy-hero-sub {
+  font-size: 1.1rem; color: var(--dim); line-height: 1.75; font-weight: 300;
+  max-width: 600px; margin-bottom: 2rem;
+  transform: translateY(30px); opacity: 0;
+  animation: slideUp 1s var(--ease) 3.2s forwards;
+}
+
+.policy-meta {
+  display: flex; flex-wrap: wrap; gap: 2rem;
+  transform: translateY(30px); opacity: 0;
+  animation: slideUp 1s var(--ease) 3.3s forwards;
+}
+.meta-item {
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.meta-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; }
+.meta-value { font-family: var(--head); font-size: 1.1rem; letter-spacing: 0.04em; color: var(--mint); }
+
+@keyframes slideUp { to { transform: translateY(0) translateX(0); opacity: 1; } }
+
+/* ════════════════════════════════════════════
+   TABLE OF CONTENTS
+════════════════════════════════════════════ */
+#toc-section {
+  padding: 4rem 4%; background: var(--ink2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.toc-inner {
+  max-width: 1000px; margin: 0 auto;
+}
+.toc-header {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+}
+.toc-title { font-family: var(--head); font-size: 1.5rem; letter-spacing: 0.08em; }
+.toc-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+.toc-item {
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.5rem;
+  text-decoration: none; color: var(--dim); transition: all 0.3s;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.toc-item:hover { border-color: rgba(0,255,178,0.3); color: var(--chalk); transform: translateY(-2px); }
+.toc-num { font-family: var(--mono); font-size: 0.7rem; color: var(--mint); background: rgba(0,255,178,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; }
+.toc-text { font-size: 0.85rem; font-weight: 500; }
+
+/* ════════════════════════════════════════════
+   CONTENT SECTION
+════════════════════════════════════════════ */
+#content-section {
+  padding: 6rem 4%; background: var(--ink);
+}
+.content-inner {
+  max-width: 900px; margin: 0 auto;
+}
+.policy-block {
+  margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border);
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.policy-block.visible { opacity: 1; transform: translateY(0); }
+.policy-block:last-child { border-bottom: none; margin-bottom: 0; }
+.block-header {
+  display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem;
+}
+.block-num {
+  font-family: var(--mono); font-size: 0.8rem; color: var(--ink); background: var(--mint);
+  padding: 0.4rem 0.8rem; border-radius: 6px; flex-shrink: 0;
+}
+.block-title { font-family: var(--head); font-size: 2rem; letter-spacing: 0.04em; line-height: 1.1; }
+.block-content { padding-left: 3.5rem; }
+.block-content p {
+  font-size: 0.95rem; color: var(--dim); line-height: 1.85; font-weight: 300;
+  margin-bottom: 1.2rem;
+}
+.block-content p:last-child { margin-bottom: 0; }
+.block-content strong { color: var(--chalk); font-weight: 600; }
+.block-content em { color: var(--mint); font-style: normal; }
+.block-content a { color: var(--mint); text-decoration: none; border-bottom: 1px solid rgba(0,255,178,0.3); transition: border-color 0.3s; }
+.block-content a:hover { border-color: var(--mint); }
+
+/* Lists */
+.policy-list { list-style: none; margin: 1.5rem 0; }
+.policy-list li {
+  position: relative; padding-left: 1.8rem; margin-bottom: 1rem;
+  font-size: 0.95rem; color: var(--dim); line-height: 1.7;
+}
+.policy-list li::before {
+  content: ""; position: absolute; left: 0; top: 0.6rem;
+  width: 6px; height: 6px; background: var(--mint); border-radius: 50%;
+}
+
+/* Nested List */
+.policy-list-nested { list-style: none; margin: 1rem 0 1rem 1.5rem; }
+.policy-list-nested li { padding-left: 1.5rem; margin-bottom: 0.7rem; }
+.policy-list-nested li::before { width: 4px; height: 4px; background: var(--dim); }
+
+/* Highlight Box */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(0,255,178,0.06), rgba(0,255,178,0.02));
+  border: 1px solid rgba(0,255,178,0.15); border-radius: 12px;
+  padding: 1.5rem 2rem; margin: 1.5rem 0;
+}
+.highlight-box p { margin-bottom: 0 !important; color: var(--chalk); }
+.highlight-box.warning {
+  background: linear-gradient(135deg, rgba(255,45,85,0.06), rgba(255,45,85,0.02));
+  border-color: rgba(255,45,85,0.15);
+}
+.highlight-box.warning p { color: var(--coral); }
+
+/* Info Table */
+.info-table {
+  width: 100%; border-collapse: collapse; margin: 1.5rem 0;
+}
+.info-table th, .info-table td {
+  padding: 1rem 1.2rem; text-align: left; border-bottom: 1px solid var(--border);
+}
+.info-table th {
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--mint); background: rgba(0,255,178,0.03);
+}
+.info-table td { font-size: 0.9rem; color: var(--dim); }
+.info-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* Status Badge */
+.status-badge {
+  display: inline-block; padding: 0.3rem 0.8rem; border-radius: 100px;
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.status-badge.full { background: rgba(0,255,178,0.15); color: var(--mint); }
+.status-badge.partial { background: rgba(232,160,32,0.15); color: var(--gold); }
+.status-badge.none { background: rgba(255,45,85,0.15); color: var(--coral); }
+
+/* ════════════════════════════════════════════
+   CONTACT SECTION
+════════════════════════════════════════════ */
+#contact-section {
+  padding: 5rem 4%; background: var(--ink2);
+}
+.contact-inner {
+  max-width: 800px; margin: 0 auto; text-align: center;
+}
+.contact-title { font-family: var(--head); font-size: clamp(2rem,4vw,3rem); letter-spacing: 0.04em; margin-bottom: 1rem; }
+.contact-sub { font-size: 0.95rem; color: var(--dim); line-height: 1.7; margin-bottom: 2.5rem; }
+.contact-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.contact-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid var(--border); border-radius: 16px; padding: 2rem;
+  text-decoration: none; color: var(--chalk); transition: all 0.3s;
+}
+.contact-card:hover { border-color: rgba(0,255,178,0.3); transform: translateY(-4px); }
+.contact-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.contact-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; margin-bottom: 0.5rem; }
+.contact-value { font-family: var(--head); font-size: 1.3rem; letter-spacing: 0.04em; }
+
+/* ════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════ */
+footer { background: var(--ink); border-top: 1px solid var(--border); }
+.footer-main { padding: 4rem 4% 3rem; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; }
+.footer-brand {}
+.footer-logo { font-family: var(--head); font-size: 1.8rem; letter-spacing: 0.15em; margin-bottom: 0.4rem; }
+.footer-logo em { color: var(--mint); font-style: normal; }
+.footer-tagline { font-size: 0.78rem; color: var(--dim); letter-spacing: 0.05em; font-weight: 300; margin-bottom: 1.5rem; }
+.footer-socials { display: flex; gap: 0.8rem; margin-bottom: 1.5rem; }
+.social-btn { width: 40px; height: 40px; border: 1px solid var(--dimmer); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--dim); font-size: 0.9rem; transition: all 0.3s; }
+.social-btn:hover { border-color: var(--mint); color: var(--mint); background: rgba(0,255,178,0.06); }
+.footer-contact-links a { display: block; color: var(--mint); text-decoration: none; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.05em; margin-bottom: 0.3rem; transition: opacity 0.2s; }
+.footer-contact-links a:hover { opacity: 0.7; }
+.footer-col h5 { font-family: var(--head); font-size: 1rem; letter-spacing: 0.1em; margin-bottom: 1.2rem; color: var(--chalk); }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a { color: var(--dim); text-decoration: none; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.03em; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--chalk); }
+.footer-pricing-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mint); border: 1px solid rgba(0,255,178,0.3); padding: 0.4rem 0.9rem; border-radius: 100px; text-decoration: none; transition: background 0.3s, border-color 0.3s; margin-top: 0.4rem; }
+.footer-pricing-btn:hover { background: rgba(0,255,178,0.08); border-color: var(--mint); }
+.footer-bottom { border-top: 1px solid var(--border); padding: 1.5rem 4%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.72rem; color: var(--dimmer); }
+.footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.footer-legal a { font-size: 0.72rem; color: var(--dimmer); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--dim); }
+
+/* ── UTILITY ── */
+.reveal-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 1100px) {
+  .toc-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-main { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .toc-grid { grid-template-columns: 1fr; }
+  .block-header { flex-direction: column; gap: 0.8rem; }
+  .block-content { padding-left: 0; margin-top: 1rem; }
+  .contact-cards { grid-template-columns: 1fr; }
+  .footer-main { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .info-table { font-size: 0.8rem; }
+  .info-table th, .info-table td { padding: 0.8rem; }
+}
+</style>
 </head>
-<body>
+<body class="loading">
 
-    <nav id="main-nav">
-        <div class="nav-content">
-            <a href="index.html" class="logo">QUANTOR</a>
-            <div class="nav-links" id="nav-menu">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <a href="pricing.html">Pricing</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="about.html">About</a>
-                <a href="contact.html" class="btn btn-filled">Get Started</a>
-            </div>
-            <button class="hamburger" id="hamburger-btn" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo"><span>Q</span><span>U</span><span>A</span><span>N</span><span>T</span><span>O</span><span>R</span><span>.</span></div>
+  <div class="pre-bar-wrap"><div class="pre-bar"></div><div class="pre-count" id="preCount">0%</div></div>
+  <div class="pre-page-label">Refund Policy</div>
+</div>
 
-    <section class="legal-hero">
-        <div class="container">
-            <div class="legal-hero-content">
-                <div class="legal-eyebrow">Legal</div>
-                <h1>Refund & Cancellation Policy</h1>
-                <p>Last updated: March 2026</p>
-                <div class="legal-rule"></div>
-            </div>
-        </div>
-    </section>
+<!-- CURSOR -->
+<div id="cursor-outer"></div>
+<div id="cursor-dot"></div>
 
-    <!-- Mobile Pill Navigation -->
-    <div class="pill-nav">
-        <div class="container">
-            <ul class="pill-list">
-                <li><a href="#overview">1. Overview</a></li>
-                <li><a href="#before-work">2. Before Work Begins</a></li>
-                <li><a href="#after-work">3. After Work Begins</a></li>
-                <li><a href="#revisions">4. Revision Policy</a></li>
-                <li><a href="#subscriptions">5. Chatbot Plans</a></li>
-                <li><a href="#exceptional">6. Exceptional</a></li>
-                <li><a href="#request">7. How to Request</a></li>
-                <li><a href="#contact">8. Contact</a></li>
-            </ul>
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">QUAN<em>TOR</em></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="pricing.html" class="nav-price-btn">&#8377; / $</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Start a Project &#8594;</a>
+</nav>
+
+<!-- HERO -->
+<section id="policy-hero">
+  <div class="policy-hero-gradient"></div>
+  <div class="policy-hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-inner">
+        <div class="eyebrow-dot"></div>
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">Legal Documentation</span>
+      </div>
+    </div>
+    <h1 class="policy-headline">
+      <span class="headline-row"><span>REFUND</span></span>
+      <span class="headline-row"><span class="mint-word">POLICY.</span></span>
+    </h1>
+    <p class="policy-hero-sub">
+      Transparent refund terms protect both parties. This policy clearly outlines when refunds are available, when they are not, and the process for requesting consideration. Please read before making any payment.
+    </p>
+    <div class="policy-meta">
+      <div class="meta-item">
+        <span class="meta-label">Last Updated</span>
+        <span class="meta-value">January 12, 2025</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Effective Date</span>
+        <span class="meta-value">January 12, 2025</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Version</span>
+        <span class="meta-value">1.0</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<section id="toc-section">
+  <div class="toc-inner">
+    <div class="toc-header">
+      <span class="toc-title">QUICK NAVIGATION</span>
+    </div>
+    <div class="toc-grid">
+      <a href="#section1" class="toc-item"><span class="toc-num">01</span><span class="toc-text">Policy Overview</span></a>
+      <a href="#section2" class="toc-item"><span class="toc-num">02</span><span class="toc-text">Before Work Begins</span></a>
+      <a href="#section3" class="toc-item"><span class="toc-num">03</span><span class="toc-text">During Project</span></a>
+      <a href="#section4" class="toc-item"><span class="toc-num">04</span><span class="toc-text">After Completion</span></a>
+      <a href="#section5" class="toc-item"><span class="toc-num">05</span><span class="toc-text">No Refund Situations</span></a>
+      <a href="#section6" class="toc-item"><span class="toc-num">06</span><span class="toc-text">Client-Caused Issues</span></a>
+      <a href="#section7" class="toc-item"><span class="toc-num">07</span><span class="toc-text">Subscription Services</span></a>
+      <a href="#section8" class="toc-item"><span class="toc-num">08</span><span class="toc-text">Chargebacks &amp; Disputes</span></a>
+      <a href="#section9" class="toc-item"><span class="toc-num">09</span><span class="toc-text">Refund Process</span></a>
+      <a href="#section10" class="toc-item"><span class="toc-num">10</span><span class="toc-text">Fairness Guarantee</span></a>
+      <a href="#section11" class="toc-item"><span class="toc-num">11</span><span class="toc-text">Exceptions &amp; Special Cases</span></a>
+      <a href="#section12" class="toc-item"><span class="toc-num">12</span><span class="toc-text">Contact &amp; Questions</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section id="content-section">
+  <div class="content-inner">
+
+    <!-- SECTION 1: POLICY OVERVIEW -->
+    <div class="policy-block" id="section1">
+      <div class="block-header">
+        <span class="block-num">01</span>
+        <h2 class="block-title">REFUND POLICY OVERVIEW</h2>
+      </div>
+      <div class="block-content">
+        <p>QUANTOR provides professional digital services that require significant investment of time, expertise, and resources. Unlike physical products that can be returned, digital services involve work that cannot be undone or recovered once performed. This refund policy is designed to be fair to both parties while recognizing the unique nature of service-based work.</p>
+
+        <p><strong>Core Principles:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Fairness:</strong> We believe in fair treatment. If we fail to deliver what was promised, we will make it right.</li>
+          <li><strong>Transparency:</strong> All refund conditions are clearly stated upfront. No surprises or hidden terms.</li>
+          <li><strong>Mutual Respect:</strong> Refund policies exist because we invest time and resources that cannot be recovered. Both parties should honor commitments.</li>
+          <li><strong>Communication First:</strong> Most issues can be resolved through direct communication. Please reach out before assuming the worst.</li>
+          <li><strong>Documentation:</strong> We maintain detailed records of all communications, approvals, and deliverables to ensure fair resolution.</li>
+        </ul>
+
+        <p><strong>Quick Reference - Refund Eligibility:</strong></p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Situation</th>
+              <th>Refund Available</th>
+              <th>Maximum Refund</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Before payment / Before work begins</td>
+              <td><span class="status-badge full">FULL</span></td>
+              <td>100% (minus processing fees)</td>
+            </tr>
+            <tr>
+              <td>Within 24 hours of payment, no work started</td>
+              <td><span class="status-badge full">FULL</span></td>
+              <td>100% (minus processing fees)</td>
+            </tr>
+            <tr>
+              <td>After work has begun</td>
+              <td><span class="status-badge none">NONE</span></td>
+              <td>0% (upfront payment non-refundable)</td>
+            </tr>
+            <tr>
+              <td>Project completed and delivered</td>
+              <td><span class="status-badge none">NONE</span></td>
+              <td>0%</td>
+            </tr>
+            <tr>
+              <td>Our failure to deliver agreed scope</td>
+              <td><span class="status-badge partial">PARTIAL</span></td>
+              <td>Up to 100% (case by case)</td>
+            </tr>
+            <tr>
+              <td>Client cancellation during project</td>
+              <td><span class="status-badge none">NONE</span></td>
+              <td>0%</td>
+            </tr>
+            <tr>
+              <td>Force majeure (beyond our control)</td>
+              <td><span class="status-badge partial">PARTIAL</span></td>
+              <td>Prorated for work not performed</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Important Note:</strong> By making any payment to QUANTOR, you acknowledge that you have read, understood, and agree to this refund policy in its entirety. If you have any questions or concerns about these terms, please contact us BEFORE making a payment. We are happy to clarify any points.</p>
+
+        <div class="highlight-box">
+          <p><strong>Key Takeaway:</strong> Once we begin work on your project, the upfront payment (50%) is non-refundable. This policy exists because we cannot recover the time, expertise, and resources invested in your project. The final payment is not required if you cancel before delivery, but you will not receive any deliverables.</p>
         </div>
+      </div>
     </div>
 
-    <section class="legal-layout">
-        <div class="container">
-            <div class="legal-grid">
-                <!-- Sticky TOC -->
-                <aside class="legal-toc">
-                    <div class="toc-title">On This Page</div>
-                    <ul class="toc-list">
-                        <li><a href="#overview">1. Overview</a></li>
-                        <li><a href="#before-work">2. Before Work Begins</a></li>
-                        <li><a href="#after-work">3. After Work Begins</a></li>
-                        <li><a href="#revisions">4. Revision Policy</a></li>
-                        <li><a href="#subscriptions">5. Chatbot Subscription Plans</a></li>
-                        <li><a href="#exceptional">6. Exceptional Circumstances</a></li>
-                        <li><a href="#request">7. How to Request</a></li>
-                        <li><a href="#contact">8. Contact</a></li>
-                    </ul>
-                </aside>
+    <!-- SECTION 2: BEFORE WORK BEGINS -->
+    <div class="policy-block" id="section2">
+      <div class="block-header">
+        <span class="block-num">02</span>
+        <h2 class="block-title">CANCELLATION BEFORE WORK BEGINS</h2>
+      </div>
+      <div class="block-content">
+        <p>The period before work begins offers the most flexibility for cancellation and refunds. We understand that plans change, and we try to accommodate changes fairly when no work has been performed.</p>
 
-                <!-- Content -->
-                <div class="legal-body">
+        <p><strong>Before Making Any Payment:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Complete Flexibility:</strong> You may cancel your project request at any time before making a payment with absolutely no obligation.</li>
+          <li><strong>Quotation Expiry:</strong> Our quotes and proposals are valid for 14 days. After this period, pricing and availability may change.</li>
+          <li><strong>No Strings Attached:</strong> Requesting a quote or having discussions does not create any obligation to proceed.</li>
+          <li><strong>Feel Free to Ask:</strong> We encourage you to ask all questions and resolve all concerns before committing.</li>
+        </ul>
 
-                    <div class="legal-section" id="overview">
-                        <h2>1. Overview</h2>
-                        <p>QUANTOR delivers custom digital services including web development, AI chatbot integration, and digital solutions tailored to your business needs. Due to the bespoke nature of our work, refunds are subject to the conditions outlined below. We are committed to transparency and fairness in all our dealings.</p>
-                    </div>
+        <p><strong>Within 24 Hours of Payment (Work Not Started):</strong></p>
+        <ul class="policy-list">
+          <li><strong>Full Refund Available:</strong> If you cancel within 24 hours of making your upfront payment AND we have not yet begun work on your project, you are eligible for a full refund.</li>
+          <li><strong>Processing Fees Deducted:</strong> The refund will be the amount we received, which may be slightly less than what you paid due to payment processing fees (typically 3-5%). These fees are kept by payment processors, not us.</li>
+          <li><strong>Same Payment Method:</strong> Refunds are processed to the original payment method. We cannot refund to a different account.</li>
+          <li><strong>Processing Time:</strong> Refunds typically take 5-10 business days to appear in your account, depending on your bank or payment provider.</li>
+        </ul>
 
-                    <div class="legal-section" id="before-work">
-                        <h2>2. Before Work Begins</h2>
-                        <div class="callout callout-green">
-                            <div class="callout-label">Eligible for Refund</div>
-                            <div class="callout-body">If you cancel before work has started on your project, you are eligible for a full refund within 48 hours of payment. To qualify, you must submit your cancellation request in writing before our team begins any design, development, or planning activities.</div>
-                        </div>
-                        <p>Full refunds are processed within 5–7 business days to the original payment method.</p>
-                    </div>
+        <p><strong>After 24 Hours (Work Not Started):</strong></p>
+        <ul class="policy-list">
+          <li><strong>Administrative Deduction:</strong> If more than 24 hours have passed but work has not yet begun, a refund may be available minus a 15% administrative fee to cover project planning, scheduling, and opportunity costs.</li>
+          <li><strong>Our Discretion:</strong> Refunds in this scenario are at our discretion and depend on how much preparation work we have done.</li>
+          <li><strong>Must Be Requested:</strong> You must proactively request cancellation. If you simply don't respond, the project may remain in our queue and work may begin.</li>
+        </ul>
 
-                    <div class="legal-section" id="after-work">
-                        <h2>3. After Work Begins</h2>
-                        <div class="callout callout-amber">
-                            <div class="callout-label">Not Eligible for Refund</div>
-                            <div class="callout-body">Once work has started on your project — including but not limited to design mockups, development, coding, or chatbot training and configuration — no refund will be issued. This policy exists because time, tools, resources, and skilled labor have already been committed to your project.</div>
-                        </div>
-                        <p>We document all project milestones and will keep you informed at each stage of development.</p>
-                    </div>
+        <p><strong>How "Work Has Begun" Is Determined:</strong></p>
+        <ul class="policy-list">
+          <li>Work is considered to have begun when we have: allocated resources to your project; started design work, coding, or configuration; created project-specific assets; or invested time in project planning beyond initial discussions.</li>
+          <li>You will be notified via email or WhatsApp when work officially begins on your project.</li>
+          <li>In most cases, work begins within 1-2 business days of receiving payment and project materials.</li>
+        </ul>
 
-                    <div class="legal-section" id="revisions">
-                        <h2>4. Revision Policy</h2>
-                        <p>If the final deliverable does not match the agreed brief or project specifications, we will revise it at no additional charge. Our goal is your complete satisfaction with the final product. However, we do not issue refunds as a substitute for revisions.</p>
-                        <p>All revision requests must be submitted within 14 days of project delivery.</p>
-                    </div>
-
-                    <div class="legal-section" id="subscriptions">
-                        <h2>5. Chatbot Subscription Plans</h2>
-                        <div class="plan-grid">
-                            <div class="plan-tile">
-                                <div class="plan-label">Monthly Plan</div>
-                                <p>You may cancel anytime. No refund is provided for the current billing month, but cancellation prevents future charges.</p>
-                            </div>
-                            <div class="plan-tile">
-                                <div class="plan-label">Annual Plan</div>
-                                <p>No refund is available after the initial setup is complete. You retain access to the service until the end of your billing period.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="legal-section" id="exceptional">
-                        <h2>6. Exceptional Circumstances</h2>
-                        <div class="callout callout-blue">
-                            <div class="callout-label">Our Commitment</div>
-                            <div class="callout-body">In rare cases where QUANTOR fails to deliver the agreed-upon services entirely, a full refund will be issued. These exceptional circumstances are handled on a case-by-case basis with full transparency. We take our commitments seriously and will work with you to find a fair resolution.</div>
-                        </div>
-                    </div>
-
-                    <div class="legal-section" id="request">
-                        <h2>7. How to Request</h2>
-                        <p>To request a cancellation or refund, please email us at <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a> with the following information:</p>
-                        <ul>
-                            <li>Your full name</li>
-                            <li>Order or project reference number</li>
-                            <li>Date of purchase</li>
-                            <li>Reason for cancellation or refund request</li>
-                        </ul>
-                        <p style="margin-top: 1rem;">We respond to all requests within 2 business days.</p>
-                    </div>
-
-                    <div class="legal-section" id="contact">
-                        <h2>8. Contact</h2>
-                        <p>For any questions regarding this policy or to discuss your specific situation:</p>
-                        <p>Email: <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a><br>
-                        Phone: <a href="tel:+919599234747">+91 9599234747</a></p>
-                    </div>
-
-                </div>
-            </div>
+        <div class="highlight-box">
+          <p><strong>Recommendation:</strong> If you are uncertain about proceeding, please do not make payment until you are fully committed. We prefer clients who are 100% ready to move forward, and we are happy to provide additional information to help you make an informed decision.</p>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <section class="contact-cta">
-        <div class="container">
-            <div class="contact-cta-box">
-                <h2>Questions about a refund?</h2>
-                <p>We're here to help. Reach out and we'll get back to you promptly.</p>
-                <a href="mailto:quantorleads@gmail.com" class="btn btn-filled">Email Us</a>
-            </div>
+    <!-- SECTION 3: DURING PROJECT -->
+    <div class="policy-block" id="section3">
+      <div class="block-header">
+        <span class="block-num">03</span>
+        <h2 class="block-title">CANCELLATION DURING PROJECT</h2>
+      </div>
+      <div class="block-content">
+        <p>Once work has begun on your project, the refund situation changes significantly. This section explains the policies that apply when a project is cancelled mid-way through development.</p>
+
+        <p><strong>The Reality of Service Work:</strong></p>
+        <p>Digital services are fundamentally different from products. When we work on your project, we invest time, expertise, and resources that cannot be recovered or reused. The work is specific to your requirements and has no value to other clients. This is why our cancellation policy during active projects is strictly enforced.</p>
+
+        <p><strong>Client-Initiated Cancellation:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Upfront Payment Non-Refundable:</strong> If you cancel after work has begun, the 50% upfront payment is completely non-refundable under all circumstances. No exceptions.</li>
+          <li><strong>No Partial Deliverables:</strong> We do not provide work-in-progress files, incomplete designs, or partial deliverables for cancelled projects. The work remains our property.</li>
+          <li><strong>Final Payment Not Required:</strong> You are not obligated to pay the remaining 50% if you cancel before final delivery.</li>
+          <li><strong>No Credit or Transfer:</strong> Payments cannot be transferred to other projects or converted to credit for future use.</li>
+        </ul>
+
+        <p><strong>Why We Cannot Offer Partial Refunds:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Sunk Costs:</strong> We incur real costs including time, software subscriptions, tool usage, and allocated resources that cannot be recovered.</li>
+          <li><strong>Opportunity Cost:</strong> When we accept your project, we turn away other work. Cancellation means we lose that other potential business.</li>
+          <li><strong>Work Specificity:</strong> The work created for your project is customized to your requirements and cannot be resold or repurposed.</li>
+          <li><strong>Project Management:</strong> Significant administrative time goes into project planning, communication, and coordination that is wasted on cancelled projects.</li>
+          <li><strong>Expertise Invested:</strong> You are paying for our expertise and skills, not just the final deliverable. That expertise cannot be "returned."</li>
+        </ul>
+
+        <p><strong>Cancellation by Us:</strong></p>
+        <ul class="policy-list">
+          <li><strong>For Cause:</strong> We may cancel a project if you breach the Terms of Service, including non-payment, abusive behavior, illegal requests, or failure to provide required materials.</li>
+          <li><strong>For Cause - Consequence:</strong> If we cancel for cause due to your breach, you forfeit all payments made and receive no deliverables.</li>
+          <li><strong>Force Majeure:</strong> If we must cancel due to circumstances beyond our control (illness, natural disaster, etc.), we will provide a prorated refund for work not performed.</li>
+          <li><strong>Inability to Deliver:</strong> In the rare event that we cannot complete your project due to technical limitations or other factors within our control, we will provide a partial refund based on the portion of work not completed.</li>
+        </ul>
+
+        <p><strong>Project Reactivation:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Within 30 Days:</strong> Cancelled projects can be reactivated within 30 days by paying a reactivation fee (20% of remaining balance) plus the final payment. Work resumes where it left off.</li>
+          <li><strong>After 30 Days:</strong> Projects cancelled for more than 30 days are considered closed. To resume, a new project must be quoted at current rates. Previous payments are forfeited.</li>
+          <li><strong>Resource Availability:</strong> Reactivation is subject to resource availability. We may need to reschedule based on our current workload.</li>
+        </ul>
+
+        <div class="highlight-box warning">
+          <p><strong>Important Warning:</strong> Please be certain about your commitment before making payment and before work begins. Once work starts, there is no scenario where the upfront payment will be refunded, regardless of the reason for cancellation. This policy is non-negotiable and strictly enforced.</p>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">QUANTOR</a>
-                    <p>Next-generation AI agency helping businesses scale through intelligent web experiences.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Navigation</h4>
-                    <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="index.html#services">Services</a>
-                        <a href="portfolio.html">Portfolio</a>
-                        <a href="about.html">About</a>
-                        <a href="contact.html">Contact</a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Pricing</h4>
-                    <div class="footer-links">
-                        <a href="pricing.html">View Plans</a>
-                        <a href="contact.html">Custom Quote</a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Legal</h4>
-                    <div class="footer-links">
-                        <a href="privacy-policy.html">Privacy Policy</a>
-                        <a href="terms.html">Terms of Service</a>
-                        <a href="refund-policy.html">Refund Policy</a>
-                        <a href="disclaimer.html">Disclaimer</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="footer-contact">
-                    <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
-                    <a href="tel:+919599234747">+91 9599234747</a>
-                </div>
-                <div>&copy; 2026 QUANTOR. All rights reserved.</div>
-            </div>
+    <!-- SECTION 4: AFTER COMPLETION -->
+    <div class="policy-block" id="section4">
+      <div class="block-header">
+        <span class="block-num">04</span>
+        <h2 class="block-title">AFTER PROJECT COMPLETION</h2>
+      </div>
+      <div class="block-content">
+        <p>Once a project is completed and delivered, the refund situation is very limited. This section explains what happens after you have received and approved your final deliverables.</p>
+
+        <p><strong>Standard Policy - No Refunds:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Completed Projects:</strong> Once a project is completed, delivered, and final payment is received, no refunds are available. The transaction is considered complete.</li>
+          <li><strong>Final Approval Significance:</strong> When you provide final approval, you confirm that the deliverable meets your requirements. This approval is binding.</li>
+          <li><strong>Buyer's Remorse:</strong> We do not offer refunds simply because you changed your mind, found a cheaper alternative, or your business needs changed.</li>
+          <li><strong>Subjective Dissatisfaction:</strong> Refunds are not available based on subjective preferences that differ from the original specifications.</li>
+        </ul>
+
+        <p><strong>The Role of Final Approval:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Thorough Review Required:</strong> You are responsible for thoroughly testing and reviewing all deliverables before providing final approval.</li>
+          <li><strong>Approval Window:</strong> You have 5 business days to review deliverables and raise any concerns before approval is deemed complete.</li>
+          <li><strong>Silent Approval:</strong> If you do not respond to delivery notifications within 7 days after two follow-up attempts, the project is deemed approved.</li>
+          <li><strong>Approval Documentation:</strong> All approvals are documented and can be referenced in case of disputes.</li>
+        </ul>
+
+        <p><strong>What If There Are Issues After Delivery?</strong></p>
+        <ul class="policy-list">
+          <li><strong>Bug Fixes (Within Warranty):</strong> If there are bugs or defects that prevent the deliverable from functioning as agreed, we will fix them at no charge within the warranty period (typically 14-30 days depending on project type).</li>
+          <li><strong>Scope Verification:</strong> If you believe we did not deliver what was promised, we will compare the deliverable against the agreed scope. If something is missing, we will deliver it.</li>
+          <li><strong>Resolution Over Refund:</strong> Our preference is always to fix issues rather than process refunds. Please give us the opportunity to make things right.</li>
+          <li><strong>Extended Issues:</strong> For ongoing issues discovered after the warranty period, we can discuss paid support or maintenance arrangements.</li>
+        </ul>
+
+        <p><strong>Exceptional Circumstances:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Our Material Failure:</strong> If we fundamentally failed to deliver what was promised in the scope, and we are unable or unwilling to fix the issue, a partial refund may be considered.</li>
+          <li><strong>Fraud or Misrepresentation:</strong> If we engaged in fraudulent behavior or deliberate misrepresentation, you may be entitled to a refund. (We pride ourselves on integrity and this has never occurred.)</li>
+          <li><strong>Legal Requirement:</strong> If applicable consumer protection laws in your jurisdiction mandate refunds in specific circumstances, we will comply with legal requirements.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Quality Commitment:</strong> While our refund policy after completion is strict, our commitment to quality is equally strong. We genuinely want you to be satisfied with our work. If you have concerns about any deliverable, please communicate with us before providing final approval. We will work with you to address legitimate issues within the scope of the original agreement.</p>
         </div>
-    </footer>
+      </div>
+    </div>
 
-    <script>
-        // Navbar Logic
-        const nav = document.getElementById('main-nav');
-        const hamburger = document.getElementById('hamburger-btn');
-        const navMenu = document.getElementById('nav-menu');
+    <!-- SECTION 5: NO REFUND SITUATIONS -->
+    <div class="policy-block" id="section5">
+      <div class="block-header">
+        <span class="block-num">05</span>
+        <h2 class="block-title">SITUATIONS WITH NO REFUND</h2>
+      </div>
+      <div class="block-content">
+        <p>Clarity is important. This section explicitly lists situations where refunds are NOT available. Please read this section carefully to avoid misunderstandings.</p>
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
+        <p><strong>No Refund Under These Circumstances:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Work Has Begun:</strong> Once we start working on your project, the upfront payment (50%) is non-refundable. This is our most strictly enforced policy.</li>
+          <li><strong>You Changed Your Mind:</strong> Deciding you no longer want the project, found a cheaper alternative, or your priorities changed does not qualify for a refund.</li>
+          <li><strong>Business Changed:</strong> If your business closes, pivots, or undergoes changes that affect the project's relevance, no refund is available.</li>
+          <li><strong>Budget Constraints:</strong> Discovering after payment that you cannot afford the project or remaining payments does not qualify for a refund.</li>
+          <li><strong>Stakeholder Disagreement:</strong> Internal disagreements within your organization about the project do not qualify for a refund.</li>
+          <li><strong>Timeline Dissatisfaction:</strong> If the project takes longer than estimated (which can happen for many reasons), this does not qualify for a refund.</li>
+          <li><strong>Preference Changes:</strong> Changing your preferences about design, features, or approach after work has begun does not qualify for a refund.</li>
+          <li><strong>Incomplete Client Input:</strong> If you fail to provide required materials or information and the project cannot be completed as a result, no refund is available.</li>
+          <li><strong>Late Feedback:</strong> If you provided feedback or approvals late, causing timeline or other issues, this does not qualify for a refund.</li>
+          <li><strong>Third-Party Issues:</strong> Problems caused by your hosting provider, domain registrar, or other third-party services do not qualify for a refund.</li>
+          <li><strong>Post-Approval Issues:</strong> Issues discovered after you provided final approval (beyond genuine bugs within warranty) do not qualify for a refund.</li>
+          <li><strong>Subjective Dissatisfaction:</strong> Being unhappy with results that meet the agreed scope does not qualify for a refund.</li>
+        </ul>
 
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
+        <p><strong>Specific Service Exclusions:</strong></p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Service Type</th>
+              <th>Refund Exclusion Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SEO Services</td>
+              <td>Results depend on factors outside our control (algorithm changes, competition, etc.)</td>
+            </tr>
+            <tr>
+              <td>AI Chatbot</td>
+              <td>AI outputs can vary; chatbot responses depend on training data provided by you</td>
+            </tr>
+            <tr>
+              <td>Website Development</td>
+              <td>Custom work cannot be reused; all work is specific to your project</td>
+            </tr>
+            <tr>
+              <td>Content Strategy</td>
+              <td>Intellectual work product cannot be "returned"</td>
+            </tr>
+            <tr>
+              <td>Consulting/Advice</td>
+              <td>Knowledge and expertise transferred cannot be un-transferred</td>
+            </tr>
+            <tr>
+              <td>Third-Party Setup</td>
+              <td>We cannot control third-party platforms' ongoing performance or changes</td>
+            </tr>
+          </tbody>
+        </table>
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
-        });
+        <p><strong>The Rationale:</strong></p>
+        <p>These exclusions exist not because we don't care about your satisfaction, but because service-based work has fundamental differences from product purchases. When we work on your project, we cannot recover our investment of time, expertise, and resources. The work is custom to your needs and has no value to anyone else. This is why the service industry operates differently from retail.</p>
 
-        // TOC Active State & IntersectionObserver
-        const sections = document.querySelectorAll('.legal-section');
-        const tocLinks = document.querySelectorAll('.toc-list a');
-        const pillLinks = document.querySelectorAll('.pill-list a');
+        <div class="highlight-box warning">
+          <p><strong>Please Understand:</strong> We are not trying to be difficult or unfair. These policies exist because we have experienced clients who request refunds for reasons that have nothing to do with our performance or delivery. By making these exclusions explicit, we can focus our energy on serving committed clients rather than managing unfair refund requests.</p>
+        </div>
+      </div>
+    </div>
 
-        const observerOptions = {
-            rootMargin: '-20% 0% -80% 0%',
-            threshold: 0
-        };
+    <!-- SECTION 6: CLIENT-CAUSED ISSUES -->
+    <div class="policy-block" id="section6">
+      <div class="block-header">
+        <span class="block-num">06</span>
+        <h2 class="block-title">CLIENT-CAUSED ISSUES</h2>
+      </div>
+      <div class="block-content">
+        <p>Sometimes projects don't go as planned due to client actions or inactions. This section explains what happens when issues arise from your side of the relationship.</p>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    
-                    tocLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === '#' + id) {
-                            link.classList.add('active');
-                        }
-                    });
+        <p><strong>What Constitutes Client-Caused Issues:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Delayed Materials:</strong> Not providing content, images, access credentials, or other required materials within the specified timeframe.</li>
+          <li><strong>Delayed Responses:</strong> Not responding to queries, feedback requests, or approval requests within the expected timeframe (3 business days).</li>
+          <li><strong>Incomplete Information:</strong> Providing inaccurate, incomplete, or misleading information that affects the project.</li>
+          <li><strong>Scope Creep Requests:</strong> Continuously requesting additions or changes beyond the agreed scope.</li>
+          <li><strong>Vague Feedback:</strong> Providing unclear, contradictory, or unactionable feedback that requires multiple rounds of clarification.</li>
+          <li><strong>Internal Conflicts:</strong> Different stakeholders providing conflicting feedback or direction.</li>
+          <li><strong>Access Issues:</strong> Providing incorrect credentials, revoked access, or failing to maintain necessary accounts.</li>
+          <li><strong>Payment Delays:</strong> Late payments or payment issues that affect project progression.</li>
+          <li><strong>Legal/Compliance Issues:</strong> Your content or business practices raising legal concerns that require project modifications.</li>
+          <li><strong>Technical Unpreparedness:</strong> Your hosting, domain, or technical infrastructure being inadequate for the project.</li>
+        </ul>
 
-                    pillLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === '#' + id) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }, observerOptions);
+        <p><strong>Consequences of Client-Caused Issues:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Extended Timelines:</strong> Project timelines will be extended to account for delays caused by client issues. We are not responsible for missed deadlines caused by client delays.</li>
+          <li><strong>Additional Charges:</strong> Extra work caused by client issues (revisiting completed phases, additional meetings, extended communication) may incur additional charges.</li>
+          <li><strong>Project Suspension:</strong> Projects may be suspended if client delays exceed 14 days. Suspended projects require reactivation fees to resume.</li>
+          <li><strong>Project Abandonment:</strong> Projects suspended for more than 60 days are considered abandoned. All payments are forfeited.</li>
+          <li><strong>No Refund:</strong> Client-caused issues NEVER qualify for refunds. The project failure is not due to our performance.</li>
+        </ul>
 
-        sections.forEach(section => observer.observe(section));
+        <p><strong>Specific Client-Caused Scenarios:</strong></p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Our Response</th>
+              <th>Refund?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>You don't provide required materials</td>
+              <td>Project paused; timeline extended</td>
+              <td><span class="status-badge none">NO</span></td>
+            </tr>
+            <tr>
+              <td>You provide incorrect information</td>
+              <td>Rework may incur additional charges</td>
+              <td><span class="status-badge none">NO</span></td>
+            </tr>
+            <tr>
+              <td>You want to change direction mid-project</td>
+              <td>Additional quote required</td>
+              <td><span class="status-badge none">NO</span></td>
+            </tr>
+            <tr>
+              <td>Your team gives conflicting feedback</td>
+              <td>Work paused until clarified</td>
+              <td><span class="status-badge none">NO</span></td>
+            </tr>
+            <tr>
+              <td>You're unhappy with approved work</td>
+              <td>Changes require new quote</td>
+              <td><span class="status-badge none">NO</span></td>
+            </tr>
+            <tr>
+              <td>Your third-party service fails</td>
+              <td>We help troubleshoot; not our fault</td>
+              <td><span class="status-badge none">NO</span></td>
+            </tr>
+            <tr>
+              <td>You disappear mid-project</td>
+              <td>After 60 days, project abandoned</td>
+              <td><span class="status-badge none">NO</span></td>
+            </tr>
+          </tbody>
+        </table>
 
-        // Smooth scroll for TOC and pill nav
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+        <p><strong>How to Avoid Client-Caused Issues:</strong></p>
+        <ul class="policy-list">
+          <li>Be prepared before starting a project. Have all content, materials, and information ready.</li>
+          <li>Designate one primary contact who can make decisions and consolidate feedback.</li>
+          <li>Provide clear, specific, and actionable feedback in a timely manner.</li>
+          <li>Review deliverables thoroughly and provide consolidated feedback, not piecemeal requests.</li>
+          <li>Maintain open communication and inform us immediately if any issues arise on your end.</li>
+          <li>Ensure your technical infrastructure (hosting, domains) is ready and adequate.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Partnership Approach:</strong> We view projects as partnerships. When both parties fulfill their responsibilities, projects succeed. We are committed to our side of the partnership and ask the same from our clients. Issues caused by either party affect the entire project, and we believe in accountability on both sides.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 7: SUBSCRIPTION SERVICES -->
+    <div class="policy-block" id="section7">
+      <div class="block-header">
+        <span class="block-num">07</span>
+        <h2 class="block-title">SUBSCRIPTION SERVICES REFUNDS</h2>
+      </div>
+      <div class="block-content">
+        <p>Some of our services are offered on a subscription basis, such as chatbot maintenance, SEO packages, and ongoing support. These services have different refund considerations than one-time projects.</p>
+
+        <p><strong>Monthly Subscription Services:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Cancellation Policy:</strong> Monthly subscriptions may be cancelled at any time with notice before the next billing cycle.</li>
+          <li><strong>Service Continuation:</strong> Service continues until the end of the current billing period. No prorated refunds for partial months.</li>
+          <li><strong>Advance Payment:</strong> Subscriptions are paid in advance. If you cancel, you will not be charged for subsequent periods.</li>
+          <li><strong>No Partial Refunds:</strong> If you cancel mid-month, no refund is provided for the remaining days.</li>
+          <li><strong>Setup Fees:</strong> Any one-time setup fees associated with subscriptions are non-refundable.</li>
+        </ul>
+
+        <p><strong>Annual Subscription Services:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Cancellation Window:</strong> Annual subscriptions may be cancelled within the first 30 days for a prorated refund minus 15% administrative fee.</li>
+          <li><strong>After 30 Days:</strong> No refunds are available for annual subscriptions cancelled after the first 30 days. Service will continue until the end of the subscription term.</li>
+          <li><strong>Non-Transferable:</strong> Annual subscriptions cannot be transferred to other services or clients.</li>
+          <li><strong>Early Termination:</strong> If we terminate the service for cause (your breach), no refund is provided.</li>
+        </ul>
+
+        <p><strong>Chatbot Subscription Services:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Platform Dependency:</strong> Chatbot subscriptions are subject to both our policies and the underlying platform's (Chatling AI) policies.</li>
+          <li><strong>Platform Changes:</strong> If the underlying platform changes pricing or features significantly, we will work with you to find alternatives or provide prorated refunds for unused service periods.</li>
+          <li><strong>Data Retention:</strong> Upon cancellation, your chatbot data and configuration will be retained for 30 days, then deleted. Re-activation after deletion requires a new setup.</li>
+          <li><strong>Monthly Chatbot Plans:</strong> Same terms as monthly subscriptions above.</li>
+        </ul>
+
+        <p><strong>Service Level Commitments:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Best Effort:</strong> Subscription services are provided on a best-effort basis. We cannot guarantee specific uptime, response times, or outcomes.</li>
+          <li><strong>Service Credits:</strong> For significant service interruptions caused by us, we may offer service credits (extension of subscription period) rather than cash refunds.</li>
+          <li><strong>Maximum Credit:</strong> Service credits for downtime are limited to a maximum of one month of service value.</li>
+          <li><strong>Exclusions:</strong> Downtime caused by third-party platforms, hosting providers, or factors outside our control does not qualify for credits.</li>
+        </ul>
+
+        <p><strong>Subscription Refund Summary:</strong></p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Subscription Type</th>
+              <th>Cancellation Notice</th>
+              <th>Refund Policy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monthly Services</td>
+              <td>Before next billing cycle</td>
+              <td>No refund for partial month; service ends at billing period</td>
+            </tr>
+            <tr>
+              <td>Annual Services (0-30 days)</td>
+              <td>30 days notice</td>
+              <td>Prorated refund minus 15% admin fee</td>
+            </tr>
+            <tr>
+              <td>Annual Services (30+ days)</td>
+              <td>Anytime</td>
+              <td>No refund; service continues to end of term</td>
+            </tr>
+            <tr>
+              <td>Chatbot Subscriptions</td>
+              <td>Per plan type above</td>
+              <td>Same as monthly/annual policies</td>
+            </tr>
+            <tr>
+              <td>Setup/Onboarding Fees</td>
+              <td>N/A</td>
+              <td>Non-refundable once work begins</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box">
+          <p><strong>Recommendation:</strong> If you're unsure about a subscription service, start with a monthly plan before committing to an annual plan. This gives you the opportunity to evaluate the service with minimal risk.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 8: CHARGEBACKS & DISPUTES -->
+    <div class="policy-block" id="section8">
+      <div class="block-header">
+        <span class="block-num">08</span>
+        <h2 class="block-title">CHARGEBACKS &amp; PAYMENT DISPUTES</h2>
+      </div>
+      <div class="block-content">
+        <p>Payment disputes and chargebacks are serious matters that affect our business and your reputation as a client. This section explains our policies regarding disputes and the consequences of improper chargebacks.</p>
+
+        <p><strong>Before Initiating Any Dispute:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Contact Us First:</strong> Always attempt to resolve issues directly with us before initiating any payment dispute. Most issues can be resolved through communication.</li>
+          <li><strong>Document Everything:</strong> Keep records of all communications, agreements, and deliverables. This documentation helps resolve disputes fairly.</li>
+          <li><strong>Understand Our Position:</strong> We maintain detailed records and will vigorously defend legitimate charges. Unjustified disputes waste everyone's time and resources.</li>
+          <li><strong>Allow Resolution Time:</strong> Give us 5 business days to respond to any concerns before escalating to payment platforms.</li>
+        </ul>
+
+        <p><strong>Consequences of Improper Chargebacks:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Immediate Service Suspension:</strong> All active projects and services will be immediately suspended pending resolution.</li>
+          <li><strong>Legal Action:</strong> We will pursue all available legal remedies to recover disputed amounts plus associated costs.</li>
+          <li><strong>Collection Efforts:</strong> Unresolved disputes may be referred to collection agencies, affecting your credit.</li>
+          <li><strong>Account Ban:</strong> You will be permanently banned from using our services in the future.</li>
+          <li><strong>Public Record:</strong> If legal action is pursued, the matter becomes public record.</li>
+          <li><strong>Additional Fees:</strong> You will be responsible for all dispute fees, legal fees, and collection costs.</li>
+        </ul>
+
+        <p><strong>What We Consider Improper Chargebacks:</strong></p>
+        <ul class="policy-list">
+          <li>Disputing a charge when you received and approved the deliverable.</li>
+          <li>Claiming "item not received" when you have the deliverable.</li>
+          <li>Claiming "unauthorized charge" when you made the payment.</li>
+          <li>Disputing after providing written approval of work.</li>
+          <li>Using chargebacks as a negotiation tactic.</li>
+          <li>Disputing after failing to respond to communications about the project.</li>
+        </ul>
+
+        <p><strong>Legitimate Dispute Grounds:</strong></p>
+        <ul class="policy-list">
+          <li>Actual unauthorized use of your payment method (fraud).</li>
+          <li>Duplicate charges for the same service.</li>
+          <li>Charges significantly different from the agreed amount without explanation.</li>
+          <li>We failed to deliver AND refused to communicate or resolve.</li>
+        </ul>
+
+        <p><strong>Our Documentation:</strong></p>
+        <p>We maintain comprehensive records of all transactions including: original project proposals and agreements; all email and WhatsApp communications; proof of deliverables sent; your approvals and feedback; payment confirmations and invoices; and any other relevant documentation. These records are used to defend against improper disputes.</p>
+
+        <p><strong>PayPal Buyer Protection Note:</strong></p>
+        <p>While PayPal offers buyer protection, this protection does not apply to service-based transactions in the same way as physical goods. PayPal's policies recognize that digital services cannot be "returned." We will provide evidence of service delivery, communications, and approvals to contest improper disputes.</p>
+
+        <div class="highlight-box warning">
+          <p><strong>Serious Warning:</strong> Chargebacks are not a refund mechanism. They are for fraud protection. Using chargebacks improperly can result in your PayPal account being limited, your bank accounts being flagged, and legal action against you. Always attempt direct resolution first.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 9: REFUND PROCESS -->
+    <div class="policy-block" id="section9">
+      <div class="block-header">
+        <span class="block-num">09</span>
+        <h2 class="block-title">HOW TO REQUEST REFUND CONSIDERATION</h2>
+      </div>
+      <div class="block-content">
+        <p>If you believe you have a legitimate case for refund consideration, this section explains the proper process to follow. Following this process ensures your request is handled fairly and efficiently.</p>
+
+        <p><strong>Step 1: Review This Policy</strong></p>
+        <ul class="policy-list">
+          <li>Read this entire refund policy to understand if your situation qualifies for a refund.</li>
+          <li>Review your original project proposal and any written agreements.</li>
+          <li>Gather all relevant communications and documentation.</li>
+        </ul>
+
+        <p><strong>Step 2: Contact Us Directly</strong></p>
+        <ul class="policy-list">
+          <li>Send an email to <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a> with the subject line "Refund Request - [Your Project Name]"</li>
+          <li>Include: Your name and contact information; Project name and date; Amount paid and payment method; Clear explanation of why you believe a refund is warranted; Specific documentation supporting your claim; and Your proposed resolution.</li>
+          <li>Be specific and factual. Vague complaints or emotional arguments are not helpful.</li>
+        </ul>
+
+        <p><strong>Step 3: Allow Response Time</strong></p>
+        <ul class="policy-list">
+          <li>We will acknowledge your email within 2 business days.</li>
+          <li>A thorough review and response will be provided within 5 business days.</li>
+          <li>Complex cases may require additional time; we will keep you informed.</li>
+        </ul>
+
+        <p><strong>Step 4: Discussion and Resolution</strong></p>
+        <ul class="policy-list">
+          <li>If your request has merit, we will work with you to find a fair resolution.</li>
+          <li>This may include: completing the work as originally agreed; making specific corrections or improvements; providing additional services; or in rare cases, processing a partial or full refund.</li>
+          <li>Our preference is always to resolve issues by delivering quality work rather than processing refunds.</li>
+        </ul>
+
+        <p><strong>Step 5: If Resolution Cannot Be Reached</strong></p>
+        <ul class="policy-list">
+          <li>If we cannot agree on a resolution, either party may propose mediation through a neutral third party.</li>
+          <li>As a last resort, disputes may be handled through arbitration or legal channels as described in our Terms of Service.</li>
+        </ul>
+
+        <p><strong>What Happens If a Refund Is Approved:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Method:</strong> Refunds are processed to the original payment method only.</li>
+          <li><strong>Timeline:</strong> Approved refunds are processed within 5-10 business days.</li>
+          <li><strong>Deductions:</strong> Processing fees charged by payment platforms cannot be recovered and are deducted from the refund amount.</li>
+          <li><strong>Confirmation:</strong> You will receive written confirmation of the refund with transaction details.</li>
+          <li><strong>Deliverables:</strong> You must confirm deletion of any deliverables received and relinquish all rights to the work.</li>
+        </ul>
+
+        <p><strong>Refund Request Checklist:</strong></p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Required Information</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Full name and contact details</td>
+              <td>Identification and communication</td>
+            </tr>
+            <tr>
+              <td>Project name and date</td>
+              <td>Project identification in our system</td>
+            </tr>
+            <tr>
+              <td>Payment amount and method</td>
+              <td>Transaction verification</td>
+            </tr>
+            <tr>
+              <td>Specific issue description</td>
+              <td>Understanding your concern</td>
+            </tr>
+            <tr>
+              <td>Relevant documentation</td>
+              <td>Evidence supporting your claim</td>
+            </tr>
+            <tr>
+              <td>Proposed resolution</td>
+              <td>Understanding your expectations</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box">
+          <p><strong>Communication First:</strong> The vast majority of issues can be resolved through direct communication. We are reasonable people who take pride in our work and our reputation. If there is a genuine problem with our delivery, we want to know about it and make it right. Please give us the opportunity before assuming the worst.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 10: FAIRNESS GUARANTEE -->
+    <div class="policy-block" id="section10">
+      <div class="block-header">
+        <span class="block-num">10</span>
+        <h2 class="block-title">OUR FAIRNESS COMMITMENT</h2>
+      </div>
+      <div class="block-content">
+        <p>While our refund policy may seem strict, we want you to understand our commitment to fairness and quality. This section explains what you can expect from us and how we handle situations when things don't go as planned.</p>
+
+        <p><strong>What We Promise:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Delivery Commitment:</strong> We commit to delivering what is specified in your project proposal. If we fail to deliver the agreed scope, we will make it right.</li>
+          <li><strong>Quality Work:</strong> We take pride in our work and will not cut corners or deliver substandard results.</li>
+          <li><strong>Communication:</strong> We will keep you informed about project progress, challenges, and any issues that arise.</li>
+          <li><strong>Honesty:</strong> We will be honest about what we can and cannot do, realistic timelines, and any limitations.</li>
+          <li><strong>Responsiveness:</strong> We will respond to your communications promptly and professionally.</li>
+          <li><strong>Problem Solving:</strong> If issues arise, we will work with you to find solutions rather than making excuses.</li>
+        </ul>
+
+        <p><strong>When We Make Mistakes:</strong></p>
+        <ul class="policy-list">
+          <li>We are human and occasionally make mistakes. When this happens, we will: acknowledge the mistake promptly; take responsibility without making excuses; work to correct the issue at no additional cost to you; and learn from the mistake to prevent recurrence.</li>
+          <li>If our mistake causes significant problems that cannot be corrected, we will discuss fair compensation, which may include partial refunds or additional services.</li>
+        </ul>
+
+        <p><strong>What We Expect From You:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Clear Communication:</strong> Tell us what you need, what you expect, and any concerns you have.</li>
+          <li><strong>Timely Responses:</strong> Respond to queries and provide materials within agreed timeframes.</li>
+          <li><strong>Honesty:</strong> Be honest about your requirements, budget, timeline, and any constraints.</li>
+          <li><strong>Reasonable Expectations:</strong> Understand that digital services involve complexity and that outcomes cannot be guaranteed.</li>
+          <li><strong>Professional Conduct:</strong> Treat our team with the same respect you expect.</li>
+          <li><strong>Commitment:</strong> Be committed to the project's success and do your part.</li>
+        </ul>
+
+        <p><strong>Resolution Philosophy:</strong></p>
+        <p>We believe that almost any issue can be resolved through honest, respectful communication. Our strict refund policy does not mean we don't care about your satisfaction—it means we protect ourselves from unfair claims while remaining committed to delivering excellent work. If you approach us with a legitimate concern in good faith, we will work with you to find a fair resolution.</p>
+
+        <div class="highlight-box">
+          <p><strong>Our Track Record:</strong> In our years of operation, we have had very few disputes because we communicate clearly, deliver what we promise, and work with clients to resolve issues before they escalate. The few refund requests we have received have typically been from clients who changed their minds or had unrealistic expectations. We are proud of our reputation and work hard to maintain it.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 11: EXCEPTIONS & SPECIAL CASES -->
+    <div class="policy-block" id="section11">
+      <div class="block-header">
+        <span class="block-num">11</span>
+        <h2 class="block-title">EXCEPTIONS &amp; SPECIAL CASES</h2>
+      </div>
+      <div class="block-content">
+        <p>While our policies are comprehensive, we recognize that unique situations may arise. This section addresses special cases and circumstances that may warrant exception consideration.</p>
+
+        <p><strong>Force Majeure Events:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Definition:</strong> Events beyond our control including natural disasters, pandemics, government actions, war, terrorism, infrastructure failures, and similar catastrophic events.</li>
+          <li><strong>If We Cannot Complete Work:</strong> If a force majeure event prevents us from completing your project, we will provide a prorated refund for work not performed.</li>
+          <li><strong>If You Cannot Proceed:</strong> If you cannot proceed due to a force majeure event, our standard cancellation policy applies (upfront payment non-refundable after work begins).</li>
+          <li><strong>Extended Delays:</strong> If a force majeure event causes delays exceeding 60 days, either party may cancel with prorated settlement.</li>
+        </ul>
+
+        <p><strong>Technical Impossibility:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Discovery After Start:</strong> If we discover after beginning work that your project requirements are technically impossible or infeasible with available resources, we will: inform you immediately; propose alternative approaches if possible; and if no alternative exists, provide a partial refund based on work not performed.</li>
+          <li><strong>Third-Platform Limitations:</strong> If third-party platform limitations prevent completion, we will help you find alternatives but are not responsible for platform constraints beyond our control.</li>
+        </ul>
+
+        <p><strong>Legal or Ethical Concerns:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Illegal Requests:</strong> If we discover your project involves illegal activities or content, we will cancel immediately with no refund.</li>
+          <li><strong>Ethical Concerns:</strong> We reserve the right to decline or cancel projects that conflict with our values. In such cases, a prorated refund will be provided.</li>
+          <li><strong>Compliance Issues:</strong> If your project raises compliance concerns after starting, we will work with you to address them. If unresolvable, standard cancellation terms apply.</li>
+        </ul>
+
+        <p><strong>Enterprise and Custom Agreements:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Custom Terms:</strong> Enterprise clients may negotiate custom refund terms as part of larger agreements. Such terms must be in writing and signed by both parties.</li>
+          <li><strong>Precedence:</strong> Custom written agreements take precedence over these standard policies for that specific engagement only.</li>
+          <li><strong>Minimum Standards:</strong> Even custom agreements will not include terms that are fundamentally unfair or unreasonable.</li>
+        </ul>
+
+        <p><strong>Local Legal Requirements:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Consumer Protection:</strong> If consumer protection laws in your jurisdiction provide rights beyond this policy, we will comply with legal requirements.</li>
+          <li><strong>EU/UK Clients:</strong> For clients in jurisdictions with strong consumer protection, we may offer additional cooling-off periods or rights as required by law.</li>
+          <li><strong>Legal Precedence:</strong> Applicable law takes precedence over policy terms that may conflict with mandatory legal requirements.</li>
+        </ul>
+
+        <p><strong>Goodwill Considerations:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Our Discretion:</strong> In exceptional circumstances, we may provide refunds, credits, or other accommodations beyond what this policy requires as a matter of goodwill.</li>
+          <li><strong>Not Precedent:</strong> Any goodwill gesture does not create a precedent or expectation for future situations.</li>
+          <li><strong>Factors Considered:</strong> Goodwill considerations take into account: your history as a client; the nature of the situation; fairness to both parties; and whether the request is made in good faith.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Clarity:</strong> Exceptions are rare and handled case-by-case. Our standard policies apply unless you have a written custom agreement or legal rights that override them. When in doubt, ask before making assumptions about exception eligibility.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 12: CONTACT & QUESTIONS -->
+    <div class="policy-block" id="section12">
+      <div class="block-header">
+        <span class="block-num">12</span>
+        <h2 class="block-title">CONTACT &amp; QUESTIONS</h2>
+      </div>
+      <div class="block-content">
+        <p>We want you to fully understand our refund policy before engaging our services. If anything is unclear or if you have questions about how these policies apply to your specific situation, please contact us.</p>
+
+        <p><strong>Before You Pay:</strong></p>
+        <ul class="policy-list">
+          <li>We encourage you to ask any questions about our refund policy before making a payment.</li>
+          <li>Understanding the terms upfront prevents misunderstandings later.</li>
+          <li>There is no such thing as a stupid question when it comes to understanding your rights and obligations.</li>
+        </ul>
+
+        <p><strong>Contact Information:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Email:</strong> <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a></li>
+          <li><strong>WhatsApp:</strong> <a href="https://wa.me/919599234747">+91 9599 234 747</a></li>
+          <li><strong>Business Hours:</strong> Monday - Friday, 10:00 AM - 7:00 PM IST</li>
+          <li><strong>Response Time:</strong> We aim to respond within 4 business hours during working hours.</li>
+        </ul>
+
+        <p><strong>Related Documents:</strong></p>
+        <ul class="policy-list">
+          <li><a href="terms-of-service.html">Terms of Service</a> - Complete service agreement and legal terms</li>
+          <li><a href="privacy-policy.html">Privacy Policy</a> - How we handle your data</li>
+        </ul>
+
+        <p><strong>Policy Updates:</strong></p>
+        <ul class="policy-list">
+          <li>This policy may be updated from time to time. Changes will be posted on this page with an updated "Last Updated" date.</li>
+          <li>Material changes will be communicated to active clients via email when practical.</li>
+          <li>Continued use of our services after policy changes constitutes acceptance of the updated terms.</li>
+          <li>The policy in effect at the time of your payment governs your transaction.</li>
+        </ul>
+
+        <p><strong>Document Information:</strong></p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Information</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Document Title</td>
+              <td>Refund Policy</td>
+            </tr>
+            <tr>
+              <td>Version</td>
+              <td>1.0</td>
+            </tr>
+            <tr>
+              <td>Last Updated</td>
+              <td>January 12, 2025</td>
+            </tr>
+            <tr>
+              <td>Effective Date</td>
+              <td>January 12, 2025</td>
+            </tr>
+            <tr>
+              <td>Governing Jurisdiction</td>
+              <td>India</td>
+            </tr>
+            <tr>
+              <td>Related Documents</td>
+              <td>Terms of Service, Privacy Policy</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="highlight-box">
+          <p><strong>Acknowledgment:</strong> By making any payment to QUANTOR, you acknowledge that you have read, understood, and agree to this Refund Policy in its entirety. You understand that once work begins on your project, the upfront payment is non-refundable, and that completed projects are not eligible for refunds. You agree to communicate any concerns directly with us before initiating any payment disputes.</p>
+        </div>
+
+        <p style="font-style: italic; color: var(--dim); margin-top: 2rem;">Thank you for taking the time to understand our policies. We look forward to working with you and delivering exceptional results that make refund discussions unnecessary.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact-section">
+  <div class="contact-inner">
+    <h2 class="contact-title">HAVE QUESTIONS?</h2>
+    <p class="contact-sub">We're here to help. If anything in this policy is unclear or you'd like to discuss how it applies to your situation, reach out before making any payment. We believe in transparency and want you to feel confident.</p>
+    <div class="contact-cards">
+      <a href="https://wa.me/919599234747?text=Hi%20QUANTOR%2C%20I%20have%20a%20question%20about%20your%20Refund%20Policy." target="_blank" class="contact-card">
+        <span class="contact-icon">&#128172;</span>
+        <span class="contact-label">WhatsApp</span>
+        <span class="contact-value">+91 9599 234 747</span>
+      </a>
+      <a href="mailto:quantorleads@gmail.com?subject=Refund%20Policy%20Inquiry" class="contact-card">
+        <span class="contact-icon">&#9993;</span>
+        <span class="contact-label">Email</span>
+        <span class="contact-value">quantorleads@gmail.com</span>
+      </a>
+      <a href="contact.html" class="contact-card">
+        <span class="contact-icon">&#128221;</span>
+        <span class="contact-label">Contact Form</span>
+        <span class="contact-value">Send a Message</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo">QUAN<em>TOR</em></div>
+      <div class="footer-tagline">Your Business Deserves More Than a Dead Website.</div>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/YOURUSERNAME" target="_blank" class="social-btn" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://www.facebook.com/YOURUSERNAME" target="_blank" class="social-btn" title="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://wa.me/919599234747" target="_blank" class="social-btn" title="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </a>
+      </div>
+      <div class="footer-contact-links">
+        <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
+        <a href="https://wa.me/919599234747">+91 9599 234 747</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>NAVIGATE</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>PRICING</h5>
+      <ul>
+        <li><a href="pricing.html#core-plans">Core Packages</a></li>
+        <li><a href="pricing.html#addons">Add-On Services</a></li>
+        <li><a href="pricing.html#custom">Custom Quote</a></li>
+        <li><a href="pricing.html#pfaq">Pricing FAQ</a></li>
+        <li><a href="pricing.html#payment">Payment Methods</a></li>
+      </ul>
+      <a href="pricing.html" class="footer-pricing-btn">View Plans &#8594;</a>
+    </div>
+    <div class="footer-col">
+      <h5>LEGAL</h5>
+      <ul>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-of-service.html">Terms of Service</a></li>
+        <li><a href="refund-policy.html">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 QUANTOR. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms-of-service.html">Terms</a>
+      <a href="refund-policy.html">Refunds</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════
+   INTERACTIONS
+════════════════════════════════════════════ */
+(function() {
+  // Preloader
+  const preloader = document.getElementById('preloader');
+  const preCount = document.getElementById('preCount');
+  let progress = 0;
+  const progressInterval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress >= 100) { progress = 100; clearInterval(progressInterval); }
+    preCount.textContent = Math.floor(progress) + '%';
+  }, 200);
+  
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      preloader.classList.add('hide');
+      document.body.classList.remove('loading');
+    }, 2500);
+  });
+
+  // Custom Cursor
+  const cursorOuter = document.getElementById('cursor-outer');
+  const cursorDot = document.getElementById('cursor-dot');
+  let mouseX = 0, mouseY = 0, outerX = 0, outerY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+  });
+
+  function animateCursor() {
+    outerX += (mouseX - outerX) * 0.15;
+    outerY += (mouseY - outerY) * 0.15;
+    cursorOuter.style.left = outerX + 'px';
+    cursorOuter.style.top = outerY + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document.querySelectorAll('a, button, .contact-card, .toc-item').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  // Nav Scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Scroll Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.policy-block').forEach(block => observer.observe(block));
+})();
+</script>
 </body>
 </html>
