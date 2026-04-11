@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Terms of Service — QUANTOR | Service Agreement</title>
+<meta name="description" content="QUANTOR Terms of Service - Complete service agreement, payment terms, client responsibilities, and legal protections. Read before engaging our services."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════════════════════════
+   QUANTOR — TERMS OF SERVICE PAGE
+   Design System: Dark Luxury Futurism v3.0
+════════════════════════════════════════════ */
+:root {
+  --ink:    #030507;
+  --ink2:   #070c12;
+  --ink3:   #0c1420;
+  --mint:   #00ffb2;
+  --coral:  #ff2d55;
+  --gold:   #e8a020;
+  --violet: #7c3aed;
+  --chalk:  #e2ecff;
+  --dim:    #4a5a78;
+  --dimmer: #1e2a3d;
+  --border: rgba(0,255,178,0.1);
+  --head: "Bebas Neue", sans-serif;
+  --body: "Manrope", sans-serif;
+  --mono: "JetBrains Mono", monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { background: var(--ink); color: var(--chalk); font-family: var(--body); overflow-x: hidden; cursor: none; }
+body.loading { overflow: hidden; }
+::selection { background: var(--mint); color: #000; }
+body::after {
+  content:""; position: fixed; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.35;
+}
+
+/* ── PRELOADER ── */
+#preloader {
+  position: fixed; inset: 0; background: var(--ink); z-index: 9998;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  transition: opacity 0.8s var(--ease), visibility 0.8s;
+}
+#preloader.hide { opacity: 0; visibility: hidden; }
+.pre-logo { font-family: var(--head); font-size: clamp(3rem,8vw,6rem); letter-spacing: 0.3em; color: var(--chalk); overflow: hidden; display: flex; }
+.pre-logo span { display: inline-block; transform: translateY(100%); opacity: 0; animation: charUp 0.6s var(--ease) forwards; }
+.pre-logo span:nth-child(1){animation-delay:.05s} .pre-logo span:nth-child(2){animation-delay:.1s}
+.pre-logo span:nth-child(3){animation-delay:.15s} .pre-logo span:nth-child(4){animation-delay:.2s}
+.pre-logo span:nth-child(5){animation-delay:.25s} .pre-logo span:nth-child(6){animation-delay:.3s}
+.pre-logo span:nth-child(7){animation-delay:.35s} .pre-logo span:nth-child(8){color:var(--mint);animation-delay:.35s}
+.pre-bar-wrap { width: 280px; height: 1px; background: var(--dimmer); position: relative; overflow: visible; }
+.pre-bar { position: absolute; left: 0; top: 0; height: 100%; background: var(--mint); width: 0%; animation: loadBar 2s var(--ease) forwards 0.5s; box-shadow: 0 0 20px var(--mint); }
+.pre-count { position: absolute; right: 0; bottom: 8px; font-family: var(--mono); font-size: 0.65rem; color: var(--mint); letter-spacing: 0.1em; }
+.pre-page-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.25em; color: var(--dim); text-transform: uppercase; }
+@keyframes charUp { to { transform: translateY(0); opacity: 1; } }
+@keyframes loadBar { to { width: 100%; } }
+
+/* ── CURSOR ── */
+#cursor-outer { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(0,255,178,0.5); border-radius: 50%; pointer-events: none; z-index: 9997; transition: width 0.3s var(--ease), height 0.3s var(--ease), background 0.3s, border-color 0.3s; transform: translate(-50%,-50%); will-change: left,top; }
+#cursor-dot { position: fixed; width: 5px; height: 5px; background: var(--mint); border-radius: 50%; pointer-events: none; z-index: 9997; transform: translate(-50%,-50%); box-shadow: 0 0 10px var(--mint); will-change: left,top; }
+body.cursor-hover #cursor-outer { width: 70px; height: 70px; background: rgba(0,255,178,0.05); border-color: var(--mint); }
+
+/* ── NAV ── */
+#nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.8rem 4%; display: flex; align-items: center; justify-content: space-between; transition: padding 0.4s var(--ease), background 0.4s, border-bottom 0.4s; }
+#nav.scrolled { padding: 1.2rem 4%; background: rgba(3,5,7,0.92); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: var(--head); font-size: 1.8rem; letter-spacing: 0.15em; color: var(--chalk); text-decoration: none; }
+.nav-logo em { color: var(--mint); font-style: normal; }
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+.nav-links a { color: var(--dim); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; position: relative; transition: color 0.3s; }
+.nav-links a::after { content:""; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--mint); transition: width 0.3s var(--ease); }
+.nav-links a:hover { color: var(--chalk); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links a.active { color: var(--chalk); }
+.nav-price-btn { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mint); border: 1px solid rgba(0,255,178,0.3); padding: 0.4rem 0.9rem; border-radius: 100px; text-decoration: none; transition: background 0.3s, border-color 0.3s; }
+.nav-price-btn:hover { background: rgba(0,255,178,0.08); border-color: var(--mint); }
+.nav-price-btn::after { display: none !important; }
+.nav-cta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink) !important; background: var(--mint); padding: 0.65rem 1.4rem; border-radius: 4px; text-decoration: none; transition: box-shadow 0.3s, transform 0.3s; box-shadow: 0 0 30px rgba(0,255,178,0.2); }
+.nav-cta:hover { box-shadow: 0 0 60px rgba(0,255,178,0.5); transform: scale(1.03); }
+.nav-cta::after { display: none !important; }
+
+/* ════════════════════════════════════════════
+   HERO SECTION
+════════════════════════════════════════════ */
+#policy-hero {
+  position: relative; min-height: 70vh; display: flex; align-items: center;
+  overflow: hidden;
+}
+.policy-hero-gradient {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 65% at 85% 50%, rgba(0,255,178,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 55% at 5% 70%, rgba(124,58,237,0.04) 0%, transparent 70%);
+}
+.policy-hero-inner {
+  position: relative; z-index: 1; padding: 10rem 4% 5rem;
+  max-width: 1000px; width: 100%;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 2.5rem; overflow: hidden;
+}
+.hero-eyebrow-inner {
+  display: flex; align-items: center; gap: 0.8rem;
+  transform: translateY(60px); opacity: 0;
+  animation: slideUp 1s var(--ease) 2.8s forwards;
+}
+.eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); animation: blink 1.5s infinite; box-shadow: 0 0 8px var(--mint); }
+.eyebrow-line { width: 40px; height: 1px; background: var(--mint); box-shadow: 0 0 10px var(--mint); }
+.eyebrow-text { font-family: var(--mono); font-size: 0.7rem; color: var(--mint); letter-spacing: 0.2em; text-transform: uppercase; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+
+.policy-headline {
+  font-family: var(--head); font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 0.92; letter-spacing: 0.02em; margin-bottom: 2rem;
+}
+.headline-row { display: block; overflow: hidden; }
+.headline-row span { display: block; transform: translateY(110%); opacity: 0; }
+.headline-row:nth-child(1) span { animation: slideUp 1.1s var(--ease) 2.9s forwards; }
+.headline-row:nth-child(2) span { animation: slideUp 1.1s var(--ease) 3.0s forwards; }
+.mint-word { color: var(--mint); }
+.outline-word { -webkit-text-stroke: 1px rgba(226,236,255,0.25); color: transparent; }
+
+.policy-hero-sub {
+  font-size: 1.1rem; color: var(--dim); line-height: 1.75; font-weight: 300;
+  max-width: 600px; margin-bottom: 2rem;
+  transform: translateY(30px); opacity: 0;
+  animation: slideUp 1s var(--ease) 3.2s forwards;
+}
+
+.policy-meta {
+  display: flex; flex-wrap: wrap; gap: 2rem;
+  transform: translateY(30px); opacity: 0;
+  animation: slideUp 1s var(--ease) 3.3s forwards;
+}
+.meta-item {
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.meta-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; }
+.meta-value { font-family: var(--head); font-size: 1.1rem; letter-spacing: 0.04em; color: var(--mint); }
+
+@keyframes slideUp { to { transform: translateY(0) translateX(0); opacity: 1; } }
+
+/* ════════════════════════════════════════════
+   TABLE OF CONTENTS
+════════════════════════════════════════════ */
+#toc-section {
+  padding: 4rem 4%; background: var(--ink2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.toc-inner {
+  max-width: 1000px; margin: 0 auto;
+}
+.toc-header {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+}
+.toc-title { font-family: var(--head); font-size: 1.5rem; letter-spacing: 0.08em; }
+.toc-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+}
+.toc-item {
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.5rem;
+  text-decoration: none; color: var(--dim); transition: all 0.3s;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.toc-item:hover { border-color: rgba(0,255,178,0.3); color: var(--chalk); transform: translateY(-2px); }
+.toc-num { font-family: var(--mono); font-size: 0.7rem; color: var(--mint); background: rgba(0,255,178,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; }
+.toc-text { font-size: 0.85rem; font-weight: 500; }
+
+/* ════════════════════════════════════════════
+   CONTENT SECTION
+════════════════════════════════════════════ */
+#content-section {
+  padding: 6rem 4%; background: var(--ink);
+}
+.content-inner {
+  max-width: 900px; margin: 0 auto;
+}
+.policy-block {
+  margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border);
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.policy-block.visible { opacity: 1; transform: translateY(0); }
+.policy-block:last-child { border-bottom: none; margin-bottom: 0; }
+.block-header {
+  display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem;
+}
+.block-num {
+  font-family: var(--mono); font-size: 0.8rem; color: var(--ink); background: var(--mint);
+  padding: 0.4rem 0.8rem; border-radius: 6px; flex-shrink: 0;
+}
+.block-title { font-family: var(--head); font-size: 2rem; letter-spacing: 0.04em; line-height: 1.1; }
+.block-content { padding-left: 3.5rem; }
+.block-content p {
+  font-size: 0.95rem; color: var(--dim); line-height: 1.85; font-weight: 300;
+  margin-bottom: 1.2rem;
+}
+.block-content p:last-child { margin-bottom: 0; }
+.block-content strong { color: var(--chalk); font-weight: 600; }
+.block-content em { color: var(--mint); font-style: normal; }
+.block-content a { color: var(--mint); text-decoration: none; border-bottom: 1px solid rgba(0,255,178,0.3); transition: border-color 0.3s; }
+.block-content a:hover { border-color: var(--mint); }
+
+/* Lists */
+.policy-list { list-style: none; margin: 1.5rem 0; }
+.policy-list li {
+  position: relative; padding-left: 1.8rem; margin-bottom: 1rem;
+  font-size: 0.95rem; color: var(--dim); line-height: 1.7;
+}
+.policy-list li::before {
+  content: ""; position: absolute; left: 0; top: 0.6rem;
+  width: 6px; height: 6px; background: var(--mint); border-radius: 50%;
+}
+
+/* Nested List */
+.policy-list-nested { list-style: none; margin: 1rem 0 1rem 1.5rem; }
+.policy-list-nested li { padding-left: 1.5rem; margin-bottom: 0.7rem; }
+.policy-list-nested li::before { width: 4px; height: 4px; background: var(--dim); }
+
+/* Highlight Box */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(0,255,178,0.06), rgba(0,255,178,0.02));
+  border: 1px solid rgba(0,255,178,0.15); border-radius: 12px;
+  padding: 1.5rem 2rem; margin: 1.5rem 0;
+}
+.highlight-box p { margin-bottom: 0 !important; color: var(--chalk); }
+.highlight-box.warning {
+  background: linear-gradient(135deg, rgba(255,45,85,0.06), rgba(255,45,85,0.02));
+  border-color: rgba(255,45,85,0.15);
+}
+.highlight-box.warning p { color: var(--coral); }
+
+/* Info Table */
+.info-table {
+  width: 100%; border-collapse: collapse; margin: 1.5rem 0;
+}
+.info-table th, .info-table td {
+  padding: 1rem 1.2rem; text-align: left; border-bottom: 1px solid var(--border);
+}
+.info-table th {
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--mint); background: rgba(0,255,178,0.03);
+}
+.info-table td { font-size: 0.9rem; color: var(--dim); }
+.info-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* ════════════════════════════════════════════
+   CONTACT SECTION
+════════════════════════════════════════════ */
+#contact-section {
+  padding: 5rem 4%; background: var(--ink2);
+}
+.contact-inner {
+  max-width: 800px; margin: 0 auto; text-align: center;
+}
+.contact-title { font-family: var(--head); font-size: clamp(2rem,4vw,3rem); letter-spacing: 0.04em; margin-bottom: 1rem; }
+.contact-sub { font-size: 0.95rem; color: var(--dim); line-height: 1.7; margin-bottom: 2.5rem; }
+.contact-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.contact-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid var(--border); border-radius: 16px; padding: 2rem;
+  text-decoration: none; color: var(--chalk); transition: all 0.3s;
+}
+.contact-card:hover { border-color: rgba(0,255,178,0.3); transform: translateY(-4px); }
+.contact-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+.contact-label { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--dim); text-transform: uppercase; margin-bottom: 0.5rem; }
+.contact-value { font-family: var(--head); font-size: 1.3rem; letter-spacing: 0.04em; }
+
+/* ════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════ */
+footer { background: var(--ink); border-top: 1px solid var(--border); }
+.footer-main { padding: 4rem 4% 3rem; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; }
+.footer-brand {}
+.footer-logo { font-family: var(--head); font-size: 1.8rem; letter-spacing: 0.15em; margin-bottom: 0.4rem; }
+.footer-logo em { color: var(--mint); font-style: normal; }
+.footer-tagline { font-size: 0.78rem; color: var(--dim); letter-spacing: 0.05em; font-weight: 300; margin-bottom: 1.5rem; }
+.footer-socials { display: flex; gap: 0.8rem; margin-bottom: 1.5rem; }
+.social-btn { width: 40px; height: 40px; border: 1px solid var(--dimmer); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--dim); font-size: 0.9rem; transition: all 0.3s; }
+.social-btn:hover { border-color: var(--mint); color: var(--mint); background: rgba(0,255,178,0.06); }
+.footer-contact-links a { display: block; color: var(--mint); text-decoration: none; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.05em; margin-bottom: 0.3rem; transition: opacity 0.2s; }
+.footer-contact-links a:hover { opacity: 0.7; }
+.footer-col h5 { font-family: var(--head); font-size: 1rem; letter-spacing: 0.1em; margin-bottom: 1.2rem; color: var(--chalk); }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-col ul a { color: var(--dim); text-decoration: none; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.03em; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--chalk); }
+.footer-pricing-btn { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mint); border: 1px solid rgba(0,255,178,0.3); padding: 0.4rem 0.9rem; border-radius: 100px; text-decoration: none; transition: background 0.3s, border-color 0.3s; margin-top: 0.4rem; }
+.footer-pricing-btn:hover { background: rgba(0,255,178,0.08); border-color: var(--mint); }
+.footer-bottom { border-top: 1px solid var(--border); padding: 1.5rem 4%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.72rem; color: var(--dimmer); }
+.footer-legal { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.footer-legal a { font-size: 0.72rem; color: var(--dimmer); text-decoration: none; letter-spacing: 0.03em; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--dim); }
+
+/* ── UTILITY ── */
+.reveal-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.reveal-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 1100px) {
+  .toc-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-main { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .toc-grid { grid-template-columns: 1fr; }
+  .block-header { flex-direction: column; gap: 0.8rem; }
+  .block-content { padding-left: 0; margin-top: 1rem; }
+  .contact-cards { grid-template-columns: 1fr; }
+  .footer-main { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .info-table { font-size: 0.8rem; }
+  .info-table th, .info-table td { padding: 0.8rem; }
+}
+</style>
+</head>
+<body class="loading">
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo"><span>Q</span><span>U</span><span>A</span><span>N</span><span>T</span><span>O</span><span>R</span><span>.</span></div>
+  <div class="pre-bar-wrap"><div class="pre-bar"></div><div class="pre-count" id="preCount">0%</div></div>
+  <div class="pre-page-label">Terms of Service</div>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor-outer"></div>
+<div id="cursor-dot"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">QUAN<em>TOR</em></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="pricing.html" class="nav-price-btn">&#8377; / $</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Start a Project &#8594;</a>
+</nav>
+
+<!-- HERO -->
+<section id="policy-hero">
+  <div class="policy-hero-gradient"></div>
+  <div class="policy-hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-inner">
+        <div class="eyebrow-dot"></div>
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">Legal Documentation</span>
+      </div>
+    </div>
+    <h1 class="policy-headline">
+      <span class="headline-row"><span>TERMS OF</span></span>
+      <span class="headline-row"><span class="mint-word">SERVICE.</span></span>
+    </h1>
+    <p class="policy-hero-sub">
+      This agreement governs your use of QUANTOR's services. By engaging us, you agree to these terms. Please read carefully to understand your rights, responsibilities, and our mutual obligations.
+    </p>
+    <div class="policy-meta">
+      <div class="meta-item">
+        <span class="meta-label">Last Updated</span>
+        <span class="meta-value">January 12, 2025</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Effective Date</span>
+        <span class="meta-value">January 12, 2025</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Version</span>
+        <span class="meta-value">1.0</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<section id="toc-section">
+  <div class="toc-inner">
+    <div class="toc-header">
+      <span class="toc-title">QUICK NAVIGATION</span>
+    </div>
+    <div class="toc-grid">
+      <a href="#section1" class="toc-item"><span class="toc-num">01</span><span class="toc-text">Agreement &amp; Acceptance</span></a>
+      <a href="#section2" class="toc-item"><span class="toc-num">02</span><span class="toc-text">Services We Provide</span></a>
+      <a href="#section3" class="toc-item"><span class="toc-num">03</span><span class="toc-text">Client Responsibilities</span></a>
+      <a href="#section4" class="toc-item"><span class="toc-num">04</span><span class="toc-text">Payment Terms</span></a>
+      <a href="#section5" class="toc-item"><span class="toc-num">05</span><span class="toc-text">Project Timelines</span></a>
+      <a href="#section6" class="toc-item"><span class="toc-num">06</span><span class="toc-text">Revisions &amp; Changes</span></a>
+      <a href="#section7" class="toc-item"><span class="toc-num">07</span><span class="toc-text">Intellectual Property</span></a>
+      <a href="#section8" class="toc-item"><span class="toc-num">08</span><span class="toc-text">Third-Party Services</span></a>
+      <a href="#section9" class="toc-item"><span class="toc-num">09</span><span class="toc-text">Limitation of Liability</span></a>
+      <a href="#section10" class="toc-item"><span class="toc-num">10</span><span class="toc-text">Cancellation &amp; Refunds</span></a>
+      <a href="#section11" class="toc-item"><span class="toc-num">11</span><span class="toc-text">Dispute Resolution</span></a>
+      <a href="#section12" class="toc-item"><span class="toc-num">12</span><span class="toc-text">General Provisions</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section id="content-section">
+  <div class="content-inner">
+
+    <!-- SECTION 1: AGREEMENT & ACCEPTANCE -->
+    <div class="policy-block" id="section1">
+      <div class="block-header">
+        <span class="block-num">01</span>
+        <h2 class="block-title">AGREEMENT &amp; ACCEPTANCE</h2>
+      </div>
+      <div class="block-content">
+        <p>Welcome to QUANTOR. These Terms of Service ("Terms") constitute a legally binding agreement between you ("Client," "You," or "Your") and QUANTOR ("We," "Us," "Our," or "Service Provider") governing your use of our website, services, and any deliverables we provide. By submitting a project request, making a payment, or engaging our services in any capacity, you acknowledge that you have read, understood, and agree to be bound by these Terms in their entirety.</p>
+
+        <p><strong>Formation of Agreement:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Quotation Request:</strong> When you submit a project inquiry or request a quote, no binding agreement is formed until both parties explicitly agree to proceed and payment is received.</li>
+          <li><strong>Proposal Acceptance:</strong> Our proposals and quotes are valid for 14 days from the date of issue. Acceptance after this period may require a revised proposal.</li>
+          <li><strong>Payment Confirmation:</strong> A binding service agreement is formed when we receive your upfront payment and confirm project commencement via email or WhatsApp.</li>
+          <li><strong>Written Amendments:</strong> Any modifications to these Terms or your specific project scope must be agreed upon in writing (email or WhatsApp message) by both parties to be valid.</li>
+        </ul>
+
+        <p><strong>Authority to Bind:</strong></p>
+        <p>By engaging our services, you represent and warrant that: (a) you are at least 18 years of age; (b) you have the legal capacity and authority to enter into this agreement on your own behalf or on behalf of the entity you represent; (c) if representing a company or organization, you have the necessary authority to bind that entity to these Terms; and (d) you have provided accurate and complete information in all communications with us.</p>
+
+        <div class="highlight-box warning">
+          <p><strong>Important:</strong> If you do not agree with any part of these Terms, you must not use our services or submit any payment. Continued use of our services after any modifications to these Terms constitutes acceptance of those modifications. We reserve the right to update these Terms at any time, and such changes will be effective immediately upon posting to our website.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: SERVICES WE PROVIDE -->
+    <div class="policy-block" id="section2">
+      <div class="block-header">
+        <span class="block-num">02</span>
+        <h2 class="block-title">SERVICES WE PROVIDE</h2>
+      </div>
+      <div class="block-content">
+        <p>QUANTOR offers a range of digital services designed to help businesses establish and enhance their online presence. Below is a comprehensive description of our service categories and what each includes. The specific services you engage will be detailed in your individual project proposal or agreement.</p>
+
+        <p><strong>AI Chatbot Development &amp; Integration:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Chatbot Setup:</strong> Configuration and deployment of AI-powered chatbots using Chatling AI or similar platforms, trained on your business data and FAQs.</li>
+          <li><strong>Training Data Integration:</strong> Inputting your business information, product details, service descriptions, and common Q&As to train the chatbot.</li>
+          <li><strong>Website Integration:</strong> Embedding the chatbot widget on your website and configuring appearance, behavior, and lead capture settings.</li>
+          <li><strong>Basic Customization:</strong> Adjusting chatbot personality, welcome messages, and conversation flows within platform capabilities.</li>
+          <li><strong>Ongoing Maintenance:</strong> Monthly subscription services include monitoring, updates, and training data refreshes as specified in your package.</li>
+        </ul>
+
+        <p><strong>Website Development Services:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Landing Page Development:</strong> Single-page websites designed for lead generation, product launches, or campaign-specific purposes.</li>
+          <li><strong>Full Website Development:</strong> Multi-page websites with custom design, responsive layouts, and essential functionality as outlined in your project scope.</li>
+          <li><strong>Website Redesign:</strong> Updating existing websites with new designs, improved functionality, or modern features.</li>
+          <li><strong>Hosting Setup:</strong> Configuration of website hosting through providers like Hostinger, including domain connection and basic DNS settings.</li>
+          <li><strong>Content Integration:</strong> Adding your provided text, images, and other content to the website (content creation is a separate service).</li>
+        </ul>
+
+        <p><strong>SEO &amp; Digital Marketing Add-Ons:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Local SEO Package:</strong> Optimization for local search visibility, Google Business Profile setup, and local directory submissions.</li>
+          <li><strong>Content Strategy &amp; SEO Copy:</strong> Development of content plans and search-engine-optimized written content for your website.</li>
+          <li><strong>Analytics Dashboard Setup:</strong> Configuration of Google Analytics or similar tools to track website performance and visitor behavior.</li>
+          <li><strong>Social Media Engine:</strong> Setup of social media automation tools and basic profile optimization.</li>
+        </ul>
+
+        <p><strong>Automation &amp; Business Tools:</strong></p>
+        <ul class="policy-list">
+          <li><strong>WhatsApp Automation:</strong> Setup of WhatsApp Business API or automation tools for customer communication workflows.</li>
+          <li><strong>Email Nurture Setup:</strong> Configuration of email marketing sequences and automation for lead nurturing.</li>
+          <li><strong>Reputation Management:</strong> Setup of review monitoring and response management systems.</li>
+          <li><strong>CRO Audit &amp; Setup:</strong> Conversion rate optimization analysis and implementation of improvements.</li>
+        </ul>
+
+        <p><strong>What Is NOT Included (Unless Explicitly Stated):</strong></p>
+        <ul class="policy-list">
+          <li>Content writing, copywriting, or creative content development (available as separate services).</li>
+          <li>Stock photography, custom illustrations, or video production (can be arranged at additional cost).</li>
+          <li>Legal advice, compliance audits, or regulatory guidance.</li>
+          <li>Guaranteed search engine rankings or specific traffic/sales outcomes.</li>
+          <li>Ongoing technical support beyond the specified warranty period.</li>
+          <li>Server maintenance, security monitoring, or backup services after project handover.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Scope Definition:</strong> The exact deliverables, features, and inclusions for your project will be specified in your individual proposal or project agreement. Anything not explicitly listed in your proposal is not included in the project scope and may incur additional charges if requested.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: CLIENT RESPONSIBILITIES -->
+    <div class="policy-block" id="section3">
+      <div class="block-header">
+        <span class="block-num">03</span>
+        <h2 class="block-title">CLIENT RESPONSIBILITIES</h2>
+      </div>
+      <div class="block-content">
+        <p>To ensure successful project delivery, you have specific responsibilities that are essential to our ability to perform the work. Failure to meet these responsibilities may result in project delays, additional charges, or inability to complete the project as specified. The following outlines your obligations as a client:</p>
+
+        <p><strong>Timely Provision of Materials &amp; Information:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Content &amp; Assets:</strong> You must provide all necessary content, images, logos, branding materials, and information within the timeframe specified in your project timeline (typically within 3-5 business days of request).</li>
+          <li><strong>Accuracy of Information:</strong> All information, content, and materials you provide must be accurate, complete, and legally compliant. You are solely responsible for verifying the accuracy of any information you provide.</li>
+          <li><strong>Access Credentials:</strong> You must provide necessary access credentials (hosting accounts, domain registrars, third-party platforms) within 24 hours of request. Delays in providing access will extend project timelines accordingly.</li>
+          <li><strong>Legal Rights to Materials:</strong> You must have the legal right to use all content, images, logos, and materials you provide. You represent that such materials do not infringe on any third party's intellectual property rights.</li>
+        </ul>
+
+        <p><strong>Communication &amp; Availability:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Primary Contact:</strong> You must designate a single primary contact person who has authority to make decisions and provide approvals on your behalf.</li>
+          <li><strong>Response Time:</strong> You agree to respond to queries, provide feedback, and approve deliverables within 3 business days. Extended silence may be treated as approval after reasonable follow-up attempts.</li>
+          <li><strong>Clear Communication:</strong> Feedback and revision requests must be clear, specific, and actionable. Vague or contradictory feedback may result in misunderstandings and additional revision cycles.</li>
+          <li><strong>Stakeholder Coordination:</strong> If multiple stakeholders are involved, you agree to consolidate feedback internally before providing it to us. Conflicting feedback from multiple sources will pause work until clarified.</li>
+        </ul>
+
+        <p><strong>Approvals &amp; Decision Making:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Timely Approvals:</strong> You must review and approve or provide feedback on deliverables within the timeframe specified (typically 3-5 business days).</li>
+          <li><strong>Deemed Approval:</strong> If you do not respond to approval requests within 7 calendar days after two follow-up attempts, the deliverable will be deemed approved, and work will proceed to the next phase.</li>
+          <li><strong>Final Approval:</strong> Final approval signifies that you have thoroughly reviewed the deliverable and accept it as meeting the agreed scope. Changes requested after final approval may incur additional charges.</li>
+          <li><strong>Testing Responsibility:</strong> You are responsible for thoroughly testing all delivered websites, chatbots, and systems before providing final approval. Issues discovered after final approval and payment completion may require a separate support engagement.</li>
+        </ul>
+
+        <p><strong>Payment &amp; Financial Obligations:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Timely Payment:</strong> You must make all payments according to the agreed payment schedule. Work will not commence until the upfront payment is received.</li>
+          <li><strong>Payment Accuracy:</strong> You are responsible for ensuring that payments are sent correctly, including accurate amounts, references, and to the correct payment details provided.</li>
+          <li><strong>Payment Verification:</strong> For certain projects, we may require payment verification or cleared funds before commencing work or releasing deliverables.</li>
+          <li><strong>Tax Obligations:</strong> You are responsible for any applicable taxes, duties, or charges in your jurisdiction related to the services we provide.</li>
+        </ul>
+
+        <p><strong>Legal &amp; Compliance Responsibilities:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Business Legality:</strong> Your business operations and the content you publish through services we provide must be legal in all applicable jurisdictions.</li>
+          <li><strong>Privacy Compliance:</strong> You are responsible for ensuring that your use of any chatbots, data collection tools, or websites we create complies with applicable privacy laws (GDPR, CCPA, etc.).</li>
+          <li><strong>Industry Regulations:</strong> If your business operates in a regulated industry (healthcare, finance, legal, etc.), you are responsible for ensuring compliance with relevant regulations.</li>
+          <li><strong>Content Legality:</strong> You must not use our services to create, host, or distribute illegal, harmful, defamatory, or infringing content.</li>
+        </ul>
+
+        <div class="highlight-box warning">
+          <p><strong>Consequences of Non-Compliance:</strong> Failure to meet your responsibilities may result in: (a) project delays without liability on our part; (b) additional charges for extra time, revisions, or work beyond the original scope; (c) suspension of work until obligations are met; (d) termination of the agreement with forfeiture of payments made; or (e) inability to complete the project as originally specified. We are not responsible for project failures or issues arising from your failure to meet these responsibilities.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: PAYMENT TERMS -->
+    <div class="policy-block" id="section4">
+      <div class="block-header">
+        <span class="block-num">04</span>
+        <h2 class="block-title">PAYMENT TERMS</h2>
+      </div>
+      <div class="block-content">
+        <p>Clear payment terms are essential for a successful working relationship. By engaging our services, you agree to the following payment structure and policies. These terms are non-negotiable unless explicitly agreed otherwise in writing before project commencement.</p>
+
+        <p><strong>Payment Structure:</strong></p>
+        <ul class="policy-list">
+          <li><strong>50% Upfront Payment:</strong> Work on your project will not commence until we receive 50% of the total project value. This payment confirms your commitment and allows us to allocate resources to your project.</li>
+          <li><strong>50% Before Final Delivery:</strong> The remaining 50% must be paid before we deliver the final files, provide access credentials, or transfer ownership of any deliverables. We retain all rights to work products until full payment is received.</li>
+          <li><strong>Milestone Payments:</strong> For larger projects, milestone-based payment schedules may be proposed. These will be specified in your project proposal and must be followed as agreed.</li>
+          <li><strong>Subscription Services:</strong> Ongoing services (chatbot maintenance, SEO packages, etc.) require payment in advance for each billing period. Services will be suspended if payment is not received before the billing period begins.</li>
+        </ul>
+
+        <p><strong>Accepted Payment Methods:</strong></p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Best For</th>
+              <th>Processing Time</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>UPI</td>
+              <td>Indian Clients</td>
+              <td>Instant</td>
+              <td>Google Pay, PhonePe, Paytm, etc.</td>
+            </tr>
+            <tr>
+              <td>PayPal</td>
+              <td>International Clients</td>
+              <td>Instant</td>
+              <td>Buyer protection included</td>
+            </tr>
+            <tr>
+              <td>Wise</td>
+              <td>International Transfers</td>
+              <td>1-2 Business Days</td>
+              <td>Competitive exchange rates</td>
+            </tr>
+            <tr>
+              <td>Bank Transfer</td>
+              <td>Large Transactions</td>
+              <td>1-3 Business Days</td>
+              <td>NEFT/IMPS for India, SWIFT for international</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Late Payment &amp; Non-Payment:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Late Payment Fees:</strong> Payments received after the due date may incur a late fee of 2% per week on the outstanding amount, up to a maximum of 10% of the project value.</li>
+          <li><strong>Work Suspension:</strong> If any payment is overdue by more than 7 days, we reserve the right to suspend all work on your project until payment is received in full, including any applicable late fees.</li>
+          <li><strong>Retention of Deliverables:</strong> We retain full ownership and possession of all work products, files, and deliverables until complete payment is received. No project files or access will be provided to clients with outstanding balances.</li>
+          <li><strong>Debt Recovery:</strong> For severely delinquent accounts, we may engage collection agencies or legal action to recover outstanding amounts. You will be responsible for all collection costs, legal fees, and associated expenses.</li>
+          <li><strong>Credit Reporting:</strong> Unpaid debts may be reported to credit bureaus or relevant authorities in accordance with applicable laws.</li>
+        </ul>
+
+        <p><strong>Currency &amp; Taxes:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Indian Rupees:</strong> All quotes in INR are final and binding. Prices include applicable Indian taxes unless otherwise stated.</li>
+          <li><strong>USD Pricing:</strong> For international clients, USD prices are subject to exchange rate fluctuations at the time of payment. Final amounts may vary slightly based on conversion rates.</li>
+          <li><strong>Tax Invoices:</strong> We will provide tax invoices for all payments received. You are responsible for providing accurate billing information for invoicing purposes.</li>
+          <li><strong>Reverse Charge:</strong> For certain international transactions, reverse charge mechanism may apply. You are responsible for understanding and complying with your local tax obligations.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>No Work Without Payment:</strong> Please do not request that we begin work before payment is received. Our policy is strictly enforced to protect both parties and ensure committed engagement. Upfront payment demonstrates your commitment and allows us to prioritize your project appropriately.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: PROJECT TIMELINES -->
+    <div class="policy-block" id="section5">
+      <div class="block-header">
+        <span class="block-num">05</span>
+        <h2 class="block-title">PROJECT TIMELINES &amp; DELAYS</h2>
+      </div>
+      <div class="block-content">
+        <p>Project timelines are estimates based on anticipated work requirements and client responsiveness. While we strive to meet all deadlines, various factors can affect actual delivery times. This section explains how timelines work and what happens when delays occur.</p>
+
+        <p><strong>Timeline Estimates:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Estimates Only:</strong> All timeline estimates provided in proposals or during discussions are good-faith estimates, not guaranteed completion dates. Actual timelines may vary based on project complexity, revision requirements, and external factors.</li>
+          <li><strong>Business Days:</strong> Unless otherwise specified, timelines refer to business days (Monday through Friday, excluding public holidays in India).</li>
+          <li><strong>Typical Timelines:</strong> Landing pages typically take 5-10 business days; full websites 15-30 business days; chatbot setup 3-7 business days. These are general guidelines and your specific project may differ.</li>
+          <li><strong>Timeline Commencement:</strong> Project timelines begin from the date we receive your upfront payment AND all necessary project materials/information, whichever is later.</li>
+        </ul>
+
+        <p><strong>Factors That May Extend Timelines:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Client Delays:</strong> Delays in providing content, assets, access credentials, feedback, or approvals will extend project timelines proportionally. We are not responsible for delays caused by client unresponsiveness.</li>
+          <li><strong>Scope Changes:</strong> Any additions or modifications to the original project scope will require timeline adjustments and may incur additional charges.</li>
+          <li><strong>Revision Cycles:</strong> Excessive revision requests beyond the included allowance will extend timelines as they require additional work.</li>
+          <li><strong>Technical Complexity:</strong> Unforeseen technical challenges, platform limitations, or integration issues may require additional development time.</li>
+          <li><strong>Third-Party Dependencies:</strong> Delays caused by third-party services (hosting providers, domain registrars, API providers, platform outages) are beyond our control and may extend timelines.</li>
+          <li><strong>Force Majeure:</strong> Events beyond our reasonable control, including natural disasters, pandemics, government actions, infrastructure failures, or personal emergencies, may cause delays without liability.</li>
+        </ul>
+
+        <p><strong>Client-Caused Delays:</strong></p>
+        <ul class="policy-list">
+          <li>If you fail to provide requested materials, feedback, or approvals within 7 calendar days of request, the project may be placed on hold.</li>
+          <li>Projects on hold for more than 30 days due to client unresponsiveness may require re-activation fees to resume work (minimum 15% of remaining project value).</li>
+          <li>Projects on hold for more than 60 days may be considered abandoned. Abandoned projects forfeit all payments made, and any deliverables created remain our property.</li>
+          <li>We reserve the right to reassign resources from delayed projects to other client work. Resumption may require re-scheduling based on our availability.</li>
+        </ul>
+
+        <p><strong>Our Delay Responsibilities:</strong></p>
+        <ul class="policy-list">
+          <li>If delays are caused solely by our actions or negligence, we will communicate proactively and work to minimize impact.</li>
+          <li>For significant delays (more than 50% beyond the estimated timeline) caused solely by us, you may request a partial refund of the upfront payment, not to exceed 25% of total project value.</li>
+          <li>This refund option applies only if the delay is entirely our fault and you have met all your client responsibilities promptly.</li>
+          <li>Our maximum liability for any delay is limited to the refund described above; we are not liable for any consequential damages, lost profits, or opportunity costs.</li>
+        </ul>
+
+        <div class="highlight-box warning">
+          <p><strong>Timelines Are Not Deadlines:</strong> We do not guarantee specific completion dates unless explicitly agreed in writing. Rush delivery requests may be accommodated for an additional fee (typically 25-50% surcharge) but are subject to resource availability. Always communicate time-sensitive requirements before project commencement.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: REVISIONS & CHANGES -->
+    <div class="policy-block" id="section6">
+      <div class="block-header">
+        <span class="block-num">06</span>
+        <h2 class="block-title">REVISIONS, CHANGES &amp; SCOPE CREEP</span>
+      </div>
+      <div class="block-content">
+        <p>Clear revision policies help ensure projects stay on track and within budget. Understanding the difference between included revisions and scope changes is essential for a smooth project experience. This section defines what constitutes a revision versus a new request and how each is handled.</p>
+
+        <p><strong>Included Revisions:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Website Projects:</strong> Standard packages include 2 rounds of revisions. Each round allows you to request changes to any aspect of the current deliverable.</li>
+          <li><strong>Chatbot Projects:</strong> Includes 2 rounds of training data adjustments and 1 round of appearance/behavior modifications.</li>
+          <li><strong>Design Work:</strong> Initial design concepts are followed by 2 revision rounds based on your feedback.</li>
+          <li><strong>Revision Definition:</strong> A revision is a modification to existing work that stays within the originally agreed scope. Examples include color changes, text updates, layout adjustments, or feature tweaks.</li>
+        </ul>
+
+        <p><strong>What Is NOT a Revision (Scope Changes):</strong></p>
+        <ul class="policy-list">
+          <li><strong>New Features:</strong> Adding features, pages, or functionality not specified in the original agreement.</li>
+          <li><strong>Design Direction Change:</strong> Significantly changing the design direction, style, or aesthetic after work has begun.</li>
+          <li><strong>Content Expansion:</strong> Adding substantially more content than originally specified.</li>
+          <li><strong>Platform Changes:</strong> Switching to a different platform, hosting provider, or technical approach mid-project.</li>
+          <li><strong>Requirement Changes:</strong> Modifying fundamental project requirements or business objectives.</li>
+          <li><strong>Re-do Requests:</strong> Asking to revert to previous versions or restart work that was already approved.</li>
+        </ul>
+
+        <p><strong>Additional Revision Charges:</strong></p>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th>Service Type</th>
+              <th>Included Revisions</th>
+              <th>Additional Revision Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Landing Page</td>
+              <td>2 Rounds</td>
+              <td>&#8377;1,500 / $20 per round</td>
+            </tr>
+            <tr>
+              <td>Full Website</td>
+              <td>2 Rounds</td>
+              <td>&#8377;3,000 / $40 per round</td>
+            </tr>
+            <tr>
+              <td>Chatbot Setup</td>
+              <td>2 Rounds</td>
+              <td>&#8377;1,000 / $15 per round</td>
+            </tr>
+            <tr>
+              <td>Enterprise Projects</td>
+              <td>As Specified</td>
+              <td>As Quoted</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>Scope Change Process:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Identification:</strong> When a request is identified as a scope change, we will notify you in writing before proceeding.</li>
+          <li><strong>Quotation:</strong> We will provide a quote for the additional work, including cost and timeline impact.</li>
+          <li><strong>Approval Required:</strong> Work on scope changes will not begin until you approve the additional charges in writing.</li>
+          <li><strong>Payment:</strong> Additional charges may require upfront payment before work proceeds, at our discretion.</li>
+          <li><strong>Timeline Extension:</strong> Scope changes will extend project timelines accordingly. The original timeline estimates no longer apply.</li>
+        </ul>
+
+        <p><strong>Managing Scope Creep:</strong></p>
+        <p>Scope creep—the gradual expansion of project requirements—is one of the most common causes of project delays and budget overruns. To avoid scope creep: (a) be thorough in your initial requirements; (b) consolidate feedback from all stakeholders before submitting; (c) avoid "while you're at it" requests; (d) understand that small requests can accumulate quickly; and (e) communicate any concerns about scope early rather than requesting changes piecemeal.</p>
+
+        <div class="highlight-box warning">
+          <p><strong>Unlimited Revisions Not Offered:</strong> We do not offer unlimited revisions as they are not sustainable for quality service delivery. If you anticipate needing extensive changes, discuss this during the proposal stage so we can include appropriate allowances. Requests for "just one more small change" after revision limits are exhausted will be billed as additional revisions.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 7: INTELLECTUAL PROPERTY -->
+    <div class="policy-block" id="section7">
+      <div class="block-header">
+        <span class="block-num">07</span>
+        <h2 class="block-title">INTELLECTUAL PROPERTY RIGHTS</h2>
+      </div>
+      <div class="block-content">
+        <p>Intellectual property rights determine who owns the work created during your project. Understanding these rights is essential for protecting both your interests and ours. This section clearly defines ownership of various project components.</p>
+
+        <p><strong>Your Pre-Existing Materials:</strong></p>
+        <ul class="policy-list">
+          <li>You retain full ownership of all materials you provide to us, including logos, images, content, branding materials, and business information.</li>
+          <li>By providing these materials, you grant us a limited license to use them solely for the purpose of completing your project.</li>
+          <li>You represent that you have the legal right to use all materials you provide and that they do not infringe on any third party's rights.</li>
+          <li>We are not responsible for verifying the ownership or legality of materials you provide.</li>
+        </ul>
+
+        <p><strong>Our Pre-Existing Materials:</strong></p>
+        <ul class="policy-list">
+          <li>We retain ownership of all pre-existing frameworks, templates, code libraries, tools, and methodologies used in your project.</li>
+          <li>This includes our proprietary project structures, CSS frameworks, JavaScript components, and development workflows.</li>
+          <li>You receive a license to use these components as part of your delivered project, but you do not own the underlying intellectual property.</li>
+          <li>You may not resell, redistribute, or claim ownership of our proprietary frameworks or methodologies.</li>
+        </ul>
+
+        <p><strong>Project Deliverables (Upon Full Payment):</strong></p>
+        <ul class="policy-list">
+          <li><strong>Ownership Transfer:</strong> Upon receipt of full payment, you own the custom work created specifically for your project, including designs, custom code, and configurations.</li>
+          <li><strong>Exception:</strong> Third-party components (themes, plugins, platforms) remain subject to their original licenses.</li>
+          <li><strong>License Grant:</strong> For components we cannot fully transfer (due to licensing or practicality), we grant you a perpetual, royalty-free license to use them as part of your project.</li>
+          <li><strong>Source Files:</strong> For website projects, we provide the final deployed files. Raw design files (Figma, PSD) or source code for proprietary tools are not included unless explicitly agreed.</li>
+        </ul>
+
+        <p><strong>Third-Party Components:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Chatling AI:</strong> Chatbot functionality is provided under Chatling AI's terms of service. You own your training data and conversation configurations, but the underlying platform remains Chatling AI's property.</li>
+          <li><strong>Hosting Platforms:</strong> Hosting services (Hostinger, etc.) are provided under their respective terms. We do not own or control these platforms.</li>
+          <li><strong>Open Source:</strong> Open-source components used in your project remain under their original licenses (MIT, GPL, etc.).</li>
+          <li><strong>Premium Plugins/Themes:</strong> If premium third-party plugins or themes are used, their licenses belong to the original providers and are subject to their terms.</li>
+        </ul>
+
+        <p><strong>Portfolio &amp; Showcase Rights:</strong></p>
+        <ul class="policy-list">
+          <li>We retain the right to showcase your project in our portfolio, case studies, and marketing materials unless you explicitly request otherwise in writing before project completion.</li>
+          <li>We may use screenshots, descriptions, and general project information. We will not share confidential business data or sensitive information.</li>
+          <li>If you request non-disclosure, we will respect that request, though this may need to be agreed before project commencement and may affect pricing.</li>
+        </ul>
+
+        <p><strong>Intellectual Property Disputes:</strong></p>
+        <ul class="policy-list">
+          <li>If you provide materials that infringe on third-party rights, you are solely responsible for any resulting legal issues or damages.</li>
+          <li>You agree to indemnify and hold us harmless from any claims, damages, or expenses arising from your provision of infringing materials.</li>
+          <li>If we become aware of potential infringement, we may suspend work until the issue is resolved.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Payment Contingency:</strong> All intellectual property rights described above are contingent upon full payment. If payment is incomplete, we retain ownership of all work products, and you have no right to use, display, or exploit any deliverables. Upon full payment, the ownership transfer becomes effective retroactively.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 8: THIRD-PARTY SERVICES -->
+    <div class="policy-block" id="section8">
+      <div class="block-header">
+        <span class="block-num">08</span>
+        <h2 class="block-title">THIRD-PARTY SERVICES &amp; DEPENDENCIES</span>
+      </div>
+      <div class="block-content">
+        <p>Many of our services involve or depend on third-party platforms, tools, and services. While we select reliable partners, we cannot control their actions, policies, or availability. This section outlines the third-party services you may encounter and your responsibilities regarding them.</p>
+
+        <p><strong>Chatling AI (Chatbot Services):</strong></p>
+        <ul class="policy-list">
+          <li><strong>Platform Dependency:</strong> Our AI chatbot services are built on Chatling AI's platform. Their terms of service, privacy policy, and acceptable use policies apply to your chatbot usage.</li>
+          <li><strong>Subscription Management:</strong> Chatbot subscriptions are managed through Chatling AI. Pricing, features, and terms are subject to their changes.</li>
+          <li><strong>Service Availability:</strong> Chatbot uptime and availability depend on Chatling AI's infrastructure. We are not responsible for their outages, feature changes, or service disruptions.</li>
+          <li><strong>Data Handling:</strong> Chatbot conversations and data are stored and processed according to Chatling AI's policies. Review their privacy policy at <a href="https://chatling.ai" target="_blank">chatling.ai</a>.</li>
+          <li><strong>Account Ownership:</strong> We typically set up chatbots under our agency account. If you want independent ownership, discuss this before project commencement.</li>
+        </ul>
+
+        <p><strong>Hosting Services (Hostinger, etc.):</strong></p>
+        <ul class="policy-list">
+          <li><strong>Hosting Accounts:</strong> Website hosting typically requires a hosting account in your name. We can assist with setup but do not own or control hosting services.</li>
+          <li><strong>Hosting Fees:</strong> Hosting fees are separate from our development fees and are paid directly to the hosting provider.</li>
+          <li><strong>Service Levels:</strong> Uptime, performance, and support for hosting are determined by the hosting provider's terms.</li>
+          <li><strong>Account Management:</strong> You are responsible for maintaining your hosting account, including renewals, payment, and security.</li>
+          <li><strong>Migration:</strong> If you already have hosting, we can work with most providers. Some technical limitations may apply.</li>
+        </ul>
+
+        <p><strong>Domain Registration:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Domain Ownership:</strong> Domain names should be registered in your name. We can assist with the process but should not be listed as the domain owner.</li>
+          <li><strong>Renewal Responsibility:</strong> You are responsible for domain renewal. Expired domains may be registered by others and cannot be recovered.</li>
+          <li><strong>DNS Management:</strong> We can configure DNS settings during project setup, but ongoing management is your responsibility unless you have a maintenance agreement.</li>
+        </ul>
+
+        <p><strong>Payment Processors (PayPal, Wise, UPI):</strong></p>
+        <ul class="policy-list">
+          <li>Payment processing is handled by the respective payment networks and processors. Their terms apply to all transactions.</li>
+          <li>We are not responsible for payment processing errors, delays, or issues caused by payment networks.</li>
+          <li>For disputes or chargebacks, we will provide documentation to support our position. Unjustified chargebacks may result in legal action.</li>
+        </ul>
+
+        <p><strong>Other Third-Party Integrations:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Analytics:</strong> Google Analytics or similar tools may be integrated. Their terms and privacy policies apply.</li>
+          <li><strong>Social Media:</strong> Social media integrations are subject to each platform's API terms and policies.</li>
+          <li><strong>Email Services:</strong> Email marketing or automation tools (if used) are governed by their respective terms.</li>
+          <li><strong>API Changes:</strong> Third-party APIs may change, deprecate, or discontinue features. We are not responsible for impacts from such changes.</li>
+        </ul>
+
+        <div class="highlight-box warning">
+          <p><strong>Third-Party Limitations:</strong> Our liability for any third-party service is limited to our selection and configuration work. We cannot guarantee the ongoing availability, pricing, or functionality of services we do not control. Always review the terms of any third-party service that will be part of your project. We recommend maintaining your own accounts and credentials for critical services.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 9: LIMITATION OF LIABILITY -->
+    <div class="policy-block" id="section9">
+      <div class="block-header">
+        <span class="block-num">09</span>
+        <h2 class="block-title">LIMITATION OF LIABILITY &amp; DISCLAIMERS</h2>
+      </div>
+      <div class="block-content">
+        <p>This section contains important limitations on our liability and disclaimers that are essential for you to understand. By engaging our services, you acknowledge and agree to these limitations. These provisions are reasonable and necessary given the nature of digital services and the many factors outside our control.</p>
+
+        <p><strong>No Warranties:</strong></p>
+        <ul class="policy-list">
+          <li><strong>As-Is Basis:</strong> All services and deliverables are provided "as is" and "as available" without warranties of any kind, either express or implied.</li>
+          <li><strong>No Implied Warranties:</strong> We disclaim all implied warranties, including merchantability, fitness for a particular purpose, and non-infringement.</li>
+          <li><strong>No Outcome Guarantees:</strong> We do not guarantee specific outcomes, including but not limited to: search engine rankings, traffic increases, conversion rates, revenue growth, or business results.</li>
+          <li><strong>No Bug-Free Guarantee:</strong> While we test our deliverables, we cannot guarantee that software, websites, or chatbots will be completely error-free or compatible with all devices and browsers.</li>
+          <li><strong>Third-Party Components:</strong> We make no warranties regarding third-party platforms, plugins, or services integrated into your project.</li>
+        </ul>
+
+        <p><strong>Limitation of Liability:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Maximum Liability:</strong> Our total liability for any claim arising from or related to our services shall not exceed the total amount paid by you for the specific service giving rise to the claim.</li>
+          <li><strong>Exclusion of Consequential Damages:</strong> We are not liable for any indirect, incidental, special, consequential, punitive, or exemplary damages, including but not limited to: lost profits, lost revenue, lost business opportunities, loss of data, business interruption, or reputational harm.</li>
+          <li><strong>Cumulative Liability:</strong> Our liability is cumulative, not per incident. All claims arising from the same project or service relationship count toward the same liability cap.</li>
+          <li><strong>Known Risks:</strong> You acknowledge that digital services involve inherent risks, including but not limited to: technical failures, security vulnerabilities, platform changes, and human error. You assume these risks by engaging our services.</li>
+        </ul>
+
+        <p><strong>Client-Caused Issues (No Liability):</strong></p>
+        <ul class="policy-list">
+          <li>We are not liable for issues caused by your failure to meet client responsibilities.</li>
+          <li>We are not liable for problems arising from content, materials, or information you provided.</li>
+          <li>We are not liable for issues caused by your modifications to delivered work after handover.</li>
+          <li>We are not liable for security breaches, data loss, or other issues resulting from your failure to maintain appropriate security practices.</li>
+          <li>We are not liable for issues caused by your hosting provider, domain registrar, or other third-party services you control.</li>
+          <li>We are not liable for legal compliance failures related to your business operations or content.</li>
+        </ul>
+
+        <p><strong>Specific Disclaimers:</strong></p>
+        <ul class="policy-list">
+          <li><strong>SEO Services:</strong> Search engine optimization results cannot be guaranteed. Rankings, traffic, and visibility depend on factors outside our control, including search engine algorithm changes and competitor actions.</li>
+          <li><strong>AI Chatbots:</strong> AI chatbots may provide incorrect or inappropriate responses. We are not liable for chatbot outputs, especially when training data was provided by you or when visitors use the chatbot in unexpected ways.</li>
+          <li><strong>Website Performance:</strong> Website speed, uptime, and performance depend on hosting, traffic, and other factors outside our control.</li>
+          <li><strong>Security:</strong> While we follow security best practices, no website or system can be guaranteed secure. You are responsible for implementing additional security measures and maintaining backups.</li>
+          <li><strong>Business Advice:</strong> Our services do not constitute legal, financial, or business advice. Consult appropriate professionals for such guidance.</li>
+        </ul>
+
+        <p><strong>Indemnification:</strong></p>
+        <p>You agree to indemnify, defend, and hold harmless QUANTOR and its owners, employees, agents, and affiliates from and against any and all claims, damages, losses, costs, and expenses (including reasonable attorneys' fees) arising from: (a) your breach of these Terms; (b) your use of our services; (c) content or materials you provide; (d) your violation of any third-party rights; (e) your violation of applicable laws; or (f) claims by your customers or end users.</p>
+
+        <div class="highlight-box warning">
+          <p><strong>Read Carefully:</strong> These liability limitations are binding and affect your legal rights. If you are not comfortable with these limitations, please discuss before engaging our services. For high-risk projects or where you require additional protection, consider obtaining appropriate insurance. We can discuss custom agreements with enhanced liability provisions for enterprise clients at adjusted pricing.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 10: CANCELLATION & REFUNDS -->
+    <div class="policy-block" id="section10">
+      <div class="block-header">
+        <span class="block-num">10</span>
+        <h2 class="block-title">CANCELLATION &amp; REFUNDS</h2>
+      </div>
+      <div class="block-content">
+        <p>Understanding cancellation and refund policies before engaging our services prevents misunderstandings later. Digital services involve significant upfront work that cannot be recovered once performed. This section outlines our policies clearly and fairly.</p>
+
+        <p><strong>Before Project Commencement:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Before Payment:</strong> You may cancel your project request at any time before making payment with no obligation.</li>
+          <li><strong>Within 24 Hours of Payment:</strong> If you cancel within 24 hours of making your upfront payment and before we have begun work, you will receive a full refund minus processing fees (typically 3-5%).</li>
+          <li><strong>After 24 Hours:</strong> Once 24 hours have passed or work has begun, the cancellation and refund policies below apply.</li>
+        </ul>
+
+        <p><strong>Cancellation After Work Begins:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Upfront Payment Non-Refundable:</strong> The 50% upfront payment is non-refundable once work has begun. This compensates us for time invested, resources allocated, and opportunity costs.</li>
+          <li><strong>Final Payment Not Required:</strong> If you cancel before final delivery, the final 50% payment is not required. However, you will not receive any deliverables or work products.</li>
+          <li><strong>No Partial Deliverables:</strong> Work-in-progress files, designs, or incomplete deliverables will not be provided for cancelled projects.</li>
+          <li><strong>Reactivation:</strong> Cancelled projects can be reactivated within 30 days by paying a reactivation fee (20% of remaining balance) plus the final payment. After 30 days, the project must be re-quoted as new work.</li>
+        </ul>
+
+        <p><strong>Cancellation by Us:</strong></p>
+        <ul class="policy-list">
+          <li>We may cancel a project if you fail to meet your client responsibilities, including but not limited to: non-payment, failure to provide materials, abusive behavior, or illegal requests.</li>
+          <li>In cases of cancellation due to your breach, you forfeit all payments made, and no deliverables will be provided.</li>
+          <li>We may cancel projects for reasons beyond our control (force majeure) with a prorated refund for work not performed.</li>
+          <li>We reserve the right to decline or cancel projects that we determine are not a good fit for our capabilities or values.</li>
+        </ul>
+
+        <p><strong>Refund Policy for Completed Work:</strong></p>
+        <ul class="policy-list">
+          <li><strong>No Refunds for Completed Projects:</strong> Once a project is completed and final payment is made, no refunds are available. All concerns should be raised during the revision process.</li>
+          <li><strong>Satisfaction Not Guaranteed:</strong> While we strive for your satisfaction, we do not offer refunds simply because you changed your mind or have different preferences than originally specified.</li>
+          <li><strong>Defect Resolution:</strong> If there are genuine defects or failures to meet the agreed scope, we will work to resolve them at no additional charge. This is your remedy, not a refund.</li>
+        </ul>
+
+        <p><strong>Subscription Services:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Monthly Subscriptions:</strong> May be cancelled at any time. Service continues until the end of the current billing period. No refunds for partial months.</li>
+          <li><strong>Annual Subscriptions:</strong> May be cancelled with 30 days notice. Prorated refunds available only for cancellations within the first 30 days.</li>
+          <li><strong>Chatbot Subscriptions:</strong> Subject to both our policies and Chatling AI's subscription terms.</li>
+        </ul>
+
+        <p><strong>Chargebacks &amp; Disputes:</strong></p>
+        <ul class="policy-list">
+          <li>If you initiate a chargeback or payment dispute without first attempting to resolve the issue directly with us, we reserve the right to: suspend all services immediately; pursue legal action for the disputed amount plus fees; report the dispute to relevant authorities; and decline to work with you in the future.</li>
+          <li>We maintain detailed records of all communications, approvals, and deliverables to support our position in disputes.</li>
+          <li>Before initiating a chargeback, please contact us to attempt resolution. Most issues can be resolved through communication.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Fair Policy:</strong> Our cancellation and refund policies are designed to be fair to both parties. We invest significant time and resources in every project and cannot recover this investment if projects are cancelled. By engaging our services, you accept these policies. If you have concerns about commitment, please discuss milestone-based payments or smaller pilot projects before committing to larger engagements.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 11: DISPUTE RESOLUTION -->
+    <div class="policy-block" id="section11">
+      <div class="block-header">
+        <span class="block-num">11</span>
+        <h2 class="block-title">DISPUTE RESOLUTION</h2>
+      </div>
+      <div class="block-content">
+        <p>We hope disputes never arise, but having a clear resolution process benefits everyone. This section outlines the steps for addressing disagreements and the governing law for our relationship.</p>
+
+        <p><strong>Step 1: Direct Communication:</strong></p>
+        <ul class="policy-list">
+          <li>If you have a concern, contact us directly via email at <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a> or WhatsApp at <a href="https://wa.me/919599234747">+91 9599 234 747</a>.</li>
+          <li>Clearly describe your concern with specific details about the issue and your desired resolution.</li>
+          <li>We will respond within 2 business days and work to address legitimate concerns in good faith.</li>
+          <li>Most issues can be resolved through direct communication and mutual understanding.</li>
+        </ul>
+
+        <p><strong>Step 2: Written Notice:</strong></p>
+        <ul class="policy-list">
+          <li>If direct communication does not resolve the issue, you may send a formal written notice to <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a> with the subject line "Formal Dispute Notice."</li>
+          <li>Your notice must include: your name and contact information; project details; a clear description of the dispute; relevant documentation; and your proposed resolution.</li>
+          <li>We will respond to formal notices within 5 business days with a proposed resolution or request for additional information.</li>
+        </ul>
+
+        <p><strong>Step 3: Mediation:</strong></p>
+        <ul class="policy-list">
+          <li>If the dispute remains unresolved after written notice, either party may propose mediation.</li>
+          <li>Mediation will be conducted by a mutually agreed-upon mediator, or through an online dispute resolution service.</li>
+          <li>Each party bears its own costs for mediation. Mediator fees will be shared equally unless agreed otherwise.</li>
+          <li>Mediation is non-binding—either party may proceed to other remedies if mediation fails.</li>
+        </ul>
+
+        <p><strong>Step 4: Arbitration or Legal Action:</strong></p>
+        <ul class="policy-list">
+          <li>If mediation fails or is declined, disputes may be submitted to binding arbitration under the Arbitration and Conciliation Act, 1996 (India) or pursued in courts as described below.</li>
+          <li>Arbitration will be conducted by a single arbitrator mutually agreed upon, or appointed per the Act.</li>
+          <li>The arbitration will be conducted in English, and the arbitrator's decision will be final and binding.</li>
+          <li>Alternatively, you may pursue legal action in the courts of competent jurisdiction in India.</li>
+        </ul>
+
+        <p><strong>Governing Law &amp; Jurisdiction:</strong></p>
+        <ul class="policy-list">
+          <li><strong>Governing Law:</strong> These Terms and any disputes arising from them shall be governed by the laws of India, without regard to conflict of law principles.</li>
+          <li><strong>Jurisdiction:</strong> The courts in [Your City, Your State], India shall have exclusive jurisdiction over any disputes arising from these Terms or our services.</li>
+          <li><strong>International Clients:</strong> By engaging our services, international clients consent to Indian jurisdiction for dispute resolution. Alternatively, disputes may be resolved through international arbitration as agreed.</li>
+        </ul>
+
+        <p><strong>Class Action Waiver:</strong></p>
+        <p>You agree that any dispute resolution proceedings will be conducted only on an individual basis and not in a class, consolidated, or representative action. You waive any right to participate in class actions, class arbitrations, or representative actions against us.</p>
+
+        <div class="highlight-box">
+          <p><strong>Good Faith Resolution:</strong> We are committed to fair and honest business practices. If we make a mistake, we will work to make it right. We ask the same commitment from our clients. Frivolous disputes, false claims, or bad-faith negotiations may result in immediate termination of services and pursuit of all available remedies.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 12: GENERAL PROVISIONS -->
+    <div class="policy-block" id="section12">
+      <div class="block-header">
+        <span class="block-num">12</span>
+        <h2 class="block-title">GENERAL PROVISIONS</h2>
+      </div>
+      <div class="block-content">
+        <p>This final section covers additional legal provisions that complete our agreement. While less exciting than other sections, these provisions are legally important and define how our overall relationship works.</p>
+
+        <p><strong>Entire Agreement:</strong></p>
+        <ul class="policy-list">
+          <li>These Terms, together with your project proposal and any written amendments, constitute the entire agreement between you and QUANTOR regarding your project.</li>
+          <li>These Terms supersede all prior discussions, negotiations, proposals, and understandings, whether written or oral.</li>
+          <li>No representations, promises, or warranties not contained in these Terms or your project proposal are binding.</li>
+          <li>If any conflict exists between these Terms and your project proposal, your project proposal takes precedence for that specific project.</li>
+        </ul>
+
+        <p><strong>Modifications to Terms:</strong></p>
+        <ul class="policy-list">
+          <li>We reserve the right to modify these Terms at any time. Changes will be effective immediately upon posting to our website.</li>
+          <li>Changes will not affect existing projects with active agreements. Your project continues under the Terms in effect when your agreement was formed.</li>
+          <li>Continued use of our services after Terms modifications constitutes acceptance of the modified Terms for new projects only.</li>
+          <li>Material changes will be communicated via email to active clients when practical.</li>
+        </ul>
+
+        <p><strong>Severability:</strong></p>
+        <ul class="policy-list">
+          <li>If any provision of these Terms is found to be unenforceable or invalid by a court of competent jurisdiction, that provision will be limited or eliminated to the minimum extent necessary.</li>
+          <li>The remaining provisions will remain in full force and effect.</li>
+          <li>The invalid provision will be modified to reflect the parties' intent as closely as possible while remaining valid and enforceable.</li>
+        </ul>
+
+        <p><strong>Waiver:</strong></p>
+        <ul class="policy-list">
+          <li>Our failure to enforce any right or provision of these Terms is not a waiver of that right or provision.</li>
+          <li>Any waiver must be in writing and signed by us to be effective.</li>
+          <li>A waiver on one occasion does not constitute a waiver for any other occasion or for any other provision.</li>
+        </ul>
+
+        <p><strong>Assignment:</strong></p>
+        <ul class="policy-list">
+          <li>You may not assign or transfer your rights or obligations under these Terms without our prior written consent.</li>
+          <li>We may assign our rights and obligations to any party at any time without your consent (e.g., in connection with a merger, acquisition, or sale of assets).</li>
+          <li>These Terms are binding upon and inure to the benefit of the parties and their permitted successors and assigns.</li>
+        </ul>
+
+        <p><strong>Force Majeure:</strong></p>
+        <ul class="policy-list">
+          <li>Neither party shall be liable for delays or failures in performance resulting from circumstances beyond their reasonable control.</li>
+          <li>Force majeure events include but are not limited to: natural disasters, pandemics, government actions, war, terrorism, labor disputes, infrastructure failures, cyber attacks, and utility failures.</li>
+          <li>The affected party must notify the other party promptly and take reasonable steps to mitigate the impact.</li>
+          <li>If a force majeure event continues for more than 60 days, either party may terminate the agreement without liability.</li>
+        </ul>
+
+        <p><strong>Relationship of Parties:</strong></p>
+        <ul class="policy-list">
+          <li>Nothing in these Terms creates a partnership, joint venture, employer-employee, or agency relationship between you and QUANTOR.</li>
+          <li>You are an independent client engaging our services as an independent contractor.</li>
+          <li>Neither party has authority to bind the other or to incur any obligation on the other's behalf.</li>
+        </ul>
+
+        <p><strong>Notices:</strong></p>
+        <ul class="policy-list">
+          <li>All formal notices under these Terms must be in writing and sent to <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>.</li>
+          <li>Notices are deemed received: immediately when sent via email (if no bounce); 24 hours after sending if via WhatsApp with read confirmation; or 3 business days after sending if via physical mail.</li>
+          <li>We may send notices to you at the email address or WhatsApp number you provided.</li>
+        </ul>
+
+        <p><strong>Survival:</strong></p>
+        <ul class="policy-list">
+          <li>Provisions that by their nature should survive termination will survive, including: intellectual property rights, limitation of liability, indemnification, dispute resolution, and general provisions.</li>
+        </ul>
+
+        <p><strong>Counterparts:</strong></p>
+        <ul class="policy-list">
+          <li>These Terms may be accepted electronically. Your payment, project request, or other indication of acceptance serves as your electronic signature and agreement to these Terms.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p><strong>Contact Information:</strong> For any questions about these Terms, please contact us at:<br/>
+          <strong>Email:</strong> <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a><br/>
+          <strong>WhatsApp:</strong> <a href="https://wa.me/919599234747">+91 9599 234 747</a><br/>
+          <strong>Location:</strong> India (serving clients globally)</p>
+        </div>
+
+        <p><strong>Related Policies:</strong></p>
+        <ul class="policy-list">
+          <li><a href="privacy-policy.html">Privacy Policy</a> - How we handle your data</li>
+          <li><a href="refund-policy.html">Refund Policy</a> - Detailed refund terms</li>
+        </ul>
+
+        <p><strong>Acknowledgment:</strong></p>
+        <p style="font-style: italic; color: var(--dim);">By engaging QUANTOR's services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service in their entirety. You further acknowledge that you have had the opportunity to seek independent legal advice if desired, and that these Terms represent a fair and reasonable allocation of risks between the parties.</p>
+
+        <table class="info-table" style="margin-top: 2rem;">
+          <thead>
+            <tr>
+              <th>Document Information</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Document Title</td>
+              <td>Terms of Service</td>
+            </tr>
+            <tr>
+              <td>Version</td>
+              <td>1.0</td>
+            </tr>
+            <tr>
+              <td>Last Updated</td>
+              <td>January 12, 2025</td>
+            </tr>
+            <tr>
+              <td>Effective Date</td>
+              <td>January 12, 2025</td>
+            </tr>
+            <tr>
+              <td>Next Review</td>
+              <td>January 2026 or as needed</td>
+            </tr>
+            <tr>
+              <td>Governing Law</td>
+              <td>Laws of India</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact-section">
+  <div class="contact-inner">
+    <h2 class="contact-title">QUESTIONS ABOUT THESE TERMS?</h2>
+    <p class="contact-sub">We're committed to transparency and want you to fully understand your rights and responsibilities. If anything is unclear, please reach out before engaging our services.</p>
+    <div class="contact-cards">
+      <a href="https://wa.me/919599234747?text=Hi%20QUANTOR%2C%20I%20have%20a%20question%20about%20your%20Terms%20of%20Service." target="_blank" class="contact-card">
+        <span class="contact-icon">&#128172;</span>
+        <span class="contact-label">WhatsApp</span>
+        <span class="contact-value">+91 9599 234 747</span>
+      </a>
+      <a href="mailto:quantorleads@gmail.com?subject=Terms%20of%20Service%20Inquiry" class="contact-card">
+        <span class="contact-icon">&#9993;</span>
+        <span class="contact-label">Email</span>
+        <span class="contact-value">quantorleads@gmail.com</span>
+      </a>
+      <a href="contact.html" class="contact-card">
+        <span class="contact-icon">&#128221;</span>
+        <span class="contact-label">Contact Form</span>
+        <span class="contact-value">Send a Message</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo">QUAN<em>TOR</em></div>
+      <div class="footer-tagline">Your Business Deserves More Than a Dead Website.</div>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/YOURUSERNAME" target="_blank" class="social-btn" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://www.facebook.com/YOURUSERNAME" target="_blank" class="social-btn" title="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://wa.me/919599234747" target="_blank" class="social-btn" title="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </a>
+      </div>
+      <div class="footer-contact-links">
+        <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
+        <a href="https://wa.me/919599234747">+91 9599 234 747</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>NAVIGATE</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>PRICING</h5>
+      <ul>
+        <li><a href="pricing.html#core-plans">Core Packages</a></li>
+        <li><a href="pricing.html#addons">Add-On Services</a></li>
+        <li><a href="pricing.html#custom">Custom Quote</a></li>
+        <li><a href="pricing.html#pfaq">Pricing FAQ</a></li>
+        <li><a href="pricing.html#payment">Payment Methods</a></li>
+      </ul>
+      <a href="pricing.html" class="footer-pricing-btn">View Plans &#8594;</a>
+    </div>
+    <div class="footer-col">
+      <h5>LEGAL</h5>
+      <ul>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-of-service.html">Terms of Service</a></li>
+        <li><a href="refund-policy.html">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 QUANTOR. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms-of-service.html">Terms</a>
+      <a href="refund-policy.html">Refunds</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════
+   INTERACTIONS
+════════════════════════════════════════════ */
+(function() {
+  // Preloader
+  const preloader = document.getElementById('preloader');
+  const preCount = document.getElementById('preCount');
+  let progress = 0;
+  const progressInterval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress >= 100) { progress = 100; clearInterval(progressInterval); }
+    preCount.textContent = Math.floor(progress) + '%';
+  }, 200);
+  
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      preloader.classList.add('hide');
+      document.body.classList.remove('loading');
+    }, 2500);
+  });
+
+  // Custom Cursor
+  const cursorOuter = document.getElementById('cursor-outer');
+  const cursorDot = document.getElementById('cursor-dot');
+  let mouseX = 0, mouseY = 0, outerX = 0, outerY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+  });
+
+  function animateCursor() {
+    outerX += (mouseX - outerX) * 0.15;
+    outerY += (mouseY - outerY) * 0.15;
+    cursorOuter.style.left = outerX + 'px';
+    cursorOuter.style.top = outerY + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document.querySelectorAll('a, button, .contact-card, .toc-item').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  // Nav Scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Scroll Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.policy-block').forEach(block => observer.observe(block));
+})();
+</script>
+</body>
+</html>
