@@ -1,656 +1,1002 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pricing | QUANTOR — AI-Powered Websites & Chatbots</title>
-<meta name="description" content="Simple pricing for AI-powered websites and chatbots. No hidden fees. No lock-in. Everything yours.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pricing — QUANTOR | Transparent Plans for Every Business</title>
+<meta name="description" content="Clear, honest pricing for every QUANTOR service. From AI chatbots to full enterprise digital systems — choose your plan and start growing today."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet"/>
 <style>
-/* ========== RESET & VARIABLES ========== */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg-dark:#0a0a0f;--card-dark:#12121a;--accent-blue:#4F8EF7;--accent-purple:#7C3AED;
-  --text-white:#ffffff;--text-muted:#a0a0b0;--text-body:#c8c8d8;
-  --border-blue:rgba(79,142,247,0.2);--border-subtle:#1e1e2e;
-  --font-main:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --ink:#030507;--ink2:#070c12;--ink3:#0c1420;
+  --mint:#00ffb2;--coral:#ff2d55;--gold:#e8a020;--violet:#7c3aed;
+  --chalk:#e2ecff;--dim:#4a5a78;--dimmer:#1e2a3d;
+  --border:rgba(0,255,178,0.1);
+  --head:"Bebas Neue",sans-serif;--body:"Manrope",sans-serif;--mono:"JetBrains Mono",monospace;
+  --ease:cubic-bezier(0.16,1,0.3,1);
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg-dark);color:var(--text-white);font-family:var(--font-main);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
-a{text-decoration:none;color:inherit}
-img{display:block;max-width:100%}
-.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--chalk);font-family:var(--body);overflow-x:hidden;cursor:none;}
+body.loading{overflow:hidden;}
+::selection{background:var(--mint);color:#000;}
+body::after{content:"";position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.05'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.35;}
 
-/* ========== BUTTONS ========== */
-.btn{display:inline-block;padding:1rem 2.5rem;border-radius:6px;text-decoration:none;font-weight:700;transition:all .3s cubic-bezier(.4,0,.2,1);cursor:pointer;font-size:.95rem;border:none;text-align:center;text-transform:uppercase;letter-spacing:.5px}
-.btn-filled{background:linear-gradient(135deg,var(--accent-blue),var(--accent-purple));color:white;box-shadow:0 4px 15px rgba(79,142,247,.3)}
-.btn-filled:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(79,142,247,.5)}
-.btn-outline{background:transparent;color:white;border:1px solid var(--border-blue)}
-.btn-outline:hover{border-color:var(--accent-blue);background:rgba(79,142,247,.1);transform:translateY(-3px)}
+/* PRELOADER */
+#preloader{position:fixed;inset:0;background:var(--ink);z-index:9998;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transition:opacity .8s var(--ease),visibility .8s;}
+#preloader.hide{opacity:0;visibility:hidden;}
+.pre-logo{font-family:var(--head);font-size:clamp(3rem,8vw,6rem);letter-spacing:.3em;color:var(--chalk);overflow:hidden;display:flex;}
+.pre-logo span{display:inline-block;transform:translateY(100%);opacity:0;animation:charUp .6s var(--ease) forwards;}
+.pre-logo span:nth-child(1){animation-delay:.05s}.pre-logo span:nth-child(2){animation-delay:.1s}
+.pre-logo span:nth-child(3){animation-delay:.15s}.pre-logo span:nth-child(4){animation-delay:.2s}
+.pre-logo span:nth-child(5){animation-delay:.25s}.pre-logo span:nth-child(6){animation-delay:.3s}
+.pre-logo span:nth-child(7){animation-delay:.35s}.pre-logo span:nth-child(8){color:var(--mint);animation-delay:.35s;}
+.pre-bar-wrap{width:280px;height:1px;background:var(--dimmer);position:relative;}
+.pre-bar{position:absolute;left:0;top:0;height:100%;background:var(--mint);width:0%;animation:loadBar 2s var(--ease) forwards .5s;box-shadow:0 0 20px var(--mint);}
+.pre-count{position:absolute;right:0;bottom:8px;font-family:var(--mono);font-size:.65rem;color:var(--mint);letter-spacing:.1em;}
+.pre-page-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.25em;color:var(--dim);text-transform:uppercase;}
+@keyframes charUp{to{transform:translateY(0);opacity:1;}}
+@keyframes loadBar{to{width:100%;}}
 
-/* ========== NAVBAR ========== */
-nav{position:fixed;top:0;width:100%;z-index:1000;padding:1.5rem 0;transition:all .3s ease}
-nav.scrolled{background:rgba(10,10,15,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border-blue);padding:1rem 0}
-.nav-content{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto;padding:0 2rem}
-.logo{font-size:1.5rem;font-weight:900;letter-spacing:2px;color:white;text-decoration:none;text-transform:uppercase}
-.nav-links{display:flex;gap:2.5rem;align-items:center}
-.nav-links a{color:var(--text-muted);text-decoration:none;font-size:.9rem;transition:color .3s ease;font-weight:500;letter-spacing:.3px}
-.nav-links a:hover,.nav-links a.active{color:var(--accent-blue)}
-.hamburger{display:none;cursor:pointer;background:none;border:none;z-index:1100;padding:5px}
-.hamburger span{display:block;width:28px;height:2px;background:white;margin:6px 0;transition:.3s}
+/* CURSOR */
+#cursor-outer{position:fixed;width:40px;height:40px;border:1px solid rgba(0,255,178,.5);border-radius:50%;pointer-events:none;z-index:9997;transition:width .3s var(--ease),height .3s var(--ease),background .3s,border-color .3s;transform:translate(-50%,-50%);will-change:left,top;}
+#cursor-dot{position:fixed;width:5px;height:5px;background:var(--mint);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--mint);will-change:left,top;}
+body.cursor-hover #cursor-outer{width:70px;height:70px;background:rgba(0,255,178,.05);border-color:var(--mint);}
 
-/* ========== PAGE HERO ========== */
-.page-hero{text-align:center;padding:10rem 0 3rem;position:relative;overflow:hidden}
-.page-hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(79,142,247,.06) 0%,transparent 70%);pointer-events:none}
-.page-hero-label{display:inline-flex;align-items:center;gap:12px;margin-bottom:1.5rem}
-.page-hero-label .line{width:40px;height:1px;background:var(--accent-blue);display:inline-block}
-.page-hero-label span{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--accent-blue)}
-.page-hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:1rem;line-height:1.15}
-.page-hero h1 .word{display:inline-block;overflow:hidden;vertical-align:bottom}
-.page-hero h1 .word span{display:inline-block;transform:translateY(110%);opacity:0;animation:cutReveal .6s cubic-bezier(.16,1,.3,1) forwards}
-@keyframes cutReveal{to{transform:translateY(0);opacity:1}}
-.page-hero p{color:var(--text-muted);font-size:1.1rem;max-width:540px;margin:0 auto}
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.8rem 4%;display:flex;align-items:center;justify-content:space-between;transition:padding .4s var(--ease),background .4s,border-bottom .4s;}
+#nav.scrolled{padding:1.2rem 4%;background:rgba(3,5,7,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--head);font-size:1.8rem;letter-spacing:.15em;color:var(--chalk);text-decoration:none;}
+.nav-logo em{color:var(--mint);font-style:normal;}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{color:var(--dim);text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;position:relative;transition:color .3s;}
+.nav-links a::after{content:"";position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--mint);transition:width .3s var(--ease);}
+.nav-links a:hover,.nav-links a.active{color:var(--chalk);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-price-btn{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);border:1px solid rgba(0,255,178,.3);padding:.4rem .9rem;border-radius:100px;text-decoration:none;transition:background .3s,border-color .3s;}
+.nav-price-btn:hover{background:rgba(0,255,178,.08);border-color:var(--mint);}
+.nav-price-btn::after{display:none!important;}
+.nav-cta{display:flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)!important;background:var(--mint);padding:.65rem 1.4rem;border-radius:4px;text-decoration:none;transition:box-shadow .3s,transform .3s;box-shadow:0 0 30px rgba(0,255,178,.2);}
+.nav-cta:hover{box-shadow:0 0 60px rgba(0,255,178,.5);transform:scale(1.03);}
+.nav-cta::after{display:none!important;}
 
-/* ========== TOGGLE ========== */
-.toggle-section{display:flex;flex-direction:column;align-items:center;gap:1rem;margin-bottom:3.5rem}
-.toggle-wrap{display:flex;align-items:center;background:#1a1a24;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:4px;position:relative}
-.toggle-option{padding:10px 24px;font-size:.88rem;font-weight:600;color:var(--text-muted);cursor:pointer;position:relative;z-index:2;transition:color .3s;user-select:none;border-radius:999px}
-.toggle-option.active{color:var(--text-white)}
-.toggle-pill{position:absolute;top:4px;height:calc(100% - 8px);background:linear-gradient(135deg,#1a2a4a,#0d1a30);border:1px solid var(--accent-blue);border-radius:999px;transition:all .35s cubic-bezier(.34,1.56,.64,1);z-index:1}
-.toggle-badge{display:inline-block;background:var(--accent-blue);color:white;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:6px;text-transform:uppercase;letter-spacing:.03em;vertical-align:middle}
+/* CURRENCY TOGGLE */
+.currency-toggle{position:fixed;top:50%;right:2rem;transform:translateY(-50%);z-index:99;display:flex;flex-direction:column;align-items:center;gap:.5rem;background:rgba(3,5,7,.85);border:1px solid var(--border);border-radius:100px;padding:.8rem .6rem;backdrop-filter:blur(20px);}
+.ct-btn{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;color:var(--dim);cursor:pointer;padding:.3rem .6rem;border-radius:100px;transition:all .3s;border:none;background:none;text-transform:uppercase;}
+.ct-btn.active{color:var(--ink);background:var(--mint);}
+.ct-divider{width:1px;height:20px;background:var(--dimmer);}
 
-/* ========== PRICING GRID ========== */
-.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:5rem}
-.pricing-card{background:var(--card-dark);border:1px solid var(--border-blue);border-radius:12px;padding:2rem 1.8rem;display:flex;flex-direction:column;position:relative;transition:transform .4s ease,box-shadow .4s ease;opacity:0;filter:blur(10px);transform:translateY(20px);animation:cardReveal .6s ease forwards}
-@keyframes cardReveal{to{opacity:1;filter:blur(0);transform:translateY(0)}}
-.pricing-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(79,142,247,.1)}
-/* Featured card */
-.pricing-card.featured{background:linear-gradient(to bottom,#0d0d18,#000000);border:2px solid var(--accent-blue);box-shadow:0 0 40px rgba(79,142,247,.15);transform:scale(1.02);z-index:2;opacity:0;filter:blur(10px);animation:cardReveal .6s ease forwards}
-.pricing-card.featured:hover{transform:scale(1.02) translateY(-4px);box-shadow:0 0 50px rgba(79,142,247,.25)}
-.card-badge{display:inline-block;padding:4px 14px;border-radius:999px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1.2rem}
-.card-badge.gray{background:rgba(255,255,255,.08);color:var(--text-muted)}
-.card-badge.teal{background:rgba(52,211,153,.12);color:#34d399}
-.card-badge.blue{background:var(--accent-blue);color:white;position:absolute;top:-1px;left:50%;transform:translateX(-50%)}
-.card-badge.purple{background:rgba(124,58,237,.15);color:var(--accent-purple)}
-.card-title{font-size:1.4rem;font-weight:800;margin-bottom:.6rem;letter-spacing:-.5px}
-.card-desc{color:var(--text-muted);font-size:.85rem;line-height:1.6;margin-bottom:1.5rem;min-height:60px}
-.card-price{margin-bottom:.5rem}
-.price-amount{font-size:2.6rem;font-weight:900;letter-spacing:-1px;display:inline}
-.price-period{font-size:.9rem;color:var(--text-muted);font-weight:500}
-.price-savings{display:block;font-size:.78rem;color:#34d399;margin-bottom:1.2rem;font-weight:600}
-.price-range-note{font-size:.78rem;color:var(--text-muted);margin-bottom:.4rem}
-.price-sub-value{font-size:.78rem;color:#34d399;margin-bottom:1.2rem;font-weight:600}
-.card-features-title{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:1rem}
-.card-features{list-style:none;display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.5rem;flex:1}
-.card-features li{font-size:.85rem;color:var(--text-body);display:flex;align-items:flex-start;gap:.6rem;line-height:1.5}
-.card-features li svg{width:16px;height:16px;min-width:16px;stroke:#34d399;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;margin-top:3px}
-.card-note{font-size:.75rem;color:rgba(160,160,176,.7);line-height:1.55;margin-bottom:1.2rem;padding:10px 12px;background:rgba(255,255,255,.02);border-radius:8px;border-left:2px solid var(--border-blue)}
-.card-note-highlight{font-size:.78rem;color:var(--text-body);line-height:1.55;margin-bottom:1.2rem;padding:12px;background:rgba(124,58,237,.06);border-radius:8px;border:1px solid rgba(124,58,237,.15)}
-.card-note-highlight strong{color:var(--accent-purple)}
-.card-purchase-box{font-size:.75rem;color:var(--text-muted);line-height:1.55;margin-bottom:1.2rem;padding:10px 12px;background:rgba(255,255,255,.02);border-radius:8px}
-.card-purchase-box p{margin-bottom:.3rem}
-.card-addons{border-top:1px solid rgba(255,255,255,.05);padding-top:1rem;margin-bottom:1rem}
-.card-addons-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(160,160,176,.5);margin-bottom:.6rem}
-.card-addons ul{list-style:none;display:flex;flex-direction:column;gap:.4rem}
-.card-addons li{font-size:.8rem;color:var(--text-muted);display:flex;align-items:flex-start;gap:.5rem;line-height:1.5}
-.card-addons li svg{width:14px;height:14px;min-width:14px;stroke:var(--accent-blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
-.card-cta{margin-top:auto;width:100%;padding:14px 20px;border-radius:10px;font-size:.88rem;font-weight:700;cursor:pointer;text-align:center;transition:all .3s ease;display:block;text-transform:uppercase;letter-spacing:.4px}
-.cta-blue-outline{background:transparent;border:1.5px solid var(--accent-blue);color:var(--accent-blue)}
-.cta-blue-outline:hover{background:var(--accent-blue);color:white;box-shadow:0 4px 20px rgba(79,142,247,.3)}
-.cta-white-outline{background:transparent;border:1.5px solid rgba(255,255,255,.25);color:white}
-.cta-white-outline:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4)}
-.cta-blue-filled{background:linear-gradient(135deg,var(--accent-blue),#3a7be8);color:white;border:none;box-shadow:0 4px 20px rgba(79,142,247,.35);font-size:.95rem;padding:16px 20px}
-.cta-blue-filled:hover{box-shadow:0 6px 30px rgba(79,142,247,.5);transform:translateY(-2px)}
-.cta-purple-gradient{background:linear-gradient(135deg,var(--accent-purple),#6d28d9);color:white;border:none;box-shadow:0 4px 20px rgba(124,58,237,.3)}
-.cta-purple-gradient:hover{box-shadow:0 6px 30px rgba(124,58,237,.45);transform:translateY(-2px)}
+/* HERO */
+#price-hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;overflow:hidden;}
+#price-canvas{position:absolute;inset:0;z-index:0;}
+.price-hero-grad{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 60% 70% at 60% 50%,rgba(0,255,178,.05) 0%,transparent 70%),
+  radial-gradient(ellipse 40% 50% at 10% 70%,rgba(124,58,237,.04) 0%,transparent 70%);}
+.price-hero-inner{position:relative;z-index:2;padding:0 4%;max-width:1400px;width:100%;}
+.eyebrow{display:inline-flex;align-items:center;gap:.8rem;margin-bottom:2.5rem;overflow:hidden;}
+.eyebrow-inner{display:flex;align-items:center;gap:.8rem;transform:translateY(60px);opacity:0;animation:slideUp 1s var(--ease) 2.8s forwards;}
+.e-dot{width:6px;height:6px;border-radius:50%;background:var(--mint);animation:blink 1.5s infinite;box-shadow:0 0 8px var(--mint);}
+.e-line{width:40px;height:1px;background:var(--mint);}
+.e-text{font-family:var(--mono);font-size:.7rem;color:var(--mint);letter-spacing:.2em;text-transform:uppercase;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.price-headline{font-family:var(--head);font-size:clamp(4rem,9.5vw,10rem);line-height:.92;letter-spacing:.02em;margin-bottom:2rem;}
+.hrow{display:block;overflow:hidden;}
+.hrow span{display:block;transform:translateY(110%);opacity:0;}
+.hrow:nth-child(1) span{animation:slideUp 1.1s var(--ease) 2.9s forwards;}
+.hrow:nth-child(2) span{animation:slideUp 1.1s var(--ease) 3s forwards;}
+.hrow:nth-child(3) span{animation:slideUp 1.1s var(--ease) 3.1s forwards;}
+.m{color:var(--mint);}.o{-webkit-text-stroke:1px rgba(226,236,255,.25);color:transparent;}
+.hero-sub{max-width:580px;font-size:1.05rem;color:var(--dim);line-height:1.7;font-weight:300;transform:translateY(30px);opacity:0;animation:slideUp 1s var(--ease) 3.2s forwards;}
+.hero-pills{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:2rem;transform:translateY(25px);opacity:0;animation:slideUp 1s var(--ease) 3.3s forwards;}
+.pill{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.35rem .9rem;border-radius:100px;border:1px solid var(--dimmer);color:var(--dim);}
+.pill-mint{border-color:rgba(0,255,178,.3);color:var(--mint);background:rgba(0,255,178,.06);}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fadeIn 1s var(--ease) 4s forwards;z-index:2;}
+.s-label{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;color:var(--dim);text-transform:uppercase;}
+.s-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--mint),transparent);animation:sp 2s infinite;}
+@keyframes sp{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}100%{transform:scaleY(1);transform-origin:bottom;opacity:0;}}
+@keyframes slideUp{to{transform:translateY(0) translateX(0);opacity:1;}}
+@keyframes fadeIn{to{opacity:1;}}
 
-/* ========== COMPARISON TABLE ========== */
-.comparison{margin-bottom:5rem}
-.comparison h2{font-size:1.3rem;font-weight:700;margin-bottom:1.5rem}
-.comp-table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border-blue)}
-.comp-table{width:100%;border-collapse:collapse;min-width:700px;font-size:.85rem}
-.comp-table thead{background:var(--card-dark)}
-.comp-table th{padding:14px 16px;text-align:center;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border-blue)}
-.comp-table th:first-child{text-align:left;color:var(--text-muted)}
-.comp-table th.plan-chatbot{color:var(--text-muted)}
-.comp-table th.plan-starter{color:#34d399}
-.comp-table th.plan-pro{color:var(--accent-blue)}
-.comp-table th.plan-enterprise{color:var(--accent-purple)}
-.comp-table tbody tr{transition:background .2s}
-.comp-table tbody tr:hover{background:rgba(79,142,247,.04)}
-.comp-table td{padding:12px 16px;text-align:center;border-bottom:1px solid rgba(255,255,255,.03);color:var(--text-body)}
-.comp-table td:first-child{text-align:left;color:var(--text-muted);font-weight:500}
-.comp-table tbody tr:nth-child(even){background:rgba(255,255,255,.01)}
-.comp-check{color:#34d399;font-weight:700;font-size:1rem}
-.comp-dash{color:rgba(160,160,176,.3);font-size:1.1rem}
-.comp-no{color:#ef4444;font-weight:700;font-size:.85rem}
-.comp-footer-note{font-size:.78rem;color:var(--text-muted);margin-top:1rem;line-height:1.6}
+/* MARQUEE */
+.mq{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.2rem 0;background:var(--ink2);}
+.mq-track{display:flex;width:max-content;animation:mqs 35s linear infinite;}
+.mq-item{display:flex;align-items:center;gap:1.2rem;padding:0 2rem;white-space:nowrap;font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+.mq-item b{color:var(--mint);font-weight:400;}
+.mq-dot{width:4px;height:4px;border-radius:50%;background:var(--dimmer);}
+@keyframes mqs{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-/* ========== FAQ ========== */
-.faq{margin-bottom:5rem}
-.faq h2{font-size:1.3rem;font-weight:700;margin-bottom:1.5rem}
-.faq-item{border:1px solid rgba(255,255,255,.05);border-radius:10px;margin-bottom:.75rem;overflow:hidden;transition:border-color .3s}
-.faq-item.open{border-color:rgba(79,142,247,.2)}
-.faq-q{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem;cursor:pointer;font-weight:600;font-size:.92rem;transition:color .3s;user-select:none;gap:1rem}
-.faq-q:hover{color:var(--accent-blue)}
-.faq-item.open .faq-q{color:var(--accent-blue);border-left:3px solid var(--accent-blue);padding-left:calc(1.5rem - 3px)}
-.faq-icon{width:20px;height:20px;min-width:20px;transition:transform .3s;stroke:var(--text-muted);fill:none;stroke-width:2;stroke-linecap:round}
-.faq-item.open .faq-icon{transform:rotate(180deg);stroke:var(--accent-blue)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.faq-a-inner{padding:0 1.5rem 1.2rem;color:var(--text-muted);font-size:.88rem;line-height:1.7}
+/* ═══ GUARANTEE STRIP ═══ */
+#guarantee-strip{padding:5rem 4%;background:var(--ink);position:relative;overflow:hidden;}
+.gs-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;}
+.gs-item{display:flex;align-items:flex-start;gap:1rem;opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.gs-item.vis{opacity:1;transform:translateY(0);}
+.gs-item:nth-child(2).vis{transition-delay:.08s;}.gs-item:nth-child(3).vis{transition-delay:.16s;}.gs-item:nth-child(4).vis{transition-delay:.24s;}
+.gs-icon{width:44px;height:44px;background:rgba(0,255,178,.08);border:1px solid rgba(0,255,178,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.gs-body h4{font-family:var(--head);font-size:1.1rem;letter-spacing:.04em;margin-bottom:.3rem;}
+.gs-body p{font-size:.8rem;color:var(--dim);line-height:1.55;font-weight:300;}
 
-/* ========== FINAL CTA ========== */
-.final-cta{text-align:center;padding:8rem 0;background:linear-gradient(180deg,var(--bg-dark) 0%,#12121a 50%,var(--bg-dark) 100%);position:relative;overflow:hidden}
-.final-cta::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,transparent,var(--accent-blue),var(--accent-purple),transparent)}
-.final-cta::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(79,142,247,.1) 0%,transparent 70%);pointer-events:none}
-.final-cta .container{position:relative;z-index:1}
-.final-cta h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:1.2rem}
-.final-cta p{color:var(--text-muted);margin-bottom:2.5rem;font-size:1.1rem;max-width:600px;margin-left:auto;margin-right:auto}
+/* ═══ MAIN PRICING SECTION ═══ */
+#core-plans{padding:8rem 4%;background:var(--ink2);position:relative;overflow:hidden;}
+.plans-bg-orb{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(0,255,178,.03) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none;}
+.plans-header{text-align:center;margin-bottom:5rem;}
+.sec-tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mint);margin-bottom:1rem;display:inline-flex;align-items:center;gap:1rem;}
+.sec-tag::before,.sec-tag::after{content:"";width:20px;height:1px;background:var(--mint);}
+.sec-title{font-family:var(--head);font-size:clamp(2.5rem,5vw,4.5rem);line-height:1;letter-spacing:.02em;}
+.plans-sub{font-size:.95rem;color:var(--dim);line-height:1.7;font-weight:300;max-width:600px;margin:1.5rem auto 0;}
 
-/* ========== FOOTER ========== */
-footer{padding:5rem 0 2rem;background:#050508;border-top:1px solid var(--border-blue)}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem}
-.footer-brand .logo{display:inline-block;margin-bottom:1.5rem}
-.footer-brand p{color:var(--text-muted);max-width:300px;font-size:.95rem}
-.footer-col h4{font-size:.85rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin-bottom:1.5rem;font-weight:700}
-.footer-links{display:flex;flex-direction:column;gap:1rem}
-.footer-links a{color:var(--text-muted);text-decoration:none;font-size:.9rem;transition:.3s}
-.footer-links a:hover{color:var(--accent-blue)}
-.footer-bottom{padding-top:2rem;border-top:1px solid rgba(255,255,255,.05);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem;color:#555;font-size:.85rem}
-.footer-contact{display:flex;gap:2rem}
-.footer-contact a{color:#555;text-decoration:none;transition:.3s}
-.footer-contact a:hover{color:var(--accent-blue)}
+.plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
 
-/* ========== MOBILE ========== */
-@media(max-width:1100px){
-  .pricing-grid{grid-template-columns:repeat(2,1fr)}
-  .pricing-card.featured{transform:none}
-  .pricing-card.featured:hover{transform:translateY(-4px)}
-}
+.plan-card{border-radius:20px;padding:2.5rem 2rem 2rem;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  border:1px solid rgba(255,255,255,.07);
+  opacity:0;transform:translateY(30px);
+  transition:opacity .8s var(--ease),transform .8s var(--ease),border-color .3s;
+  cursor:none;}
+.plan-card.vis{opacity:1;transform:translateY(0);}
+.plan-card:nth-child(2).vis{transition-delay:.1s;}.plan-card:nth-child(3).vis{transition-delay:.2s;}.plan-card:nth-child(4).vis{transition-delay:.3s;}
+.plan-card::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .4s;border-radius:20px;}
+.plan-card:hover::before{opacity:1;}
+.plan-card:hover{border-color:rgba(0,255,178,.2);}
+.plan-card::before{background:linear-gradient(135deg,rgba(0,255,178,.04),transparent 60%);}
+
+/* POPULAR */
+.plan-card.popular{border-color:rgba(0,255,178,.3);background:linear-gradient(135deg,rgba(0,255,178,.06),rgba(0,255,178,.02));}
+.popular-badge{position:absolute;top:1.2rem;right:1.2rem;font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;background:var(--mint);color:#000;padding:.25rem .7rem;border-radius:100px;font-weight:700;}
+.plan-icon{font-size:2.2rem;margin-bottom:1.2rem;display:block;}
+.plan-name{font-family:var(--head);font-size:1.8rem;letter-spacing:.04em;margin-bottom:.3rem;}
+.plan-tagline{font-size:.8rem;color:var(--dim);font-weight:300;margin-bottom:1.5rem;}
+
+.plan-price-wrap{margin-bottom:1.5rem;min-height:80px;display:flex;flex-direction:column;justify-content:center;}
+.price-inr,.price-usd{display:none;}
+.price-inr.show,.price-usd.show{display:block;}
+.price-main{font-family:var(--head);font-size:2.8rem;letter-spacing:.02em;color:var(--chalk);line-height:1;}
+.price-main .curr{font-size:.6em;color:var(--mint);vertical-align:top;margin-top:.3em;font-family:var(--mono);}
+.price-period{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-top:.3rem;}
+.price-alt{font-size:.78rem;color:var(--dimmer);margin-top:.2rem;}
+
+.plan-features{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1.2rem;}
+.pf{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:var(--dim);}
+.pf::before{content:"✓";color:var(--mint);font-size:.75rem;margin-top:.05rem;flex-shrink:0;}
+.pf.no::before{content:"✕";color:var(--dimmer);}
+.pf.no{opacity:.5;}
+
+.plan-cta{width:100%;padding:1rem;border-radius:8px;font-family:var(--body);font-size:.88rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.6rem;text-decoration:none;}
+.cta-mint{background:var(--mint);color:#000;box-shadow:0 0 30px rgba(0,255,178,.2);}
+.cta-mint:hover{box-shadow:0 0 60px rgba(0,255,178,.5);transform:translateY(-2px);}
+.cta-outline{background:transparent;color:var(--chalk);border:1px solid var(--dimmer);}
+.cta-outline:hover{border-color:rgba(0,255,178,.4);background:rgba(0,255,178,.04);}
+
+/* ═══ THREE.JS DIVIDER ═══ */
+#divider-3d{position:relative;height:550px;overflow:hidden;background:var(--ink3);display:flex;align-items:center;}
+#divider-canvas{position:absolute;inset:0;z-index:0;}
+.div-content{position:relative;z-index:1;padding:0 4%;max-width:700px;}
+.div-tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mint);margin-bottom:2rem;display:flex;align-items:center;gap:1rem;}
+.div-tag::before{content:"";width:20px;height:1px;background:var(--mint);}
+.div-hl{font-family:var(--head);font-size:clamp(2.5rem,5vw,5rem);line-height:1;letter-spacing:.02em;margin-bottom:1.5rem;}
+.div-sub{font-size:.95rem;color:var(--dim);line-height:1.75;font-weight:300;max-width:520px;}
+
+/* ═══ ADD-ON SERVICES ═══ */
+#addons{padding:8rem 4%;background:var(--ink);position:relative;overflow:hidden;}
+.addons-header{text-align:center;margin-bottom:5rem;}
+.addon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.addon-card{background:linear-gradient(135deg,rgba(255,255,255,.025),rgba(255,255,255,.008));border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:2rem;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease),border-color .3s;cursor:none;}
+.addon-card.vis{opacity:1;transform:translateY(0);}
+.addon-card:nth-child(2).vis{transition-delay:.06s;}.addon-card:nth-child(3).vis{transition-delay:.12s;}
+.addon-card:nth-child(4).vis{transition-delay:.18s;}.addon-card:nth-child(5).vis{transition-delay:.24s;}.addon-card:nth-child(6).vis{transition-delay:.3s;}
+.addon-card::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .4s;border-radius:16px;}
+.addon-card:hover::before{opacity:1;}
+.addon-acc-mint::before{background:linear-gradient(135deg,rgba(0,255,178,.04),transparent 55%);}.addon-acc-mint:hover{border-color:rgba(0,255,178,.2);}
+.addon-acc-coral::before{background:linear-gradient(135deg,rgba(255,45,85,.04),transparent 55%);}.addon-acc-coral:hover{border-color:rgba(255,45,85,.2);}
+.addon-acc-gold::before{background:linear-gradient(135deg,rgba(232,160,32,.04),transparent 55%);}.addon-acc-gold:hover{border-color:rgba(232,160,32,.2);}
+.addon-acc-vio::before{background:linear-gradient(135deg,rgba(124,58,237,.05),transparent 55%);}.addon-acc-vio:hover{border-color:rgba(124,58,237,.25);}
+.addon-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;}
+.addon-icon{font-size:1.8rem;}
+.addon-type{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .6rem;border-radius:100px;}
+.type-monthly{background:rgba(0,255,178,.1);color:var(--mint);border:1px solid rgba(0,255,178,.25);}
+.type-once{background:rgba(232,160,32,.1);color:var(--gold);border:1px solid rgba(232,160,32,.25);}
+.type-new{background:rgba(124,58,237,.12);color:#a78bfa;border:1px solid rgba(124,58,237,.3);}
+.addon-name{font-family:var(--head);font-size:1.4rem;letter-spacing:.03em;margin-bottom:.4rem;}
+.addon-desc{font-size:.8rem;color:var(--dim);line-height:1.6;font-weight:300;margin-bottom:1.2rem;}
+.addon-price-row{display:flex;align-items:flex-end;justify-content:space-between;border-top:1px solid rgba(255,255,255,.06);padding-top:1rem;}
+.addon-price-inr,.addon-price-usd{display:none;}
+.addon-price-inr.show,.addon-price-usd.show{display:block;}
+.ap-main{font-family:var(--head);font-size:1.6rem;letter-spacing:.02em;}
+.ap-period{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;}
+.addon-btn{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid var(--dimmer);color:var(--dim);padding:.4rem .9rem;border-radius:100px;cursor:pointer;transition:all .3s;text-decoration:none;}
+.addon-acc-mint:hover .addon-btn{border-color:var(--mint);color:var(--mint);}
+.addon-acc-coral:hover .addon-btn{border-color:var(--coral);color:var(--coral);}
+.addon-acc-gold:hover .addon-btn{border-color:var(--gold);color:var(--gold);}
+.addon-acc-vio:hover .addon-btn{border-color:#a78bfa;color:#a78bfa;}
+
+/* ═══ CUSTOM PRICING ═══ */
+#custom{padding:8rem 4%;background:var(--ink2);position:relative;overflow:hidden;}
+.custom-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.custom-left{}
+.custom-big{font-family:var(--head);font-size:clamp(3rem,6vw,6rem);line-height:.95;letter-spacing:.02em;margin-bottom:2rem;}
+.custom-sub{font-size:.95rem;color:var(--dim);line-height:1.8;font-weight:300;max-width:460px;margin-bottom:2.5rem;}
+.custom-points{display:flex;flex-direction:column;gap:.8rem;margin-bottom:3rem;}
+.cp-item{display:flex;align-items:center;gap:.8rem;font-size:.88rem;color:var(--dim);}
+.cp-dot{width:6px;height:6px;border-radius:50%;background:var(--mint);flex-shrink:0;}
+.custom-right{background:linear-gradient(135deg,rgba(0,255,178,.06),rgba(0,255,178,.01));border:1px solid rgba(0,255,178,.15);border-radius:20px;padding:3rem;position:relative;overflow:hidden;}
+.custom-right::before{content:"";position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,255,178,.08) 0%,transparent 70%);pointer-events:none;}
+.cr-tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;color:var(--mint);text-transform:uppercase;margin-bottom:1.5rem;}
+.cr-title{font-family:var(--head);font-size:2.5rem;letter-spacing:.03em;margin-bottom:1rem;}
+.cr-desc{font-size:.88rem;color:var(--dim);line-height:1.7;font-weight:300;margin-bottom:2rem;}
+.cr-items{display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem;}
+.cr-item{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--dim);text-transform:uppercase;display:flex;align-items:center;gap:.6rem;}
+.cr-item::before{content:"→";color:var(--mint);}
+.cr-cta{display:inline-flex;align-items:center;gap:.7rem;padding:1rem 2rem;background:var(--mint);color:#000;font-weight:800;font-size:.88rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:8px;transition:box-shadow .3s,transform .2s;box-shadow:0 0 40px rgba(0,255,178,.25);}
+.cr-cta:hover{box-shadow:0 0 80px rgba(0,255,178,.5);transform:scale(1.02);}
+
+/* ═══ THREE.JS SECTION 2 ═══ */
+#geo-section{position:relative;height:500px;overflow:hidden;background:var(--ink);display:flex;align-items:center;}
+#geo-canvas{position:absolute;inset:0;z-index:0;}
+.geo-content{position:relative;z-index:1;padding:0 4%;max-width:700px;}
+.geo-tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;display:flex;align-items:center;gap:1rem;}
+.geo-tag::before{content:"";width:20px;height:1px;background:var(--gold);}
+.geo-hl{font-family:var(--head);font-size:clamp(2.5rem,5vw,5rem);line-height:1;letter-spacing:.02em;margin-bottom:1.5rem;}
+.geo-sub{font-size:.95rem;color:var(--dim);line-height:1.75;font-weight:300;max-width:540px;}
+
+/* ═══ FAQ PRICING ═══ */
+#pfaq{padding:8rem 4%;background:var(--ink2);position:relative;overflow:hidden;}
+.pfaq-grid{display:grid;grid-template-columns:1fr 1.8fr;gap:8rem;margin-top:5rem;align-items:start;}
+.pfaq-left p{font-size:.9rem;color:var(--dim);line-height:1.8;font-weight:300;margin-top:1.5rem;}
+.pfaq-list{display:flex;flex-direction:column;}
+.pfaq-item{border-bottom:1px solid var(--border);opacity:0;transform:translateY(15px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
+.pfaq-item.vis{opacity:1;transform:translateY(0);}
+.pfaq-item:nth-child(2).vis{transition-delay:.08s;}.pfaq-item:nth-child(3).vis{transition-delay:.16s;}
+.pfaq-item:nth-child(4).vis{transition-delay:.24s;}.pfaq-item:nth-child(5).vis{transition-delay:.32s;}.pfaq-item:nth-child(6).vis{transition-delay:.4s;}
+.pfaq-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.8rem 0;background:none;border:none;cursor:pointer;color:var(--chalk);text-align:left;gap:1rem;}
+.pfaq-q{font-family:var(--head);font-size:1.5rem;letter-spacing:.03em;}
+.pfaq-ch{width:32px;height:32px;border:1px solid var(--dimmer);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--dim);flex-shrink:0;transition:all .3s var(--ease);}
+.pfaq-item.open .pfaq-ch{background:var(--mint);border-color:var(--mint);color:#000;transform:rotate(45deg);}
+.pfaq-answer{max-height:0;overflow:hidden;transition:max-height .4s var(--ease);}
+.pfaq-item.open .pfaq-answer{max-height:300px;}
+.pfaq-answer p{font-size:.9rem;color:var(--dim);line-height:1.8;font-weight:300;padding-bottom:1.5rem;}
+.pfaq-answer span{color:var(--mint);}
+
+/* ═══ PAYMENT METHODS ═══ */
+#payment{padding:6rem 4%;background:var(--ink3);border-top:1px solid var(--border);}
+.pay-inner{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;align-items:center;}
+.pay-left h3{font-family:var(--head);font-size:2.5rem;letter-spacing:.03em;margin-bottom:.8rem;}
+.pay-left p{font-size:.88rem;color:var(--dim);line-height:1.7;font-weight:300;}
+.pay-methods{display:flex;flex-direction:column;gap:.8rem;}
+.pay-method{display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px;padding:.8rem 1.2rem;}
+.pm-icon{font-size:1.4rem;}
+.pm-name{font-family:var(--head);font-size:1.1rem;letter-spacing:.04em;}
+.pm-sub{font-size:.72rem;color:var(--dim);}
+.pay-note{background:rgba(0,255,178,.04);border:1px solid rgba(0,255,178,.15);border-radius:12px;padding:1.5rem;text-align:center;}
+.pay-note-icon{font-size:2rem;margin-bottom:.8rem;display:block;}
+.pay-note h4{font-family:var(--head);font-size:1.5rem;letter-spacing:.04em;margin-bottom:.5rem;}
+.pay-note p{font-size:.82rem;color:var(--dim);line-height:1.6;font-weight:300;}
+
+/* ═══ FINAL CTA ═══ */
+#fcta{padding:10rem 4%;position:relative;overflow:hidden;text-align:center;background:var(--ink);}
+.cta-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(0,255,178,.05) 0%,transparent 70%);pointer-events:none;}
+.cta-gl{position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,178,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,178,.025) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 80%);}
+.cta-inner{position:relative;z-index:1;max-width:900px;margin:0 auto;}
+.cta-tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--mint);margin-bottom:2.5rem;display:inline-block;}
+.cta-hl{font-family:var(--head);font-size:clamp(3.5rem,8vw,7.5rem);line-height:.95;letter-spacing:.02em;margin-bottom:2.5rem;}
+.cta-hl .l2{color:var(--mint);}.cta-hl .l3{-webkit-text-stroke:1px rgba(226,236,255,.22);color:transparent;}
+.cta-sub{font-size:1rem;color:var(--dim);line-height:1.7;font-weight:300;max-width:480px;margin:0 auto 3.5rem;}
+.cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+.btn-p{display:inline-flex;align-items:center;gap:.7rem;padding:1.1rem 2.5rem;background:var(--mint);color:#000;font-weight:800;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:6px;transition:box-shadow .3s,transform .2s;box-shadow:0 0 60px rgba(0,255,178,.3);}
+.btn-p:hover{box-shadow:0 0 100px rgba(0,255,178,.6);transform:scale(1.03);}
+.btn-g{display:inline-flex;align-items:center;gap:.7rem;padding:1.1rem 2.5rem;background:transparent;color:var(--chalk);font-weight:600;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border:1px solid var(--dimmer);border-radius:6px;transition:border-color .3s,background .3s;}
+.btn-g:hover{border-color:rgba(0,255,178,.3);background:rgba(0,255,178,.03);}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--ink);border-top:1px solid var(--border);}
+.footer-main{padding:4rem 4% 3rem;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;}
+.footer-brand{}
+.footer-logo{font-family:var(--head);font-size:1.8rem;letter-spacing:.15em;margin-bottom:.4rem;}
+.footer-logo em{color:var(--mint);font-style:normal;}
+.footer-tagline{font-size:.78rem;color:var(--dim);letter-spacing:.05em;font-weight:300;margin-bottom:1.5rem;}
+.footer-socials{display:flex;gap:.8rem;margin-bottom:1.5rem;}
+.social-btn{width:40px;height:40px;border:1px solid var(--dimmer);border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--dim);font-size:.9rem;transition:all .3s;}
+.social-btn:hover{border-color:var(--mint);color:var(--mint);background:rgba(0,255,178,.06);}
+.footer-contact-links a{display:block;color:var(--mint);text-decoration:none;font-family:var(--mono);font-size:.75rem;letter-spacing:.05em;margin-bottom:.3rem;transition:opacity .2s;}
+.footer-contact-links a:hover{opacity:.7;}
+.footer-col h5{font-family:var(--head);font-size:1rem;letter-spacing:.1em;margin-bottom:1.2rem;color:var(--chalk);}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.footer-col ul a{color:var(--dim);text-decoration:none;font-size:.82rem;font-weight:400;letter-spacing:.03em;transition:color .2s;}
+.footer-col ul a:hover{color:var(--chalk);}
+.footer-pricing-btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);border:1px solid rgba(0,255,178,.3);padding:.4rem .9rem;border-radius:100px;text-decoration:none;transition:background .3s,border-color .3s;margin-top:.4rem;}
+.footer-pricing-btn:hover{background:rgba(0,255,178,.08);border-color:var(--mint);}
+.footer-bottom{border-top:1px solid var(--border);padding:1.5rem 4%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:.72rem;color:var(--dimmer);}
+.footer-legal{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-legal a{font-size:.72rem;color:var(--dimmer);text-decoration:none;letter-spacing:.03em;transition:color .2s;}
+.footer-legal a:hover{color:var(--dim);}
+
+/* UTILS */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.vis{opacity:1;transform:translateY(0);}
+
+@media(max-width:1200px){.plans-grid{grid-template-columns:repeat(2,1fr);}.addon-grid{grid-template-columns:repeat(2,1fr);}.custom-inner{grid-template-columns:1fr;gap:4rem;}.pay-inner{grid-template-columns:1fr 1fr;}.footer-main{grid-template-columns:1fr 1fr;}}
 @media(max-width:768px){
-  .nav-links{position:fixed;top:0;right:-100%;width:85%;height:100vh;background:var(--card-dark);flex-direction:column;justify-content:center;transition:.4s ease;box-shadow:-10px 0 40px rgba(0,0,0,.7);gap:2rem;z-index:1000}
-  .nav-links.active{right:0}
-  .hamburger{display:block}
-  .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-  .hamburger.active span:nth-child(2){opacity:0}
-  .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-  .pricing-grid{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto}
-  .page-hero{padding:8rem 0 2rem}
-  .footer-grid{grid-template-columns:1fr;gap:3rem}
-  .footer-bottom{flex-direction:column;text-align:center}
-  .footer-contact{flex-direction:column;gap:.5rem}
-  .toggle-option{padding:8px 16px;font-size:.82rem}
-}
-@media(max-width:480px){
-  .page-hero h1{font-size:1.8rem}
-}
-
-/* ========== REDUCED MOTION ========== */
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  html{scroll-behavior:auto}
-  .pricing-card{opacity:1!important;filter:none!important;transform:none!important}
-  .page-hero h1 .word span{transform:none!important;opacity:1!important}
+  .nav-links{display:none;}.plans-grid{grid-template-columns:1fr;}.addon-grid{grid-template-columns:1fr;}.pfaq-grid{grid-template-columns:1fr;gap:4rem;}.pay-inner{grid-template-columns:1fr;}.gs-inner{grid-template-columns:1fr 1fr;}.footer-main{grid-template-columns:1fr;}.footer-bottom{flex-direction:column;text-align:center;}.currency-toggle{display:none;}
 }
 </style>
 </head>
-<body>
+<body class="loading">
 
-<!-- ========== NAVBAR ========== -->
-<nav id="main-nav">
-  <div class="nav-content">
-    <a href="index.html" class="logo">QUANTOR</a>
-    <div class="nav-links" id="nav-menu">
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="pricing.html" class="active">Pricing</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="about.html">About</a>
-      <a href="contact.html" class="btn btn-filled">Get Started</a>
-    </div>
-    <button class="hamburger" id="hamburger-btn" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+<div id="preloader">
+  <div class="pre-logo"><span>Q</span><span>U</span><span>A</span><span>N</span><span>T</span><span>O</span><span>R</span><span>.</span></div>
+  <div class="pre-bar-wrap"><div class="pre-bar"></div><div class="pre-count" id="preCount">0%</div></div>
+  <div class="pre-page-label">Pricing</div>
+</div>
+<div id="cursor-outer"></div>
+<div id="cursor-dot"></div>
+
+<!-- CURRENCY TOGGLE -->
+<div class="currency-toggle" id="currencyToggle">
+  <button class="ct-btn active" id="btnINR" onclick="setCurrency('INR')">&#8377;</button>
+  <div class="ct-divider"></div>
+  <button class="ct-btn" id="btnUSD" onclick="setCurrency('USD')">$</button>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">QUAN<em>TOR</em></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Services</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="pricing.html" class="active">Pricing</a></li>
+    <li><a href="pricing.html" class="nav-price-btn">&#8377; / $</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Start a Project &#8594;</a>
 </nav>
 
-<!-- ========== PAGE HERO ========== -->
-<section class="page-hero">
-  <div class="container">
-    <div class="page-hero-label">
-      <span class="line"></span>
-      <span>Pricing</span>
-      <span class="line"></span>
+<!-- HERO -->
+<section id="price-hero">
+  <canvas id="price-canvas"></canvas>
+  <div class="price-hero-grad"></div>
+  <div class="price-hero-inner">
+    <div class="eyebrow">
+      <div class="eyebrow-inner">
+        <div class="e-dot"></div><div class="e-line"></div>
+        <span class="e-text">Transparent Pricing &mdash; No Hidden Fees</span>
+      </div>
     </div>
-    <h1 id="hero-title">
-      <span class="word"><span style="animation-delay:0s">Simple</span></span>
-      <span class="word"><span style="animation-delay:.15s">Pricing.</span></span>
-      <span class="word"><span style="animation-delay:.3s">Everything</span></span>
-      <span class="word"><span style="animation-delay:.45s">Included.</span></span>
+    <h1 class="price-headline">
+      <span class="hrow"><span>INVEST IN</span></span>
+      <span class="hrow"><span class="m">SYSTEMS</span></span>
+      <span class="hrow"><span class="o">THAT WORK.</span></span>
     </h1>
-    <p>No hidden fees. No tech headaches. Just results.</p>
+    <p class="hero-sub">Every plan is built around one commitment: you only pay the second half after you love what we build. No risk. No bloated retainers. Just clear pricing for results that compound.</p>
+    <div class="hero-pills">
+      <span class="pill pill-mint">&#10003; 50% Upfront Only</span>
+      <span class="pill">India &#8377; &amp; International $</span>
+      <span class="pill">No Hidden Fees</span>
+      <span class="pill">Support Included</span>
+    </div>
+  </div>
+  <div class="scroll-hint"><span class="s-label">Scroll</span><div class="s-line"></div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq">
+  <div class="mq-track">
+    <div class="mq-item"><span class="mq-dot"></span><b>50%</b> Upfront Only</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>50%</b> After You Approve</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>2-Day</b> Min. Delivery</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>UPI</b> &bull; PayPal &bull; Wise</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>India &#8377;</b> &amp; International $</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>AI Chatbot</b> Every Plan</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>Free</b> Consultation</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>No</b> Lock-In Contracts</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>50%</b> Upfront Only</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>50%</b> After You Approve</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>2-Day</b> Min. Delivery</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>UPI</b> &bull; PayPal &bull; Wise</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>India &#8377;</b> &amp; International $</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>AI Chatbot</b> Every Plan</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>Free</b> Consultation</div>
+    <div class="mq-item"><span class="mq-dot"></span><b>No</b> Lock-In Contracts</div>
+  </div>
+</div>
+
+<!-- GUARANTEES -->
+<section id="guarantee-strip">
+  <div class="gs-inner">
+    <div class="gs-item"><div class="gs-icon">&#128274;</div><div class="gs-body"><h4>APPROVAL FIRST</h4><p>You see, test and approve everything before the final payment. We stake our income on delivering work you genuinely love.</p></div></div>
+    <div class="gs-item"><div class="gs-icon">&#9889;</div><div class="gs-body"><h4>FAST DELIVERY</h4><p>Every project has a locked delivery window — from 2 days to 9 days depending on scope. We move because your leads cannot wait.</p></div></div>
+    <div class="gs-item"><div class="gs-icon">&#127759;</div><div class="gs-body"><h4>GLOBAL READY</h4><p>Indian pricing in Rupees. International pricing in Dollars. Pay via UPI, PayPal or Wise — whichever works for your location.</p></div></div>
+    <div class="gs-item"><div class="gs-icon">&#128200;</div><div class="gs-body"><h4>SUPPORT INCLUDED</h4><p>Post-launch support from 30 days to 6 months is built into every package. You are never left without backup after we go live.</p></div></div>
   </div>
 </section>
 
-<!-- ========== PRICING SECTION ========== -->
-<section style="padding:0 0 5rem">
-  <div class="container">
+<!-- CORE PLANS -->
+<section id="core-plans">
+  <div class="plans-bg-orb"></div>
+  <div class="plans-header reveal">
+    <div class="sec-tag">Core Packages</div>
+    <h2 class="sec-title">CHOOSE YOUR FOUNDATION.</h2>
+    <p class="plans-sub">Four packages built for different stages of growth. Every single one includes an AI chatbot trained on your business. Every single one is delivered fast.</p>
+  </div>
 
-    <!-- TOGGLE -->
-    <div class="toggle-section">
-      <div class="toggle-wrap" id="billingToggle">
-        <div class="toggle-pill" id="billingPill"></div>
-        <div class="toggle-option active" data-value="monthly" onclick="setBilling('monthly')">Monthly</div>
-        <div class="toggle-option" data-value="yearly" onclick="setBilling('yearly')">Yearly <span class="toggle-badge">Save more</span></div>
+  <div class="plans-grid">
+
+    <!-- PLAN 1: CHATBOT ONLY -->
+    <div class="plan-card">
+      <span class="plan-icon">&#129302;</span>
+      <div class="plan-name">CHATBOT ONLY</div>
+      <div class="plan-tagline">AI that works for you 24/7</div>
+      <div class="plan-price-wrap">
+        <div class="price-inr show">
+          <div class="price-main"><span class="curr">&#8377;</span>7,500</div>
+          <div class="price-period">Per Month</div>
+          <div class="price-alt">~$90/mo international</div>
+        </div>
+        <div class="price-usd">
+          <div class="price-main"><span class="curr" style="color:var(--mint)">$</span>90</div>
+          <div class="price-period">Per Month</div>
+          <div class="price-alt">&#8377;7,500/mo India</div>
+        </div>
+      </div>
+      <div class="plan-features">
+        <div class="pf">Chatling AI chatbot</div>
+        <div class="pf">32+ AI models available</div>
+        <div class="pf">Trained on your business data</div>
+        <div class="pf">Embeds on any existing site</div>
+        <div class="pf">Lead capture + notifications</div>
+        <div class="pf">2-day delivery</div>
+        <div class="pf">30-day support</div>
+        <div class="pf no">Website not included</div>
+        <div class="pf no">Hosting not included</div>
+      </div>
+      <a href="https://wa.me/919599234747?text=%F0%9F%A4%96%20Hey%20QUANTOR%21%20I%27m%20interested%20in%20the%20%F0%9D%97%96%F0%9D%97%9B%F0%9D%97%94%F0%9D%97%A7%F0%9D%97%95%F0%9D%97%A2%F0%9D%97%A7%20%F0%9D%97%A2%F0%9D%97%A1%F0%9D%97%9F%F0%9D%97%AC%20plan%20%28%E2%82%B97%2C500%2Fmo%29%20%E2%80%94%20a%2024%2F7%20AI%20assistant%20that%20never%20sleeps.%20I%20want%20leads%20captured%20and%20questions%20answered%20automatically.%20Let%27s%20get%20this%20set%20up%21%20%F0%9F%9A%80" target="_blank" class="plan-cta cta-outline">Get Started &#8594;</a>
+    </div>
+
+    <!-- PLAN 2: STARTER -->
+    <div class="plan-card">
+      <span class="plan-icon">&#127760;</span>
+      <div class="plan-name">STARTER</div>
+      <div class="plan-tagline">Your first digital presence</div>
+      <div class="plan-price-wrap">
+        <div class="price-inr show">
+          <div class="price-main"><span class="curr">&#8377;</span>10,999</div>
+          <div class="price-period">One-Time</div>
+          <div class="price-alt">~$129 international</div>
+        </div>
+        <div class="price-usd">
+          <div class="price-main"><span class="curr" style="color:var(--mint)">$</span>129</div>
+          <div class="price-period">One-Time</div>
+          <div class="price-alt">&#8377;10,999 India</div>
+        </div>
+      </div>
+      <div class="plan-features">
+        <div class="pf">1-page landing site</div>
+        <div class="pf">GitHub Pages hosting</div>
+        <div class="pf">Client-provided domain connection</div>
+        <div class="pf">Chatling AI chatbot</div>
+        <div class="pf">Mobile-first design</div>
+        <div class="pf">3-day delivery</div>
+        <div class="pf">30-day support</div>
+        <div class="pf no">Custom domain not included</div>
+        <div class="pf no">Multi-page not included</div>
+      </div>
+      <a href="https://wa.me/919599234747?text=%F0%9F%8C%9F%20Hey%20QUANTOR%21%20I%27m%20ready%20to%20launch%20with%20the%20%F0%9D%97%A6%F0%9D%97%A7%F0%9D%97%94%F0%9D%97%A5%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%A5%20plan%20%28%E2%82%B910%2C999%20one-time%29%20%E2%80%94%20a%20professional%201-page%20site%20with%20AI%20chatbot.%20My%20first%20step%20to%20being%20found%20online.%20Let%27s%20do%20this%21%20%F0%9F%92%BC" target="_blank" class="plan-cta cta-outline">Get Started &#8594;</a>
+    </div>
+
+    <!-- PLAN 3: PRO — POPULAR -->
+    <div class="plan-card popular">
+      <span class="popular-badge">Most Popular</span>
+      <span class="plan-icon">&#128640;</span>
+      <div class="plan-name">PRO</div>
+      <div class="plan-tagline">Full site + full AI system</div>
+      <div class="plan-price-wrap">
+        <div class="price-inr show">
+          <div class="price-main"><span class="curr">&#8377;</span>59,999</div>
+          <div class="price-period">One-Time</div>
+          <div class="price-alt">~$699 international</div>
+        </div>
+        <div class="price-usd">
+          <div class="price-main"><span class="curr" style="color:var(--mint)">$</span>699</div>
+          <div class="price-period">One-Time</div>
+          <div class="price-alt">&#8377;59,999 India</div>
+        </div>
+      </div>
+      <div class="plan-features">
+        <div class="pf">5&ndash;6 page website</div>
+        <div class="pf">Hostinger Premium hosting (1yr)</div>
+        <div class="pf">Custom domain (1yr)</div>
+        <div class="pf">Chatling AI on every page</div>
+        <div class="pf">Mobile-first + Core Web Vitals</div>
+        <div class="pf">Basic SEO setup</div>
+        <div class="pf">5-day delivery</div>
+        <div class="pf">3-month support</div>
+      </div>
+      <a href="https://wa.me/919599234747?text=%F0%9F%94%A5%20Hey%20QUANTOR%21%20I%27m%20all%20in%20for%20the%20%F0%9D%97%A3%F0%9D%97%A5%F0%9D%97%A2%20plan%20%28%E2%82%B959%2C999%20one-time%29%20%E2%80%94%205-6%20pages%2C%20custom%20domain%2C%20premium%20hosting%2C%20AI%20chatbot%20on%20every%20page%20and%203-month%20support.%20Time%20to%20dominate%20my%20market%21%20%F0%9F%9A%80" target="_blank" class="plan-cta cta-mint">Get Started &#8594;</a>
+    </div>
+
+    <!-- PLAN 4: ENTERPRISE -->
+    <div class="plan-card" style="border-color:rgba(232,160,32,.2);background:linear-gradient(135deg,rgba(232,160,32,.04),rgba(232,160,32,.01));">
+      <span class="plan-icon">&#127981;</span>
+      <div class="plan-name">ENTERPRISE</div>
+      <div class="plan-tagline">The complete digital system</div>
+      <div class="plan-price-wrap">
+        <div class="price-inr show">
+          <div class="price-main"><span class="curr" style="color:var(--gold)">&#8377;</span>1,24,999</div>
+          <div class="price-period">One-Time</div>
+          <div class="price-alt">~$1,499 international</div>
+        </div>
+        <div class="price-usd">
+          <div class="price-main"><span class="curr" style="color:var(--gold)">$</span>1,499</div>
+          <div class="price-period">One-Time</div>
+          <div class="price-alt">&#8377;1,24,999 India</div>
+        </div>
+      </div>
+      <div class="plan-features">
+        <div class="pf">Everything in Pro</div>
+        <div class="pf">Hostinger Business + domain (1yr)</div>
+        <div class="pf">Advanced on-page SEO</div>
+        <div class="pf">GA4 + Google Search Console</div>
+        <div class="pf">Core Web Vitals optimisation</div>
+        <div class="pf">Security hardening</div>
+        <div class="pf">Content strategy session</div>
+        <div class="pf">9-day delivery</div>
+        <div class="pf">6-month priority support</div>
+      </div>
+      <a href="https://wa.me/919599234747?text=%F0%9F%8F%A2%20Hey%20QUANTOR%21%20I%27m%20ready%20for%20the%20full%20%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%A5%F0%9D%97%A3%F0%9D%97%A5%F0%9D%97%9C%F0%9D%97%A6%F0%9D%97%98%20experience%20%28%E2%82%B91%2C24%2C999%20one-time%29%20%E2%80%94%20complete%20digital%20system%20with%20advanced%20SEO%2C%20analytics%2C%20security%2C%20and%206-month%20priority%20support.%20Let%27s%20build%20something%20exceptional%21%20%E2%9C%A8" target="_blank" class="plan-cta" style="background:var(--gold);color:#000;box-shadow:0 0 30px rgba(232,160,32,.2);">Get Started &#8594;</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- THREE.JS DIVIDER 1 -->
+<section id="divider-3d">
+  <canvas id="divider-canvas"></canvas>
+  <div class="div-content">
+    <div class="div-tag">Add-On Services</div>
+    <div class="div-hl reveal">POWER UP<br><span style="color:var(--mint)">YOUR SYSTEM.</span></div>
+    <p class="div-sub reveal">Every add-on is a standalone service you can stack onto any core plan &mdash; or run independently. Mix and match to build the exact digital ecosystem your business needs right now.</p>
+  </div>
+</section>
+
+<!-- ADD-ON SERVICES -->
+<section id="addons">
+  <div class="addons-header reveal">
+    <div class="sec-tag">Service Add-Ons</div>
+    <h2 class="sec-title">STACK YOUR ADVANTAGE.</h2>
+    <p style="font-size:.95rem;color:var(--dim);max-width:600px;margin:1.5rem auto 0;line-height:1.7;font-weight:300;">Eight specialist services you can add to any core package &mdash; or purchase independently. Each one is engineered to solve a specific growth problem.</p>
+  </div>
+  <div class="addon-grid">
+
+    <div class="addon-card addon-acc-coral">
+      <div class="addon-top">
+        <span class="addon-icon">&#128172;</span>
+        <span class="addon-type type-monthly">Monthly</span>
+      </div>
+      <div class="addon-name">WHATSAPP AUTOMATION</div>
+      <div class="addon-desc">Automated welcome flows, follow-up sequences, broadcasts and instant lead responses via WhatsApp. 90%+ open rates. Zero manual effort.</div>
+      <div class="addon-price-row">
+        <div>
+          <div class="addon-price-inr show"><div class="ap-main">&#8377;12,999</div><div class="ap-period">/ Month</div></div>
+          <div class="addon-price-usd"><div class="ap-main">$149</div><div class="ap-period">/ Month</div></div>
+        </div>
+        <a href="https://wa.me/919599234747?text=%F0%9F%92%AC%20Hey%20QUANTOR%21%20I%20want%20to%20add%20%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%A5%F0%9D%97%A1%F0%9D%97%98%F0%9D%97%A7%F0%9D%97%A6%20%F0%9D%97%A2%F0%9D%97%A1%20%F0%9D%97%A0%F0%9D%97%A2%F0%9D%97%A5%F0%9D%97%9E%F0%9D%97%98%F0%9D%97%A7%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%A2%20%E2%80%94%2090%25%2B%20open%20rates%2C%20automated%20follow-ups%2C%20zero%20manual%20effort.%20Ready%20to%20turn%20WhatsApp%20into%20my%20revenue%20machine%21%20%F0%9F%9A%80" target="_blank" class="addon-btn">Add This &#8594;</a>
       </div>
     </div>
 
-    <!-- CARDS -->
-    <div class="pricing-grid">
-
-      <!-- CARD 1: CHATBOT -->
-      <div class="pricing-card" style="animation-delay:.1s">
-        <span class="card-badge gray">Chatbot Only</span>
-        <h3 class="card-title">Chatbot</h3>
-        <p class="card-desc">For businesses that already have a website and need an AI chatbot to capture leads and answer questions 24/7.</p>
-        <div class="card-price">
-          <span class="price-amount" id="chatbotPrice">$90</span>
-          <span class="price-period" id="chatbotPeriod">/mo</span>
-        </div>
-        <span class="price-savings" id="chatbotSavings" style="display:none"></span>
-        <div class="card-features-title">Everything in this plan:</div>
-        <ul class="card-features">
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Chatling AI chatbot account (yours forever)</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Chatbot trained on your business</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span id="chatbotRetrain">1 retraining session per month</span></li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Embed code for your existing website</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>24/7 automated lead capture</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>32 AI models via Chatling</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full chatbot customization</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Chatbot analytics dashboard</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Credentials handed over — we hold nothing</li>
-        </ul>
-        <div class="card-note" id="chatbotExtraNote">Extra retraining: $20/session</div>
-        <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Chatbot%20plan." target="_blank" rel="noopener" class="card-cta cta-blue-outline">Get My Chatbot</a>
+    <div class="addon-card addon-acc-gold">
+      <div class="addon-top">
+        <span class="addon-icon">&#128270;</span>
+        <span class="addon-type type-monthly">Monthly</span>
       </div>
-
-      <!-- CARD 2: STARTER -->
-      <div class="pricing-card" style="animation-delay:.25s">
-        <span class="card-badge teal">One-time</span>
-        <h3 class="card-title">Starter</h3>
-        <p class="card-desc">For small businesses that want a professional online presence with minimal investment before scaling up.</p>
-        <div class="card-price">
-          <span class="price-amount" style="font-size:1.1rem;color:var(--text-muted);font-weight:600">From</span>
-          <span class="price-amount">$129</span>
+      <div class="addon-name">LOCAL SEO PACKAGE</div>
+      <div class="addon-desc">Google Business Profile optimisation, local citations, NAP consistency, geo-targeted content and Search Console setup to dominate local search.</div>
+      <div class="addon-price-row">
+        <div>
+          <div class="addon-price-inr show"><div class="ap-main">&#8377;19,999</div><div class="ap-period">/ Month</div></div>
+          <div class="addon-price-usd"><div class="ap-main">$249</div><div class="ap-period">/ Month</div></div>
         </div>
-        <span class="price-range-note">one-time setup fee</span>
-        <div class="card-features-title">Everything in this plan:</div>
-        <ul class="card-features">
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>1-page landing site (5 sections)</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Hosted on GitHub Pages (free, forever)</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>AI chatbot embedded and trained</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Chatling account — yours to keep</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>WhatsApp click-to-chat button</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mobile responsive design</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>AI-written copy for your business</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Delivered in 3 days</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>30-day post-delivery fix coverage</li>
-        </ul>
-        <div class="card-addons">
-          <div class="card-addons-title">Optional upgrades:</div>
-          <ul>
-            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Custom domain: +$10/yr</li>
-            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Hostinger hosting: +$22/yr upgrade</li>
-          </ul>
-        </div>
-        <div class="card-note">Default hosting is GitHub Pages — free, fast, reliable. Custom domain and hosting are optional extras.</div>
-        <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Starter%20landing%20page%20plan." target="_blank" rel="noopener" class="card-cta cta-white-outline">Get My Landing Page</a>
+        <a href="https://wa.me/919599234747?text=%F0%9F%93%8A%20Hey%20QUANTOR%21%20I%20want%20to%20add%20%F0%9D%97%9F%F0%9D%97%A2%F0%9D%97%96%F0%9D%97%94%F0%9D%97%B9%20%F0%9D%97%A6%F0%9D%97%A7%F0%9D%97%A2%20%E2%80%94%20Google%20Business%20optimisation%2C%20local%20citations%2C%20and%20dominating%20%22near%20me%22%20searches.%20Let%27s%20make%20my%20business%20impossible%20to%20miss%20locally%21%20%F0%9F%8F%86" target="_blank" class="addon-btn">Add This &#8594;</a>
       </div>
+    </div>
 
-      <!-- CARD 3: PRO (FEATURED) -->
-      <div class="pricing-card featured" style="animation-delay:.4s">
-        <span class="card-badge blue">Most Popular</span>
-        <h3 class="card-title">Pro</h3>
-        <p class="card-desc">For businesses ready to establish a full online presence with AI chatbot, proper hosting, and 3 months of included support.</p>
-        <div class="card-price">
-          <span class="price-amount" style="font-size:1.1rem;color:var(--text-muted);font-weight:600">From</span>
-          <span class="price-amount">$699</span>
-        </div>
-        <span class="price-range-note">one-time setup fee</span>
-        <span class="price-sub-value">Includes 3 months support — worth $54</span>
-        <div class="card-purchase-box">
-          <p><strong style="color:var(--text-body)">We purchase for you & you own forever:</strong></p>
-          <p>• Hosting: ~$22/yr</p>
-          <p>• Your domain (.in or .com): ~$10–$12/yr</p>
-          <p style="margin-top:.3rem;color:rgba(160,160,176,.6)">We purchase and set up everything, then hand over all credentials to you.</p>
-        </div>
-        <div class="card-features-title">Everything in this plan:</div>
-        <ul class="card-features">
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full website (5–6 pages)</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Home, About, Services, Portfolio/Gallery, Contact</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>AI chatbot on every page</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Chatling account — yours forever</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>3 months free support included</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Website bugs from our side fixed free (3 months)</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Retraining: 3 sessions/month via Chatling plan</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mobile responsive, fast loading</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>WhatsApp integration</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>AI-written copy for all pages</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Delivered in 5 days</li>
-        </ul>
-        <div class="card-note">After 3 months: $18/fix session | $30/mo ongoing support</div>
-        <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Pro%20website%20plan." target="_blank" rel="noopener" class="card-cta cta-blue-filled">Get My Website</a>
+    <div class="addon-card addon-acc-mint">
+      <div class="addon-top">
+        <span class="addon-icon">&#127775;</span>
+        <span class="addon-type type-monthly">Monthly</span>
       </div>
-
-      <!-- CARD 4: ENTERPRISE -->
-      <div class="pricing-card" style="animation-delay:.55s">
-        <span class="card-badge purple">Full Power</span>
-        <h3 class="card-title">Enterprise</h3>
-        <p class="card-desc">For businesses that want everything — full website, AI chatbot, SEO optimization, and 6 months of dedicated support.</p>
-        <div class="card-price">
-          <span class="price-amount" style="font-size:1.1rem;color:var(--text-muted);font-weight:600">From</span>
-          <span class="price-amount">$1,499</span>
+      <div class="addon-name">REPUTATION MANAGEMENT</div>
+      <div class="addon-desc">Automated review collection from happy clients, negative feedback alerts before they spread, and brand-voice response templates for every platform.</div>
+      <div class="addon-price-row">
+        <div>
+          <div class="addon-price-inr show"><div class="ap-main">&#8377;9,999</div><div class="ap-period">/ Month</div></div>
+          <div class="addon-price-usd"><div class="ap-main">$119</div><div class="ap-period">/ Month</div></div>
         </div>
-        <span class="price-range-note">one-time setup fee</span>
-        <span class="price-sub-value">Includes 6 months support — worth $108</span>
-        <div class="card-purchase-box">
-          <p><strong style="color:var(--text-body)">We purchase for you & you own forever:</strong></p>
-          <p>• Business hosting: ~$36/yr (faster, daily backups)</p>
-          <p>• Your domain: ~$10–$12/yr</p>
-        </div>
-        <div class="card-note-highlight">
-          <strong>We buy hosting & domain for you:</strong> we handle the full setup and hand over all credentials. Your website support extends for the entire year at no extra charge.
-        </div>
-        <div class="card-features-title">Everything in Pro, plus:</div>
-        <ul class="card-features">
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SEO optimization (on-page)</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Google Search Console setup & indexing</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Site speed optimization</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority delivery (9 days)</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>6 months free support included</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Website bugs fixed free (6 months)</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Retraining: 3 sessions/month via Chatling plan</li>
-          <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated WhatsApp support line</li>
-        </ul>
-        <div class="card-note">After 6 months: $24/fix session | $48/mo ongoing support</div>
-        <a href="https://wa.me/919599234747?text=Hi%2C%20I%27m%20interested%20in%20the%20Enterprise%20plan." target="_blank" rel="noopener" class="card-cta cta-purple-gradient">Get Enterprise</a>
+        <a href="https://wa.me/919599234747?text=%E2%AD%90%20Hey%20QUANTOR%21%20I%20want%20to%20add%20%F0%9D%97%A5%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%A8%F0%9D%97%A7%F0%9D%97%94%F0%9D%97%A7%F0%9D%97%9C%F0%9D%97%A2%F0%9D%97%A1%20%F0%9D%97%A0%F0%9D%97%94%F0%9D%97%A1%F0%9D%97%94%F0%9D%97%9A%F0%9D%97%98%F0%9D%97%A0%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%A7%20%E2%80%94%20automatic%20review%20collection%2C%20negative%20feedback%20alerts%2C%20and%20five-star%20trust%20building.%20Let%27s%20protect%20and%20grow%20my%20online%20reputation%21%20%F0%9F%9B%A1%EF%B8%8F" target="_blank" class="addon-btn">Add This &#8594;</a>
       </div>
+    </div>
 
+    <div class="addon-card addon-acc-vio">
+      <div class="addon-top">
+        <span class="addon-icon">&#128247;</span>
+        <span class="addon-type type-monthly">Monthly</span>
+      </div>
+      <div class="addon-name">SOCIAL MEDIA ENGINE</div>
+      <div class="addon-desc">On-brand posts, captions, carousels and reel scripts generated for Instagram, LinkedIn and Facebook &mdash; scheduled and ready to publish. Zero daily effort.</div>
+      <div class="addon-price-row">
+        <div>
+          <div class="addon-price-inr show"><div class="ap-main">&#8377;14,999</div><div class="ap-period">/ Month</div></div>
+          <div class="addon-price-usd"><div class="ap-main">$179</div><div class="ap-period">/ Month</div></div>
+        </div>
+        <a href="https://wa.me/919599234747?text=%F0%9F%93%B1%20Hey%20QUANTOR%21%20I%20want%20to%20add%20%F0%9D%97%A6%F0%9D%97%A2%F0%9D%97%96%F0%9D%97%9C%F0%9D%97%94%F0%9D%97%B9%20%F0%9D%97%A0%F0%9D%97%98%F0%9D%97%97%F0%9D%97%9C%F0%9D%97%94%20%F0%9D%97%A6%F0%9D%97%A7%F0%9D%97%A5%F0%9D%97%A1%F0%9D%97%9C%F0%9D%97%A1%F0%9D%97%96%20%E2%80%94%20on-brand%20posts%2C%20captions%2C%20carousels%2C%20and%20reels%20ready%20to%20publish.%20Zero%20daily%20effort%2C%20maximum%20engagement%21%20%F0%9F%8E%AF" target="_blank" class="addon-btn">Add This &#8594;</a>
+      </div>
+    </div>
+
+    <div class="addon-card addon-acc-gold">
+      <div class="addon-top">
+        <span class="addon-icon">&#128202;</span>
+        <span class="addon-type type-once">One-Time</span>
+      </div>
+      <div class="addon-name">ANALYTICS DASHBOARD</div>
+      <div class="addon-desc">Full GA4 setup, Search Console integration, heatmap tools, conversion event tracking and a clean reporting dashboard. Know exactly what earns revenue.</div>
+      <div class="addon-price-row">
+        <div>
+          <div class="addon-price-inr show"><div class="ap-main">&#8377;7,999</div><div class="ap-period">One-Time</div></div>
+          <div class="addon-price-usd"><div class="ap-main">$99</div><div class="ap-period">One-Time</div></div>
+        </div>
+        <a href="https://wa.me/919599234747?text=%F0%9F%93%8A%20Hey%20QUANTOR%21%20I%20want%20to%20add%20%F0%9D%97%94%F0%9D%97%A1%F0%9D%97%94%F0%9D%97%B9%F0%9D%97%98%F0%9D%97%A7%F0%9D%97%9C%F0%9D%97%96%F0%9D%97%A6%20%F0%9D%97%97%F0%9D%97%94%F0%9D%97%A6%F0%9D%97%9B%F0%9D%97%A7%F0%9D%97%A2%F0%9D%97%A2%F0%9D%97%A1%F0%9D%97%A1%F0%9D%97%A2%20%E2%80%94%20GA4%20setup%2C%20conversion%20tracking%2C%20and%20clean%20reporting.%20I%20want%20to%20know%20exactly%20what%20earns%20revenue%21%20%F0%9F%92%B0" target="_blank" class="addon-btn">Add This &#8594;</a>
+      </div>
+    </div>
+
+    <div class="addon-card addon-acc-vio">
+      <div class="addon-top">
+        <span class="addon-icon">&#128140;</span>
+        <span class="addon-type type-once">One-Time</span>
+      </div>
+      <div class="addon-name">EMAIL NURTURE SETUP</div>
+      <div class="addon-desc">Complete email automation — welcome sequences, lead nurture flows and re-engagement campaigns designed, written and triggered to convert cold leads into paying clients.</div>
+      <div class="addon-price-row">
+        <div>
+          <div class="addon-price-inr show"><div class="ap-main">&#8377;12,999</div><div class="ap-period">One-Time</div></div>
+          <div class="addon-price-usd"><div class="ap-main">$149</div><div class="ap-period">One-Time</div></div>
+        </div>
+        <a href="https://wa.me/919599234747?text=%F0%9F%93%A7%20Hey%20QUANTOR%21%20I%20want%20to%20add%20%F0%9D%97%98%F0%9D%97%A0%F0%9D%97%94%F0%9D%97%9C%F0%9D%97%B7%20%F0%9D%97%A1%F0%9D%97%A2%F0%9D%97%A6%F0%9D%97%A7%F0%9D%97%A8%F0%9D%97%A5%F0%9D%97%98%20%E2%80%94%20welcome%20sequences%2C%20lead%20nurture%20flows%2C%20and%20re-engagement%20campaigns.%20Time%20to%20turn%20cold%20leads%20into%20paying%20clients%21%20%F0%9F%94%A5" target="_blank" class="addon-btn">Add This &#8594;</a>
+      </div>
+    </div>
+
+    <div class="addon-card addon-acc-coral">
+      <div class="addon-top">
+        <span class="addon-icon">&#127919;</span>
+        <span class="addon-type type-once">One-Time</span>
+      </div>
+      <div class="addon-name">CRO AUDIT + FIX</div>
+      <div class="addon-desc">Full conversion rate audit, friction point removal, CTA redesign, trust signal overhaul and landing page rebuilds. Turn the traffic you already have into clients you actually close.</div>
+      <div class="addon-price-row">
+        <div>
+          <div class="addon-price-inr show"><div class="ap-main">&#8377;24,999</div><div class="ap-period">One-Time</div></div>
+          <div class="addon-price-usd"><div class="ap-main">$299</div><div class="ap-period">One-Time</div></div>
+        </div>
+        <a href="https://wa.me/919599234747?text=%F0%9F%8E%AF%20Hey%20QUANTOR%21%20I%20want%20to%20add%20%F0%9D%97%96%F0%9D%97%A5%F0%9D%97%A2%20%F0%9D%97%94%F0%9D%97%A8%F0%9D%97%B1%F0%9D%97%9C%F0%9D%97%A7%20%2B%20%F0%9D%97%99%F0%9D%97%9C%F0%9D%97%AB%20%E2%80%94%20full%20conversion%20audit%2C%20CTA%20redesign%2C%20and%20landing%20page%20optimisation.%20I%20want%20more%20visitors%20turning%20into%20clients%21%20%F0%9F%92%B8" target="_blank" class="addon-btn">Add This &#8594;</a>
+      </div>
+    </div>
+
+    <div class="addon-card addon-acc-mint">
+      <div class="addon-top">
+        <span class="addon-icon">&#9997;</span>
+        <span class="addon-type type-monthly">Monthly</span>
+      </div>
+      <div class="addon-name">CONTENT STRATEGY + SEO COPY</div>
+      <div class="addon-desc">Keyword research, pillar pages, blog strategy, service page rewrites and topical authority content that ranks and converts. Become the expert Google and your clients both see.</div>
+      <div class="addon-price-row">
+        <div>
+          <div class="addon-price-inr show"><div class="ap-main">&#8377;17,999</div><div class="ap-period">/ Month</div></div>
+          <div class="addon-price-usd"><div class="ap-main">$219</div><div class="ap-period">/ Month</div></div>
+        </div>
+        <a href="https://wa.me/919599234747?text=%E2%9C%8D%F0%9F%8F%BC%20Hey%20QUANTOR%21%20I%20want%20to%20add%20%F0%9D%97%96%F0%9D%97%A2%F0%9D%97%A1%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%A7%20%F0%9D%97%A6%F0%9D%97%A7%F0%9D%97%A5%F0%9D%97%94%F0%9D%97%A7%F0%9D%97%98%F0%9D%97%9B%F0%9D%97%9C%20%2B%20%F0%9D%97%A6%F0%9D%97%A2%F0%9D%97%98%20%F0%9D%97%96%F0%9D%97%A2%F0%9D%97%A3%F0%9D%97%AC%20%E2%80%94%20keyword%20research%2C%20pillar%20pages%2C%20and%20content%20that%20ranks.%20I%20want%20to%20become%20the%20expert%20Google%20sees%21%20%F0%9F%8F%86" target="_blank" class="addon-btn">Add This &#8594;</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CUSTOM PRICING -->
+<section id="custom">
+  <div class="custom-inner">
+    <div class="custom-left reveal">
+      <div class="sec-tag" style="justify-content:flex-start;"><span>Custom Scope</span></div>
+      <div class="custom-big">NEED<br><span style="color:var(--mint)">SOMETHING</span><br><span style="color:var(--dim);">DIFFERENT?</span></div>
+      <p class="custom-sub">Not every business fits a standard package. If you need a multi-location setup, a franchise system, a complex booking platform, a full digital transformation, or a combination of services that does not fit neatly into any box above &mdash; we will build it exactly as you need it.</p>
+      <div class="custom-points">
+        <div class="cp-item"><span class="cp-dot"></span>Any combination of services, scoped to your exact brief</div>
+        <div class="cp-item"><span class="cp-dot"></span>Multi-language and multi-region deployments</div>
+        <div class="cp-item"><span class="cp-dot"></span>Integrations with your existing CRM, booking or ERP systems</div>
+        <div class="cp-item"><span class="cp-dot"></span>Retainer pricing available for ongoing management</div>
+        <div class="cp-item"><span class="cp-dot"></span>Quote delivered within 4 hours of your brief</div>
+      </div>
+    </div>
+    <div class="custom-right reveal">
+      <div class="cr-tag">Custom Quote</div>
+      <div class="cr-title">TALK TO AVA.</div>
+      <div class="cr-desc">Send us a brief &mdash; your business, your goals, what you need built. Ava reviews every custom request personally and sends you a clear, itemised proposal within 4 hours. No vague estimates, no back-and-forth for days.</div>
+      <div class="cr-items">
+        <div class="cr-item">Multi-location digital systems</div>
+        <div class="cr-item">Full ecosystem build-outs</div>
+        <div class="cr-item">Monthly management retainers</div>
+        <div class="cr-item">Franchise and chain businesses</div>
+        <div class="cr-item">CRM &amp; booking integrations</div>
+      </div>
+      <a href="https://wa.me/919599234747?text=%F0%9F%92%8E%20Hey%20QUANTOR%21%20I%20need%20a%20%F0%9D%97%96%F0%9D%97%A2%F0%9D%97%A6%F0%9D%97%A7%F0%9D%97%A2%F0%9D%97%A0%20%F0%9D%97%A4%F0%9D%97%A8%F0%9D%97%A2%F0%9D%97%A7%F0%9D%97%98%20%E2%80%94%20my%20project%20doesn%27t%20fit%20a%20standard%20package.%20I%27d%20love%20to%20discuss%20my%20specific%20requirements%20and%20get%20a%20tailored%20proposal.%20Ready%20to%20share%20my%20brief%21%20%F0%9F%93%8B" target="_blank" class="cr-cta">Get a Custom Quote &#8594;</a>
     </div>
   </div>
 </section>
 
-<!-- ========== COMPARISON TABLE ========== -->
-<section style="padding:0 0 5rem">
-  <div class="container">
-    <div class="comparison">
-      <h2>Compare all plans</h2>
-      <div class="comp-table-wrap">
-        <table class="comp-table">
-          <thead>
-            <tr>
-              <th>Feature</th>
-              <th class="plan-chatbot">Chatbot</th>
-              <th class="plan-starter">Starter</th>
-              <th class="plan-pro">Pro</th>
-              <th class="plan-enterprise">Enterprise</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>AI Chatbot</td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td></tr>
-            <tr><td>Website included</td><td><span class="comp-dash">—</span></td><td>1 page</td><td>5–6 pages</td><td>5–6 pages + SEO</td></tr>
-            <tr><td>Default hosting</td><td><span class="comp-dash">—</span></td><td>GitHub Pages</td><td>Hostinger Premium*</td><td>Hostinger Business*</td></tr>
-            <tr><td>Custom domain</td><td>Extra</td><td>Extra</td><td>Extra*</td><td>Extra*</td></tr>
-            <tr><td>Chatling account (yours)</td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td><td><span class="comp-check">✓</span></td></tr>
-            <tr><td>Retraining sessions</td><td>1/mo or 2/yr</td><td>As per plan</td><td>3/mo</td><td>3/mo</td></tr>
-            <tr><td>Free support period</td><td><span class="comp-dash">—</span></td><td>30 days fixes</td><td>3 months</td><td>6 months</td></tr>
-            <tr><td>SEO optimization</td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-check">✓</span></td></tr>
-            <tr><td>Google indexing</td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-check">✓</span></td></tr>
-            <tr><td>Priority delivery</td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-dash">—</span></td><td><span class="comp-check">✓</span></td></tr>
-            <tr><td>We hold your credentials</td><td><span class="comp-no">✗</span></td><td><span class="comp-no">✗</span></td><td><span class="comp-no">✗</span></td><td><span class="comp-no">✗</span></td></tr>
-            <tr><td>Delivery time</td><td>2 days</td><td>3 days</td><td>5 days</td><td>9 days</td></tr>
-          </tbody>
-        </table>
+<!-- THREE.JS GEO SECTION 2 -->
+<section id="geo-section">
+  <canvas id="geo-canvas"></canvas>
+  <div class="geo-content">
+    <div class="geo-tag">Our Promise</div>
+    <div class="geo-hl reveal">EVERY PRICE<br><span style="color:var(--gold)">INCLUDES OUR</span><br>REPUTATION.</div>
+    <p class="geo-sub reveal">We charge what we charge because we deliver what we promise. Every rupee and every dollar you invest comes with a commitment: you only pay in full when you love the work. That is not a marketing line &mdash; that is how we have structured our business from day one.</p>
+  </div>
+</section>
+
+<!-- PRICING FAQ -->
+<section id="pfaq">
+  <div class="pfaq-grid">
+    <div class="reveal">
+      <div class="sec-tag" style="justify-content:flex-start;"><span>Common Questions</span></div>
+      <h2 class="sec-title">PRICING<br>FAQ.</h2>
+      <p>Honest answers to the questions every client asks before committing. If something is not answered here, just WhatsApp us &mdash; we reply personally.</p>
+    </div>
+    <div class="pfaq-list">
+      <div class="pfaq-item">
+        <button class="pfaq-btn"><span class="pfaq-q">WHY ONLY 50% UPFRONT?</span><span class="pfaq-ch">+</span></button>
+        <div class="pfaq-answer"><p>Because we believe in skin in the game. Charging full payment before delivery removes our incentive to exceed expectations. When our income depends on you loving the result, we are completely aligned with your success. The 50% upfront covers our time and resources. The 50% after approval is yours to withhold if we fall short &mdash; which we have never done.</p></div>
       </div>
-      <p class="comp-footer-note">* We purchase hosting and domain on your behalf and hand over all credentials to you. We don't hold any of your data except the business information needed to build your project.</p>
+      <div class="pfaq-item">
+        <button class="pfaq-btn"><span class="pfaq-q">IS THERE A DIFFERENCE IN QUALITY BETWEEN INR AND USD PRICING?</span><span class="pfaq-ch">+</span></button>
+        <div class="pfaq-answer"><p>Absolutely not. <span>Indian pricing reflects local purchasing power</span>. International pricing reflects international market rates. You receive exactly the same quality, the same speed, the same support, and the same obsessive attention to detail regardless of which currency you pay in. QUANTOR does not have a &ldquo;budget version&rdquo; for any market.</p></div>
+      </div>
+      <div class="pfaq-item">
+        <button class="pfaq-btn"><span class="pfaq-q">CAN I UPGRADE MY PLAN AFTER LAUNCH?</span><span class="pfaq-ch">+</span></button>
+        <div class="pfaq-answer"><p>Yes. Many clients start with the Starter or Chatbot Only plan and grow into Pro or Enterprise later. You can also add any of the service add-ons at any point &mdash; WhatsApp automation, SEO, reputation management &mdash; these are designed to layer on top of whatever you already have. Just message us and we will scope the upgrade.</p></div>
+      </div>
+      <div class="pfaq-item">
+        <button class="pfaq-btn"><span class="pfaq-q">WHAT PAYMENT METHODS ARE ACCEPTED?</span><span class="pfaq-ch">+</span></button>
+        <div class="pfaq-answer"><p>India: <span>UPI and Razorpay</span>. International: <span>PayPal and Wise</span>. Both are fast, familiar and secure. We do not accept cryptocurrency. If you have a specific method not listed, mention it in your brief and we will see what we can arrange.</p></div>
+      </div>
+      <div class="pfaq-item">
+        <button class="pfaq-btn"><span class="pfaq-q">ARE THERE ANY RECURRING FEES AFTER THE ONE-TIME PLANS?</span><span class="pfaq-ch">+</span></button>
+        <div class="pfaq-answer"><p>Only third-party costs which you control directly: your hosting renewal (Hostinger, billed annually by you), your domain renewal, and the Chatling AI plan for the chatbot. We do not take a cut of any of these. <span>Our one-time fee is genuinely one-time.</span> The only recurring fees are for add-on services if you choose to engage them monthly.</p></div>
+      </div>
+      <div class="pfaq-item">
+        <button class="pfaq-btn"><span class="pfaq-q">WHAT IF I NEED CHANGES AFTER LAUNCH?</span><span class="pfaq-ch">+</span></button>
+        <div class="pfaq-answer"><p>All packages include a post-launch support window: <span>30 days (Starter and Chatbot Only)</span>, <span>3 months (Pro)</span>, and <span>6 months (Enterprise)</span>. Within that window, reasonable changes, fixes and updates are handled at no extra cost. After your support window closes, we offer hourly and retainer options for ongoing maintenance.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ========== FAQ ========== -->
-<section style="padding:0 0 5rem">
-  <div class="container">
-    <div class="faq">
-      <h2>Common questions</h2>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>Who owns the chatbot and website after delivery?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">You own everything. We purchase your Chatling account and hosting plan on your behalf, set everything up, and hand over every login and credential to you. We don't hold any of your data except the business information needed to build your project. Your accounts, your passwords, your business.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>What does "retraining" mean?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">Retraining means updating your chatbot's knowledge — adding new services, changing prices, updating FAQs, adding new responses. Monthly plan users get 1 session included per month. Annual plan users get 2 sessions per year. Extra sessions are $20 (monthly) or $25 (annual).</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>What is GitHub Pages hosting on the Starter plan?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">GitHub Pages is a free, reliable hosting service by GitHub (owned by Microsoft). Your site lives at a free web address. It's fast, secure, and costs nothing. If you want a proper custom domain (like yoursalon.com) and traditional hosting, that's an optional upgrade — we purchase it for you and hand over all credentials.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>What does "3 months free support" mean on the Pro plan?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">If anything on your website breaks or has an issue caused by our work, we fix it for free within 3 months of delivery. After 3 months, fixes are $18 per session.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>Do you do maintenance on the Starter plan?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">The Starter plan is a one-time delivery. We cover minor fixes for 30 days after delivery. After that, any changes or fixes are billed per session. It's built to be simple enough that most clients never need changes.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>How do I pay?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">India: UPI, Razorpay, debit/credit card. International: PayPal or Wise. 50% upfront before work begins, 50% on delivery.</div></div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>What if I already have a website and just need the chatbot?</span>
-          <svg class="faq-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="faq-a"><div class="faq-a-inner">We build and train your chatbot, then give you the embed code to paste into your existing website. Once it's live and working, we hand over your Chatling account and credentials. Simple.</div></div>
-      </div>
-
+<!-- PAYMENT METHODS -->
+<section id="payment">
+  <div class="pay-inner">
+    <div class="pay-left reveal">
+      <h3>SIMPLE,<br>GLOBAL<br>PAYMENTS.</h3>
+      <p>Pay from anywhere in the world using the method that works best for you. No complicated bank transfers, no rejected cards, no friction before we can start your project.</p>
+    </div>
+    <div class="pay-methods reveal">
+      <div class="pay-method"><span class="pm-icon">&#128179;</span><div><div class="pm-name">UPI / RAZORPAY</div><div class="pm-sub">India &mdash; Instant transfer</div></div></div>
+      <div class="pay-method"><span class="pm-icon">&#128178;</span><div><div class="pm-name">PAYPAL</div><div class="pm-sub">International &mdash; Widely accepted</div></div></div>
+      <div class="pay-method"><span class="pm-icon">&#127760;</span><div><div class="pm-name">WISE</div><div class="pm-sub">International &mdash; Low-fee transfers</div></div></div>
+    </div>
+    <div class="pay-note reveal">
+      <span class="pay-note-icon">&#128274;</span>
+      <h4>50% AFTER APPROVAL</h4>
+      <p>We initiate work on 50% upfront. The second payment is requested only once you have seen, tested and approved the completed work. You are never asked to pay in full before experiencing what you paid for.</p>
     </div>
   </div>
 </section>
 
-<!-- ========== FINAL CTA ========== -->
-<section class="final-cta">
-  <div class="container">
-    <h2>Every plan. Everything yours. No lock-in.</h2>
-    <p>Pick a plan and WhatsApp us — we'll confirm what's right for your business before any payment.</p>
-    <a href="https://wa.me/919599234747?text=Hi%2C%20I%27d%20like%20to%20discuss%20pricing%20for%20my%20business." target="_blank" rel="noopener" class="btn btn-filled">WhatsApp Us to Get Started</a>
+<!-- FINAL CTA -->
+<section id="fcta">
+  <div class="cta-bg"></div><div class="cta-gl"></div>
+  <div class="cta-inner">
+    <span class="cta-tag reveal">Start Today</span>
+    <h2 class="cta-hl reveal"><span>PICK YOUR</span><br><span class="l2">PLAN.</span><br><span class="l3">START GROWING.</span></h2>
+    <p class="cta-sub reveal">Every day without a working digital system is a day your competitors capture the leads that should belong to you. The consultation is free. The quote arrives in 4 hours. The build starts the same day.</p>
+    <div class="cta-btns reveal">
+      <a href="https://wa.me/919599234747?text=Hi%20QUANTOR%21%20I%E2%80%99d%20like%20to%20discuss%20a%20plan%20for%20my%20business.%20Can%20you%20help%3F" target="_blank" class="btn-p">&#128172; Chat on WhatsApp</a>
+      <a href="contact.html" class="btn-g">Send a Brief &#8594;</a>
+    </div>
   </div>
 </section>
 
-<!-- ========== FOOTER ========== -->
+<!-- FOOTER -->
 <footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="logo">QUANTOR</a>
-        <p>Next-generation AI agency helping businesses scale through intelligent web experiences.</p>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo">QUAN<em>TOR</em></div>
+      <div class="footer-tagline">Your Business Deserves More Than a Dead Website.</div>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/YOURUSERNAME" target="_blank" class="social-btn" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://www.facebook.com/YOURUSERNAME" target="_blank" class="social-btn" title="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://wa.me/919599234747" target="_blank" class="social-btn" title="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </a>
       </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <div class="footer-links">
-          <a href="index.html">Home</a>
-          <a href="index.html#services">Services</a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Pricing</h4>
-        <div class="footer-links">
-          <a href="pricing.html">View Plans</a>
-          <a href="contact.html">Custom Quote</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <div class="footer-links">
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
-          <a href="refund-policy.html">Refund Policy</a>
-          <a href="disclaimer.html">Disclaimer</a>
-        </div>
+      <div class="footer-contact-links">
+        <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
+        <a href="https://wa.me/919599234747">+91 9599 234 747</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="footer-contact">
-        <a href="mailto:quantorleads@gmail.com">quantorleads@gmail.com</a>
-        <a href="tel:+919599234747">+91 9599234747</a>
-      </div>
-      <div>© 2026 QUANTOR. All rights reserved.</div>
+    <div class="footer-col">
+      <h5>NAVIGATE</h5>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>PRICING</h5>
+      <ul>
+        <li><a href="pricing.html#core-plans">Core Packages</a></li>
+        <li><a href="pricing.html#addons">Add-On Services</a></li>
+        <li><a href="pricing.html#custom">Custom Quote</a></li>
+        <li><a href="pricing.html#pfaq">Pricing FAQ</a></li>
+        <li><a href="pricing.html#payment">Payment Methods</a></li>
+      </ul>
+      <a href="pricing.html" class="footer-pricing-btn">&#8377; / $ View Pricing</a>
+    </div>
+    <div class="footer-col">
+      <h5>COMPANY</h5>
+      <ul>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="https://wa.me/919599234747" target="_blank">WhatsApp Us</a></li>
+        <li><a href="contact.html">Start a Project</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 QUANTOR. All rights reserved.</span>
+    <div class="footer-legal">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="refund-policy.html">Refund Policy</a>
+      <a href="disclaimer.html">Disclaimer</a>
     </div>
   </div>
 </footer>
 
-<!-- ========== SCRIPTS ========== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+// PRELOADER
+const preloader=document.getElementById("preloader"),preCount=document.getElementById("preCount");
+let prog=0;const ci=setInterval(()=>{prog+=Math.random()*12;if(prog>=100){prog=100;clearInterval(ci);setTimeout(()=>{preloader.classList.add("hide");document.body.classList.remove("loading");},400);}preCount.textContent=Math.floor(prog)+"%";},80);
+
+// CURSOR
+const cO=document.getElementById("cursor-outer"),cD=document.getElementById("cursor-dot");
+let mx=0,my=0,ox=0,oy=0;
+document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;cD.style.left=mx+"px";cD.style.top=my+"px";});
+(function raf(){ox+=(mx-ox)*.12;oy+=(my-oy)*.12;cO.style.left=ox+"px";cO.style.top=oy+"px";requestAnimationFrame(raf);})();
+document.querySelectorAll("a,button,.plan-card,.addon-card").forEach(el=>{el.addEventListener("mouseenter",()=>document.body.classList.add("cursor-hover"));el.addEventListener("mouseleave",()=>document.body.classList.remove("cursor-hover"));});
+
+// NAV
+const nav=document.getElementById("nav");
+window.addEventListener("scroll",()=>nav.classList.toggle("scrolled",window.scrollY>60));
+
+// CURRENCY TOGGLE
+let currentCurrency="INR";
+function setCurrency(c){
+  currentCurrency=c;
+  document.getElementById("btnINR").classList.toggle("active",c==="INR");
+  document.getElementById("btnUSD").classList.toggle("active",c==="USD");
+  document.querySelectorAll(".price-inr,.addon-price-inr").forEach(el=>{el.classList.toggle("show",c==="INR");});
+  document.querySelectorAll(".price-usd,.addon-price-usd").forEach(el=>{el.classList.toggle("show",c==="USD");});
+}
+
+// THREE.JS HERO — Rotating price tags / geometric shapes
 (function(){
-'use strict';
+  const canvas=document.getElementById("price-canvas");
+  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.1,1000);
+  camera.position.z=20;
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setClearColor(0,0);
 
-/* ========== NAVBAR ========== */
-var nav=document.getElementById('main-nav');
-var hamburger=document.getElementById('hamburger-btn');
-var navMenu=document.getElementById('nav-menu');
+  const mk=(geo,col,op,pos)=>{const m=new THREE.MeshBasicMaterial({color:col,wireframe:true,transparent:true,opacity:op});const mesh=new THREE.Mesh(geo,m);mesh.position.set(...pos);return mesh;};
+  const shapes=[];
+  // Cluster of pricing-themed geometric shapes — right side
+  const s1=mk(new THREE.TorusKnotGeometry(2.5,.5,64,8),0x00ffb2,.08,[8,1,-4]);scene.add(s1);shapes.push({m:s1,rx:.003,ry:.006,rz:.002});
+  const s2=mk(new THREE.DodecahedronGeometry(2,0),0xe8a020,.07,[11,-2,-5]);scene.add(s2);shapes.push({m:s2,rx:-.005,ry:.004,rz:.006});
+  const s3=mk(new THREE.IcosahedronGeometry(1.5,1),0xff2d55,.06,[5,3,-2]);scene.add(s3);shapes.push({m:s3,rx:.006,ry:-.003,rz:.004});
+  const s4=mk(new THREE.CylinderGeometry(2,2,3,8,1,true),0x7c3aed,.05,[9,-4,-6]);scene.add(s4);shapes.push({m:s4,rx:.004,ry:.008,rz:-.003});
+  const s5=mk(new THREE.TorusGeometry(3,.4,6,28),0x00ffb2,.04,[6,-2,-7]);s5.rotation.x=Math.PI/5;scene.add(s5);shapes.push({m:s5,rx:.003,ry:.004,rz:.005});
 
-window.addEventListener('scroll',function(){
-  if(window.scrollY>80) nav.classList.add('scrolled');
-  else nav.classList.remove('scrolled');
-},{passive:true});
-
-hamburger.addEventListener('click',function(){
-  navMenu.classList.toggle('active');
-  hamburger.classList.toggle('active');
-});
-
-document.querySelectorAll('.nav-links a').forEach(function(link){
-  link.addEventListener('click',function(){
-    navMenu.classList.remove('active');
-    hamburger.classList.remove('active');
-  });
-});
-
-/* ========== BILLING TOGGLE ========== */
-var currentBilling='monthly';
-var chatbotPrices={monthly:90,yearly:389};
-
-window.setBilling=function(val){
-  if(val===currentBilling) return;
-  currentBilling=val;
-  var options=document.querySelectorAll('#billingToggle .toggle-option');
-  var pill=document.getElementById('billingPill');
-  options.forEach(function(o){o.classList.remove('active')});
-  var activeOpt=document.querySelector('[data-value="'+val+'"]');
-  activeOpt.classList.add('active');
-  pill.style.left=activeOpt.offsetLeft+'px';
-  pill.style.width=activeOpt.offsetWidth+'px';
-
-  var priceEl=document.getElementById('chatbotPrice');
-  var periodEl=document.getElementById('chatbotPeriod');
-  var savingsEl=document.getElementById('chatbotSavings');
-  var retrainEl=document.getElementById('chatbotRetrain');
-  var extraEl=document.getElementById('chatbotExtraNote');
-
-  animateCounter(priceEl,chatbotPrices[val],'$',val==='monthly'?'/mo':'/yr');
-
-  if(val==='yearly'){
-    savingsEl.textContent='Save $691/yr';
-    savingsEl.style.display='block';
-    retrainEl.textContent='2 retraining sessions per year';
-    extraEl.textContent='Extra retraining: $25/session';
-  }else{
-    savingsEl.style.display='none';
-    retrainEl.textContent='1 retraining session per month';
-    extraEl.textContent='Extra retraining: $20/session';
-  }
-};
-
-// Position pill on load
-function positionPill(){
-  var activeOpt=document.querySelector('#billingToggle .toggle-option.active');
-  var pill=document.getElementById('billingPill');
-  if(activeOpt&&pill){
-    pill.style.left=activeOpt.offsetLeft+'px';
-    pill.style.width=activeOpt.offsetWidth+'px';
-  }
-}
-window.addEventListener('load',positionPill);
-window.addEventListener('resize',positionPill);
-
-/* ========== ANIMATED COUNTER ========== */
-function animateCounter(el,target,prefix,suffix){
-  var start=parseFloat(el.textContent.replace(/[^0-9.]/g,''))||0;
-  var startTime=null;
-  var duration=400;
-
-  function easeOutCubic(t){return 1-Math.pow(1-t,3)}
-
-  function step(ts){
-    if(!startTime) startTime=ts;
-    var progress=Math.min((ts-startTime)/duration,1);
-    var eased=easeOutCubic(progress);
-    var current=Math.round(start+(target-start)*eased);
-    el.textContent=prefix+current+suffix;
-    if(progress<1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-
-/* ========== FAQ ACCORDION ========== */
-window.toggleFaq=function(qEl){
-  var item=qEl.parentElement;
-  var answer=item.querySelector('.faq-a');
-  var isOpen=item.classList.contains('open');
-
-  // Close all
-  document.querySelectorAll('.faq-item.open').forEach(function(openItem){
-    openItem.classList.remove('open');
-    openItem.querySelector('.faq-a').style.maxHeight='0';
-  });
-
-  if(!isOpen){
-    item.classList.add('open');
-    answer.style.maxHeight=answer.scrollHeight+'px';
-  }
-};
-
+  const PC=180,pP=new Float32Array(PC*3),pV=[];
+  for(let i=0;i<PC;i++){pP[i*3]=(Math.random()-.5)*24;pP[i*3+1]=(Math.random()-.5)*14;pP[i*3+2]=(Math.random()-.5)*10;pV.push({x:(Math.random()-.5)*.005,y:(Math.random()-.5)*.005,z:(Math.random()-.5)*.004});}
+  const pGeo=new THREE.BufferGeometry();pGeo.setAttribute("position",new THREE.BufferAttribute(pP,3));
+  scene.add(new THREE.Points(pGeo,new THREE.PointsMaterial({color:0x00ffb2,size:.07,transparent:true,opacity:.4,sizeAttenuation:true})));
+  let lM=null,fc=0;
+  const lMat=new THREE.LineBasicMaterial({color:0x00ffb2,transparent:true,opacity:.05});
+  function bL(){if(lM)scene.remove(lM);const lP=[],t=5;for(let i=0;i<PC;i++)for(let j=i+1;j<PC;j++){const dx=pP[i*3]-pP[j*3],dy=pP[i*3+1]-pP[j*3+1],dz=pP[i*3+2]-pP[j*3+2];if(dx*dx+dy*dy+dz*dz<t*t)lP.push(pP[i*3],pP[i*3+1],pP[i*3+2],pP[j*3],pP[j*3+1],pP[j*3+2]);}const lg=new THREE.BufferGeometry();lg.setAttribute("position",new THREE.BufferAttribute(new Float32Array(lP),3));lM=new THREE.LineSegments(lg,lMat);scene.add(lM);}
+  let trx=0,try_=0,crx=0,cry=0;
+  document.addEventListener("mousemove",e=>{try_=(e.clientX/innerWidth-.5)*.3;trx=-(e.clientY/innerHeight-.5)*.22;});
+  (function animate(){requestAnimationFrame(animate);fc++;shapes.forEach(s=>{s.m.rotation.x+=s.rx;s.m.rotation.y+=s.ry;s.m.rotation.z+=s.rz;});
+    for(let i=0;i<PC;i++){pP[i*3]+=pV[i].x;pP[i*3+1]+=pV[i].y;pP[i*3+2]+=pV[i].z;if(Math.abs(pP[i*3])>12)pV[i].x*=-1;if(Math.abs(pP[i*3+1])>7)pV[i].y*=-1;if(Math.abs(pP[i*3+2])>5)pV[i].z*=-1;}
+    pGeo.attributes.position.needsUpdate=true;if(fc%4===0)bL();crx+=(trx-crx)*.04;cry+=(try_-cry)*.04;scene.rotation.x=crx;scene.rotation.y=cry;renderer.render(scene,camera);})();
+  window.addEventListener("resize",()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
 })();
+
+// THREE.JS DIVIDER
+(function(){
+  const canvas=document.getElementById("divider-canvas");
+  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,innerWidth/550,.1,1000);
+  camera.position.z=14;
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  function resize(){renderer.setSize(innerWidth,550);camera.aspect=innerWidth/550;camera.updateProjectionMatrix();}resize();renderer.setClearColor(0,0);
+  const group=new THREE.Group();group.position.set(7,0,0);
+  const mk=(geo,col,op)=>new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:col,wireframe:true,transparent:true,opacity:op}));
+  const g1=mk(new THREE.TorusKnotGeometry(3,.6,80,8),0x00ffb2,.1);group.add(g1);
+  const g2=mk(new THREE.OctahedronGeometry(2,0),0xe8a020,.06);g2.rotation.y=Math.PI/4;group.add(g2);
+  const g3=mk(new THREE.SphereGeometry(4,16,12),0x00ffb2,.03);group.add(g3);
+  scene.add(group);
+  (function animate(){requestAnimationFrame(animate);group.rotation.y+=.005;group.rotation.x+=.002;g2.rotation.z+=.008;renderer.render(scene,camera);})();
+  window.addEventListener("resize",resize);
+})();
+
+// THREE.JS GEO SECTION 2 — Gold theme
+(function(){
+  const canvas=document.getElementById("geo-canvas");
+  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(60,innerWidth/500,.1,1000);
+  camera.position.z=14;
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  function resize(){renderer.setSize(innerWidth,500);camera.aspect=innerWidth/500;camera.updateProjectionMatrix();}resize();renderer.setClearColor(0,0);
+  const group=new THREE.Group();group.position.set(7,0,0);
+  const mk=(geo,col,op)=>new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:col,wireframe:true,transparent:true,opacity:op}));
+  const g1=mk(new THREE.DodecahedronGeometry(3.5,0),0xe8a020,.1);group.add(g1);
+  const g2=mk(new THREE.IcosahedronGeometry(2,1),0x00ffb2,.06);g2.rotation.x=Math.PI/3;group.add(g2);
+  const g3=mk(new THREE.TorusGeometry(5,.3,6,40),0xe8a020,.04);g3.rotation.x=Math.PI/5;group.add(g3);
+  scene.add(group);
+  (function animate(){requestAnimationFrame(animate);group.rotation.y+=.004;group.rotation.z+=.003;g2.rotation.y+=.009;renderer.render(scene,camera);})();
+  window.addEventListener("resize",resize);
+})();
+
+// FAQ ACCORDION
+document.querySelectorAll(".pfaq-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{const item=btn.closest(".pfaq-item");const isOpen=item.classList.contains("open");document.querySelectorAll(".pfaq-item").forEach(i=>i.classList.remove("open"));if(!isOpen)item.classList.add("open");});
+});
+
+// PLAN CARD ENTRANCE
+(function(){
+  const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add("vis");});},{threshold:.15});
+  document.querySelectorAll(".plan-card,.addon-card,.pfaq-item,.gs-item,.st-item").forEach((el,i)=>{el.style.transitionDelay=(i*.07)+"s";obs.observe(el);});
+})();
+
+// GENERIC REVEAL
+(function(){
+  const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add("vis");});},{threshold:.12});
+  document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
+})();
+
+// MAGNETIC BUTTONS
+document.querySelectorAll(".btn-p,.btn-g,.cr-cta,.nav-cta,.plan-cta").forEach(btn=>{
+  btn.addEventListener("mousemove",e=>{const r=btn.getBoundingClientRect();btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.18}px,${(e.clientY-r.top-r.height/2)*.18}px)`;});
+  btn.addEventListener("mouseleave",()=>{btn.style.transform="";btn.style.transition="transform .5s cubic-bezier(.16,1,.3,1)";});
+  btn.addEventListener("mouseenter",()=>{btn.style.transition="none";});
+});
+
+// PLAN CARD 3D TILT
+document.querySelectorAll(".plan-card").forEach(card=>{
+  card.addEventListener("mousemove",e=>{const r=card.getBoundingClientRect();card.style.transform=`perspective(1200px) rotateY(${((e.clientX-r.left)/r.width-.5)*8}deg) rotateX(${-((e.clientY-r.top)/r.height-.5)*8}deg) translateY(-4px)`;});
+  card.addEventListener("mouseleave",()=>{card.style.transform="";card.style.transition="transform .5s cubic-bezier(.16,1,.3,1)";});
+  card.addEventListener("mouseenter",()=>{card.style.transition="none";});
+});
 </script>
 </body>
 </html>
