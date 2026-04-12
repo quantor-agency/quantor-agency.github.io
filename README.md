@@ -35,7 +35,7 @@
 
 ## What is QUANTOR?
 
-**QUANTOR** is a precision AI web agency founded in 2024, based in India, serving clients globally. We are a lean, fast-moving operation — two people, enterprise-grade output. Every project is treated as if it were our own business.
+**QUANTOR** is a precision AI web agency founded in 2025, based in India, serving clients globally. We are a lean, fast-moving operation — two people, enterprise-grade output. Every project is treated as if it were our own business.
 
 We do not build websites. We build **revenue systems dressed as websites**.
 
@@ -77,7 +77,7 @@ QUANTOR offers **10 specialist services**, ranging from foundation builds to mon
 | 02 | **AI Chatbot Systems** | One-Time + Recurring | Chatling AI bots trained on your business data, deployed 24/7 |
 | 10 | **Content Strategy & SEO Copywriting** | Monthly | Keyword research, pillar pages, service copy that ranks and converts |
 
-### New Services (2025)
+### New Services (2026)
 
 | # | Service | Type | What It Does |
 |---|---|---|---|
@@ -258,6 +258,6 @@ QUANTOR has built demo sites and real deployments across:
 ---
 
 <p align="center">
-  <strong>© 2025 QUANTOR. All rights reserved.</strong><br/>
+  <strong>© 2026 QUANTOR. All rights reserved.</strong><br/>
   Made with obsessive precision. Delivered with radical speed.
 </p>
